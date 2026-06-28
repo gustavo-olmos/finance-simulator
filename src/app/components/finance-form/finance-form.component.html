@@ -3,7 +3,23 @@
   <div class="campo">
     <div class="linha">
       <span class="rotulo">{{ labelValor() }}</span>
-      <span class="valor">{{ valorBem() | currency: 'BRL' : 'symbol' : '1.0-0' }}</span>
+      @if (editandoCampo() === 'valor') {
+        <input
+          class="valor-input"
+          type="number"
+          data-edit="valor"
+          [value]="valorBem()"
+          [min]="faixas().bemMin"
+          [max]="faixas().bemMax"
+          [step]="faixas().bemStep"
+          (blur)="confirmarEdicao('valor', $any($event.target).value)"
+          (keydown)="onKeyDown($event, 'valor')"
+        />
+      } @else {
+        <span class="valor editavel" (click)="iniciarEdicao('valor')">
+          {{ valorBem() | currency: 'BRL' : 'symbol' : '1.0-0' }}
+        </span>
+      }
     </div>
     <input
       type="range"
@@ -20,7 +36,23 @@
       <span class="rotulo">Entrada</span>
       <span class="valor-grupo">
         <span class="aux">{{ entradaPct() }}%</span>
-        <span class="valor">{{ entrada() | currency: 'BRL' : 'symbol' : '1.0-0' }}</span>
+        @if (editandoCampo() === 'entrada') {
+          <input
+            class="valor-input"
+            type="number"
+            data-edit="entrada"
+            [value]="entrada()"
+            [min]="0"
+            [max]="valorBem()"
+            [step]="faixas().bemStep"
+            (blur)="confirmarEdicao('entrada', $any($event.target).value)"
+            (keydown)="onKeyDown($event, 'entrada')"
+          />
+        } @else {
+          <span class="valor editavel" (click)="iniciarEdicao('entrada')">
+            {{ entrada() | currency: 'BRL' : 'symbol' : '1.0-0' }}
+          </span>
+        }
       </span>
     </div>
     <input
@@ -38,7 +70,23 @@
       <span class="rotulo">Prazo</span>
       <span class="valor-grupo">
         <span class="aux">{{ anos() }} anos</span>
-        <span class="valor">{{ prazo() }} meses</span>
+        @if (editandoCampo() === 'prazo') {
+          <input
+            class="valor-input"
+            type="number"
+            data-edit="prazo"
+            [value]="prazo()"
+            [min]="faixas().prazoMin"
+            [max]="faixas().prazoMax"
+            [step]="faixas().prazoStep"
+            (blur)="confirmarEdicao('prazo', $any($event.target).value)"
+            (keydown)="onKeyDown($event, 'prazo')"
+          />
+        } @else {
+          <span class="valor editavel" (click)="iniciarEdicao('prazo')">
+            {{ prazo() }} meses
+          </span>
+        }
       </span>
     </div>
     <input
@@ -56,7 +104,23 @@
       <span class="rotulo">Taxa de juros</span>
       <span class="valor-grupo">
         <span class="aux">≈ {{ taxaMes() | number: '1.2-2' }}% a.m.</span>
-        <span class="valor">{{ taxa() | number: '1.1-1' }}% a.a.</span>
+        @if (editandoCampo() === 'taxa') {
+          <input
+            class="valor-input"
+            type="number"
+            data-edit="taxa"
+            [value]="taxa()"
+            [min]="faixas().taxaMin"
+            [max]="faixas().taxaMax"
+            [step]="faixas().taxaStep"
+            (blur)="confirmarEdicao('taxa', $any($event.target).value)"
+            (keydown)="onKeyDown($event, 'taxa')"
+          />
+        } @else {
+          <span class="valor editavel" (click)="iniciarEdicao('taxa')">
+            {{ taxa() | number: '1.1-1' }}% a.a.
+          </span>
+        }
       </span>
     </div>
     <input

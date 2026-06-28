@@ -45,6 +45,35 @@
   color: #fff;
 }
 
+.editavel {
+  cursor: pointer;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.45);
+  transition: border-color 0.15s;
+
+  &:hover {
+    border-bottom-color: rgba(255, 255, 255, 0.85);
+  }
+}
+
+.valor-input {
+  font-size: 17px;
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+  color: #fff;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #fff;
+  outline: none;
+  width: 120px;
+  text-align: right;
+  padding: 0 0 1px;
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    display: none;
+  }
+}
+
 // Sliders — trilho translúcido, polegar branco com borda no tom do tema (--app-ink).
 input[type='range'] {
   -webkit-appearance: none;

@@ -1,0 +1,32 @@
+.toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.12);
+  padding: 5px;
+  border-radius: 12px;
+  margin-bottom: 26px;
+}
+
+.seg {
+  border: none;
+  cursor: pointer;
+  padding: 11px;
+  border-radius: 8px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.78);
+  transition: all 0.15s ease;
+
+  &.ativo {
+    background: rgba(255, 255, 255, 0.92);
+    color: #15623f; // SAC = verde
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  }
+
+  &.price.ativo {
+    color: #b07a1e; // PRICE = âmbar
+  }
+}

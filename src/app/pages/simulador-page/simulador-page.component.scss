@@ -1,0 +1,95 @@
+:host {
+  display: block;
+}
+
+// ===== Zona principal (app) =====
+.app-zone {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--app-bg, #1f8a5b);
+}
+
+.palco {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px 48px;
+}
+
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  max-width: 560px;
+  width: 100%;
+  margin-top: 16px;
+  background: #fff;
+  color: var(--app-ink, #15623f);
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 16px;
+  padding: 15px;
+  border-radius: 13px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.aviso {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 14px 0 0;
+}
+
+// ===== Zona de conteúdo (claro) =====
+.conteudo {
+  background: #fbfbfa;
+  padding-top: 36px;
+}
+
+.texto {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 64px 24px 8px;
+
+  .titulo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    letter-spacing: -0.02em;
+    margin: 0 0 16px;
+  }
+
+  .paragrafo {
+    font-size: 17px;
+    line-height: 1.6;
+    color: #4a504d;
+    margin: 0 0 14px;
+
+    .sac { color: #15623f; }
+    .price { color: #b07a1e; }
+  }
+}
+
+.rodape {
+  border-top: 1px solid #e8e8e5;
+  background: #fff;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 26px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 14px;
+  color: #6b716e;
+
+  span:last-child {
+    font-size: 13px;
+    color: #aab0ac;
+  }
+}

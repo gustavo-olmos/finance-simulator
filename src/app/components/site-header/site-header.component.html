@@ -1,0 +1,22 @@
+<header class="header">
+  <a class="brand" routerLink="/financiamento-imovel">
+    <span class="mark">S</span>
+    <span class="nome">Simulae</span>
+  </a>
+  <nav class="nav">
+    <a
+      routerLink="/financiamento-imovel"
+      class="link"
+      [class.ativo]="temaAtivo() === 'imovel'"
+    >
+      Imóvel
+    </a>
+    <a
+      routerLink="/financiamento-veiculo"
+      class="link"
+      [class.ativo]="temaAtivo() === 'veiculo'"
+    >
+      Veículo
+    </a>
+  </nav>
+</header>

@@ -1,0 +1,72 @@
+<div class="campos">
+
+  <div class="campo">
+    <div class="linha">
+      <span class="rotulo">{{ labelValor() }}</span>
+      <span class="valor">{{ valorBem() | currency: 'BRL' : 'symbol' : '1.0-0' }}</span>
+    </div>
+    <input
+      type="range"
+      [min]="faixas().bemMin"
+      [max]="faixas().bemMax"
+      [step]="faixas().bemStep"
+      [value]="valorBem()"
+      (input)="emitir('valor', $any($event.target).value)"
+    />
+  </div>
+
+  <div class="campo">
+    <div class="linha">
+      <span class="rotulo">Entrada</span>
+      <span class="valor-grupo">
+        <span class="aux">{{ entradaPct() }}%</span>
+        <span class="valor">{{ entrada() | currency: 'BRL' : 'symbol' : '1.0-0' }}</span>
+      </span>
+    </div>
+    <input
+      type="range"
+      [min]="0"
+      [max]="valorBem()"
+      [step]="faixas().bemStep"
+      [value]="entrada()"
+      (input)="emitir('entrada', $any($event.target).value)"
+    />
+  </div>
+
+  <div class="campo">
+    <div class="linha">
+      <span class="rotulo">Prazo</span>
+      <span class="valor-grupo">
+        <span class="aux">{{ anos() }} anos</span>
+        <span class="valor">{{ prazo() }} meses</span>
+      </span>
+    </div>
+    <input
+      type="range"
+      [min]="faixas().prazoMin"
+      [max]="faixas().prazoMax"
+      [step]="faixas().prazoStep"
+      [value]="prazo()"
+      (input)="emitir('prazo', $any($event.target).value)"
+    />
+  </div>
+
+  <div class="campo">
+    <div class="linha">
+      <span class="rotulo">Taxa de juros</span>
+      <span class="valor-grupo">
+        <span class="aux">≈ {{ taxaMes() | number: '1.2-2' }}% a.m.</span>
+        <span class="valor">{{ taxa() | number: '1.1-1' }}% a.a.</span>
+      </span>
+    </div>
+    <input
+      type="range"
+      [min]="faixas().taxaMin"
+      [max]="faixas().taxaMax"
+      [step]="faixas().taxaStep"
+      [value]="taxa()"
+      (input)="emitir('taxa', $any($event.target).value)"
+    />
+  </div>
+
+</div>

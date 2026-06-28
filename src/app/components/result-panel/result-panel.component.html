@@ -1,0 +1,20 @@
+<div class="resultado">
+  <div class="rotulo">Parcela inicial</div>
+  <div class="valor">{{ resultado().primeiraParcela | currency: 'BRL' : 'symbol' : '1.2-2' }}</div>
+  <div class="resumo">{{ resumo() }}</div>
+</div>
+
+<div class="chips">
+  <div class="chip">
+    <div class="chip-rotulo">Financiado</div>
+    <div class="chip-valor">{{ resultado().valorFinanciado | currency: 'BRL' : 'symbol' : '1.0-0' }}</div>
+  </div>
+  <div class="chip">
+    <div class="chip-rotulo">Total a pagar</div>
+    <div class="chip-valor">{{ resultado().totalPago | currency: 'BRL' : 'symbol' : '1.0-0' }}</div>
+  </div>
+  <div class="chip">
+    <div class="chip-rotulo">Juros</div>
+    <div class="chip-valor">{{ resultado().totalJuros | currency: 'BRL' : 'symbol' : '1.0-0' }}</div>
+  </div>
+</div>

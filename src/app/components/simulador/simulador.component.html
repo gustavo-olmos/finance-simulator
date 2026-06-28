@@ -1,0 +1,26 @@
+<div class="card">
+  <app-system-toggle />
+
+  <app-result-panel
+    [resultado]="resultado()"
+    [prazo]="prazo()"
+    [sistema]="theme.sistema()"
+  />
+
+  <div class="divisor"></div>
+
+  <app-finance-form
+    [labelValor]="config().labelValor"
+    [faixas]="config().faixas"
+    [valorBem]="valorBem()"
+    [entrada]="entrada()"
+    [prazo]="prazo()"
+    [taxa]="taxa()"
+    (valorBemChange)="onValorBem($event)"
+    (entradaChange)="entrada.set($event)"
+    (prazoChange)="prazo.set($event)"
+    (taxaChange)="taxa.set($event)"
+  />
+
+  <app-amortization-chart [parcelas]="resultado().parcelas" [prazo]="prazo()" />
+</div>

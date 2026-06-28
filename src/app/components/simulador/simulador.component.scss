@@ -1,0 +1,19 @@
+:host {
+  display: block;
+  max-width: 560px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 20px;
+  padding: 28px;
+}
+
+.divisor {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.16);
+  margin: 24px 0;
+}

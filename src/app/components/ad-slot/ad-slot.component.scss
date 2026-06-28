@@ -1,0 +1,43 @@
+:host {
+  display: block;
+}
+
+.wrap {
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.rotulo-publicidade {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #b9bdb9;
+  margin-bottom: 8px;
+}
+
+.slot {
+  border: 1px dashed #d6d6d0;
+  border-radius: 12px;
+  background: repeating-linear-gradient(
+    135deg,
+    #f4f4f1,
+    #f4f4f1 11px,
+    #eeeeea 11px,
+    #eeeeea 22px
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  color: #a8aca6;
+  background: #fff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid #e8e8e5;
+}

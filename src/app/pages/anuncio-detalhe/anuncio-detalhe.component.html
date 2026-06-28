@@ -1,0 +1,34 @@
+<section class="app-zone">
+  <app-site-header />
+
+  <div class="palco">
+    @if (anuncio(); as a) {
+      <div class="item">
+        <div class="item-img" [style.background-image]="'url(' + a.imagem_url + ')'"></div>
+        <div class="item-info">
+          <h1 class="item-titulo">{{ a.titulo }}</h1>
+          <p class="item-desc">{{ a.descricao }}</p>
+          <div class="item-preco">{{ a.preco | currency: 'BRL' : 'symbol' : '1.0-0' }}</div>
+        </div>
+      </div>
+
+      <app-simulador [config]="config()" [valorInicial]="valorInicial()" />
+
+      <a class="voltar" routerLink="/financiamento-imovel">← Voltar para o simulador</a>
+    } @else {
+      <div class="vazio">
+        <p>Anúncio não encontrado.</p>
+        <a class="voltar" routerLink="/financiamento-imovel">← Voltar para o simulador</a>
+      </div>
+    }
+  </div>
+</section>
+
+<section class="conteudo">
+  <app-ad-slot
+    formato="responsivo (728×90 / 970×90)"
+    [alturaMin]="120"
+    [larguraMax]="970"
+    slotId="detalhe-topo"
+  />
+</section>

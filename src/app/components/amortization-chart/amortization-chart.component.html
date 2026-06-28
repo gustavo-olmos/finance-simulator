@@ -1,0 +1,21 @@
+<div class="cabecalho">
+  <span class="titulo">Composição das parcelas</span>
+  <div class="legenda">
+    <span class="item"><span class="swatch amort"></span>Amortização</span>
+    <span class="item"><span class="swatch juros"></span>Juros</span>
+  </div>
+</div>
+
+<div class="grafico">
+  @for (barra of barras(); track $index) {
+    <div class="coluna">
+      <div class="seg-juros" [style.height.px]="barra.jurosPx"></div>
+      <div class="seg-amort" [style.height.px]="barra.amortPx"></div>
+    </div>
+  }
+</div>
+
+<div class="eixo">
+  <span>1ª parcela</span>
+  <span>Parcela {{ prazo() }}</span>
+</div>

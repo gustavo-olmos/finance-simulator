@@ -1,0 +1,20 @@
+<div class="tabela-wrap">
+  <table class="tabela">
+    <thead>
+      <tr>
+        <th>Característica</th>
+        <th class="sac">SAC</th>
+        <th class="price">PRICE</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (linha of linhas; track linha.caracteristica) {
+        <tr>
+          <td class="carac">{{ linha.caracteristica }}</td>
+          <td>{{ linha.sac }}</td>
+          <td>{{ linha.price }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

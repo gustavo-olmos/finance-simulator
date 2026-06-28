@@ -1,0 +1,55 @@
+<!-- ZONA PRINCIPAL (app) — fundo verde/âmbar conforme o sistema -->
+<section class="app-zone">
+  <app-site-header [temaAtivo]="temaId()" />
+
+  <div class="palco">
+    <app-simulador [config]="config()" />
+
+    <a class="cta" href="#ofertas">Ver anúncios de financiamento →</a>
+    <p class="aviso">Estimativa. Não constitui proposta de crédito.</p>
+  </div>
+</section>
+
+<!-- ZONA DE CONTEÚDO (fundo claro) — SEO + anúncios -->
+<section class="conteudo">
+
+  <!-- AD SLOT 1 · topo da zona de conteúdo -->
+  <app-ad-slot
+    formato="responsivo (728×90 / 970×90)"
+    [alturaMin]="120"
+    [larguraMax]="970"
+    slotId="topo"
+  />
+
+  <div class="texto">
+    <h2 class="titulo">{{ config().seo.h2 }}</h2>
+    <p class="paragrafo">{{ config().seo.intro }}</p>
+    <p class="paragrafo">
+      No <strong class="sac">SAC</strong>, a amortização é constante e as parcelas começam mais
+      altas e diminuem ao longo do tempo. No <strong class="price">PRICE</strong>, as parcelas são
+      fixas do início ao fim. O SAC costuma gerar menos juros no total; o PRICE oferece
+      previsibilidade.
+    </p>
+  </div>
+
+  <app-comparison-table />
+
+  <!-- AD SLOT 2 · in-article -->
+  <app-ad-slot
+    formato="in-article (336×280 / responsivo)"
+    [alturaMin]="250"
+    [larguraMax]="760"
+    slotId="in-article"
+  />
+
+  <app-faq />
+
+  <div id="ofertas">
+    <app-ads-grid [anuncios]="anuncios()" titulo="Anúncios em destaque" />
+  </div>
+
+  <footer class="rodape">
+    <span>© 2026 Simulae · Simulador independente</span>
+    <span>Não somos uma instituição financeira. Conteúdo informativo.</span>
+  </footer>
+</section>

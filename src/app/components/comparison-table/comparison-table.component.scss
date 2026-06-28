@@ -1,0 +1,46 @@
+:host {
+  display: block;
+  max-width: 760px;
+  margin: 36px auto 0;
+  padding: 0 24px;
+}
+
+.tabela-wrap {
+  border: 1px solid #e8e8e5;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+
+  thead tr {
+    background: #f4f4f1;
+  }
+
+  th {
+    text-align: left;
+    padding: 15px 20px;
+    font-weight: 700;
+    color: #1a1d1b;
+
+    &.sac { color: #15623f; }
+    &.price { color: #b07a1e; }
+  }
+
+  tbody tr {
+    border-top: 1px solid #ededea;
+  }
+
+  td {
+    padding: 15px 20px;
+    color: #1a1d1b;
+
+    &.carac {
+      color: #6b716e;
+      font-weight: 600;
+    }
+  }
+}

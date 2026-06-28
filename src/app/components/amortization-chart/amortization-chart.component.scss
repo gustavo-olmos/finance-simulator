@@ -1,0 +1,76 @@
+:host {
+  display: block;
+  margin-top: 26px;
+}
+
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 11px;
+
+  .titulo {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .legenda {
+    display: flex;
+    gap: 13px;
+
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.78);
+      font-weight: 600;
+    }
+
+    .swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+
+      &.amort { background: #fff; }
+      &.juros { background: rgba(255, 255, 255, 0.4); }
+    }
+  }
+}
+
+.grafico {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 120px;
+  width: 100%;
+}
+
+.coluna {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.seg-juros {
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 2px 2px 0 0;
+}
+
+.seg-amort {
+  background: #fff;
+  border-radius: 0 0 2px 2px;
+  margin-top: 1px;
+}
+
+.eixo {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 9px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 600;
+}

@@ -1,0 +1,9 @@
+<h3 class="titulo">Perguntas frequentes</h3>
+<div class="lista">
+  @for (item of itens; track item.q) {
+    <div class="item">
+      <span class="pergunta">{{ item.q }}</span>
+      <span class="resposta">{{ item.a }}</span>
+    </div>
+  }
+</div>

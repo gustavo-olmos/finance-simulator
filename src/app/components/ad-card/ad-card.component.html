@@ -1,0 +1,13 @@
+<a class="card" [routerLink]="['/anuncios', anuncio().slug]">
+  <div class="imagem" [style.background-image]="'url(' + anuncio().imagem_url + ')'">
+    <span class="tag">Anúncio</span>
+  </div>
+  <div class="corpo">
+    <span class="titulo">{{ anuncio().titulo }}</span>
+    <span class="descricao">{{ anuncio().descricao }}</span>
+    <div class="rodape">
+      <span class="preco">{{ anuncio().preco | currency: 'BRL' : 'symbol' : '1.0-0' }}</span>
+      <span class="cta">Simular →</span>
+    </div>
+  </div>
+</a>

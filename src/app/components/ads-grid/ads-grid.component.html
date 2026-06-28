@@ -1,0 +1,12 @@
+<div class="cabecalho">
+  <h2 class="titulo">{{ titulo() }}</h2>
+  <span class="selo">Publicidade</span>
+</div>
+
+<div class="grid">
+  @for (anuncio of anuncios(); track anuncio.id) {
+    <app-ad-card [anuncio]="anuncio" />
+  } @empty {
+    <p class="vazio">Nenhum anúncio disponível no momento.</p>
+  }
+</div>

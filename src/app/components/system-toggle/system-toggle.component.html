@@ -1,0 +1,18 @@
+<div class="toggle">
+  <button
+    type="button"
+    class="seg"
+    [class.ativo]="theme.sistema() === 'SAC'"
+    (click)="selecionar('SAC')"
+  >
+    SAC
+  </button>
+  <button
+    type="button"
+    class="seg price"
+    [class.ativo]="theme.sistema() === 'PRICE'"
+    (click)="selecionar('PRICE')"
+  >
+    PRICE
+  </button>
+</div>

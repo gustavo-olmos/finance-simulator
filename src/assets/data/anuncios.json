@@ -1,0 +1,56 @@
+[
+  {
+    "id": "fe3b2b4e-1234-4bc3-a213-9a3b8d1451f2",
+    "titulo": "Apartamento 2 Quartos Centro",
+    "slug": "apartamento-2-quartos-centro",
+    "preco": 350000,
+    "descricao": "Apartamento planejado no centro da cidade, ideal para simulação de financiamento facilitado.",
+    "imagem_url": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2",
+    "criado_em": "2026-06-27T20:00:00Z"
+  },
+  {
+    "id": "a91c7f02-55de-4f0a-b1e2-7c2c9f0a1b33",
+    "titulo": "Casa 3 Quartos com Quintal",
+    "slug": "casa-3-quartos-com-quintal",
+    "preco": 520000,
+    "descricao": "Casa térrea com 3 quartos, quintal amplo e garagem para 2 carros em bairro residencial tranquilo.",
+    "imagem_url": "https://images.unsplash.com/photo-1568605114967-8130f3a36994",
+    "criado_em": "2026-06-25T14:30:00Z"
+  },
+  {
+    "id": "c2d8e4a1-90ab-4c77-8f3d-1e6b0a2c4d55",
+    "titulo": "Studio Mobiliado Próximo ao Metrô",
+    "slug": "studio-mobiliado-proximo-ao-metro",
+    "preco": 215000,
+    "descricao": "Studio compacto e mobiliado a 200 metros da estação de metrô, perfeito para investimento ou moradia.",
+    "imagem_url": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688",
+    "criado_em": "2026-06-22T09:15:00Z"
+  },
+  {
+    "id": "d7f3b9c6-21ee-4a88-9b0c-3a5d8e1f2b77",
+    "titulo": "Sedan 1.6 Automático 2024",
+    "slug": "sedan-1-6-automatico-2024",
+    "preco": 98000,
+    "descricao": "Sedan completo, câmbio automático, baixa quilometragem e revisões em dia. Ótimo para financiamento.",
+    "imagem_url": "https://images.unsplash.com/photo-1503376780353-7e6692767b70",
+    "criado_em": "2026-06-20T16:45:00Z"
+  },
+  {
+    "id": "e4a1c8b2-67cd-4e99-a2f1-9d3b7c0e5a88",
+    "titulo": "SUV Compacto Flex 2023",
+    "slug": "suv-compacto-flex-2023",
+    "preco": 132000,
+    "descricao": "SUV compacto flex, espaçoso e econômico, com central multimídia e câmera de ré.",
+    "imagem_url": "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b",
+    "criado_em": "2026-06-18T11:00:00Z"
+  },
+  {
+    "id": "f0b6d2e9-43af-4b11-8c7e-2f9a1d4c6e99",
+    "titulo": "Motocicleta 300cc 2025",
+    "slug": "motocicleta-300cc-2025",
+    "preco": 28500,
+    "descricao": "Moto 300cc seminova, ideal para deslocamento urbano, baixo consumo e fácil manutenção.",
+    "imagem_url": "https://images.unsplash.com/photo-1558981403-c5f9899a28bc",
+    "criado_em": "2026-06-15T08:20:00Z"
+  }
+]

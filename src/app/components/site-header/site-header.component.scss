@@ -1,0 +1,63 @@
+:host {
+  display: block;
+}
+
+.header {
+  max-width: 560px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+
+  .mark {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.22);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .nome {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    color: #fff;
+  }
+}
+
+.nav {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.link {
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 8px 13px;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+
+  &.ativo {
+    color: var(--app-ink, #15623f);
+    background: rgba(255, 255, 255, 0.92);
+  }
+}

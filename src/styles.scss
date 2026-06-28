@@ -1,0 +1,20 @@
+/* Estilos globais — fontes, reset e variáveis de tema (verde/âmbar).
+   As variáveis --app-bg e --app-ink são atualizadas em runtime pelo ThemeService
+   (ver AppComponent) conforme o sistema selecionado (SAC = verde / PRICE = âmbar). */
+
+:root {
+  --app-bg: #1f8a5b;
+  --app-ink: #15623f;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+  color: #1a1d1b;
+  background: var(--app-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }

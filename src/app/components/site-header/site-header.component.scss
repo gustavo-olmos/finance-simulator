@@ -15,28 +15,31 @@
 .brand {
   display: flex;
   align-items: center;
-  gap: 9px;
   text-decoration: none;
-
-  .mark {
-    width: 26px;
-    height: 26px;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.22);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 15px;
-  }
 
   .nome {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 600;
     font-size: 17px;
     color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .mark {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.22);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    flex-shrink: 0;
   }
 }
 

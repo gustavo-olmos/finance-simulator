@@ -7,7 +7,10 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--app-bg, #1f8a5b);
+  background:
+    radial-gradient(ellipse 48% 42% at 50% 38%, rgba(255, 255, 255, 0.40) 0%, transparent 100%),
+    radial-gradient(ellipse at 50% 50%, transparent 20%, rgba(0, 0, 0, 0.60) 100%),
+    var(--app-bg, #1f8a5b);
 }
 
 .palco {

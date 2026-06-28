@@ -1,13 +1,13 @@
 :host {
   display: block;
-  margin-top: 26px;
+  margin-top: 40px;
 }
 
 .cabecalho {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 11px;
+  margin-bottom: 24px;
 
   .titulo {
     font-size: 13px;
@@ -33,8 +33,8 @@
       height: 10px;
       border-radius: 3px;
 
-      &.amort { background: #fff; }
-      &.juros { background: rgba(255, 255, 255, 0.4); }
+      &.amort { background: #ffffff9f; }
+      &.juros { background: #e70c3c5b; }
     }
   }
 }
@@ -56,12 +56,12 @@
 }
 
 .seg-juros {
-  background: rgba(255, 255, 255, 0.4);
+  background: #e70c3c5b;
   border-radius: 2px 2px 0 0;
 }
 
 .seg-amort {
-  background: #fff;
+  background: #ffffff9f;
   border-radius: 0 0 2px 2px;
   margin-top: 1px;
 }

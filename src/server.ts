@@ -49,4 +49,8 @@ function run(): void {
   });
 }
 
-run();
+// A Vercel define VERCEL=1 automaticamente; aqui só iniciamos o servidor Express
+// quando estamos fora do ambiente serverless (desenvolvimento local ou serve:ssr)
+if (!process.env['VERCEL']) {
+  run();
+}

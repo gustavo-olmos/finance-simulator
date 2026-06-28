@@ -17,3 +17,9 @@
   background: rgba(255, 255, 255, 0.16);
   margin: 24px 0;
 }
+
+@media (max-width: 26.25em) {
+  .card {
+    padding: 1.25rem 1rem;
+  }
+}

@@ -43,6 +43,7 @@
   font-weight: 700;
   font-family: 'Space Grotesk', sans-serif;
   color: #fff;
+  white-space: nowrap;
 }
 
 .editavel {
@@ -71,6 +72,25 @@
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {
     display: none;
+  }
+}
+
+@media (max-width: 26.25em) {
+  .valor {
+    font-size: 0.9375rem;
+  }
+
+  .aux {
+    font-size: 0.6875rem;
+  }
+
+  .valor-input {
+    font-size: 0.9375rem;
+    width: 6.25rem;
+  }
+
+  .valor-grupo {
+    gap: 0.3125rem;
   }
 }
 

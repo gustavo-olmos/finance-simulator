@@ -8,7 +8,6 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 import { FinanceCalculatorService } from '../../core/finance-calculator.service';
 import { ParametrosSimulacao, ResultadoSimulacao } from '../../models/simulacao.model';
 import { ThemeService } from '../../core/theme.service';
@@ -37,7 +36,6 @@ import { AmortizationChartComponent } from '../amortization-chart/amortization-c
 })
 export class SimuladorComponent implements OnInit {
   private readonly calc = inject(FinanceCalculatorService);
-  private readonly doc = inject(DOCUMENT);
   readonly theme = inject(ThemeService);
 
   readonly resultadoChange = output<ResultadoSimulacao>();
@@ -51,16 +49,12 @@ export class SimuladorComponent implements OnInit {
   readonly entradaInicial = input<number | null>(null);
   readonly prazoInicial = input<number | null>(null);
   readonly taxaInicial = input<number | null>(null);
-  /** Exibe o botão de compartilhamento (desativado em páginas de anúncio). */
-  readonly compartilhavel = input(false);
 
   // Estado do formulário (Signals).
   readonly valorBem = signal(0);
   readonly entrada = signal(0);
   readonly prazo = signal(0);
   readonly taxa = signal(0);
-
-  readonly copiado = signal(false);
 
   // Resultado derivado — recalcula sozinho quando qualquer signal acima muda.
   readonly resultado = computed(() =>
@@ -92,12 +86,6 @@ export class SimuladorComponent implements OnInit {
     this.entrada.set(this.entradaInicial() ?? Math.round(base * (d.entrada / d.valorBem)));
     this.prazo.set(this.prazoInicial() ?? d.prazoMeses);
     this.taxa.set(this.taxaInicial() ?? d.taxaAnual);
-  }
-
-  async copiarLink(): Promise<void> {
-    await navigator.clipboard.writeText(this.doc.location.href);
-    this.copiado.set(true);
-    setTimeout(() => this.copiado.set(false), 2000);
   }
 
   onValorBem(v: number): void {

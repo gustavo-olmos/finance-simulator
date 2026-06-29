@@ -1,4 +1,5 @@
 import { Component, computed, inject, OnInit, signal, afterNextRender } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { AnuncioService } from '../../core/anuncio.service';
@@ -38,6 +39,7 @@ export class SimuladorPageComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly seo = inject(SeoService);
   private readonly anuncioService = inject(AnuncioService);
+  private readonly doc = inject(DOCUMENT);
 
   readonly temaId = signal<TemaId>('imovel');
   readonly config = computed(() => getTema(this.temaId()));
@@ -48,6 +50,8 @@ export class SimuladorPageComponent implements OnInit {
   readonly entradaParam = signal<number | null>(null);
   readonly prazoParam = signal<number | null>(null);
   readonly taxaParam = signal<number | null>(null);
+
+  readonly copiado = signal(false);
 
   // Só sincroniza a URL após a primeira renderização para não poluir o histórico no carregamento.
   private urlSincronizada = false;
@@ -74,6 +78,12 @@ export class SimuladorPageComponent implements OnInit {
       descricao: cfg.seo.descricao,
       canonicalPath: `/${this.route.snapshot.routeConfig?.path ?? ''}`,
     });
+  }
+
+  async copiarLink(): Promise<void> {
+    await navigator.clipboard.writeText(this.doc.location.href);
+    this.copiado.set(true);
+    setTimeout(() => this.copiado.set(false), 2000);
   }
 
   onParametrosChange(p: ParametrosSimulacao): void {

@@ -23,14 +23,4 @@
   />
 
   <app-amortization-chart [parcelas]="resultado().parcelas" [prazo]="prazo()" />
-
-  @if (compartilhavel()) {
-    <button class="btn-compartilhar" (click)="copiarLink()">
-      @if (copiado()) {
-        ✓ Link copiado!
-      } @else {
-        Copiar link da simulação
-      }
-    </button>
-  }
 </div>

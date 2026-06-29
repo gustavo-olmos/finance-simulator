@@ -23,14 +23,21 @@
   padding: 32px 20px 48px;
 }
 
-.cta {
+.palco-acoes {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: stretch;
   gap: 8px;
   max-width: 560px;
   width: 100%;
   margin-top: 16px;
+}
+
+.cta {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   background: #fff;
   color: var(--app-ink, #15623f);
   text-decoration: none;
@@ -39,6 +46,24 @@
   padding: 15px;
   border-radius: 13px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.btn-share {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  background: var(--app-ink, #15623f);
+  border: none;
+  border-radius: 13px;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  transition: opacity 0.15s, background 0.15s;
+
+  &:hover { opacity: 0.88; }
+  &.copiado { background: #0e4f30; }
 }
 
 .aviso {

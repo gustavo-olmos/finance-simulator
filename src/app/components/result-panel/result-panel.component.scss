@@ -17,7 +17,7 @@
   .valor {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
-    font-size: 56px;
+    font-size: clamp(1.875rem, 9vw, 3.5rem);
     line-height: 1.02;
     letter-spacing: -0.03em;
     color: #fff;
@@ -43,6 +43,7 @@
   border-radius: 11px;
   padding: 13px 10px;
   text-align: center;
+  min-width: 0;
 
   .chip-rotulo {
     font-size: 11px;
@@ -55,8 +56,25 @@
   .chip-valor {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 600;
-    font-size: 16px;
+    font-size: clamp(0.75rem, 2.8vw, 1rem);
     color: #fff;
     margin-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+@media (max-width: 26.25em) {
+  .chips {
+    gap: 0.375rem;
+  }
+
+  .chip {
+    padding: 0.625rem 0.375rem;
+
+    .chip-rotulo {
+      font-size: 0.625rem;
+    }
   }
 }

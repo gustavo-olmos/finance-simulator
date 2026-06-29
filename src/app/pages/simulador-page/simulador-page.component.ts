@@ -11,6 +11,8 @@ import { ComparisonTableComponent } from '../../components/comparison-table/comp
 import { FaqComponent } from '../../components/faq/faq.component';
 import { AdsGridComponent } from '../../components/ads-grid/ads-grid.component';
 import { AdSlotComponent } from '../../components/ad-slot/ad-slot.component';
+import { AmortizationTableComponent } from '../../components/amortization-table/amortization-table.component';
+import { ResultadoSimulacao } from '../../models/simulacao.model';
 
 /**
  * Landing page temática (imóvel / veículo). O tema vem de route.data.
@@ -26,6 +28,7 @@ import { AdSlotComponent } from '../../components/ad-slot/ad-slot.component';
     FaqComponent,
     AdsGridComponent,
     AdSlotComponent,
+    AmortizationTableComponent,
   ],
   templateUrl: './simulador-page.component.html',
   styleUrl: './simulador-page.component.scss',
@@ -37,6 +40,7 @@ export class SimuladorPageComponent implements OnInit {
 
   readonly temaId = signal<TemaId>('imovel');
   readonly config = computed(() => getTema(this.temaId()));
+  readonly resultadoAtual = signal<ResultadoSimulacao | null>(null);
 
   readonly anuncios = toSignal(this.anuncioService.getTodos(), { initialValue: [] });
 

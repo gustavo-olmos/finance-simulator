@@ -1,0 +1,33 @@
+@if (resultado(); as r) {
+  <div class="cabecalho">
+    <h3 class="titulo">Tabela de amortização</h3>
+    <span class="badge" [class.sac]="r.sistema === 'SAC'" [class.price]="r.sistema === 'PRICE'">
+      {{ r.sistema }}
+    </span>
+  </div>
+
+  <div class="tabela-wrap">
+    <table class="tabela">
+      <thead>
+        <tr>
+          <th class="col-num">#</th>
+          <th>Parcela</th>
+          <th>Amortização</th>
+          <th>Juros</th>
+          <th>Saldo devedor</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of r.parcelas; track p.numero) {
+          <tr>
+            <td class="col-num num">{{ p.numero }}</td>
+            <td>{{ p.parcela | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+            <td>{{ p.amortizacao | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+            <td class="juros">{{ p.juros | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+            <td>{{ p.saldoDevedor | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}

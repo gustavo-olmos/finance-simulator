@@ -6,7 +6,7 @@ import { map, switchMap } from 'rxjs';
 import { AnuncioService } from '../../core/anuncio.service';
 import { SeoService } from '../../core/seo.service';
 import { FinanceCalculatorService } from '../../core/finance-calculator.service';
-import { getTema } from '../../config/temas.config';
+import { getTema, inferirTema } from '../../config/temas.config';
 import { TemaId } from '../../models/tema.model';
 import { SiteHeaderComponent } from '../../components/site-header/site-header.component';
 import { SimuladorComponent } from '../../components/simulador/simulador.component';
@@ -38,7 +38,7 @@ export class AnuncioDetalheComponent {
   );
 
   /** Tema inferido pelo preço, para escolher faixas adequadas dos sliders. */
-  readonly temaId = computed<TemaId>(() => this.inferirTema(this.anuncio()?.preco ?? 0));
+  readonly temaId = computed<TemaId>(() => inferirTema(this.anuncio()?.preco ?? 0));
   readonly config = computed(() => getTema(this.temaId()));
   readonly valorInicial = computed(() => this.anuncio()?.preco ?? null);
 
@@ -48,7 +48,7 @@ export class AnuncioDetalheComponent {
       const a = this.anuncio();
       if (!a) return;
 
-      const cfg = getTema(this.inferirTema(a.preco));
+      const cfg = this.config();
       const d = cfg.defaults;
       const entrada = Math.round(a.preco * (d.entrada / d.valorBem));
       const sim = this.calc.calcularSAC({
@@ -71,7 +71,4 @@ export class AnuncioDetalheComponent {
     });
   }
 
-  private inferirTema(preco: number): TemaId {
-    return preco <= 150000 ? 'veiculo' : 'imovel';
-  }
 }

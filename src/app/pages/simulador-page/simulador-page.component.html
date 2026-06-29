@@ -3,7 +3,7 @@
   <app-site-header [temaAtivo]="temaId()" />
 
   <div class="palco">
-    <app-simulador [config]="config()" />
+    <app-simulador [config]="config()" (resultadoChange)="resultadoAtual.set($event)" />
 
     <a class="cta" href="#ofertas">Ver anúncios de financiamento →</a>
     <p class="aviso">Estimativa. Não constitui proposta de crédito.</p>
@@ -20,6 +20,8 @@
     [larguraMax]="970"
     slotId="topo"
   />
+
+  <app-amortization-table [resultado]="resultadoAtual()" />
 
   <div class="texto">
     <h2 class="titulo">{{ config().seo.h2 }}</h2>

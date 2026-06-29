@@ -1,0 +1,81 @@
+:host {
+  display: block;
+  max-width: 760px;
+  margin: 36px auto 0;
+  padding: 0 24px;
+}
+
+.cabecalho {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.titulo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.125rem;
+  letter-spacing: -0.01em;
+  color: #1a1d1b;
+  margin: 0;
+}
+
+.badge {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 100px;
+
+  &.sac   { background: #d4f0e3; color: #0e4f30; }
+  &.price { background: #fde9b6; color: #7a5010; }
+}
+
+.tabela-wrap {
+  border: 1px solid #e8e8e5;
+  border-radius: 16px;
+  overflow-x: auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  max-height: 26rem;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  min-width: 30rem;
+
+  thead tr {
+    background: #f4f4f1;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  th {
+    text-align: left;
+    padding: 13px 18px;
+    font-weight: 700;
+    color: #1a1d1b;
+    white-space: nowrap;
+
+    &.col-num { width: 3rem; color: #6b716e; }
+  }
+
+  tbody tr {
+    border-top: 1px solid #ededea;
+
+    &:hover { background: #fafaf8; }
+  }
+
+  td {
+    padding: 11px 18px;
+    color: #1a1d1b;
+
+    &.num   { color: #aab0ac; font-size: 0.8125rem; }
+    &.juros { color: #8a4e10; }
+  }
+}

@@ -1,12 +1,15 @@
 import {
   Component,
   computed,
+  effect,
   inject,
   input,
   OnInit,
+  output,
   signal,
 } from '@angular/core';
 import { FinanceCalculatorService } from '../../core/finance-calculator.service';
+import { ResultadoSimulacao } from '../../models/simulacao.model';
 import { ThemeService } from '../../core/theme.service';
 import { TemaConfig } from '../../models/tema.model';
 import { SystemToggleComponent } from '../system-toggle/system-toggle.component';
@@ -35,6 +38,8 @@ export class SimuladorComponent implements OnInit {
   private readonly calc = inject(FinanceCalculatorService);
   readonly theme = inject(ThemeService);
 
+  readonly resultadoChange = output<ResultadoSimulacao>();
+
   /** Configuração do tema (faixas, defaults, rótulos). */
   readonly config = input.required<TemaConfig>();
   /** Valor inicial do bem (ex.: preço de um anúncio). Sobrepõe o default do tema. */
@@ -58,6 +63,10 @@ export class SimuladorComponent implements OnInit {
       this.theme.sistema(),
     ),
   );
+
+  constructor() {
+    effect(() => this.resultadoChange.emit(this.resultado()));
+  }
 
   ngOnInit(): void {
     const d = this.config().defaults;

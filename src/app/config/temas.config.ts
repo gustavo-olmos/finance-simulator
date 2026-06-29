@@ -43,3 +43,12 @@ export const TEMAS: Record<TemaId, TemaConfig> = {
 export function getTema(id: TemaId | string | undefined): TemaConfig {
   return TEMAS[(id as TemaId)] ?? TEMAS.imovel;
 }
+
+/** Infere o tema pelo preço: retorna o tema cujo range bemMin–bemMax contém o preço,
+ *  preferindo o de menor bemMax quando há sobreposição de faixas. */
+export function inferirTema(preco: number): TemaId {
+  const tema = Object.values(TEMAS)
+    .sort((a, b) => a.faixas.bemMax - b.faixas.bemMax)
+    .find(t => preco >= t.faixas.bemMin && preco <= t.faixas.bemMax);
+  return tema?.id ?? 'imovel';
+}

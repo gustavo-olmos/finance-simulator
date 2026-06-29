@@ -3,7 +3,16 @@
   <app-site-header [temaAtivo]="temaId()" />
 
   <div class="palco">
-    <app-simulador [config]="config()" (resultadoChange)="resultadoAtual.set($event)" />
+    <app-simulador
+      [config]="config()"
+      [valorInicial]="valorParam()"
+      [entradaInicial]="entradaParam()"
+      [prazoInicial]="prazoParam()"
+      [taxaInicial]="taxaParam()"
+      [compartilhavel]="true"
+      (resultadoChange)="resultadoAtual.set($event)"
+      (parametrosChange)="onParametrosChange($event)"
+    />
 
     <a class="cta" href="#ofertas">Ver anúncios de financiamento →</a>
     <p class="aviso">Estimativa. Não constitui proposta de crédito.</p>

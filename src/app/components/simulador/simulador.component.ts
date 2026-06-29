@@ -8,8 +8,9 @@ import {
   output,
   signal,
 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { FinanceCalculatorService } from '../../core/finance-calculator.service';
-import { ResultadoSimulacao } from '../../models/simulacao.model';
+import { ParametrosSimulacao, ResultadoSimulacao } from '../../models/simulacao.model';
 import { ThemeService } from '../../core/theme.service';
 import { TemaConfig } from '../../models/tema.model';
 import { SystemToggleComponent } from '../system-toggle/system-toggle.component';
@@ -36,20 +37,30 @@ import { AmortizationChartComponent } from '../amortization-chart/amortization-c
 })
 export class SimuladorComponent implements OnInit {
   private readonly calc = inject(FinanceCalculatorService);
+  private readonly doc = inject(DOCUMENT);
   readonly theme = inject(ThemeService);
 
   readonly resultadoChange = output<ResultadoSimulacao>();
+  readonly parametrosChange = output<ParametrosSimulacao>();
 
   /** Configuração do tema (faixas, defaults, rótulos). */
   readonly config = input.required<TemaConfig>();
   /** Valor inicial do bem (ex.: preço de um anúncio). Sobrepõe o default do tema. */
   readonly valorInicial = input<number | null>(null);
+  /** Parâmetros iniciais vindos da URL (query params). Sobrepõem defaults e valorInicial. */
+  readonly entradaInicial = input<number | null>(null);
+  readonly prazoInicial = input<number | null>(null);
+  readonly taxaInicial = input<number | null>(null);
+  /** Exibe o botão de compartilhamento (desativado em páginas de anúncio). */
+  readonly compartilhavel = input(false);
 
   // Estado do formulário (Signals).
   readonly valorBem = signal(0);
   readonly entrada = signal(0);
   readonly prazo = signal(0);
   readonly taxa = signal(0);
+
+  readonly copiado = signal(false);
 
   // Resultado derivado — recalcula sozinho quando qualquer signal acima muda.
   readonly resultado = computed(() =>
@@ -66,15 +77,27 @@ export class SimuladorComponent implements OnInit {
 
   constructor() {
     effect(() => this.resultadoChange.emit(this.resultado()));
+    effect(() => this.parametrosChange.emit({
+      valorBem: this.valorBem(),
+      entrada: this.entrada(),
+      taxaAnual: this.taxa(),
+      prazoMeses: this.prazo(),
+    }));
   }
 
   ngOnInit(): void {
     const d = this.config().defaults;
     const base = this.valorInicial() ?? d.valorBem;
     this.valorBem.set(base);
-    this.entrada.set(Math.round(base * (d.entrada / d.valorBem)));
-    this.prazo.set(d.prazoMeses);
-    this.taxa.set(d.taxaAnual);
+    this.entrada.set(this.entradaInicial() ?? Math.round(base * (d.entrada / d.valorBem)));
+    this.prazo.set(this.prazoInicial() ?? d.prazoMeses);
+    this.taxa.set(this.taxaInicial() ?? d.taxaAnual);
+  }
+
+  async copiarLink(): Promise<void> {
+    await navigator.clipboard.writeText(this.doc.location.href);
+    this.copiado.set(true);
+    setTimeout(() => this.copiado.set(false), 2000);
   }
 
   onValorBem(v: number): void {

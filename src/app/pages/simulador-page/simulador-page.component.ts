@@ -1,5 +1,4 @@
 import { Component, computed, inject, OnInit, signal, afterNextRender } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { AnuncioService } from '../../core/anuncio.service';
@@ -13,6 +12,7 @@ import { FaqComponent } from '../../components/faq/faq.component';
 import { AdsGridComponent } from '../../components/ads-grid/ads-grid.component';
 import { AdSlotComponent } from '../../components/ad-slot/ad-slot.component';
 import { AmortizationTableComponent } from '../../components/amortization-table/amortization-table.component';
+import { ShareModalComponent } from '../../components/share-modal/share-modal.component';
 import { ParametrosSimulacao, ResultadoSimulacao } from '../../models/simulacao.model';
 
 /**
@@ -30,6 +30,7 @@ import { ParametrosSimulacao, ResultadoSimulacao } from '../../models/simulacao.
     AdsGridComponent,
     AdSlotComponent,
     AmortizationTableComponent,
+    ShareModalComponent,
   ],
   templateUrl: './simulador-page.component.html',
   styleUrl: './simulador-page.component.scss',
@@ -39,8 +40,6 @@ export class SimuladorPageComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly seo = inject(SeoService);
   private readonly anuncioService = inject(AnuncioService);
-  private readonly doc = inject(DOCUMENT);
-
   readonly temaId = signal<TemaId>('imovel');
   readonly config = computed(() => getTema(this.temaId()));
   readonly resultadoAtual = signal<ResultadoSimulacao | null>(null);
@@ -51,7 +50,7 @@ export class SimuladorPageComponent implements OnInit {
   readonly prazoParam = signal<number | null>(null);
   readonly taxaParam = signal<number | null>(null);
 
-  readonly copiado = signal(false);
+  readonly mostrarModal = signal(false);
 
   // Só sincroniza a URL após a primeira renderização para não poluir o histórico no carregamento.
   private urlSincronizada = false;
@@ -78,12 +77,6 @@ export class SimuladorPageComponent implements OnInit {
       descricao: cfg.seo.descricao,
       canonicalPath: `/${this.route.snapshot.routeConfig?.path ?? ''}`,
     });
-  }
-
-  async copiarLink(): Promise<void> {
-    await navigator.clipboard.writeText(this.doc.location.href);
-    this.copiado.set(true);
-    setTimeout(() => this.copiado.set(false), 2000);
   }
 
   onParametrosChange(p: ParametrosSimulacao): void {

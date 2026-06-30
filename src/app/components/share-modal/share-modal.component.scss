@@ -1,0 +1,173 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+  animation: fadeIn 0.15s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  background: #fff;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.2s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(16px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.btn-fechar {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.18);
+  border: none;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  z-index: 1;
+  transition: background 0.15s;
+
+  &:hover { background: rgba(255, 255, 255, 0.28); }
+}
+
+// ===== Share card (fundo verde — simula o card do simulador) =====
+.share-card {
+  background:
+    radial-gradient(ellipse 280px 240px at 50% 30%, rgba(255, 255, 255, 0.22) 0%, transparent 100%),
+    var(--app-bg, #1f8a5b);
+  padding: 28px 24px 22px;
+  color: #fff;
+}
+
+.share-card-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.share-titulo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+}
+
+.badge {
+  font-size: 0.625rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 100px;
+
+  &.sac   { background: rgba(255, 255, 255, 0.22); color: #fff; }
+  &.price { background: rgba(255, 255, 255, 0.22); color: #fff; }
+}
+
+.metricas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 10px;
+  margin-bottom: 22px;
+}
+
+.metrica {
+  &.destaque .metrica-valor { font-size: 1.25rem; }
+}
+
+.metrica-rotulo {
+  display: block;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 4px;
+}
+
+.metrica-valor {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  letter-spacing: -0.02em;
+  color: #fff;
+
+  &.juros { color: rgba(255, 220, 150, 0.95); }
+}
+
+.share-card-rodape {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.55);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 14px;
+}
+
+// ===== Botões de ação =====
+.acoes {
+  display: flex;
+  gap: 8px;
+  padding: 16px;
+}
+
+.btn-copiar {
+  flex: 1;
+  padding: 13px;
+  background: #f4f4f1;
+  border: 1px solid #e8e8e5;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #1a1d1b;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover { background: #eaeae7; }
+}
+
+.btn-compartilhar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 13px;
+  background: var(--app-ink, #15623f);
+  border: none;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.15s;
+
+  &:hover { opacity: 0.88; }
+}

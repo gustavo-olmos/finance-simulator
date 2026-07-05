@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 interface ItemFaq {
   q: string;
@@ -13,6 +13,12 @@ interface ItemFaq {
   styleUrl: './faq.component.scss',
 })
 export class FaqComponent {
+  readonly abertoIndex = signal<number | null>(null);
+
+  alternar(i: number): void {
+    this.abertoIndex.update(atual => atual === i ? null : i);
+  }
+
   readonly itens: ItemFaq[] = [
     {
       q: 'Para qual tipo de financiamento serve?',

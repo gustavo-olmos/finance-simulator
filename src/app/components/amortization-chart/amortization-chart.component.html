@@ -7,7 +7,7 @@
 </div>
 
 <div class="grafico">
-  @for (barra of barras(); track $index; let i = $index) {
+  @for (barra of barras(); track barra.numero; let i = $index) {
     <div
       class="coluna"
       (mouseenter)="hoveredIndex.set(i)"

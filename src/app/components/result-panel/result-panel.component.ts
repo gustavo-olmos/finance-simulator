@@ -23,7 +23,7 @@ export class ResultPanelComponent {
         style: 'currency',
         currency: 'BRL',
       });
-      return `1ª de ${n} parcelas (SAC) · cai para ${ultima}`;
+      return `${n}x SAC · última parcela ${ultima}`;
     }
     return `parcela fixa · ${n} meses (PRICE)`;
   });

@@ -84,6 +84,15 @@ export class SimuladorPageComponent implements OnInit {
 
     const url = `${this.seo.ORIGIN}/${path}`;
 
+    const ogUrl = new URL(`${this.seo.ORIGIN}/api/og`);
+    ogUrl.searchParams.set('valor',   (Number(qp['valor']   ?? cfg.defaults.valorBem)).toString());
+    ogUrl.searchParams.set('entrada', (Number(qp['entrada'] ?? cfg.defaults.entrada)).toString());
+    ogUrl.searchParams.set('prazo',   (Number(qp['prazo']   ?? cfg.defaults.prazoMeses)).toString());
+    ogUrl.searchParams.set('taxa',    (Number(qp['taxa']    ?? cfg.defaults.taxaAnual)).toString());
+    ogUrl.searchParams.set('seguro',  (Number(qp['seguro']  ?? 0)).toString());
+    ogUrl.searchParams.set('sistema', 'SAC');
+    this.seo.setOgImage(ogUrl.toString());
+
     this.seo.injetarJsonLd('financial-product', {
       '@context': 'https://schema.org',
       '@type': 'FinancialProduct',

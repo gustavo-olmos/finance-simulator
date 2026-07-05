@@ -6,7 +6,8 @@
       "memory": 1024
     }
   },
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/api/index" }
+  "routes": [
+    { "src": "/api/og", "dest": "/api/og" },
+    { "src": "/(.*)",   "dest": "/api/index" }
   ]
 }

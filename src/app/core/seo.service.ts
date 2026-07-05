@@ -43,6 +43,13 @@ export class SeoService {
     }
   }
 
+  setOgImage(url: string): void {
+    this.meta.updateTag({ property: 'og:image',        content: url });
+    this.meta.updateTag({ property: 'og:image:width',  content: '1200' });
+    this.meta.updateTag({ property: 'og:image:height', content: '630' });
+    this.meta.updateTag({ property: 'og:image:type',   content: 'image/png' });
+  }
+
   injetarJsonLd(id: string, schema: object): void {
     const scriptId = `ld-json-${id}`;
     let script = this.doc.getElementById(scriptId) as HTMLScriptElement | null;

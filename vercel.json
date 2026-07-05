@@ -7,6 +7,7 @@
     }
   },
   "rewrites": [
-    { "source": "/(.*)", "destination": "/api/index" }
+    { "source": "/api/og",  "destination": "/api/og" },
+    { "source": "/(.*)",    "destination": "/api/index" }
   ]
 }

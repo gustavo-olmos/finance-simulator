@@ -11,7 +11,7 @@ registerLocaleData(localePt, 'pt-BR');
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes, withInMemoryScrolling({ scrollPositionRestoration: 'top', anchorScrolling: 'enabled' })),
+    provideRouter(routes, withInMemoryScrolling({ scrollPositionRestoration: 'disabled', anchorScrolling: 'enabled' })),
     // provideClientHydration faz a transferência do estado renderizado no servidor
     // para o cliente sem flicker (requisito 3.3 da spec).
     provideClientHydration(),

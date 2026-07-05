@@ -62,7 +62,10 @@
   grid-template-rows: 0fr;
   transition: grid-template-rows 0.25s ease;
 
-  > * { overflow: hidden; }
+  > * {
+    overflow: hidden;
+    min-height: 0;
+  }
 }
 
 .resposta {

@@ -55,6 +55,7 @@ export class SimuladorPageComponent implements OnInit {
 
   // Só sincroniza a URL após a primeira renderização para não poluir o histórico no carregamento.
   private urlSincronizada = false;
+  private urlTimer: ReturnType<typeof setTimeout> | null = null;
 
   readonly anuncios = toSignal(this.anuncioService.getTodos(), { initialValue: [] });
 
@@ -111,16 +112,19 @@ export class SimuladorPageComponent implements OnInit {
 
   onParametrosChange(p: ParametrosSimulacao): void {
     if (!this.urlSincronizada) return;
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: {
-        valor: p.valorBem,
-        entrada: p.entrada,
-        prazo: p.prazoMeses,
-        taxa: p.taxaAnual,
-        seguro: p.seguroMensal ?? 0,
-      },
-      replaceUrl: true,
-    });
+    if (this.urlTimer) clearTimeout(this.urlTimer);
+    this.urlTimer = setTimeout(() => {
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: {
+          valor: p.valorBem,
+          entrada: p.entrada,
+          prazo: p.prazoMeses,
+          taxa: p.taxaAnual,
+          seguro: p.seguroMensal ?? 0,
+        },
+        replaceUrl: true,
+      });
+    }, 400);
   }
 }

@@ -17,4 +17,10 @@
     <div class="chip-rotulo">Juros</div>
     <div class="chip-valor">{{ resultado().totalJuros | currency: 'BRL' : 'symbol' : '1.0-0' }}</div>
   </div>
+  @if (resultado().totalSeguro > 0) {
+    <div class="chip">
+      <div class="chip-rotulo">Seguro total</div>
+      <div class="chip-valor">{{ resultado().totalSeguro | currency: 'BRL' : 'symbol' : '1.0-0' }}</div>
+    </div>
+  }
 </div>

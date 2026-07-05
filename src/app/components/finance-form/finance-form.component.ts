@@ -2,7 +2,7 @@ import { Component, computed, effect, ElementRef, inject, input, output, signal 
 import { CurrencyPipe, DecimalPipe } from '@angular/common';
 import { FaixasSimulacao } from '../../models/tema.model';
 
-type Campo = 'valor' | 'entrada' | 'prazo' | 'taxa';
+type Campo = 'valor' | 'entrada' | 'prazo' | 'taxa' | 'seguro';
 
 @Component({
   selector: 'app-finance-form',
@@ -19,11 +19,13 @@ export class FinanceFormComponent {
   readonly entrada = input.required<number>();
   readonly prazo = input.required<number>();
   readonly taxa = input.required<number>();
+  readonly seguro = input.required<number>();
 
   readonly valorBemChange = output<number>();
   readonly entradaChange = output<number>();
   readonly prazoChange = output<number>();
   readonly taxaChange = output<number>();
+  readonly seguroChange = output<number>();
 
   readonly entradaPct = computed(() =>
     this.valorBem() > 0 ? Math.round((this.entrada() / this.valorBem()) * 100) : 0,
@@ -76,6 +78,7 @@ export class FinanceFormComponent {
       case 'entrada': return Math.min(this.valorBem(), Math.max(0, n));
       case 'prazo':   return Math.min(f.prazoMax, Math.max(f.prazoMin, n));
       case 'taxa':    return Math.min(f.taxaMax, Math.max(f.taxaMin, n));
+      case 'seguro':  return Math.min(0.5, Math.max(0, n));
     }
   }
 
@@ -86,6 +89,7 @@ export class FinanceFormComponent {
       case 'entrada': this.entradaChange.emit(n);  break;
       case 'prazo':   this.prazoChange.emit(n);    break;
       case 'taxa':    this.taxaChange.emit(n);     break;
+      case 'seguro':  this.seguroChange.emit(n);   break;
     }
   }
 }

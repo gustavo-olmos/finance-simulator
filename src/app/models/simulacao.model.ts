@@ -4,10 +4,11 @@ export type SistemaAmortizacao = 'SAC' | 'PRICE';
 
 /** Parâmetros de entrada da simulação. */
 export interface ParametrosSimulacao {
-  valorBem: number;   // Valor total do bem
-  entrada: number;    // Valor da entrada
-  taxaAnual: number;  // Taxa de juros nominal anual (% a.a.)
-  prazoMeses: number; // Prazo em meses
+  valorBem: number;      // Valor total do bem
+  entrada: number;       // Valor da entrada
+  taxaAnual: number;     // Taxa de juros nominal anual (% a.a.)
+  prazoMeses: number;    // Prazo em meses
+  seguroMensal?: number; // Seguro MIP/DFI (% a.m. sobre saldo devedor, default 0)
 }
 
 /** Uma parcela da tabela de amortização (linha do array de saída — requisito 3.1). */
@@ -27,6 +28,7 @@ export interface ResultadoSimulacao {
   valorFinanciado: number;
   totalPago: number;
   totalJuros: number;
+  totalSeguro: number;
   primeiraParcela: number;
   ultimaParcela: number;
 }

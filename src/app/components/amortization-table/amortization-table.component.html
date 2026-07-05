@@ -14,6 +14,9 @@
           <th>Parcela</th>
           <th>Amortização</th>
           <th>Juros</th>
+          @if (r.totalSeguro > 0) {
+            <th>Seguro</th>
+          }
           <th>Saldo devedor</th>
         </tr>
       </thead>
@@ -24,6 +27,9 @@
             <td>{{ p.parcela | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
             <td>{{ p.amortizacao | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
             <td class="juros">{{ p.juros | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+            @if (r.totalSeguro > 0) {
+              <td class="seguro">{{ p.seguro | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+            }
             <td>{{ p.saldoDevedor | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
           </tr>
         }

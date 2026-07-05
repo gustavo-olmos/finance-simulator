@@ -49,6 +49,7 @@ export class SimuladorPageComponent implements OnInit {
   readonly entradaParam = signal<number | null>(null);
   readonly prazoParam = signal<number | null>(null);
   readonly taxaParam = signal<number | null>(null);
+  readonly seguroParam = signal<number | null>(null);
 
   readonly mostrarModal = signal(false);
 
@@ -70,6 +71,7 @@ export class SimuladorPageComponent implements OnInit {
     if (qp['entrada']) this.entradaParam.set(Number(qp['entrada']));
     if (qp['prazo'])   this.prazoParam.set(Number(qp['prazo']));
     if (qp['taxa'])    this.taxaParam.set(Number(qp['taxa']));
+    if (qp['seguro'])  this.seguroParam.set(Number(qp['seguro']));
 
     const cfg = getTema(tema);
     const path = this.route.snapshot.routeConfig?.path ?? '';
@@ -111,7 +113,13 @@ export class SimuladorPageComponent implements OnInit {
     if (!this.urlSincronizada) return;
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: { valor: p.valorBem, entrada: p.entrada, prazo: p.prazoMeses, taxa: p.taxaAnual },
+      queryParams: {
+        valor: p.valorBem,
+        entrada: p.entrada,
+        prazo: p.prazoMeses,
+        taxa: p.taxaAnual,
+        seguro: p.seguroMensal ?? 0,
+      },
       replaceUrl: true,
     });
   }

@@ -49,12 +49,14 @@ export class SimuladorComponent implements OnInit {
   readonly entradaInicial = input<number | null>(null);
   readonly prazoInicial = input<number | null>(null);
   readonly taxaInicial = input<number | null>(null);
+  readonly seguroInicial = input<number | null>(null);
 
   // Estado do formulário (Signals).
   readonly valorBem = signal(0);
   readonly entrada = signal(0);
   readonly prazo = signal(0);
   readonly taxa = signal(0);
+  readonly seguro = signal(0);
 
   // Resultado derivado — recalcula sozinho quando qualquer signal acima muda.
   readonly resultado = computed(() =>
@@ -64,6 +66,7 @@ export class SimuladorComponent implements OnInit {
         entrada: this.entrada(),
         taxaAnual: this.taxa(),
         prazoMeses: this.prazo(),
+        seguroMensal: this.seguro(),
       },
       this.theme.sistema(),
     ),
@@ -76,6 +79,7 @@ export class SimuladorComponent implements OnInit {
       entrada: this.entrada(),
       taxaAnual: this.taxa(),
       prazoMeses: this.prazo(),
+      seguroMensal: this.seguro(),
     }));
   }
 
@@ -86,6 +90,7 @@ export class SimuladorComponent implements OnInit {
     this.entrada.set(this.entradaInicial() ?? Math.round(base * (d.entrada / d.valorBem)));
     this.prazo.set(this.prazoInicial() ?? d.prazoMeses);
     this.taxa.set(this.taxaInicial() ?? d.taxaAnual);
+    this.seguro.set(this.seguroInicial() ?? 0);
   }
 
   onValorBem(v: number): void {

@@ -20,13 +20,14 @@ export class FinanceCalculatorService {
   }
 
   /** Normaliza e valida os parâmetros de entrada. */
-  private sanitizar(p: ParametrosSimulacao): { principal: number; n: number; i: number } {
+  private sanitizar(p: ParametrosSimulacao): { principal: number; n: number; i: number; s: number } {
     const valorBem = Math.max(0, p.valorBem || 0);
     const entrada = Math.min(Math.max(0, p.entrada || 0), valorBem);
     const principal = Math.max(0, valorBem - entrada);
     const n = Math.max(0, Math.floor(p.prazoMeses || 0));
     const i = this.taxaMensal(p.taxaAnual || 0);
-    return { principal, n, i };
+    const s = Math.max(0, (p.seguroMensal ?? 0) / 100);
+    return { principal, n, i, s };
   }
 
   /** Ponto de entrada: calcula pelo sistema escolhido. */
@@ -39,7 +40,7 @@ export class FinanceCalculatorService {
    * Juros recalculados sobre o saldo devedor → parcelas decrescentes.
    */
   calcularSAC(p: ParametrosSimulacao): ResultadoSimulacao {
-    const { principal, n, i } = this.sanitizar(p);
+    const { principal, n, i, s } = this.sanitizar(p);
     if (n === 0 || principal === 0) return this.resultadoVazio('SAC', principal);
 
     const amortizacao = principal / n;
@@ -48,7 +49,7 @@ export class FinanceCalculatorService {
 
     for (let k = 1; k <= n; k++) {
       const juros = saldo * i;
-      const seguro = 0; // Reservado para evolução (MIP/DFI). MVP = 0.
+      const seguro = saldo * s;
       const parcela = amortizacao + juros + seguro;
       saldo = Math.max(0, saldo - amortizacao);
       parcelas.push({ numero: k, amortizacao, juros, seguro, parcela, saldoDevedor: saldo });
@@ -62,11 +63,11 @@ export class FinanceCalculatorService {
    * Amortização crescente e juros decrescentes ao longo do tempo.
    */
   calcularPRICE(p: ParametrosSimulacao): ResultadoSimulacao {
-    const { principal, n, i } = this.sanitizar(p);
+    const { principal, n, i, s } = this.sanitizar(p);
     if (n === 0 || principal === 0) return this.resultadoVazio('PRICE', principal);
 
     // Fórmula PRICE; quando i = 0, cai para amortização linear (evita divisão por zero).
-    const parcelaFixa =
+    const parcelaBase =
       i > 0 ? (principal * i) / (1 - Math.pow(1 + i, -n)) : principal / n;
 
     const parcelas: Parcela[] = [];
@@ -74,15 +75,15 @@ export class FinanceCalculatorService {
 
     for (let k = 1; k <= n; k++) {
       const juros = saldo * i;
-      const seguro = 0;
-      const amortizacao = parcelaFixa - juros;
+      const seguro = saldo * s;
+      const amortizacao = parcelaBase - juros;
       saldo = Math.max(0, saldo - amortizacao);
       parcelas.push({
         numero: k,
         amortizacao,
         juros,
         seguro,
-        parcela: parcelaFixa,
+        parcela: parcelaBase + seguro,
         saldoDevedor: saldo,
       });
     }
@@ -97,9 +98,11 @@ export class FinanceCalculatorService {
   ): ResultadoSimulacao {
     let totalPago = 0;
     let totalJuros = 0;
+    let totalSeguro = 0;
     for (const p of parcelas) {
       totalPago += p.parcela;
       totalJuros += p.juros;
+      totalSeguro += p.seguro;
     }
     return {
       sistema,
@@ -107,6 +110,7 @@ export class FinanceCalculatorService {
       valorFinanciado,
       totalPago,
       totalJuros,
+      totalSeguro,
       primeiraParcela: parcelas[0]?.parcela ?? 0,
       ultimaParcela: parcelas[parcelas.length - 1]?.parcela ?? 0,
     };
@@ -119,6 +123,7 @@ export class FinanceCalculatorService {
       valorFinanciado,
       totalPago: 0,
       totalJuros: 0,
+      totalSeguro: 0,
       primeiraParcela: 0,
       ultimaParcela: 0,
     };

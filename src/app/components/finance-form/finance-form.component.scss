@@ -101,36 +101,61 @@
   }
 }
 
-// Sliders — trilho translúcido, polegar branco com borda no tom do tema (--app-ink).
+.instrucao {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.42);
+  text-align: center;
+  margin: 0 0 18px;
+  letter-spacing: 0.01em;
+}
+
+// Sliders — trilho com preenchimento progressivo via --fill, polegar destacado.
 input[type='range'] {
   -webkit-appearance: none;
   appearance: none;
   height: 6px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.28);
-  accent-color: #fff;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.75) 0%,
+    rgba(255, 255, 255, 0.75) var(--fill, 0%),
+    rgba(255, 255, 255, 0.22) var(--fill, 0%),
+    rgba(255, 255, 255, 0.22) 100%
+  );
   width: 100%;
   cursor: pointer;
 
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     background: #fff;
-    border: 2px solid var(--app-ink, #15623f);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.22);
+    border: 2.5px solid var(--app-ink, #15623f);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28), 0 0 0 3px rgba(255, 255, 255, 0.22);
     cursor: pointer;
+    transition: box-shadow 0.15s;
+
+    &:hover, &:active {
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35), 0 0 0 5px rgba(255, 255, 255, 0.28);
+    }
   }
 
   &::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     background: #fff;
-    border: 2px solid var(--app-ink, #15623f);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.22);
+    border: 2.5px solid var(--app-ink, #15623f);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28), 0 0 0 3px rgba(255, 255, 255, 0.22);
     cursor: pointer;
+    transition: box-shadow 0.15s;
+  }
+
+  &::-moz-range-progress {
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 999px;
+    height: 6px;
   }
 }

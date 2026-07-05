@@ -82,6 +82,11 @@ export class FinanceFormComponent {
     }
   }
 
+  fill(value: number, min: number, max: number): string {
+    if (max <= min) return '0%';
+    return `${Math.min(100, Math.max(0, (value - min) / (max - min) * 100)).toFixed(1)}%`;
+  }
+
   emitir(saida: Campo, valor: string): void {
     const n = Number(valor);
     switch (saida) {

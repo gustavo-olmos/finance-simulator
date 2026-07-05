@@ -1,3 +1,5 @@
+<p class="instrucao">Arraste os controles abaixo para simular os valores</p>
+
 <div class="campos">
 
   <div class="campo">
@@ -27,6 +29,7 @@
       [max]="faixas().bemMax"
       [step]="faixas().bemStep"
       [value]="valorBem()"
+      [style.--fill]="fill(valorBem(), faixas().bemMin, faixas().bemMax)"
       (input)="emitir('valor', $any($event.target).value)"
     />
   </div>
@@ -61,6 +64,7 @@
       [max]="valorBem()"
       [step]="faixas().bemStep"
       [value]="entrada()"
+      [style.--fill]="fill(entrada(), 0, valorBem())"
       (input)="emitir('entrada', $any($event.target).value)"
     />
   </div>
@@ -95,6 +99,7 @@
       [max]="faixas().prazoMax"
       [step]="faixas().prazoStep"
       [value]="prazo()"
+      [style.--fill]="fill(prazo(), faixas().prazoMin, faixas().prazoMax)"
       (input)="emitir('prazo', $any($event.target).value)"
     />
   </div>
@@ -129,6 +134,7 @@
       [max]="faixas().taxaMax"
       [step]="faixas().taxaStep"
       [value]="taxa()"
+      [style.--fill]="fill(taxa(), faixas().taxaMin, faixas().taxaMax)"
       (input)="emitir('taxa', $any($event.target).value)"
     />
   </div>
@@ -162,6 +168,7 @@
       [max]="0.5"
       [step]="0.005"
       [value]="seguro()"
+      [style.--fill]="fill(seguro(), 0, 0.5)"
       (input)="emitir('seguro', $any($event.target).value)"
     />
   </div>

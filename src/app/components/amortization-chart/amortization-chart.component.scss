@@ -53,6 +53,86 @@
   flex-direction: column;
   justify-content: flex-end;
   min-width: 0;
+  position: relative;
+  cursor: default;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border-radius: 10px;
+  padding: 9px 11px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 10;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #fff;
+  }
+
+  &.tooltip-esquerda {
+    left: 0;
+    transform: none;
+    &::after { left: 12px; transform: none; }
+  }
+
+  &.tooltip-direita {
+    left: auto;
+    right: 0;
+    transform: none;
+    &::after { left: auto; right: 12px; transform: none; }
+  }
+}
+
+.tooltip-parcela {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #aab0ac;
+  margin-bottom: 6px;
+}
+
+.tooltip-linha {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: #1a1d1b;
+
+  & + & { margin-top: 3px; }
+
+  .swatch {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    flex-shrink: 0;
+
+    &.amort { background: var(--app-bg, #1f8a5b); }
+    &.juros { background: #c0392b; }
+  }
+}
+
+.tooltip-rotulo {
+  flex: 1;
+  color: #6b716e;
+  font-weight: 600;
+}
+
+.tooltip-valor {
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 .seg-juros {

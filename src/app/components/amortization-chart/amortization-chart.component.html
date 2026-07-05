@@ -7,8 +7,27 @@
 </div>
 
 <div class="grafico">
-  @for (barra of barras(); track $index) {
-    <div class="coluna">
+  @for (barra of barras(); track $index; let i = $index) {
+    <div
+      class="coluna"
+      (mouseenter)="hoveredIndex.set(i)"
+      (mouseleave)="hoveredIndex.set(null)"
+    >
+      @if (hoveredIndex() === i) {
+        <div class="tooltip" [class.tooltip-esquerda]="i < 4" [class.tooltip-direita]="i >= barras().length - 4">
+          <span class="tooltip-parcela">Parcela {{ barra.numero }}</span>
+          <div class="tooltip-linha">
+            <span class="swatch amort"></span>
+            <span class="tooltip-rotulo">Amort.</span>
+            <span class="tooltip-valor">{{ barra.amortizacao | currency:'BRL':'symbol':'1.0-0':'pt-BR' }}</span>
+          </div>
+          <div class="tooltip-linha">
+            <span class="swatch juros"></span>
+            <span class="tooltip-rotulo">Juros</span>
+            <span class="tooltip-valor">{{ barra.juros | currency:'BRL':'symbol':'1.0-0':'pt-BR' }}</span>
+          </div>
+        </div>
+      }
       <div class="seg-juros" [style.height.px]="barra.jurosPx"></div>
       <div class="seg-amort" [style.height.px]="barra.amortPx"></div>
     </div>

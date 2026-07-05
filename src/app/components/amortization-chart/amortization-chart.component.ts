@@ -1,9 +1,14 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, signal } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
 import { Parcela } from '../../models/simulacao.model';
 
 interface Barra {
   amortPx: number;
   jurosPx: number;
+  numero: number;
+  amortizacao: number;
+  juros: number;
+  parcela: number;
 }
 
 const ALTURA_MAX = 120;
@@ -13,12 +18,15 @@ const MAX_BARRAS = 40;
 @Component({
   selector: 'app-amortization-chart',
   standalone: true,
+  imports: [CurrencyPipe],
   templateUrl: './amortization-chart.component.html',
   styleUrl: './amortization-chart.component.scss',
 })
 export class AmortizationChartComponent {
   readonly parcelas = input.required<Parcela[]>();
   readonly prazo = input.required<number>();
+
+  readonly hoveredIndex = signal<number | null>(null);
 
   /** Amostra as parcelas e converte em alturas (px) proporcionais à maior parcela. */
   readonly barras = computed<Barra[]>(() => {
@@ -36,6 +44,10 @@ export class AmortizationChartComponent {
       barras.push({
         amortPx: (item.amortizacao / maxParcela) * ALTURA_MAX,
         jurosPx: (item.juros / maxParcela) * ALTURA_MAX,
+        numero: item.numero,
+        amortizacao: item.amortizacao,
+        juros: item.juros,
+        parcela: item.parcela,
       });
     }
     return barras;

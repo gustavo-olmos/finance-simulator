@@ -15,8 +15,6 @@ export class AppComponent {
   private readonly doc = inject(DOCUMENT);
 
   constructor() {
-    // Sincroniza as variáveis CSS de tema (verde/âmbar) sempre que o sistema muda.
-    // Só roda no browser; no servidor os valores padrão de styles.scss são usados.
     effect(() => {
       const cores = this.theme.cores();
       if (!isPlatformBrowser(this.platformId)) return;

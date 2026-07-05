@@ -17,6 +17,11 @@ export function app(): express.Express {
 
   const commonEngine = new CommonEngine();
 
+  // Atrás do proxy da Vercel, respeita X-Forwarded-Proto para que req.protocol
+  // seja "https" — sem isso o og:image/twitter:image sai com http:// e o
+  // crawler do WhatsApp descarta a imagem (o do Facebook segue o redirect).
+  server.set('trust proxy', true);
+
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
 

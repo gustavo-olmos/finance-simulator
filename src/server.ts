@@ -4,6 +4,7 @@ import express from 'express';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import bootstrap from './main.server';
+import { criarOgImageHandler } from './og-image';
 
 // Servidor Express para Angular SSR.
 // Garante que /financiamento-* e /anuncios/:slug sejam renderizados no servidor
@@ -21,6 +22,9 @@ export function app(): express.Express {
 
   // Servir assets estáticos (inclui src/assets/data/anuncios.json)
   server.get('*.*', express.static(browserDistFolder, { maxAge: '1y' }));
+
+  // Imagem Open Graph dinâmica (SVG → PNG via Sharp), gerada pelo próprio SSR
+  server.get('/api/og', criarOgImageHandler(join(browserDistFolder, 'assets', 'og')));
 
   // Todas as outras rotas passam pelo Angular SSR
   server.get('*', (req, res, next) => {

@@ -32,8 +32,14 @@ export class SeoService {
     this.meta.updateTag({ property: 'og:title', content: dados.titulo });
     this.meta.updateTag({ property: 'og:description', content: dados.descricao });
     this.meta.updateTag({ property: 'og:type', content: 'website' });
+
+    this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+    this.meta.updateTag({ name: 'twitter:title', content: dados.titulo });
+    this.meta.updateTag({ name: 'twitter:description', content: dados.descricao });
+
     if (dados.imagem) {
       this.meta.updateTag({ property: 'og:image', content: dados.imagem });
+      this.meta.updateTag({ name: 'twitter:image', content: dados.imagem });
     }
 
     const url = dados.canonicalPath ? this.ORIGIN + dados.canonicalPath : undefined;
@@ -48,6 +54,8 @@ export class SeoService {
     this.meta.updateTag({ property: 'og:image:width',  content: '1200' });
     this.meta.updateTag({ property: 'og:image:height', content: '630' });
     this.meta.updateTag({ property: 'og:image:type',   content: 'image/png' });
+    this.meta.updateTag({ name: 'twitter:card',  content: 'summary_large_image' });
+    this.meta.updateTag({ name: 'twitter:image', content: url });
   }
 
   injetarJsonLd(id: string, schema: object): void {

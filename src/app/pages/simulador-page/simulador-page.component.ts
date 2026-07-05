@@ -72,10 +72,38 @@ export class SimuladorPageComponent implements OnInit {
     if (qp['taxa'])    this.taxaParam.set(Number(qp['taxa']));
 
     const cfg = getTema(tema);
+    const path = this.route.snapshot.routeConfig?.path ?? '';
     this.seo.aplicar({
       titulo: cfg.seo.titulo,
       descricao: cfg.seo.descricao,
-      canonicalPath: `/${this.route.snapshot.routeConfig?.path ?? ''}`,
+      canonicalPath: `/${path}`,
+    });
+
+    const url = `${this.seo.ORIGIN}/${path}`;
+
+    this.seo.injetarJsonLd('financial-product', {
+      '@context': 'https://schema.org',
+      '@type': 'FinancialProduct',
+      name: cfg.seo.titulo,
+      description: cfg.seo.descricao,
+      url,
+      feesAndCommissionsSpecification: 'Estimativa para fins de comparação. Não constitui proposta de crédito.',
+      provider: { '@type': 'Organization', name: 'Simulae', url: this.seo.ORIGIN },
+    });
+
+    this.seo.injetarJsonLd('faq', {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        { '@type': 'Question', name: 'Para qual tipo de financiamento serve?',
+          acceptedAnswer: { '@type': 'Answer', text: 'Imóvel, veículo, crédito com garantia e outros financiamentos com parcelas mensais. Basta informar valor, entrada, prazo e taxa.' } },
+        { '@type': 'Question', name: 'A taxa de juros é mensal ou anual?',
+          acceptedAnswer: { '@type': 'Answer', text: 'Você informa a taxa anual e o simulador converte para a taxa mensal equivalente automaticamente.' } },
+        { '@type': 'Question', name: 'Os valores são exatos?',
+          acceptedAnswer: { '@type': 'Answer', text: 'São estimativas para fins de comparação. As condições reais variam conforme a instituição financeira e o seu perfil.' } },
+        { '@type': 'Question', name: 'Preciso me cadastrar?',
+          acceptedAnswer: { '@type': 'Answer', text: 'Não. O cálculo é gratuito, instantâneo e não exige nenhum dado pessoal.' } },
+      ],
     });
   }
 

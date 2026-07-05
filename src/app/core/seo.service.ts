@@ -23,7 +23,7 @@ export class SeoService {
   private readonly meta = inject(Meta);
   private readonly doc = inject(DOCUMENT);
 
-  private readonly ORIGIN = 'https://www.simulae.com.br';
+  readonly ORIGIN = 'https://www.simulae.com.br';
 
   aplicar(dados: MetadadosSeo): void {
     this.title.setTitle(dados.titulo);
@@ -41,6 +41,18 @@ export class SeoService {
       this.meta.updateTag({ property: 'og:url', content: url });
       this.setCanonical(url);
     }
+  }
+
+  injetarJsonLd(id: string, schema: object): void {
+    const scriptId = `ld-json-${id}`;
+    let script = this.doc.getElementById(scriptId) as HTMLScriptElement | null;
+    if (!script) {
+      script = this.doc.createElement('script');
+      script.setAttribute('type', 'application/ld+json');
+      script.setAttribute('id', scriptId);
+      this.doc.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(schema);
   }
 
   private setCanonical(href: string): void {

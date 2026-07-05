@@ -1,7 +1,4 @@
-/** @jsxImportSource @vercel/og/jsx-runtime */
 import { ImageResponse } from '@vercel/og';
-
-export const config = { runtime: 'edge' };
 
 // Formata número como BRL sem depender de Intl (Edge tem suporte limitado)
 function brl(n: number): string {

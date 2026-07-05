@@ -1,4 +1,5 @@
 import { Component, computed, inject, OnInit, signal, afterNextRender } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { AnuncioService } from '../../core/anuncio.service';
@@ -40,6 +41,7 @@ export class SimuladorPageComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly seo = inject(SeoService);
   private readonly anuncioService = inject(AnuncioService);
+  private readonly doc = inject(DOCUMENT);
   readonly temaId = signal<TemaId>('imovel');
   readonly config = computed(() => getTema(this.temaId()));
   readonly resultadoAtual = signal<ResultadoSimulacao | null>(null);
@@ -84,7 +86,8 @@ export class SimuladorPageComponent implements OnInit {
 
     const url = `${this.seo.ORIGIN}/${path}`;
 
-    const ogUrl = new URL(`${this.seo.ORIGIN}/api/og`);
+    const origin = this.doc.location?.origin || this.seo.ORIGIN;
+    const ogUrl = new URL(`${origin}/api/og`);
     ogUrl.searchParams.set('valor',   (Number(qp['valor']   ?? cfg.defaults.valorBem)).toString());
     ogUrl.searchParams.set('entrada', (Number(qp['entrada'] ?? cfg.defaults.entrada)).toString());
     ogUrl.searchParams.set('prazo',   (Number(qp['prazo']   ?? cfg.defaults.prazoMeses)).toString());

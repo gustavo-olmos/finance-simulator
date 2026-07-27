@@ -123,7 +123,7 @@ function construirSvg(d: DadosImagem): string {
 ${chipsSvg}
 
   <!-- Footer -->
-  <text x="80" y="572" font-family="${fonte}" font-size="15" fill="rgba(255,255,255,0.4)">simulae.com.br · simulador gratuito de financiamento</text>
+  <text x="80" y="572" font-family="${fonte}" font-size="15" fill="rgba(255,255,255,0.4)">rotafin.com.br · simulador gratuito de financiamento</text>
 </svg>`;
 }
 

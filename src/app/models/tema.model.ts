@@ -24,6 +24,12 @@ export interface TemaConfig {
   seo: {
     titulo: string;
     descricao: string;
+    /** H1 único da página — o texto principal exibido acima do simulador. */
+    h1: string;
+    /** H2 de apoio, logo abaixo do H1. */
+    subtitulo: string;
+    /** Nome do produto financeiro para o JSON-LD (distinto do <title>, sem repetir a marca). */
+    produtoNome: string;
     h2: string;
     intro: string;
   };

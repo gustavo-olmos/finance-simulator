@@ -16,8 +16,11 @@ export const TEMAS: Record<TemaId, TemaConfig> = {
       taxaMin: 4, taxaMax: 20, taxaStep: 0.1,
     },
     seo: {
-      titulo: 'Simulador de Financiamento de Imóvel — SAC e PRICE | Simulae',
-      descricao: 'Simule o financiamento do seu imóvel com os sistemas SAC e PRICE. Veja parcelas, juros e total a pagar em tempo real, sem cadastro.',
+      titulo: 'Calculadora de Financiamento — Simulação SAC e PRICE',
+      descricao: 'Calculadora de financiamento de imóvel: faça a simulação de financiamento com SAC e PRICE e veja parcelas, juros e total a pagar em segundos, sem cadastro.',
+      h1: 'Calculadora de Financiamento',
+      subtitulo: 'Simulação de financiamento SAC e PRICE',
+      produtoNome: 'Financiamento de imóvel',
       h2: 'Como funciona o simulador de financiamento de imóvel',
       intro: 'O cálculo usa o valor do imóvel menos a entrada (o valor financiado), o prazo em meses e a taxa de juros anual, convertida para a taxa mensal equivalente. A partir daí, mostramos a evolução das parcelas nos dois sistemas de amortização.',
     },
@@ -34,6 +37,9 @@ export const TEMAS: Record<TemaId, TemaConfig> = {
     seo: {
       titulo: 'Simulador de Financiamento de Veículo — SAC e PRICE | Simulae',
       descricao: 'Simule o financiamento do seu carro ou moto com os sistemas SAC e PRICE. Parcelas, juros e total a pagar em tempo real, sem cadastro.',
+      h1: 'Calculadora de Financiamento de Veículo',
+      subtitulo: 'Simulação de financiamento SAC e PRICE',
+      produtoNome: 'Financiamento de veículo',
       h2: 'Como funciona o simulador de financiamento de veículo',
       intro: 'O cálculo usa o valor do veículo menos a entrada (o valor financiado), o prazo em meses e a taxa de juros anual, convertida para a taxa mensal equivalente. A partir daí, mostramos a evolução das parcelas nos dois sistemas de amortização.',
     },

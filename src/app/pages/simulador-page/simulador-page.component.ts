@@ -96,10 +96,21 @@ export class SimuladorPageComponent implements OnInit {
     ogUrl.searchParams.set('sistema', 'SAC');
     this.seo.setOgImage(ogUrl.toString());
 
+    this.seo.injetarJsonLd('web-application', {
+      '@context': 'https://schema.org',
+      '@type': 'WebApplication',
+      name: cfg.seo.titulo,
+      description: cfg.seo.descricao,
+      url,
+      applicationCategory: 'FinanceApplication',
+      operatingSystem: 'Web',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'BRL' },
+    });
+
     this.seo.injetarJsonLd('financial-product', {
       '@context': 'https://schema.org',
       '@type': 'FinancialProduct',
-      name: cfg.seo.titulo,
+      name: cfg.seo.produtoNome,
       description: cfg.seo.descricao,
       url,
       feesAndCommissionsSpecification: 'Estimativa para fins de comparação. Não constitui proposta de crédito.',

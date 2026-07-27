@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.simulae.com.br/sitemap.xml
+Sitemap: https://www.rotafin.com.br/sitemap.xml

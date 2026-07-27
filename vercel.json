@@ -1,5 +1,6 @@
 {
   "buildCommand": "npm run build",
+  "outputDirectory": "dist/simulae-financiamento/browser",
   "functions": {
     "api/index.mjs": {
       "includeFiles": "dist/simulae-financiamento/**",

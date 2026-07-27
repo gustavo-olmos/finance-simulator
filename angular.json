@@ -23,7 +23,11 @@
               { "glob": "sitemap.xml", "input": "src", "output": "/" },
               { "glob": "robots.txt",  "input": "src", "output": "/" }
             ],
-            "styles": ["src/styles.scss"],
+            "styles": [
+              "node_modules/@fontsource-variable/manrope/index.css",
+              "node_modules/@fontsource-variable/space-grotesk/index.css",
+              "src/styles.scss"
+            ],
             "scripts": [],
             "server": "src/main.server.ts",
             "externalDependencies": ["sharp"],

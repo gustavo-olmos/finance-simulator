@@ -1,5 +1,6 @@
 <a class="card" [routerLink]="['/anuncios', anuncio().slug]">
-  <div class="imagem" [style.background-image]="'url(' + anuncio().imagem_url + ')'">
+  <div class="imagem">
+    <img [src]="imagemThumb()" [alt]="anuncio().titulo" width="480" height="300" loading="lazy" decoding="async">
     <span class="tag">Anúncio</span>
   </div>
   <div class="corpo">

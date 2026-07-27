@@ -23,7 +23,7 @@ export class SeoService {
   private readonly meta = inject(Meta);
   private readonly doc = inject(DOCUMENT);
 
-  readonly ORIGIN = 'https://www.simulae.com.br';
+  readonly ORIGIN = 'https://www.rotafin.com.br';
 
   aplicar(dados: MetadadosSeo): void {
     this.title.setTitle(dados.titulo);

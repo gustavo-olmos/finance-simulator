@@ -23,6 +23,30 @@
   padding: 32px 20px 48px;
 }
 
+.palco-titulo {
+  max-width: 560px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.h1-principal {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin: 0 0 6px;
+}
+
+.h2-apoio {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0;
+}
+
 .palco-acoes {
   display: flex;
   align-items: stretch;

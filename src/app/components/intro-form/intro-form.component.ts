@@ -45,14 +45,6 @@ export class IntroFormComponent {
     return Math.round(r.primeiraParcela);
   });
 
-  readonly valido = computed(() => {
-    const c1 = this.campo1();
-    const ent = this.entrada();
-    const anos = this.prazoAnos();
-    const tx = this.taxa();
-    return c1 !== null && c1 > 0 && ent !== null && ent >= 0 && anos !== null && anos > 0 && tx !== null && tx >= 0;
-  });
-
   setSistema(sistema: SistemaAmortizacao): void {
     this.theme.setSistema(sistema);
   }
@@ -63,20 +55,19 @@ export class IntroFormComponent {
     return Number.isFinite(n) ? n : null;
   }
 
+  /** Campo vazio/inválido cai no mesmo valor mostrado como placeholder (o default da página). */
   enviar(): void {
-    if (!this.valido()) return;
-
-    const prazoMeses = Math.round((this.prazoAnos() ?? 0) * 12);
-    const taxaAnual = this.taxa() ?? 0;
-    let entrada = this.entrada() ?? 0;
+    const prazoMeses = Math.round((this.prazoAnos() ?? this.placeholderAnos()) * 12);
+    const taxaAnual = this.taxa() ?? this.placeholderTaxa();
+    let entrada = this.entrada() ?? this.placeholderEntrada();
     let valorBem: number;
 
     if (this.modo() === 'parcela') {
-      valorBem = this.campo1() ?? 0;
+      valorBem = this.campo1() ?? this.placeholderValor();
       entrada = Math.min(entrada, valorBem);
     } else {
       const principal = this.calc.calcularPrincipalMaximo(
-        this.campo1() ?? 0,
+        this.campo1() ?? this.placeholderParcela(),
         prazoMeses,
         taxaAnual,
         this.theme.sistema(),

@@ -6,6 +6,10 @@
 // ===== Zona principal (app) =====
 .app-zone {
   min-height: 100vh;
+  // dvh considera a barra de endereço dinâmica do mobile (o vh sozinho assume
+  // ela escondida, o que sobra/falta espaço real no iOS Safari). Navegador sem
+  // suporte a dvh ignora essa linha e mantém o vh acima.
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   background:
@@ -25,14 +29,21 @@
 
 // Título ancorado perto do topo; o formulário ocupa o espaço restante e fica
 // centralizado nele — flutua no meio do vazio, em vez de colado no título.
-// O min-height (proporcional à tela) é o único responsável por empurrar a
-// calculadora pra baixo da dobra — não somar margens em vários pontos.
+// min-height: 100dvh é uma GARANTIA, não uma aposta — como a calculadora vem
+// depois do hero no HTML, ela só pode aparecer depois que o hero já ocupou a
+// tela inteira. Com 88% sobrava só "geralmente dá certo", em telas baixas o
+// formulário sozinho já preenchia mais que isso.
 .hero {
-  min-height: 88vh;
+  min-height: 100vh;
+  min-height: 100dvh;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  // Gap mínimo garantido entre título e formulário — em telas baixas o
+  // form-wrapper não sobra espaço nenhum pra centralizar (o conteúdo já
+  // preenche tudo), então sem isso os dois ficam colados.
+  gap: 24px;
 }
 
 .form-wrapper {
@@ -48,15 +59,26 @@
   display: flex;
   justify-content: center;
   scroll-margin-top: 24px;
+  // Gap mínimo garantido entre o fim do formulário e a calculadora — mesmo
+  // motivo do gap no .hero: em telas baixas o conteúdo já estoura o
+  // min-height, então não sobra espaço nenhum entre os dois.
+  margin-top: 32px;
+}
+
+@media (max-width: 40em) {
+  .hero {
+    min-height: auto;
+  }
 }
 
 .palco-titulo {
   max-width: 560px;
   width: 100%;
   text-align: center;
-  // translateY em vez de margin: desloca só visualmente, sem tirar espaço do
-  // .form-wrapper (que centraliza o formulário no que sobra do .hero).
-  transform: translateY(3rem);
+  // margin (não transform): reserva espaço de verdade no layout. Em telas
+  // estreitas o H1 pode quebrar em 2 linhas — com transform isso sobrepunha
+  // o formulário, porque o deslocamento visual não empurra o irmão abaixo.
+  margin-top: 3rem;
 }
 
 .h1-principal {
@@ -173,5 +195,15 @@
   span:last-child {
     font-size: 13px;
     color: #aab0ac;
+  }
+}
+
+// Fica por último de propósito: mesma especificidade (uma classe) que outras
+// regras de display acima (.palco-acoes, .ancora-calculadora) — em CSS, quando
+// a especificidade empata, quem vem depois no arquivo vence. Isso garante que
+// esconder sempre ganha, não importa a ordem em que outras classes apareçam.
+@media (max-width: 40em) {
+  .oculta-ate-clicar {
+    display: none;
   }
 }

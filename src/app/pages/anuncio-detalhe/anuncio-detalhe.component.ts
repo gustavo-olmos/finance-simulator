@@ -63,7 +63,7 @@ export class AnuncioDetalheComponent {
       });
 
       this.seo.aplicar({
-        titulo: `${a.titulo} — Financiamento | Simulae`,
+        titulo: `${a.titulo} — Financiamento | RotaFin`,
         descricao: `${a.descricao} Simule: a partir de ${parcela}/mês (SAC).`,
         imagem: a.imagem_url,
         canonicalPath: `/anuncios/${a.slug}`,

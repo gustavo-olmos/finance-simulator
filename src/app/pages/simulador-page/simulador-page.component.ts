@@ -96,6 +96,27 @@ export class SimuladorPageComponent implements OnInit {
     ogUrl.searchParams.set('sistema', 'SAC');
     this.seo.setOgImage(ogUrl.toString());
 
+    const organizacao = { '@type': 'Organization', name: 'RotaFin', url: this.seo.ORIGIN };
+
+    this.seo.injetarJsonLd('organization', { '@context': 'https://schema.org', ...organizacao });
+
+    this.seo.injetarJsonLd('website', {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'RotaFin',
+      url: this.seo.ORIGIN,
+      inLanguage: 'pt-BR',
+    });
+
+    this.seo.injetarJsonLd('breadcrumb', {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Início', item: this.seo.ORIGIN },
+        { '@type': 'ListItem', position: 2, name: cfg.seo.h1, item: url },
+      ],
+    });
+
     this.seo.injetarJsonLd('web-application', {
       '@context': 'https://schema.org',
       '@type': 'WebApplication',
@@ -114,7 +135,7 @@ export class SimuladorPageComponent implements OnInit {
       description: cfg.seo.descricao,
       url,
       feesAndCommissionsSpecification: 'Estimativa para fins de comparação. Não constitui proposta de crédito.',
-      provider: { '@type': 'Organization', name: 'Simulae', url: this.seo.ORIGIN },
+      provider: organizacao,
     });
 
     this.seo.injetarJsonLd('faq', {

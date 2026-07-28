@@ -3,21 +3,33 @@
   <app-site-header [temaAtivo]="temaId()" />
 
   <div class="palco">
-    <div class="palco-titulo">
-      <h1 class="h1-principal">{{ config().seo.h1 }}</h1>
-      <h2 class="h2-apoio">{{ config().seo.subtitulo }}</h2>
+    <div class="hero">
+      <div class="palco-titulo">
+        <h1 class="h1-principal">{{ config().seo.h1 }}</h1>
+        <h2 class="h2-apoio">{{ config().seo.subtitulo }}</h2>
+      </div>
+
+      <div class="form-wrapper">
+        <app-intro-form
+          [labelValor]="config().labelValor"
+          [defaults]="config().defaults"
+          (calcular)="onIntroCalcular($event)"
+        />
+      </div>
     </div>
 
-    <app-simulador
-      [config]="config()"
-      [valorInicial]="valorParam()"
-      [entradaInicial]="entradaParam()"
-      [prazoInicial]="prazoParam()"
-      [taxaInicial]="taxaParam()"
-      [seguroInicial]="seguroParam()"
-      (resultadoChange)="resultadoAtual.set($event)"
-      (parametrosChange)="onParametrosChange($event)"
-    />
+    <div id="calculadora" class="ancora-calculadora">
+      <app-simulador
+        [config]="config()"
+        [valorInicial]="valorParam()"
+        [entradaInicial]="entradaParam()"
+        [prazoInicial]="prazoParam()"
+        [taxaInicial]="taxaParam()"
+        [seguroInicial]="seguroParam()"
+        (resultadoChange)="resultadoAtual.set($event)"
+        (parametrosChange)="onParametrosChange($event)"
+      />
+    </div>
 
     <div class="palco-acoes">
       <a class="cta" href="#ofertas">Ver anúncios de financiamento →</a>

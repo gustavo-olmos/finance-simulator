@@ -14,6 +14,7 @@ import { AdsGridComponent } from '../../components/ads-grid/ads-grid.component';
 import { AdSlotComponent } from '../../components/ad-slot/ad-slot.component';
 import { AmortizationTableComponent } from '../../components/amortization-table/amortization-table.component';
 import { ShareModalComponent } from '../../components/share-modal/share-modal.component';
+import { IntroFormComponent } from '../../components/intro-form/intro-form.component';
 import { ParametrosSimulacao, ResultadoSimulacao } from '../../models/simulacao.model';
 
 /**
@@ -32,6 +33,7 @@ import { ParametrosSimulacao, ResultadoSimulacao } from '../../models/simulacao.
     AdSlotComponent,
     AmortizationTableComponent,
     ShareModalComponent,
+    IntroFormComponent,
   ],
   templateUrl: './simulador-page.component.html',
   styleUrl: './simulador-page.component.scss',
@@ -151,6 +153,20 @@ export class SimuladorPageComponent implements OnInit {
         { '@type': 'Question', name: 'Preciso me cadastrar?',
           acceptedAnswer: { '@type': 'Answer', text: 'Não. O cálculo é gratuito, instantâneo e não exige nenhum dado pessoal.' } },
       ],
+    });
+  }
+
+  onIntroCalcular(p: ParametrosSimulacao): void {
+    this.valorParam.set(p.valorBem);
+    this.entradaParam.set(p.entrada);
+    this.prazoParam.set(p.prazoMeses);
+    this.taxaParam.set(p.taxaAnual);
+    this.seguroParam.set(p.seguroMensal ?? 0);
+
+    // Aguarda o próximo frame para a calculadora já ter re-renderizado com os novos
+    // valores antes de rolar até ela.
+    requestAnimationFrame(() => {
+      this.doc.getElementById('calculadora')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
 

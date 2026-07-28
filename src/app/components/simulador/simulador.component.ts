@@ -4,7 +4,6 @@ import {
   effect,
   inject,
   input,
-  OnInit,
   output,
   signal,
 } from '@angular/core';
@@ -34,7 +33,7 @@ import { AmortizationChartComponent } from '../amortization-chart/amortization-c
   templateUrl: './simulador.component.html',
   styleUrl: './simulador.component.scss',
 })
-export class SimuladorComponent implements OnInit {
+export class SimuladorComponent {
   private readonly calc = inject(FinanceCalculatorService);
   readonly theme = inject(ThemeService);
 
@@ -81,16 +80,19 @@ export class SimuladorComponent implements OnInit {
       prazoMeses: this.prazo(),
       seguroMensal: this.seguro(),
     }));
-  }
 
-  ngOnInit(): void {
-    const d = this.config().defaults;
-    const base = this.valorInicial() ?? d.valorBem;
-    this.valorBem.set(base);
-    this.entrada.set(this.entradaInicial() ?? Math.round(base * (d.entrada / d.valorBem)));
-    this.prazo.set(this.prazoInicial() ?? d.prazoMeses);
-    this.taxa.set(this.taxaInicial() ?? d.taxaAnual);
-    this.seguro.set(this.seguroInicial() ?? 0);
+    // Re-sincroniza sempre que os "iniciais" mudarem — não só no primeiro render.
+    // Necessário para o intro-form (acima da calculadora) conseguir pré-preencher
+    // os campos depois que o usuário calcula por lá.
+    effect(() => {
+      const d = this.config().defaults;
+      const base = this.valorInicial() ?? d.valorBem;
+      this.valorBem.set(base);
+      this.entrada.set(this.entradaInicial() ?? Math.round(base * (d.entrada / d.valorBem)));
+      this.prazo.set(this.prazoInicial() ?? d.prazoMeses);
+      this.taxa.set(this.taxaInicial() ?? d.taxaAnual);
+      this.seguro.set(this.seguroInicial() ?? 0);
+    }, { allowSignalWrites: true });
   }
 
   onValorBem(v: number): void {

@@ -1,0 +1,99 @@
+<div class="intro-card">
+  <div class="modos">
+    <button
+      type="button"
+      class="modo-btn"
+      [class.ativo]="modo() === 'parcela'"
+      (click)="modo.set('parcela')"
+    >
+      Quanto ficaria a parcela?
+    </button>
+    <button
+      type="button"
+      class="modo-btn"
+      [class.ativo]="modo() === 'inverso'"
+      (click)="modo.set('inverso')"
+    >
+      Quanto posso financiar?
+    </button>
+  </div>
+
+  <div class="campos">
+    <label class="campo campo-grande">
+      <span class="rotulo">{{ modo() === 'parcela' ? labelValor() : 'Quanto pode pagar por mês' }}</span>
+      <div class="input-grupo">
+        <span class="prefixo">R$</span>
+        <input
+          type="number"
+          inputmode="decimal"
+          min="0"
+          [placeholder]="(modo() === 'parcela' ? placeholderValor() : placeholderParcela()).toString()"
+          [value]="campo1() ?? ''"
+          (input)="campo1.set(parseNum($any($event.target).value))"
+        />
+      </div>
+    </label>
+
+    <label class="campo campo-pequeno">
+      <span class="rotulo">Prazo</span>
+      <div class="input-grupo">
+        <input
+          type="number"
+          inputmode="numeric"
+          min="1"
+          [placeholder]="placeholderAnos().toString()"
+          [value]="prazoAnos() ?? ''"
+          (input)="prazoAnos.set(parseNum($any($event.target).value))"
+        />
+        <span class="sufixo">anos</span>
+      </div>
+    </label>
+
+    <label class="campo campo-grande">
+      <span class="rotulo">{{ modo() === 'parcela' ? 'Entrada' : 'Entrada disponível' }}</span>
+      <div class="input-grupo">
+        <span class="prefixo">R$</span>
+        <input
+          type="number"
+          inputmode="decimal"
+          min="0"
+          [placeholder]="placeholderEntrada().toString()"
+          [value]="entrada() ?? ''"
+          (input)="entrada.set(parseNum($any($event.target).value))"
+        />
+      </div>
+    </label>
+
+    <label class="campo campo-pequeno">
+      <span class="rotulo">Taxa de juros</span>
+      <div class="input-grupo">
+        <input
+          type="number"
+          inputmode="decimal"
+          min="0"
+          step="0.1"
+          [placeholder]="placeholderTaxa().toString()"
+          [value]="taxa() ?? ''"
+          (input)="taxa.set(parseNum($any($event.target).value))"
+        />
+        <span class="sufixo">% a.a.</span>
+      </div>
+    </label>
+  </div>
+
+  <div class="sistema-toggle">
+    <span class="sistema-rotulo">Sistema</span>
+    <div class="toggle">
+      <button type="button" class="seg" [class.ativo]="theme.sistema() === 'SAC'" (click)="setSistema('SAC')">SAC</button>
+      <button type="button" class="seg price" [class.ativo]="theme.sistema() === 'PRICE'" (click)="setSistema('PRICE')">PRICE</button>
+    </div>
+  </div>
+
+  <button type="button" class="btn-cta" [disabled]="!valido()" (click)="enviar()">
+    Me leve à calculadora
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="5" x2="12" y2="19"/>
+      <polyline points="19 12 12 19 5 12"/>
+    </svg>
+  </button>
+</div>

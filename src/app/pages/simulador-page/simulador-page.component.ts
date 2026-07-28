@@ -57,6 +57,10 @@ export class SimuladorPageComponent implements OnInit {
 
   readonly mostrarModal = signal(false);
 
+  // No mobile a calculadora fica com display:none (via CSS) até isso virar true —
+  // não depende de cálculo de altura/scroll, ver .oculta-ate-clicar no SCSS.
+  readonly calculadoraRevelada = signal(false);
+
   // Só sincroniza a URL após a primeira renderização para não poluir o histórico no carregamento.
   private urlSincronizada = false;
   private urlTimer: ReturnType<typeof setTimeout> | null = null;
@@ -162,6 +166,7 @@ export class SimuladorPageComponent implements OnInit {
     this.prazoParam.set(p.prazoMeses);
     this.taxaParam.set(p.taxaAnual);
     this.seguroParam.set(p.seguroMensal ?? 0);
+    this.calculadoraRevelada.set(true);
 
     // Aguarda o próximo frame para a calculadora já ter re-renderizado com os novos
     // valores antes de rolar até ela.

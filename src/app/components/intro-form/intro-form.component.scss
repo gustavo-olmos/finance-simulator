@@ -22,6 +22,10 @@
 .modo-btn {
   border: none;
   cursor: pointer;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 11px 6px;
   border-radius: 8px;
   font-family: 'Manrope Variable', sans-serif;
@@ -133,6 +137,10 @@ input {
 .seg {
   border: none;
   cursor: pointer;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 7px 16px;
   border-radius: 7px;
   font-family: 'Manrope Variable', sans-serif;

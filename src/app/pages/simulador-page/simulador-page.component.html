@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <div id="calculadora" class="ancora-calculadora">
+    <div id="calculadora" class="ancora-calculadora" [class.oculta-ate-clicar]="!calculadoraRevelada()">
       <app-simulador
         [config]="config()"
         [valorInicial]="valorParam()"
@@ -31,7 +31,7 @@
       />
     </div>
 
-    <div class="palco-acoes">
+    <div class="palco-acoes" [class.oculta-ate-clicar]="!calculadoraRevelada()">
       <a class="cta" href="#ofertas">Ver anúncios de financiamento →</a>
       <button
         class="btn-share"
@@ -47,7 +47,7 @@
         </svg>
       </button>
     </div>
-    <p class="aviso">Estimativa. Não constitui proposta de crédito.</p>
+    <p class="aviso" [class.oculta-ate-clicar]="!calculadoraRevelada()">Estimativa. Não constitui proposta de crédito.</p>
   </div>
 </section>
 

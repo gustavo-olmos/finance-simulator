@@ -28,7 +28,7 @@ export class ShareModalComponent {
     const url = this.doc.location.href;
     try {
       if (navigator.share) {
-        await navigator.share({ title: 'Simulação de financiamento — Simulae', url });
+        await navigator.share({ title: 'Simulação de financiamento — RotaFin', url });
         this.fechar.emit();
         return;
       }

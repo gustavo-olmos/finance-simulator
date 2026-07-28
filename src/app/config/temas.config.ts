@@ -35,7 +35,7 @@ export const TEMAS: Record<TemaId, TemaConfig> = {
       taxaMin: 8, taxaMax: 36, taxaStep: 0.5,
     },
     seo: {
-      titulo: 'Simulador de Financiamento de Veículo — SAC e PRICE | Simulae',
+      titulo: 'Simulador de Financiamento de Veículo — SAC e PRICE | RotaFin',
       descricao: 'Simule o financiamento do seu carro ou moto com os sistemas SAC e PRICE. Parcelas, juros e total a pagar em tempo real, sem cadastro.',
       h1: 'Calculadora de Financiamento de Veículo',
       subtitulo: 'Simulação de financiamento SAC e PRICE',

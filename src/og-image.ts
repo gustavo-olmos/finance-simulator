@@ -113,7 +113,7 @@ function construirSvg(d: DadosImagem): string {
   <rect width="${LARGURA}" height="${ALTURA}" fill="url(#bg)"/>
 
   <!-- Header -->
-  <text x="80" y="92" font-family="${fonte}" font-size="28" font-weight="800" letter-spacing="-0.5" fill="rgba(255,255,255,0.75)">Simulae</text>
+  <text x="80" y="92" font-family="${fonte}" font-size="28" font-weight="800" letter-spacing="-0.5" fill="rgba(255,255,255,0.75)">RotaFin</text>
   <rect x="${seloX}" y="62" width="${seloLargura}" height="36" rx="18" fill="rgba(0,0,0,0.22)"/>
   <text x="${seloX + seloLargura / 2}" y="85" text-anchor="middle" font-family="${fonte}" font-size="14" font-weight="800" letter-spacing="1.4" fill="#ffffff">${escaparXml(seloTexto)}</text>
 

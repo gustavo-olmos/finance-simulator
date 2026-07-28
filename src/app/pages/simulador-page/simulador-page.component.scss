@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   background:
-    radial-gradient(ellipse 380px 480px at 50% 48%, rgba(255, 255, 255, 0.34) 0%, transparent 100%),
+    radial-gradient(ellipse 380px 480px at 50% 72%, rgba(255, 255, 255, 0.34) 0%, transparent 100%),
     radial-gradient(ellipse at 50% 50%, transparent 20%, rgba(0, 0, 0, 0.60) 100%),
     var(--app-bg, #1f8a5b);
 }
@@ -20,14 +20,43 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 32px 20px 48px;
+  padding: 40px 20px 48px;
+}
+
+// Título ancorado perto do topo; o formulário ocupa o espaço restante e fica
+// centralizado nele — flutua no meio do vazio, em vez de colado no título.
+// O min-height (proporcional à tela) é o único responsável por empurrar a
+// calculadora pra baixo da dobra — não somar margens em vários pontos.
+.hero {
+  min-height: 88vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-wrapper {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ancora-calculadora {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  scroll-margin-top: 24px;
 }
 
 .palco-titulo {
   max-width: 560px;
   width: 100%;
   text-align: center;
-  margin-bottom: 20px;
+  // translateY em vez de margin: desloca só visualmente, sem tirar espaço do
+  // .form-wrapper (que centraliza o formulário no que sobra do .hero).
+  transform: translateY(3rem);
 }
 
 .h1-principal {
@@ -36,7 +65,7 @@
   font-size: 28px;
   letter-spacing: -0.02em;
   color: #fff;
-  margin: 0 0 6px;
+  margin: 0 0 8px;
 }
 
 .h2-apoio {

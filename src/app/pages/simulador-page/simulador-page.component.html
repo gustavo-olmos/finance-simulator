@@ -18,6 +18,45 @@
       </div>
     </div>
 
+    <!-- Ponte entre o formulário e a calculadora: explica a escolha SAC/PRICE
+         em linguagem simples, dando conteúdo real ao espaço (e à rolagem). -->
+    <section class="ponte">
+      <h2 class="ponte-titulo">SAC ou PRICE: qual cabe no seu bolso?</h2>
+      <p class="ponte-intro">
+        Essa é a primeira decisão de quem vai financiar, e ela muda o quanto você paga
+        por mês e no total. A RotaFin coloca os dois lado a lado, em tempo real, para
+        você comparar sem depender do simulador de um banco específico.
+      </p>
+
+      <div class="ponte-cards">
+        <div class="ponte-card">
+          <span class="ponte-tag sac">SAC</span>
+          <strong class="ponte-card-titulo">Começa mais alto e vai caindo</strong>
+          <p class="ponte-card-texto">
+            Você abate sempre a mesma fatia da dívida, e os juros incidem só sobre o que
+            ainda falta pagar. Como esse saldo diminui todo mês, a parcela diminui junto —
+            e o total de juros costuma ser menor.
+          </p>
+        </div>
+
+        <div class="ponte-card">
+          <span class="ponte-tag price">PRICE</span>
+          <strong class="ponte-card-titulo">A mesma parcela até o fim</strong>
+          <p class="ponte-card-texto">
+            A prestação é calculada para não mudar ao longo do contrato. A primeira parcela
+            é menor que a do SAC e é mais fácil de encaixar no orçamento — em troca, os juros
+            somados no fim tendem a ser maiores.
+          </p>
+        </div>
+      </div>
+
+      <p class="ponte-fecho">
+        Não existe escolha certa para todo mundo: depende de quanto você pode pagar hoje e
+        de quanto quer pagar no total. Abaixo, troque entre os dois e veja a diferença nos
+        seus próprios números.
+      </p>
+    </section>
+
     <div id="calculadora" class="ancora-calculadora" [class.oculta-ate-clicar]="!calculadoraRevelada()">
       <app-simulador
         [config]="config()"

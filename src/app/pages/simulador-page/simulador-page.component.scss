@@ -65,6 +65,88 @@
   margin-top: 32px;
 }
 
+// ===== Ponte (texto SAC/PRICE entre o formulário e a calculadora) =====
+// Fica dentro da zona verde/âmbar, então usa a mesma paleta translúcida
+// dos outros blocos sobre fundo colorido.
+.ponte {
+  max-width: 560px;
+  width: 100%;
+  margin: 72px auto 0;
+}
+
+.ponte-titulo {
+  font-family: 'Space Grotesk Variable', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-align: center;
+  margin: 0 0 12px;
+}
+
+.ponte-intro,
+.ponte-fecho {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.75);
+  text-align: center;
+  margin: 0;
+}
+
+.ponte-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 22px 0;
+}
+
+.ponte-card {
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ponte-tag {
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+
+  &.sac { color: #15623f; }
+  &.price { color: #b07a1e; }
+}
+
+.ponte-card-titulo {
+  font-family: 'Space Grotesk Variable', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.ponte-card-texto {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0;
+}
+
+@media (max-width: 30em) {
+  .ponte {
+    margin-top: 48px;
+  }
+
+  .ponte-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 40em) {
   .hero {
     min-height: auto;
@@ -208,18 +290,16 @@
   }
 }
 
-// Revelação suave em vez do "pop" abrupto do display:none → visível. A
-// animação começa sozinha assim que o elemento passa a ser desenhado — no
-// mobile isso é exatamente o momento do clique em "Me leve à calculadora";
-// no desktop (sempre visível) é só um fade-in discreto no carregamento.
+// Revelação suave em vez do "pop" abrupto do display:none → visível. Só
+// opacidade (sem transform/posição) de propósito: o clique também dispara um
+// scrollIntoView pro mesmo elemento — animar a posição ao mesmo tempo em que
+// a página rola pra ele fazia os dois brigarem, com um efeito instável.
 @keyframes revelar {
   from {
     opacity: 0;
-    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 

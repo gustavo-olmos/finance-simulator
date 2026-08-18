@@ -4,10 +4,10 @@ import {
   effect,
   inject,
   input,
-  OnInit,
   output,
   signal,
 } from '@angular/core';
+import { track } from '@vercel/analytics';
 import { FinanceCalculatorService } from '../../core/finance-calculator.service';
 import { ParametrosSimulacao, ResultadoSimulacao } from '../../models/simulacao.model';
 import { ThemeService } from '../../core/theme.service';
@@ -34,7 +34,7 @@ import { AmortizationChartComponent } from '../amortization-chart/amortization-c
   templateUrl: './simulador.component.html',
   styleUrl: './simulador.component.scss',
 })
-export class SimuladorComponent implements OnInit {
+export class SimuladorComponent {
   private readonly calc = inject(FinanceCalculatorService);
   readonly theme = inject(ThemeService);
 
@@ -81,21 +81,55 @@ export class SimuladorComponent implements OnInit {
       prazoMeses: this.prazo(),
       seguroMensal: this.seguro(),
     }));
+
+    // Re-sincroniza sempre que os "iniciais" mudarem — não só no primeiro render.
+    // Necessário para o intro-form (acima da calculadora) conseguir pré-preencher
+    // os campos depois que o usuário calcula por lá.
+    effect(() => {
+      const d = this.config().defaults;
+      const base = this.valorInicial() ?? d.valorBem;
+      this.valorBem.set(base);
+      this.entrada.set(this.entradaInicial() ?? Math.round(base * (d.entrada / d.valorBem)));
+      this.prazo.set(this.prazoInicial() ?? d.prazoMeses);
+      this.taxa.set(this.taxaInicial() ?? d.taxaAnual);
+      this.seguro.set(this.seguroInicial() ?? 0);
+    }, { allowSignalWrites: true });
   }
 
-  ngOnInit(): void {
-    const d = this.config().defaults;
-    const base = this.valorInicial() ?? d.valorBem;
-    this.valorBem.set(base);
-    this.entrada.set(this.entradaInicial() ?? Math.round(base * (d.entrada / d.valorBem)));
-    this.prazo.set(this.prazoInicial() ?? d.prazoMeses);
-    this.taxa.set(this.taxaInicial() ?? d.taxaAnual);
-    this.seguro.set(this.seguroInicial() ?? 0);
+  // Dispara só uma vez por carregamento — a primeira mexida de verdade do
+  // usuário nos sliders/campos da calculadora (não conta o preenchimento
+  // programático vindo do intro-form ou dos query params iniciais).
+  private jaRegistrouInteracao = false;
+  private registrarInteracao(): void {
+    if (this.jaRegistrouInteracao) return;
+    this.jaRegistrouInteracao = true;
+    track('calculadora_interagiu', { sistema: this.theme.sistema() });
   }
 
   onValorBem(v: number): void {
+    this.registrarInteracao();
     this.valorBem.set(v);
     // Mantém a entrada nunca maior que o valor do bem.
     if (this.entrada() > v) this.entrada.set(v);
+  }
+
+  onEntrada(v: number): void {
+    this.registrarInteracao();
+    this.entrada.set(v);
+  }
+
+  onPrazo(v: number): void {
+    this.registrarInteracao();
+    this.prazo.set(v);
+  }
+
+  onTaxa(v: number): void {
+    this.registrarInteracao();
+    this.taxa.set(v);
+  }
+
+  onSeguro(v: number): void {
+    this.registrarInteracao();
+    this.seguro.set(v);
   }
 }

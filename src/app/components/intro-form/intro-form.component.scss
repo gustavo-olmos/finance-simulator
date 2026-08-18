@@ -1,0 +1,213 @@
+:host {
+  display: block;
+  max-width: 560px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.intro-card {
+  width: 100%;
+}
+
+.modos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.12);
+  padding: 5px;
+  border-radius: 12px;
+  margin-bottom: 22px;
+}
+
+.modo-btn {
+  border: none;
+  cursor: pointer;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 6px;
+  border-radius: 8px;
+  font-family: 'Manrope Variable', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1.25;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.78);
+  transition: all 0.15s ease;
+
+  &.ativo {
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--app-ink, #15623f);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.campos {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 18px 14px;
+  margin-bottom: 26px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+
+.rotulo {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 600;
+}
+
+.input-grupo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 48px;
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  padding: 0 14px;
+  box-sizing: border-box;
+}
+
+.prefixo,
+.sufixo {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+}
+
+input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: 'Space Grotesk Variable', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 600;
+  }
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    display: none;
+  }
+}
+
+.campo-grande input {
+  font-size: 18px;
+}
+
+.campo-pequeno input {
+  font-size: 15px;
+}
+
+.sistema-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.sistema-rotulo {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.toggle {
+  display: flex;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.12);
+  padding: 4px;
+  border-radius: 10px;
+}
+
+.seg {
+  border: none;
+  cursor: pointer;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 16px;
+  border-radius: 7px;
+  font-family: 'Manrope Variable', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.78);
+  transition: all 0.15s ease;
+
+  &.ativo {
+    background: rgba(255, 255, 255, 0.92);
+    color: #15623f;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  }
+
+  &.price.ativo {
+    color: #b07a1e;
+  }
+}
+
+.btn-cta {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #fff;
+  color: var(--app-ink, #15623f);
+  font-family: 'Space Grotesk Variable', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  min-height: 5rem;
+  padding: 0 20px;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  transition: opacity 0.15s;
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):hover {
+    opacity: 0.9;
+  }
+
+  svg {
+    animation: bounce 1.8s ease-in-out infinite;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
+
+@media (max-width: 26.25em) {
+  .modo-btn {
+    font-size: 0.75rem;
+  }
+}
+
+// Só empilha os campos em telas bem estreitas, onde 2 colunas apertaria demais.
+@media (max-width: 22em) {
+  .campos {
+    grid-template-columns: 1fr;
+  }
+}

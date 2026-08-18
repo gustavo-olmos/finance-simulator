@@ -36,6 +36,30 @@ export class FinanceCalculatorService {
   }
 
   /**
+   * Inverso: dada a parcela que a pessoa pode pagar, retorna o principal (valor financiável)
+   * correspondente — fórmula fechada, sem iteração.
+   * No PRICE a parcela é constante, então é o inverso direto da fórmula de prestação.
+   * No SAC a parcela cai com o tempo; consideramos a parcela informada como a primeira
+   * (a mais alta), a leitura mais conservadora de "quanto posso pagar por mês".
+   */
+  calcularPrincipalMaximo(
+    parcelaDesejada: number,
+    prazoMeses: number,
+    taxaAnual: number,
+    sistema: SistemaAmortizacao,
+  ): number {
+    const n = Math.max(0, Math.floor(prazoMeses || 0));
+    const i = this.taxaMensal(taxaAnual || 0);
+    const parcela = Math.max(0, parcelaDesejada || 0);
+    if (n === 0) return 0;
+
+    if (sistema === 'PRICE') {
+      return i > 0 ? (parcela * (1 - Math.pow(1 + i, -n))) / i : parcela * n;
+    }
+    return parcela / (1 / n + i);
+  }
+
+  /**
    * Sistema SAC: amortização constante.
    * Juros recalculados sobre o saldo devedor → parcelas decrescentes.
    */

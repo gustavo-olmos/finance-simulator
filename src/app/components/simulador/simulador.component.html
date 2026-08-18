@@ -18,10 +18,10 @@
     [taxa]="taxa()"
     [seguro]="seguro()"
     (valorBemChange)="onValorBem($event)"
-    (entradaChange)="entrada.set($event)"
-    (prazoChange)="prazo.set($event)"
-    (taxaChange)="taxa.set($event)"
-    (seguroChange)="seguro.set($event)"
+    (entradaChange)="onEntrada($event)"
+    (prazoChange)="onPrazo($event)"
+    (taxaChange)="onTaxa($event)"
+    (seguroChange)="onSeguro($event)"
   />
 
   <app-amortization-chart [parcelas]="resultado().parcelas" [prazo]="prazo()" />

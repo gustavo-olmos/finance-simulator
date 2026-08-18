@@ -2,6 +2,7 @@ import { Component, computed, inject, OnInit, signal, afterNextRender } from '@a
 import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { track } from '@vercel/analytics';
 import { AnuncioService } from '../../core/anuncio.service';
 import { SeoService } from '../../core/seo.service';
 import { getTema } from '../../config/temas.config';
@@ -14,7 +15,7 @@ import { AdsGridComponent } from '../../components/ads-grid/ads-grid.component';
 import { AdSlotComponent } from '../../components/ad-slot/ad-slot.component';
 import { AmortizationTableComponent } from '../../components/amortization-table/amortization-table.component';
 import { ShareModalComponent } from '../../components/share-modal/share-modal.component';
-import { IntroFormComponent } from '../../components/intro-form/intro-form.component';
+import { IntroFormComponent, Modo } from '../../components/intro-form/intro-form.component';
 import { ParametrosSimulacao, ResultadoSimulacao } from '../../models/simulacao.model';
 
 /**
@@ -160,13 +161,16 @@ export class SimuladorPageComponent implements OnInit {
     });
   }
 
-  onIntroCalcular(p: ParametrosSimulacao): void {
+  onIntroCalcular(evento: { parametros: ParametrosSimulacao; modo: Modo }): void {
+    const { parametros: p, modo } = evento;
     this.valorParam.set(p.valorBem);
     this.entradaParam.set(p.entrada);
     this.prazoParam.set(p.prazoMeses);
     this.taxaParam.set(p.taxaAnual);
     this.seguroParam.set(p.seguroMensal ?? 0);
     this.calculadoraRevelada.set(true);
+
+    track('intro_form_calcular', { modo, tema: this.temaId() });
 
     // Aguarda o próximo frame para a calculadora já ter re-renderizado com os novos
     // valores antes de rolar até ela.

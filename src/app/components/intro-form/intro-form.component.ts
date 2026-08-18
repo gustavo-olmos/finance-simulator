@@ -3,7 +3,7 @@ import { FinanceCalculatorService } from '../../core/finance-calculator.service'
 import { ThemeService } from '../../core/theme.service';
 import { ParametrosSimulacao, SistemaAmortizacao } from '../../models/simulacao.model';
 
-type Modo = 'parcela' | 'inverso';
+export type Modo = 'parcela' | 'inverso';
 
 /**
  * Formulário de entrada leigo-friendly, exibido acima da calculadora (com sliders).
@@ -24,7 +24,7 @@ export class IntroFormComponent {
   readonly labelValor = input.required<string>();
   readonly defaults = input.required<ParametrosSimulacao>();
 
-  readonly calcular = output<ParametrosSimulacao>();
+  readonly calcular = output<{ parametros: ParametrosSimulacao; modo: Modo }>();
 
   readonly modo = signal<Modo>('inverso');
 
@@ -75,6 +75,9 @@ export class IntroFormComponent {
       valorBem = principal + entrada;
     }
 
-    this.calcular.emit({ valorBem, entrada, taxaAnual, prazoMeses, seguroMensal: 0 });
+    this.calcular.emit({
+      parametros: { valorBem, entrada, taxaAnual, prazoMeses, seguroMensal: 0 },
+      modo: this.modo(),
+    });
   }
 }

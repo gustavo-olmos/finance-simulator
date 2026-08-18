@@ -7,6 +7,7 @@ import {
   output,
   signal,
 } from '@angular/core';
+import { track } from '@vercel/analytics';
 import { FinanceCalculatorService } from '../../core/finance-calculator.service';
 import { ParametrosSimulacao, ResultadoSimulacao } from '../../models/simulacao.model';
 import { ThemeService } from '../../core/theme.service';
@@ -95,9 +96,40 @@ export class SimuladorComponent {
     }, { allowSignalWrites: true });
   }
 
+  // Dispara só uma vez por carregamento — a primeira mexida de verdade do
+  // usuário nos sliders/campos da calculadora (não conta o preenchimento
+  // programático vindo do intro-form ou dos query params iniciais).
+  private jaRegistrouInteracao = false;
+  private registrarInteracao(): void {
+    if (this.jaRegistrouInteracao) return;
+    this.jaRegistrouInteracao = true;
+    track('calculadora_interagiu', { sistema: this.theme.sistema() });
+  }
+
   onValorBem(v: number): void {
+    this.registrarInteracao();
     this.valorBem.set(v);
     // Mantém a entrada nunca maior que o valor do bem.
     if (this.entrada() > v) this.entrada.set(v);
+  }
+
+  onEntrada(v: number): void {
+    this.registrarInteracao();
+    this.entrada.set(v);
+  }
+
+  onPrazo(v: number): void {
+    this.registrarInteracao();
+    this.prazo.set(v);
+  }
+
+  onTaxa(v: number): void {
+    this.registrarInteracao();
+    this.taxa.set(v);
+  }
+
+  onSeguro(v: number): void {
+    this.registrarInteracao();
+    this.seguro.set(v);
   }
 }

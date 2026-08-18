@@ -207,3 +207,24 @@
     display: none;
   }
 }
+
+// Revelação suave em vez do "pop" abrupto do display:none → visível. A
+// animação começa sozinha assim que o elemento passa a ser desenhado — no
+// mobile isso é exatamente o momento do clique em "Me leve à calculadora";
+// no desktop (sempre visível) é só um fade-in discreto no carregamento.
+@keyframes revelar {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ancora-calculadora,
+.palco-acoes,
+.aviso {
+  animation: revelar 0.5s ease-out;
+}

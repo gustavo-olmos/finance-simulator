@@ -1,0 +1,28 @@
+<footer class="site-footer">
+  <div class="wrap topo">
+    <div class="sobre">
+      <a class="brand" routerLink="/financiamento-imovel" aria-label="RotaFin, página inicial">
+        <app-logo variante="escuro" />
+      </a>
+      <p>Simuladores gratuitos e independentes de financiamento de imóvel e veículo.</p>
+    </div>
+
+    <!-- TODO: criar as páginas Sobre, Contato, Privacidade e Termos. Até lá essas
+         rotas caem no redirect '**' e voltam para o simulador. -->
+    <nav class="links" aria-label="Rodapé">
+      <a routerLink="/financiamento-imovel">Simular imóvel</a>
+      <a routerLink="/sobre">Sobre nós</a>
+      <a routerLink="/financiamento-veiculo">Simular veículo</a>
+      <a routerLink="/contato">Contato</a>
+      <a [routerLink]="rotaSimulador()" fragment="anunciar">Anuncie na RotaFin</a>
+      <a routerLink="/privacidade">Política de privacidade</a>
+      <a [routerLink]="rotaSimulador()" fragment="como-funciona">Como calculamos</a>
+      <a routerLink="/termos">Termos de uso</a>
+    </nav>
+  </div>
+
+  <!-- TODO: incluir CNPJ ou responsável após "© 2026 RotaFin". -->
+  <div class="wrap legal">
+    © 2026 RotaFin · Não somos instituição financeira. Simulações são estimativas.
+  </div>
+</footer>

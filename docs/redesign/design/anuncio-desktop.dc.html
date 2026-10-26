@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>RotaFin — Página do anúncio</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&amp;family=Inter:wght@400;500;600;700&amp;family=DM+Sans:ital,opsz,wght@1,9..40,700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#0E6B43}a:hover{color:#0A4D31}
+input[type=range]{width:100%;height:28px;margin:0;accent-color:#0E6B43}
+.mob-only{display:none !important}
+@media (max-width:760px){
+  .desk-only{display:none !important}
+  .wrap{padding-left:16px !important;padding-right:16px !important}
+  .galeria{grid-template-columns:1fr !important}
+  .galeria .thumbs{display:none !important}
+  .mais{display:flex !important;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px 6px}
+  .mais>article{flex:0 0 78%;scroll-snap-align:start}
+  .ctabar{display:flex !important}
+  .page{padding-bottom:88px}
+}
+</style>
+</helmet>
+<div class="page" style="font-family: Inter, system-ui, sans-serif; color: #10241A; background: #FFFFFF; min-height: 100vh">
+
+<header style="position: sticky; top: 0; z-index: 30; background: #FFFFFF; border-bottom: 1px solid #DDE5E0">
+<div class="wrap" style="max-width: 1160px; margin: 0 auto; padding: 0 24px; height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<a href="#" style="text-decoration: none; font-family: 'DM Sans', sans-serif; font-style: italic; font-weight: 700; font-size: 27px; letter-spacing: -1px; color: #10241A">Rota<span style="color: #0E6B43">Fin</span></a>
+<nav class="desk-only" aria-label="Principal" style="display: flex; align-items: center; gap: 22px; font-size: 15px; font-weight: 600">
+<a href="#" style="color: #0A4D31; text-decoration: none">Imóvel</a>
+<a href="#" style="color: #33463C; text-decoration: none">Veículo</a>
+<a href="#" style="display: flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 10px; background: #0E6B43; color: #FFFFFF; text-decoration: none">Anuncie aqui</a>
+</nav>
+</div>
+</header>
+
+<div class="wrap" style="max-width: 1160px; margin: 0 auto; padding: 16px 24px 0">
+<nav aria-label="Você está em" style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 14px; color: #52655A">
+<a href="#" style="display: flex; align-items: center; gap: 6px; min-height: 36px; font-weight: 600"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>Voltar à minha simulação</a>
+<span aria-hidden="true">·</span><span>Anúncios</span><span aria-hidden="true">›</span><span>Imóveis</span><span aria-hidden="true">›</span><span style="color: #10241A">[Título do anúncio]</span>
+</nav>
+</div>
+
+<section class="wrap" style="max-width: 1160px; margin: 0 auto; padding: 12px 24px 0">
+<div class="galeria" style="display: grid; grid-template-columns: 2fr 1fr; gap: 8px; height: 420px">
+<div style="position: relative; border-radius: 16px 0 0 16px; background: #DCE7E0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; color: #52655A; font-weight: 600; font-size: 14px">
+<svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#52655A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>[Foto principal]
+<span style="position: absolute; top: 14px; left: 14px; padding: 5px 9px; border-radius: 6px; background: #10241A; color: #FFFFFF; font-size: 12px; font-weight: 700; letter-spacing: .3px">ANÚNCIO</span>
+<button style="position: absolute; bottom: 14px; right: 14px; min-height: 40px; padding: 0 14px; border: 0; border-radius: 9px; background: #FFFFFF; font: inherit; font-size: 14px; font-weight: 600; color: #10241A; cursor: pointer">Ver as [N] fotos</button>
+</div>
+<div class="thumbs" style="display: grid; grid-template-rows: 1fr 1fr; gap: 8px">
+<div style="border-radius: 0 16px 0 0; background: #E4ECE7; display: flex; align-items: center; justify-content: center; color: #52655A; font-size: 13px">[Foto 2]</div>
+<div style="border-radius: 0 0 16px 0; background: #E4ECE7; display: flex; align-items: center; justify-content: center; color: #52655A; font-size: 13px">[Foto 3]</div>
+</div>
+</div>
+</section>
+
+<section class="wrap" style="max-width: 1160px; margin: 0 auto; padding: 28px 24px 40px; display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start">
+
+<div style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
+<div>
+<p style="margin: 0 0 6px; font-size: 14px; color: #52655A">[Bairro, cidade – UF]</p>
+<h1 style="margin: 0 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 700; letter-spacing: -0.5px; line-height: 1.15">[Título do anúncio]</h1>
+<p style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; font-weight: 700">{{precoFmt}}</p>
+<p style="margin: 4px 0 0; font-size: 14px; color: #52655A">Condomínio R$ [VALOR] · IPTU R$ [VALOR]/ano</p>
+</div>
+
+<ul style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px">
+<li style="border: 1px solid #DDE5E0; border-radius: 12px; padding: 14px"><p style="margin: 0; font-size: 13px; color: #52655A">Área</p><p style="margin: 2px 0 0; font-weight: 700">[m²]</p></li>
+<li style="border: 1px solid #DDE5E0; border-radius: 12px; padding: 14px"><p style="margin: 0; font-size: 13px; color: #52655A">Quartos</p><p style="margin: 2px 0 0; font-weight: 700">[N]</p></li>
+<li style="border: 1px solid #DDE5E0; border-radius: 12px; padding: 14px"><p style="margin: 0; font-size: 13px; color: #52655A">Banheiros</p><p style="margin: 2px 0 0; font-weight: 700">[N]</p></li>
+<li style="border: 1px solid #DDE5E0; border-radius: 12px; padding: 14px"><p style="margin: 0; font-size: 13px; color: #52655A">Vagas</p><p style="margin: 2px 0 0; font-weight: 700">[N]</p></li>
+</ul>
+
+<div>
+<h2 style="margin: 0 0 8px; font-size: 18px; font-weight: 700">Sobre o imóvel</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #3D5046">[Descrição escrita pelo anunciante. Texto curto, com os diferenciais do imóvel, região e condições.]</p>
+</div>
+
+<div style="border: 1px solid #DDE5E0; border-radius: 16px; padding: 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px">
+<span style="width: 56px; height: 56px; border-radius: 12px; background: #E6F2EC; flex: none; display: flex; align-items: center; justify-content: center; color: #52655A; font-size: 11px">[logo]</span>
+<div style="flex: 1 1 200px">
+<p style="margin: 0; font-size: 13px; color: #52655A">Anunciado por</p>
+<p style="margin: 2px 0 0; font-size: 17px; font-weight: 700">[Nome da imobiliária]</p>
+<p style="margin: 2px 0 0; font-size: 14px; color: #3D5046">CRECI [NÚMERO] · [Cidade]</p>
+</div>
+<a href="#" style="display: flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 10px; border: 1px solid #C9D5CE; color: #10241A; font-weight: 600; font-size: 14px; text-decoration: none">Ver outros imóveis</a>
+</div>
+</div>
+
+<aside id="simular" aria-label="Simulação deste imóvel" style="flex: 1 1 380px; min-width: 0; max-width: 420px; position: sticky; top: 92px; border: 1px solid #DDE5E0; border-radius: 18px; padding: 22px; box-sizing: border-box; box-shadow: 0 10px 30px rgba(16,36,26,.08); display: flex; flex-direction: column; gap: 16px">
+<div>
+<p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: #52655A">Sua simulação para este imóvel</p>
+<p style="margin: 4px 0 0; font-size: 14px; color: #3D5046">Usamos os valores da sua última simulação. Ajuste à vontade.</p>
+</div>
+
+<div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px">
+<label for="a-entrada" style="font-size: 14px; font-weight: 600">Entrada <span style="font-weight: 500; color: #52655A">{{entradaPct}}</span></label>
+<span style="font-size: 15px; font-weight: 700">{{entradaFmt}}</span>
+</div>
+<input id="a-entrada" type="range" min="0" max="{{preco}}" step="1000" value="{{entrada}}" onChange="{{setEntrada}}">
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<div>
+<label for="a-prazo" style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 4px">Prazo</label>
+<div style="display: flex; align-items: center; height: 44px; border: 1px solid #C9D5CE; border-radius: 9px">
+<button aria-label="Diminuir prazo" onClick="{{prazoMenos}}" style="width: 40px; height: 100%; border: 0; background: transparent; font-size: 20px; color: #10241A; cursor: pointer">−</button>
+<span id="a-prazo" style="flex: 1; text-align: center; font-weight: 700">{{prazo}} anos</span>
+<button aria-label="Aumentar prazo" onClick="{{prazoMais}}" style="width: 40px; height: 100%; border: 0; background: transparent; font-size: 20px; color: #10241A; cursor: pointer">+</button>
+</div>
+</div>
+<div>
+<label for="a-taxa" style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 4px">Juros ao ano</label>
+<div style="display: flex; align-items: center; height: 44px; border: 1px solid #C9D5CE; border-radius: 9px">
+<button aria-label="Diminuir juros" onClick="{{taxaMenos}}" style="width: 40px; height: 100%; border: 0; background: transparent; font-size: 20px; color: #10241A; cursor: pointer">−</button>
+<span id="a-taxa" style="flex: 1; text-align: center; font-weight: 700">{{taxaFmt}}</span>
+<button aria-label="Aumentar juros" onClick="{{taxaMais}}" style="width: 40px; height: 100%; border: 0; background: transparent; font-size: 20px; color: #10241A; cursor: pointer">+</button>
+</div>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<div style="background: #E6F2EC; border-radius: 12px; padding: 12px">
+<p style="margin: 0; font-size: 12px; font-weight: 700; color: #0A4D31">SAC · diminui</p>
+<p style="margin: 4px 0 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px; font-weight: 700">{{sac}}</p>
+</div>
+<div style="background: #FDF3E3; border-radius: 12px; padding: 12px">
+<p style="margin: 0; font-size: 12px; font-weight: 700; color: #7A4706">PRICE · fixa</p>
+<p style="margin: 4px 0 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px; font-weight: 700">{{price}}</p>
+</div>
+</div>
+<p style="margin: -4px 0 0; font-size: 13px; color: #3D5046">Renda familiar estimada a partir de <strong>{{renda}}</strong>*</p>
+
+<a href="#" style="display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; border-radius: 12px; background: #0E6B43; color: #FFFFFF; font-weight: 700; font-size: 16px; text-decoration: none"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-13.5 7.8L3 21l1.2-4.5A9 9 0 1 1 21 12z"></path></svg>Falar com a imobiliária</a>
+
+<div style="background: #F3F7F4; border-radius: 12px; padding: 12px 14px">
+<p style="margin: 0 0 6px; font-size: 12px; font-weight: 700; color: #52655A">Mensagem que será enviada</p>
+<p style="margin: 0; font-size: 14px; line-height: 1.5; color: #10241A">“{{mensagem}}”</p>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<a href="#" style="display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; border-radius: 10px; border: 1px solid #C9D5CE; color: #10241A; font-weight: 600; font-size: 14px; text-decoration: none"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>Ligar</a>
+<a href="#" style="display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; border-radius: 10px; border: 1px solid #C9D5CE; color: #10241A; font-weight: 600; font-size: 14px; text-decoration: none"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"></path><path d="M20 4L10 14"></path><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg>Site do anunciante</a>
+</div>
+<p style="margin: 0; font-size: 12px; line-height: 1.5; color: #52655A">*Parcela até 30% da renda bruta. Estimativa, não é proposta de crédito. A negociação é feita direto com o anunciante.</p>
+</aside>
+</section>
+
+<section class="wrap" style="max-width: 1160px; margin: 0 auto; padding: 8px 24px 40px">
+<h2 style="margin: 0 0 14px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px; font-weight: 700">Outros imóveis na mesma faixa</h2>
+<div class="mais" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px">
+<sc-for list="{{mais}}" as="m" hint-placeholder-count="4">
+<article style="border: 1px solid #DDE5E0; border-radius: 14px; overflow: hidden">
+<div style="position: relative; aspect-ratio: 4 / 3; background: #DCE7E0; display: flex; align-items: center; justify-content: center; color: #52655A; font-size: 13px">[Foto]<span style="position: absolute; top: 8px; left: 8px; padding: 3px 7px; border-radius: 5px; background: #10241A; color: #FFFFFF; font-size: 11px; font-weight: 700">ANÚNCIO</span></div>
+<div style="padding: 12px 14px 14px">
+<p style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700">R$ [PREÇO]</p>
+<p style="margin: 2px 0 0; font-size: 13px; font-weight: 600; color: #0A4D31">≈ R$ [PARCELA]/mês</p>
+<p style="margin: 6px 0 0; font-size: 14px; color: #3D5046">[Bairro] · [quartos] · [m²]</p>
+</div>
+</article>
+</sc-for>
+</div>
+</section>
+
+<section class="wrap" aria-label="Publicidade" style="max-width: 1160px; margin: 0 auto; padding: 0 24px 48px">
+<p style="margin: 0 0 6px; font-size: 11px; font-weight: 600; letter-spacing: .6px; text-transform: uppercase; color: #52655A; text-align: center">Publicidade</p>
+<div style="min-height: 120px; max-width: 970px; margin: 0 auto; border-radius: 12px; background: repeating-linear-gradient(135deg, #F3F7F4 0 12px, #EAF0EC 12px 24px); border: 1px dashed #C9D5CE; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #52655A">[Google AdSense · altura reservada]</div>
+</section>
+
+<footer style="background: #0A3524; color: #D5E3DA">
+<div class="wrap" style="max-width: 1160px; margin: 0 auto; padding: 28px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; font-size: 13px">
+<span style="font-family: 'DM Sans', sans-serif; font-style: italic; font-weight: 700; font-size: 22px; letter-spacing: -0.8px; color: #FFFFFF">Rota<span style="color: #7FE0AE">Fin</span></span>
+<span>Não somos instituição financeira nem imobiliária. Anúncios publicados por parceiros.</span>
+</div>
+</footer>
+
+<div class="ctabar" style="display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; align-items: center; gap: 10px; padding: 10px 12px; background: #FFFFFF; border-top: 1px solid #DDE5E0; box-shadow: 0 -6px 18px rgba(16,36,26,.12)">
+<div style="flex: 1; min-width: 0"><p style="margin: 0; font-size: 11px; color: #52655A">Parcela SAC</p><p style="margin: 0; font-size: 17px; font-weight: 700">{{sac}}</p></div>
+<a href="#" style="display: flex; align-items: center; gap: 6px; min-height: 48px; padding: 0 16px; border-radius: 11px; background: #0E6B43; color: #FFFFFF; font-weight: 700; font-size: 15px; text-decoration: none">Falar no WhatsApp</a>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"preco":{"editor":"int","default":350000,"min":20000,"max":5000000,"step":5000},"$preview":{"width":1440,"height":2300}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { entradaPct: 0.2, prazo: 30, taxa: 10.5 }; }
+  brl(v) { return 'R$ ' + (v || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  brl0(v) { return 'R$ ' + Math.round(v || 0).toLocaleString('pt-BR'); }
+  renderVals() {
+    var self = this, s = this.state;
+    var preco = this.props.preco ?? 350000;
+    var entrada = Math.round(preco * s.entradaPct / 1000) * 1000;
+    var P = Math.max(preco - entrada, 0), n = s.prazo * 12;
+    var i = Math.pow(1 + s.taxa / 100, 1 / 12) - 1;
+    var sac = P / n + P * i;
+    var price = i > 0 ? P * i / (1 - Math.pow(1 + i, -n)) : P / n;
+    var clamp = function (v, lo, hi) { return Math.min(hi, Math.max(lo, v)); };
+    return {
+      preco: preco, precoFmt: this.brl0(preco),
+      entrada: entrada, entradaFmt: this.brl0(entrada),
+      entradaPct: '· ' + Math.round(s.entradaPct * 100) + '%',
+      setEntrada: function (e) { var v = parseFloat(e.target.value) || 0; self.setState({ entradaPct: preco > 0 ? v / preco : 0 }); },
+      prazo: s.prazo, taxaFmt: s.taxa.toLocaleString('pt-BR', { minimumFractionDigits: 1 }) + '%',
+      prazoMenos: function () { self.setState({ prazo: clamp(s.prazo - 1, 5, 35) }); },
+      prazoMais: function () { self.setState({ prazo: clamp(s.prazo + 1, 5, 35) }); },
+      taxaMenos: function () { self.setState({ taxa: clamp(Math.round((s.taxa - 0.1) * 10) / 10, 1, 25) }); },
+      taxaMais: function () { self.setState({ taxa: clamp(Math.round((s.taxa + 0.1) * 10) / 10, 1, 25) }); },
+      sac: this.brl(sac), price: this.brl(price), renda: this.brl0(sac / 0.3),
+      mensagem: 'Olá! Vi o anúncio [Título do anúncio] na RotaFin. Simulei com ' + this.brl0(entrada) + ' de entrada em ' + s.prazo + ' anos, parcela de ' + this.brl0(sac) + ' (SAC). Ainda está disponível?',
+      mais: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]
+    };
+  }
+}
+</script>
+</body>
+</html>

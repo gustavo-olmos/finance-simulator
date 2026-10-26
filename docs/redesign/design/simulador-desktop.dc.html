@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>RotaFin — Simulador de financiamento de imóvel</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Inter:wght@400;500;600;700&amp;family=DM+Sans:ital,opsz,wght@1,9..40,700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#0E6B43}a:hover{color:#0A4D31}
+.hero a{color:#9FE3BF}.hero a:hover{color:#FFFFFF}
+input[type=range]{width:100%;height:28px;margin:0;accent-color:#7FE0AE}
+input[type=number]::-webkit-inner-spin-button{opacity:.35}
+summary{cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+details[open] .chev{transform:rotate(180deg)}
+.ofertas{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.resbar{display:none}
+.mob-only{display:none !important}
+@media (max-width:760px){
+  .desk-only{display:none !important}
+  button.mob-only{display:flex !important}
+  nav.mob-only{display:grid !important}
+  .ofertas{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:6px;margin:0 -16px;padding-left:16px;padding-right:16px}
+  .ofertas>article{flex:0 0 78%;scroll-snap-align:start}
+  .hero-title{font-size:30px !important}
+  .hero-sub{font-size:16px !important}
+  .wrap{padding-left:16px !important;padding-right:16px !important}
+  .nav-extra{display:none !important}
+  .resbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20}
+  .page{padding-bottom:96px}
+}
+</style>
+</helmet>
+<div class="page" style="font-family: Inter, system-ui, sans-serif; color: #10241A; background: #FFFFFF; min-height: 100vh">
+
+<header style="position: sticky; top: 0; z-index: 30; background: #FFFFFF; border-bottom: 1px solid #DDE5E0; color: #10241A">
+<div class="wrap" style="max-width: 1160px; margin: 0 auto; padding: 0 24px; height: 72px; display: flex; align-items: stretch; justify-content: space-between; gap: 12px">
+<a href="#" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #10241A">
+<span style="font-family: 'DM Sans', sans-serif; font-style: italic; font-weight: 700; font-size: 27px; letter-spacing: -1px; color: #10241A">Rota<span style="color: #0E6B43">Fin</span></span>
+</a>
+<nav class="desk-only" aria-label="Principal" style="display: flex; align-items: stretch; gap: 8px">
+<a href="#" aria-current="page" style="display: flex; align-items: center; gap: 8px; padding: 0 14px; border-bottom: 3px solid #0E6B43; color: #0A4D31; font-weight: 700; font-size: 15px; text-decoration: none"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Imóvel</a>
+<a href="#" style="display: flex; align-items: center; gap: 8px; padding: 0 14px; border-bottom: 3px solid transparent; color: #33463C; font-weight: 600; font-size: 15px; text-decoration: none"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14"></path><path d="M3 13l2-6h14l2 6v4H3z"></path><circle cx="7.5" cy="17" r="1.6"></circle><circle cx="16.5" cy="17" r="1.6"></circle></svg>Veículo</a>
+<a href="#como-funciona" style="display: flex; align-items: center; padding: 0 14px; border-bottom: 3px solid transparent; color: #33463C; font-weight: 500; font-size: 15px; text-decoration: none">Como funciona</a>
+<a href="#duvidas" style="display: flex; align-items: center; padding: 0 14px; border-bottom: 3px solid transparent; color: #33463C; font-weight: 500; font-size: 15px; text-decoration: none">Dúvidas</a>
+</nav>
+<div style="display: flex; align-items: center">
+<a class="desk-only" href="#anunciar" style="display: flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 10px; background: #0E6B43; color: #FFFFFF; font-weight: 700; font-size: 15px; text-decoration: none">Anuncie aqui</a>
+<button class="mob-only" aria-label="Abrir menu" style="width: 44px; height: 44px; border: 0; background: transparent; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10241A" stroke-width="2" stroke-linecap="round"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg></button>
+</div>
+</div>
+<nav class="mob-only" aria-label="Simulador" style="grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid #EEF3F0">
+<a href="#" aria-current="page" style="display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 48px; border-bottom: 3px solid #0E6B43; color: #0A4D31; font-weight: 700; font-size: 15px; text-decoration: none"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Imóvel</a>
+<a href="#" style="display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 48px; border-bottom: 3px solid transparent; color: #33463C; font-weight: 600; font-size: 15px; text-decoration: none"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14"></path><path d="M3 13l2-6h14l2 6v4H3z"></path><circle cx="7.5" cy="17" r="1.6"></circle><circle cx="16.5" cy="17" r="1.6"></circle></svg>Veículo</a>
+</nav>
+</header>
+
+<section class="hero" style="background: radial-gradient(ellipse 90% 70% at 50% 35%, #1F7A52 0%, #11573A 45%, #0A3524 100%); color: #FFFFFF">
+<div class="wrap" style="max-width: 1160px; margin: 0 auto; padding: 48px 24px 48px">
+<div style="text-align: center; max-width: 720px; margin: 0 auto 28px">
+<h1 class="hero-title" style="margin: 0 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 44px; line-height: 1.08; letter-spacing: -0.8px">Quanto vai ficar a parcela do seu imóvel?</h1>
+<p class="hero-sub" style="margin: 0 0 16px; font-size: 18px; line-height: 1.5; color: #D8EEE2">Mexa nos valores e veja na hora a parcela no SAC e no PRICE, o total pago e a renda que o banco pede.</p>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; font-size: 14px; font-weight: 500; color: #E3F1E9">
+<li style="display: flex; align-items: center; gap: 6px"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7FE0AE" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg>Grátis</li>
+<li style="display: flex; align-items: center; gap: 6px"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7FE0AE" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg>Sem cadastro</li>
+<li style="display: flex; align-items: center; gap: 6px"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7FE0AE" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg>Resultado em segundos</li>
+</ul>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+
+<div style="flex: 1 1 380px; min-width: 0; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.16); border-radius: 18px; padding: 22px; box-sizing: border-box">
+<div role="tablist" aria-label="Tipo de simulação" style="display: flex; gap: 4px; padding: 4px; background: rgba(0,0,0,0.22); border-radius: 11px; margin-bottom: 22px">
+<button role="tab" aria-selected="{{tabValorSel}}" onClick="{{toValor}}" style="{{tabValorStyle}}">Sei o valor do imóvel</button>
+<button role="tab" aria-selected="{{tabRendaSel}}" onClick="{{toRenda}}" style="{{tabRendaStyle}}">Sei quanto posso pagar</button>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 20px">
+<sc-if value="{{modoValor}}" hint-placeholder-val="{{ true }}">
+<div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 6px">
+<label for="f-valor" style="font-size: 15px; font-weight: 600; color: #E3F1E9">Valor do imóvel</label>
+<div style="display: flex; align-items: center; gap: 4px; border: 1px solid rgba(255,255,255,0.18); border-radius: 9px; padding: 0 10px; height: 46px; background: rgba(0,0,0,0.2)"><span style="color: #B9D6C6; font-size: 15px">R$</span><input id="f-valor" type="number" inputmode="numeric" value="{{valor}}" onChange="{{setValor}}" style="width: 112px; border: 0; outline: none; font: inherit; font-size: 18px; font-weight: 700; color: #FFFFFF; text-align: right; background: transparent"></div>
+</div>
+<input type="range" min="50000" max="3000000" step="5000" value="{{valor}}" onChange="{{setValor}}" aria-label="Ajustar valor do imóvel">
+</div>
+</sc-if>
+<sc-if value="{{modoRenda}}" hint-placeholder-val="{{ false }}">
+<div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 6px">
+<label for="f-parcela" style="font-size: 15px; font-weight: 600; color: #E3F1E9">Parcela que cabe no bolso</label>
+<div style="display: flex; align-items: center; gap: 4px; border: 1px solid rgba(255,255,255,0.18); border-radius: 9px; padding: 0 10px; height: 46px; background: rgba(0,0,0,0.2)"><span style="color: #B9D6C6; font-size: 15px">R$</span><input id="f-parcela" type="number" inputmode="numeric" value="{{parcelaMax}}" onChange="{{setParcela}}" style="width: 112px; border: 0; outline: none; font: inherit; font-size: 18px; font-weight: 700; color: #FFFFFF; text-align: right; background: transparent"></div>
+</div>
+<input type="range" min="500" max="30000" step="50" value="{{parcelaMax}}" onChange="{{setParcela}}" aria-label="Ajustar parcela mensal">
+</div>
+</sc-if>
+
+<div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 6px">
+<label for="f-entrada" style="font-size: 15px; font-weight: 600; color: #E3F1E9">Entrada <span style="font-weight: 500; color: #B9D6C6">{{entradaPct}}</span></label>
+<div style="display: flex; align-items: center; gap: 4px; border: 1px solid rgba(255,255,255,0.18); border-radius: 9px; padding: 0 10px; height: 46px; background: rgba(0,0,0,0.2)"><span style="color: #B9D6C6; font-size: 15px">R$</span><input id="f-entrada" type="number" inputmode="numeric" value="{{entrada}}" onChange="{{setEntrada}}" style="width: 112px; border: 0; outline: none; font: inherit; font-size: 18px; font-weight: 700; color: #FFFFFF; text-align: right; background: transparent"></div>
+</div>
+<input type="range" min="0" max="{{entradaMax}}" step="1000" value="{{entrada}}" onChange="{{setEntrada}}" aria-label="Ajustar entrada">
+<p style="margin: 4px 0 0; font-size: 13px; color: #B9D6C6">Pode incluir o FGTS. Bancos costumam pedir ao menos 20%.</p>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<div>
+<label for="f-prazo" style="display: block; font-size: 15px; font-weight: 600; color: #E3F1E9; margin-bottom: 6px">Prazo</label>
+<div style="display: flex; align-items: center; border: 1px solid rgba(255,255,255,0.18); border-radius: 9px; height: 48px; background: rgba(0,0,0,0.2); overflow: hidden">
+<button aria-label="Diminuir prazo" onClick="{{prazoMenos}}" style="width: 44px; height: 100%; border: 0; background: transparent; color: #FFFFFF; font-size: 22px; cursor: pointer">−</button>
+<input id="f-prazo" type="number" inputmode="numeric" value="{{prazo}}" onChange="{{setPrazo}}" style="flex: 1; min-width: 0; border: 0; outline: none; font: inherit; font-size: 18px; font-weight: 700; color: #FFFFFF; text-align: center; background: transparent">
+<span style="color: #B9D6C6; font-size: 14px; padding-right: 4px">anos</span>
+<button aria-label="Aumentar prazo" onClick="{{prazoMais}}" style="width: 44px; height: 100%; border: 0; background: transparent; color: #FFFFFF; font-size: 22px; cursor: pointer">+</button>
+</div>
+</div>
+<div>
+<label for="f-taxa" style="display: block; font-size: 15px; font-weight: 600; color: #E3F1E9; margin-bottom: 6px">Juros ao ano</label>
+<div style="display: flex; align-items: center; border: 1px solid rgba(255,255,255,0.18); border-radius: 9px; height: 48px; background: rgba(0,0,0,0.2); overflow: hidden">
+<button aria-label="Diminuir juros" onClick="{{taxaMenos}}" style="width: 44px; height: 100%; border: 0; background: transparent; color: #FFFFFF; font-size: 22px; cursor: pointer">−</button>
+<input id="f-taxa" type="number" step="0.1" value="{{taxa}}" onChange="{{setTaxa}}" style="flex: 1; min-width: 0; border: 0; outline: none; font: inherit; font-size: 18px; font-weight: 700; color: #FFFFFF; text-align: center; background: transparent">
+<span style="color: #B9D6C6; font-size: 14px; padding-right: 4px">%</span>
+<button aria-label="Aumentar juros" onClick="{{taxaMais}}" style="width: 44px; height: 100%; border: 0; background: transparent; color: #FFFFFF; font-size: 22px; cursor: pointer">+</button>
+</div>
+</div>
+</div>
+<p style="margin: -8px 0 0; font-size: 13px; color: #B9D6C6">{{taxaMes}} ao mês · <a href="#taxas">Qual taxa usar?</a></p>
+
+<details style="border-top: 1px solid rgba(255,255,255,0.14); padding-top: 12px">
+<summary style="display: flex; justify-content: space-between; align-items: center; min-height: 36px; font-size: 15px; font-weight: 600; color: #E3F1E9">Seguro obrigatório (opcional)<svg class="chev" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E3F1E9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg></summary>
+<div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<label for="f-seguro" style="font-size: 14px; font-weight: 600; color: #E3F1E9">Seguro MIP/DFI</label>
+<div style="display: flex; align-items: center; gap: 6px; border: 1px solid rgba(255,255,255,0.18); border-radius: 9px; padding: 0 10px; height: 44px; background: rgba(0,0,0,0.2)"><input id="f-seguro" type="number" step="0.005" value="{{seguro}}" onChange="{{setSeguro}}" style="width: 64px; border: 0; outline: none; font: inherit; font-size: 16px; font-weight: 700; color: #FFFFFF; text-align: right; background: transparent"><span style="color: #B9D6C6; font-size: 14px">% a.m.</span></div>
+</div>
+<p style="margin: 0; font-size: 13px; line-height: 1.5; color: #B9D6C6">Seguros que o banco cobra junto com a parcela: morte ou invalidez de quem paga (MIP) e danos ao imóvel (DFI). Deixe 0 se não souber.</p>
+</div>
+</details>
+</div>
+</div>
+
+<div id="resultado" style="flex: 1 1 440px; min-width: 0; background: #FFFFFF; color: #10241A; border-radius: 18px; padding: 22px; box-sizing: border-box; box-shadow: 0 18px 40px rgba(0,0,0,0.22)">
+<sc-if value="{{modoValor}}" hint-placeholder-val="{{ true }}">
+<div>
+<p style="margin: 0 0 16px; font-size: 15px; color: #33463C">Financiando <strong style="color: #10241A">{{financiado}}</strong> em {{prazo}} anos</p>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<div style="background: #E6F2EC; border-radius: 12px; padding: 14px">
+<p style="margin: 0; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #0A4D31"><span style="width: 9px; height: 9px; border-radius: 2px; background: #0E6B43"></span>SAC · diminui</p>
+<p style="margin: 6px 0 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -0.5px">{{sacFirst}}</p>
+<p style="margin: 2px 0 0; font-size: 13px; color: #33463C">cai até {{sacLast}}</p>
+</div>
+<div style="background: #FDF3E3; border-radius: 12px; padding: 14px">
+<p style="margin: 0; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #7A4706"><span style="width: 9px; height: 9px; border-radius: 2px; background: #E39B2D"></span>PRICE · fixa</p>
+<p style="margin: 6px 0 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -0.5px">{{priceFirst}}</p>
+<p style="margin: 2px 0 0; font-size: 13px; color: #33463C">do início ao fim</p>
+</div>
+</div>
+<div style="margin-top: 12px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid #E4EBE7; border-radius: 12px; overflow: hidden; font-size: 14px">
+<div style="padding: 10px 12px; background: #F7FAF8"></div>
+<div style="padding: 10px 12px; background: #F7FAF8; font-weight: 700; color: #0A4D31">SAC</div>
+<div style="padding: 10px 12px; background: #F7FAF8; font-weight: 700; color: #7A4706">PRICE</div>
+<div style="padding: 10px 12px; border-top: 1px solid #E4EBE7; color: #33463C">Total pago</div>
+<div style="padding: 10px 12px; border-top: 1px solid #E4EBE7; font-weight: 600">{{sacTotal}}</div>
+<div style="padding: 10px 12px; border-top: 1px solid #E4EBE7; font-weight: 600">{{priceTotal}}</div>
+<div style="padding: 10px 12px; border-top: 1px solid #E4EBE7; color: #33463C">Renda mínima*</div>
+<div style="padding: 10px 12px; border-top: 1px solid #E4EBE7; font-weight: 600">{{sacRenda}}</div>
+<div style="padding: 10px 12px; border-top: 1px solid #E4EBE7; font-weight: 600">{{priceRenda}}</div>
+</div>
+<p style="margin: 12px 0 0; font-size: 14px; line-height: 1.5; color: #33463C">No PRICE a 1ª parcela é <strong>{{difInicial}} menor</strong>, mas o total sai <strong>{{difTotal}} mais caro</strong>.</p>
+</div>
+</sc-if>
+<sc-if value="{{modoRenda}}" hint-placeholder-val="{{ false }}">
+<div>
+<p style="margin: 0 0 16px; font-size: 15px; color: #33463C">Pagando até <strong style="color: #10241A">{{parcelaMaxFmt}}</strong>/mês, com {{entradaFmt}} de entrada, você compra um imóvel de até:</p>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<div style="background: #E6F2EC; border-radius: 12px; padding: 14px">
+<p style="margin: 0; font-size: 13px; font-weight: 700; color: #0A4D31">No SAC</p>
+<p style="margin: 6px 0 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700">{{maxSac}}</p>
+</div>
+<div style="background: #FDF3E3; border-radius: 12px; padding: 14px">
+<p style="margin: 0; font-size: 13px; font-weight: 700; color: #7A4706">No PRICE</p>
+<p style="margin: 6px 0 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700">{{maxPrice}}</p>
+</div>
+</div>
+<p style="margin: 12px 0 0; font-size: 14px; color: #33463C">Renda familiar mínima estimada: <strong>{{rendaParcela}}</strong>*</p>
+</div>
+</sc-if>
+
+<a href="#ofertas" style="margin-top: 16px; display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; border-radius: 11px; background: #0E6B43; color: #FFFFFF; font-weight: 700; font-size: 16px; text-decoration: none">Ver imóveis de até {{faixaCurta}}<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"></path><path d="M6 13l6 6 6-6"></path></svg></a>
+<div style="margin-top: 10px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<a href="#" style="display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; border-radius: 10px; border: 1px solid #C9D5CE; color: #10241A; font-weight: 600; font-size: 14px; text-decoration: none"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-13.5 7.8L3 21l1.2-4.5A9 9 0 1 1 21 12z"></path></svg>Enviar no WhatsApp</a>
+<a href="#" style="display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; border-radius: 10px; border: 1px solid #C9D5CE; color: #10241A; font-weight: 600; font-size: 14px; text-decoration: none"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"></path><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"></path></svg>Copiar link</a>
+</div>
+<p style="margin: 10px 0 0; font-size: 12px; line-height: 1.5; color: #52655A">*Bancos costumam limitar a parcela a 30% da renda bruta. Estimativa; não é proposta de crédito.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="ofertas" class="wrap" style="max-width: 1160px; margin: 0 auto; padding: 40px 24px 8px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 8px 16px; margin-bottom: 16px">
+<div>
+<p style="margin: 0 0 4px; font-size: 13px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: #52655A">Patrocinado · imobiliárias parceiras</p>
+<h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -0.4px">Imóveis que cabem nessa simulação</h2>
+</div>
+<a href="#" style="font-size: 15px; font-weight: 600">Ver todos os anúncios</a>
+</div>
+<div class="ofertas">
+<sc-for list="{{ofertas}}" as="o" hint-placeholder-count="4">
+<article style="border: 1px solid #DDE5E0; border-radius: 14px; overflow: hidden; background: #FFFFFF; display: flex; flex-direction: column">
+<div style="position: relative; aspect-ratio: 4 / 3; background: #DCE7E0; display: flex; align-items: center; justify-content: center; color: #52655A; font-size: 13px; font-weight: 600">
+<span style="display: flex; flex-direction: column; align-items: center; gap: 6px"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#52655A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>[Foto do imóvel]</span>
+<span style="position: absolute; top: 10px; left: 10px; padding: 4px 8px; border-radius: 6px; background: #10241A; color: #FFFFFF; font-size: 11px; font-weight: 700; letter-spacing: .3px">ANÚNCIO</span>
+</div>
+<div style="padding: 14px; display: flex; flex-direction: column; gap: 4px; flex: 1">
+<p style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700">R$ [PREÇO]</p>
+<p style="margin: 0; font-size: 13px; font-weight: 600; color: #0A4D31">≈ R$ [PARCELA]/mês com sua entrada</p>
+<p style="margin: 6px 0 0; font-size: 15px; font-weight: 600">[Título do anúncio]</p>
+<p style="margin: 0; font-size: 14px; color: #3D5046">[Bairro, cidade] · [quartos] · [m²]</p>
+<p style="margin: 8px 0 0; display: flex; align-items: center; gap: 8px; font-size: 13px; color: #33463C"><span style="width: 22px; height: 22px; border-radius: 50%; background: #E6F2EC; flex: none"></span>[Nome da imobiliária]</p>
+<div style="margin-top: auto; padding-top: 12px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<a href="#resultado" style="display: flex; align-items: center; justify-content: center; min-height: 44px; border-radius: 9px; border: 1px solid #C9D5CE; color: #10241A; font-weight: 600; font-size: 14px; text-decoration: none">Simular</a>
+<a href="#" style="display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; border-radius: 9px; background: #0E6B43; color: #FFFFFF; font-weight: 600; font-size: 14px; text-decoration: none">WhatsApp</a>
+</div>
+</div>
+</article>
+</sc-for>
+</div>
+</section>
+
+<section class="wrap" aria-label="Publicidade" style="max-width: 1160px; margin: 0 auto; padding: 28px 24px">
+<p style="margin: 0 0 6px; font-size: 11px; font-weight: 600; letter-spacing: .6px; text-transform: uppercase; color: #52655A; text-align: center">Publicidade</p>
+<div style="min-height: 250px; max-width: 970px; margin: 0 auto; border-radius: 12px; background: repeating-linear-gradient(135deg, #F3F7F4 0 12px, #EAF0EC 12px 24px); border: 1px dashed #C9D5CE; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 14px; color: #52655A">[Google AdSense · bloco responsivo · altura reservada de 250 px]</div>
+</section>
+
+<section id="anunciar" class="wrap" style="max-width: 1160px; margin: 0 auto; padding: 8px 24px 40px">
+<div style="background: #10241A; color: #FFFFFF; border-radius: 18px; padding: 28px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between">
+<div style="flex: 1 1 420px">
+<h2 style="margin: 0 0 6px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px; font-weight: 700">É imobiliária ou concessionária?</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.5; color: #D5E3DA">Mostre seus imóveis e veículos para quem já está calculando a parcela, na faixa de preço que a pessoa simulou.</p>
+</div>
+<a href="#" style="display: flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 22px; border-radius: 11px; background: #7FE0AE; color: #0A3524; font-weight: 700; font-size: 16px; text-decoration: none">Quero anunciar</a>
+</div>
+</section>
+
+<section id="como-funciona" style="background: #F3F7F4; border-top: 1px solid #DDE5E0">
+<div class="wrap" style="max-width: 1160px; margin: 0 auto; padding: 48px 24px">
+<div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start">
+<div style="flex: 1 1 320px; min-width: 0">
+<h2 style="margin: 0 0 12px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -0.5px">SAC ou PRICE: qual cabe no seu bolso?</h2>
+<p style="margin: 0 0 14px; font-size: 16px; line-height: 1.6; color: #3D5046"><strong style="color: #0A4D31">SAC</strong> começa mais alto e vai caindo: você abate sempre a mesma fatia da dívida, e os juros incidem sobre um saldo cada vez menor.</p>
+<p style="margin: 0 0 14px; font-size: 16px; line-height: 1.6; color: #3D5046"><strong style="color: #7A4706">PRICE</strong> é a mesma parcela até o fim. Mais fácil de encaixar no orçamento hoje, mas com mais juros no total.</p>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #3D5046">Não existe escolha certa para todo mundo. O gráfico usa os números da sua simulação.</p>
+</div>
+<figure style="flex: 2 1 480px; min-width: 0; margin: 0; background: #FFFFFF; border: 1px solid #DDE5E0; border-radius: 16px; padding: 20px; box-sizing: border-box">
+<figcaption style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin-bottom: 16px; font-size: 14px; font-weight: 600">
+<span>Parcela mensal por ano de contrato</span>
+<span style="display: flex; gap: 14px; color: #33463C"><span style="display: flex; align-items: center; gap: 6px"><span style="width: 11px; height: 11px; border-radius: 3px; background: #0E6B43"></span>SAC</span><span style="display: flex; align-items: center; gap: 6px"><span style="width: 11px; height: 11px; border-radius: 3px; background: #E39B2D"></span>PRICE</span></span>
+</figcaption>
+<div role="img" aria-label="{{chartLabel}}" style="display: flex; align-items: flex-end; gap: 3px; height: 200px; border-bottom: 1px solid #C9D5CE">
+<sc-for list="{{bars}}" as="b" hint-placeholder-count="30">
+<div style="flex: 1 1 0; display: flex; align-items: flex-end; gap: 1px; height: 100%">
+<div style="flex: 1; background: #0E6B43; border-radius: 2px 2px 0 0; height: {{b.sacH}}%"></div>
+<div style="flex: 1; background: #E39B2D; border-radius: 2px 2px 0 0; height: {{b.priceH}}%"></div>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; gap: 3px; margin-top: 6px">
+<sc-for list="{{bars}}" as="b" hint-placeholder-count="30">
+<div style="flex: 1 1 0; text-align: center; font-size: 11px; color: #52655A">{{b.label}}</div>
+</sc-for>
+</div>
+</figure>
+</div>
+
+<div style="margin-top: 32px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px; margin-bottom: 12px">
+<h3 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700">Parcelas ano a ano</h3>
+<button onClick="{{toggleTabela}}" style="min-height: 44px; padding: 0 16px; border-radius: 10px; border: 1px solid #C9D5CE; background: #FFFFFF; font: inherit; font-size: 15px; font-weight: 600; color: #10241A; cursor: pointer">{{tabelaBtn}}</button>
+</div>
+<div style="overflow-x: auto; background: #FFFFFF; border: 1px solid #DDE5E0; border-radius: 12px">
+<table style="width: 100%; min-width: 480px; border-collapse: collapse; font-size: 15px">
+<thead>
+<tr style="background: #F7FAF8; text-align: left">
+<th scope="col" style="padding: 12px 14px; font-weight: 600; color: #33463C">Ano</th>
+<th scope="col" style="padding: 12px 14px; font-weight: 600; color: #0A4D31">SAC</th>
+<th scope="col" style="padding: 12px 14px; font-weight: 600; color: #7A4706">PRICE</th>
+<th scope="col" style="padding: 12px 14px; font-weight: 600; color: #33463C">Saldo (SAC)</th>
+</tr>
+</thead>
+<tbody>
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="5">
+<tr style="border-top: 1px solid #E4EBE7">
+<td style="padding: 12px 14px">{{r.ano}}</td>
+<td style="padding: 12px 14px; font-weight: 600">{{r.sac}}</td>
+<td style="padding: 12px 14px; font-weight: 600">{{r.price}}</td>
+<td style="padding: 12px 14px; color: #33463C">{{r.saldo}}</td>
+</tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+
+<section id="taxas" class="wrap" style="max-width: 1160px; margin: 0 auto; padding: 48px 24px 24px">
+<h2 style="margin: 0 0 6px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -0.4px">Qual taxa de juros colocar?</h2>
+<p style="margin: 0 0 20px; font-size: 16px; color: #3D5046">Sem proposta do banco ainda? Use uma referência. Atualizado em [DATA].</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px">
+<div style="border: 1px solid #DDE5E0; border-radius: 14px; padding: 18px"><p style="margin: 0 0 4px; font-size: 14px; font-weight: 600; color: #52655A">Bancos públicos</p><p style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px; font-weight: 700">[FAIXA]% a.a.</p><p style="margin: 4px 0 0; font-size: 13px; color: #52655A">Fonte: [FONTE]</p></div>
+<div style="border: 1px solid #DDE5E0; border-radius: 14px; padding: 18px"><p style="margin: 0 0 4px; font-size: 14px; font-weight: 600; color: #52655A">Bancos privados</p><p style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px; font-weight: 700">[FAIXA]% a.a.</p><p style="margin: 4px 0 0; font-size: 13px; color: #52655A">Fonte: [FONTE]</p></div>
+<div style="border: 1px solid #DDE5E0; border-radius: 14px; padding: 18px"><p style="margin: 0 0 4px; font-size: 14px; font-weight: 600; color: #52655A">Minha Casa, Minha Vida</p><p style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px; font-weight: 700">[FAIXA]% a.a.</p><p style="margin: 4px 0 0; font-size: 13px; color: #52655A">Fonte: [FONTE]</p></div>
+</div>
+</section>
+
+<section id="duvidas" class="wrap" style="max-width: 820px; margin: 0 auto; padding: 40px 24px 56px">
+<h2 style="margin: 0 0 16px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -0.4px">Dúvidas frequentes</h2>
+<div style="border-top: 1px solid #DDE5E0">
+<details style="border-bottom: 1px solid #DDE5E0; padding: 4px 0"><summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 52px; font-size: 16px; font-weight: 600">Quanto de renda preciso para financiar?<svg class="chev" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#33463C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex: none; transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg></summary><p style="margin: 0 0 14px; font-size: 15px; line-height: 1.6; color: #3D5046">Os bancos costumam aceitar parcela de até 30% da renda bruta familiar. O simulador já mostra essa renda mínima estimada.</p></details>
+<details style="border-bottom: 1px solid #DDE5E0; padding: 4px 0"><summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 52px; font-size: 16px; font-weight: 600">Posso usar o FGTS na entrada?<svg class="chev" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#33463C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex: none; transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg></summary><p style="margin: 0 0 14px; font-size: 15px; line-height: 1.6; color: #3D5046">Em muitos casos, sim, se você e o imóvel cumprirem as regras do FGTS. Some o saldo à entrada.</p></details>
+<details style="border-bottom: 1px solid #DDE5E0; padding: 4px 0"><summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 52px; font-size: 16px; font-weight: 600">Os valores são exatos?<svg class="chev" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#33463C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex: none; transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg></summary><p style="margin: 0 0 14px; font-size: 15px; line-height: 1.6; color: #3D5046">São estimativas para comparar cenários. A proposta do banco inclui correção (como a TR), tarifas e depende do seu perfil.</p></details>
+<details style="border-bottom: 1px solid #DDE5E0; padding: 4px 0"><summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 52px; font-size: 16px; font-weight: 600">Os anúncios são da RotaFin?<svg class="chev" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#33463C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex: none; transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg></summary><p style="margin: 0 0 14px; font-size: 15px; line-height: 1.6; color: #3D5046">Não. São publicados por imobiliárias e concessionárias parceiras. A negociação é feita direto com o anunciante.</p></details>
+</div>
+</section>
+
+<footer style="background: #0A3524; color: #D5E3DA">
+<div class="wrap" style="max-width: 1160px; margin: 0 auto; padding: 40px 24px 24px; display: flex; flex-wrap: wrap; gap: 32px; justify-content: space-between">
+<div style="flex: 1 1 260px; max-width: 360px">
+<div style="margin-bottom: 10px"><span style="font-family: 'DM Sans', sans-serif; font-style: italic; font-weight: 700; font-size: 26px; letter-spacing: -1px; color: #FFFFFF">Rota<span style="color: #7FE0AE">Fin</span></span></div>
+<p style="margin: 0; font-size: 14px; line-height: 1.6">Simuladores gratuitos e independentes de financiamento de imóvel e veículo.</p>
+</div>
+<nav aria-label="Rodapé" style="display: grid; grid-template-columns: repeat(2, minmax(140px, 1fr)); gap: 10px 32px; font-size: 14px">
+<a href="#" style="color: #D5E3DA">Simular imóvel</a>
+<a href="#" style="color: #D5E3DA">Sobre nós</a>
+<a href="#" style="color: #D5E3DA">Simular veículo</a>
+<a href="#" style="color: #D5E3DA">Contato</a>
+<a href="#anunciar" style="color: #D5E3DA">Anuncie na RotaFin</a>
+<a href="#" style="color: #D5E3DA">Política de privacidade</a>
+<a href="#" style="color: #D5E3DA">Como calculamos</a>
+<a href="#" style="color: #D5E3DA">Termos de uso</a>
+</nav>
+</div>
+<div class="wrap" style="max-width: 1160px; margin: 0 auto; padding: 16px 24px 28px; border-top: 1px solid #1E4A36; font-size: 13px; line-height: 1.6; color: #B5C8BC">© 2026 RotaFin · [CNPJ OU RESPONSÁVEL] · Não somos instituição financeira. Simulações são estimativas.</div>
+</footer>
+
+<div class="resbar" style="align-items: center; gap: 10px; padding: 10px 12px; background: #FFFFFF; border-top: 1px solid #DDE5E0; box-shadow: 0 -6px 18px rgba(16,36,26,.12)">
+<div style="flex: 1; min-width: 0; display: flex; gap: 14px">
+<div><p style="margin: 0; font-size: 11px; font-weight: 700; color: #0A4D31">SAC</p><p style="margin: 0; font-size: 17px; font-weight: 700">{{sacFirst}}</p></div>
+<div><p style="margin: 0; font-size: 11px; font-weight: 700; color: #7A4706">PRICE</p><p style="margin: 0; font-size: 17px; font-weight: 700">{{priceFirst}}</p></div>
+</div>
+<a href="#resultado" style="flex: none; display: flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 10px; background: #0E6B43; color: #FFFFFF; font-weight: 700; font-size: 14px; text-decoration: none">Detalhes</a>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4200}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { modo: 'valor', valor: 300000, entrada: 60000, prazo: 30, taxa: 10.5, seguro: 0, parcelaMax: 3000, showAll: false };
+  }
+  num(e) { var v = parseFloat(e && e.target ? e.target.value : e); return isNaN(v) ? 0 : v; }
+  brl(v) { return 'R$ ' + (v || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  brl0(v) { return 'R$ ' + Math.round(v || 0).toLocaleString('pt-BR'); }
+  short(v) { if (v >= 1000000) return 'R$ ' + (v / 1000000).toLocaleString('pt-BR', { maximumFractionDigits: 2 }) + ' mi'; return 'R$ ' + Math.round(v / 1000).toLocaleString('pt-BR') + ' mil'; }
+  simulate(P, n, i, seg) {
+    var A = P / n, sb = P, sp = P;
+    var pmt = i > 0 ? P * i / (1 - Math.pow(1 + i, -n)) : P / n;
+    var tSac = 0, tPrice = 0, years = [], sacFirst = 0, priceFirst = 0, sacLast = 0;
+    for (var k = 0; k < n; k++) {
+      var ps = A + sb * i + sb * seg;
+      var pp = pmt + sp * seg;
+      if (k === 0) { sacFirst = ps; priceFirst = pp; }
+      if (k === n - 1) sacLast = ps;
+      if (k % 12 === 0) years.push({ ano: k / 12 + 1, sac: ps, price: pp, saldo: 0 });
+      tSac += ps; tPrice += pp;
+      sb -= A; sp -= (pmt - sp * i);
+      if (k % 12 === 11) years[years.length - 1].saldo = Math.max(sb, 0);
+    }
+    return { sacFirst: sacFirst, priceFirst: priceFirst, sacLast: sacLast, tSac: tSac, tPrice: tPrice, years: years };
+  }
+  renderVals() {
+    var s = this.state, self = this;
+    var set = function (key) { return function (e) { var o = {}; o[key] = self.num(e); self.setState(o); }; };
+    var step = function (key, d, lo, hi) { return function () { var o = {}; o[key] = Math.min(hi, Math.max(lo, Math.round(((self.state[key] || 0) + d) * 10) / 10)); self.setState(o); }; };
+    var modoValor = s.modo === 'valor';
+    var prazo = Math.min(Math.max(Math.round(s.prazo) || 1, 1), 35);
+    var n = prazo * 12;
+    var i = Math.pow(1 + (s.taxa || 0) / 100, 1 / 12) - 1;
+    var seg = (s.seguro || 0) / 100;
+    var tabOn = 'flex: 1; min-height: 44px; border: 0; border-radius: 8px; background: #FFFFFF; font: inherit; font-size: 14px; font-weight: 600; color: #0A4D31; cursor: pointer';
+    var tabOff = 'flex: 1; min-height: 44px; border: 0; border-radius: 8px; background: transparent; font: inherit; font-size: 14px; font-weight: 600; color: #FFFFFF; cursor: pointer';
+
+    var valor = Math.max(s.valor, 0), entrada = Math.max(s.entrada, 0);
+    var P = Math.max(valor - entrada, 0);
+    var maxSac = 0, maxPrice = 0;
+    if (!modoValor) {
+      var pm = Math.max(s.parcelaMax, 0);
+      var finSac = pm / (1 / n + i + seg);
+      var finPrice = i > 0 ? pm * (1 - Math.pow(1 + i, -n)) / i : pm * n;
+      maxSac = finSac + entrada; maxPrice = finPrice + entrada;
+      P = finPrice; valor = Math.max(maxSac, maxPrice);
+    }
+    var r = P > 0 ? this.simulate(P, n, i, seg) : { sacFirst: 0, priceFirst: 0, sacLast: 0, tSac: 0, tPrice: 0, years: [] };
+    var maxP = Math.max(r.sacFirst, r.priceFirst, 1);
+    var bars = r.years.map(function (y) { return { sacH: Math.round(y.sac / maxP * 1000) / 10, priceH: Math.round(y.price / maxP * 1000) / 10, label: (y.ano === 1 || y.ano % 5 === 0) ? String(y.ano) : '' }; });
+    var allRows = r.years.map(function (y) { return { ano: y.ano + 'º', sac: self.brl(y.sac), price: self.brl(y.price), saldo: self.brl0(y.saldo) }; });
+
+    return {
+      modoValor: modoValor, modoRenda: !modoValor,
+      tabValorSel: modoValor ? 'true' : 'false', tabRendaSel: modoValor ? 'false' : 'true',
+      tabValorStyle: modoValor ? tabOn : tabOff, tabRendaStyle: modoValor ? tabOff : tabOn,
+      toValor: function () { self.setState({ modo: 'valor' }); },
+      toRenda: function () { self.setState({ modo: 'renda' }); },
+      valor: s.valor, entrada: s.entrada, prazo: s.prazo, taxa: s.taxa, seguro: s.seguro, parcelaMax: s.parcelaMax,
+      entradaMax: modoValor ? Math.max(s.valor, 0) : 2000000,
+      setValor: set('valor'), setEntrada: set('entrada'), setPrazo: set('prazo'), setTaxa: set('taxa'), setSeguro: set('seguro'), setParcela: set('parcelaMax'),
+      prazoMenos: step('prazo', -1, 1, 35), prazoMais: step('prazo', 1, 1, 35),
+      taxaMenos: step('taxa', -0.1, 0, 30), taxaMais: step('taxa', 0.1, 0, 30),
+      entradaPct: modoValor && valor > 0 ? '· ' + Math.round(entrada / valor * 100) + '%' : '',
+      taxaMes: ((i * 100).toLocaleString('pt-BR', { maximumFractionDigits: 2 })) + '%',
+      financiado: this.brl0(P),
+      sacFirst: this.brl(r.sacFirst), sacLast: this.brl(r.sacLast), priceFirst: this.brl(r.priceFirst),
+      sacTotal: this.brl0(r.tSac), priceTotal: this.brl0(r.tPrice),
+      sacRenda: this.brl0(r.sacFirst / 0.3), priceRenda: this.brl0(r.priceFirst / 0.3),
+      difInicial: this.brl0(r.sacFirst - r.priceFirst), difTotal: this.brl0(r.tPrice - r.tSac),
+      parcelaMaxFmt: this.brl0(s.parcelaMax), entradaFmt: this.brl0(entrada),
+      maxSac: this.short(maxSac), maxPrice: this.short(maxPrice),
+      rendaParcela: this.brl0(s.parcelaMax / 0.3),
+      faixaCurta: this.short(valor),
+      ofertas: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }],
+      bars: bars,
+      chartLabel: 'Parcela SAC começa em ' + this.brl(r.sacFirst) + ' e cai até ' + this.brl(r.sacLast) + '; parcela PRICE fica em ' + this.brl(r.priceFirst) + ' durante todo o contrato.',
+      rows: s.showAll ? allRows : allRows.slice(0, 5),
+      tabelaBtn: s.showAll ? 'Mostrar só 5 anos' : 'Ver os ' + allRows.length + ' anos',
+      toggleTabela: function () { self.setState({ showAll: !self.state.showAll }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

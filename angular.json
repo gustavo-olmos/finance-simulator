@@ -21,11 +21,16 @@
             "assets": [
               "src/assets",
               { "glob": "sitemap.xml", "input": "src", "output": "/" },
-              { "glob": "robots.txt",  "input": "src", "output": "/" }
+              { "glob": "robots.txt",  "input": "src", "output": "/" },
+              { "glob": "favicon.ico", "input": "src", "output": "/" },
+              { "glob": "site.webmanifest", "input": "src", "output": "/" }
             ],
             "styles": [
               "node_modules/@fontsource-variable/manrope/index.css",
               "node_modules/@fontsource-variable/space-grotesk/index.css",
+              "node_modules/@fontsource-variable/inter/index.css",
+              "node_modules/@fontsource-variable/bricolage-grotesque/index.css",
+              "node_modules/@fontsource-variable/dm-sans/wght-italic.css",
               "src/styles.scss"
             ],
             "scripts": [],

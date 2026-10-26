@@ -1,0 +1,126 @@
+:host { display: block; }
+
+.cabecalho {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+h3 {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+
+.btn {
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 10px;
+  border: 1px solid var(--borda-input);
+  background: #FFFFFF;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--texto);
+  cursor: pointer;
+
+  &:hover { border-color: var(--verde); }
+}
+
+.link {
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--verde);
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover { color: var(--verde-escuro); }
+}
+
+.btn:focus-visible,
+.link:focus-visible {
+  outline: 2px solid var(--verde);
+  outline-offset: 2px;
+}
+
+.rolagem {
+  overflow-x: auto;
+  background: #FFFFFF;
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+}
+
+table {
+  width: 100%;
+  min-width: 480px;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+thead tr {
+  background: var(--superficie-2);
+  text-align: left;
+}
+
+th {
+  padding: 12px 14px;
+  font-weight: 600;
+  color: var(--texto-3);
+
+  &.sac { color: var(--sac-texto); }
+  &.price { color: var(--price-texto); }
+}
+
+td { padding: 12px 14px; }
+
+tbody tr { border-top: 1px solid var(--divisor); }
+
+.forte { font-weight: 600; }
+.saldo { color: var(--texto-3); }
+
+.abrir-mob { display: none; }
+
+@media (max-width: 760px) {
+  // Design mobile: só o botão aparece; a tabela abre ao tocar.
+  .abrir-mob {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 12px;
+    font-size: 14px;
+  }
+
+  .bloco { display: none; }
+
+  .bloco.aberta-mob {
+    display: block;
+    margin-top: 16px;
+  }
+
+  h3 { font-size: 20px; }
+
+  table {
+    min-width: 0;
+    font-size: 14px;
+  }
+
+  th,
+  td { padding: 10px; }
+}

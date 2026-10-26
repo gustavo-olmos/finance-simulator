@@ -70,6 +70,25 @@ export class SimulacaoStore {
 
   readonly resultado = computed(() => this.calc.simularAmbos(this.parametros()));
 
+  /**
+   * Resumo por ano de contrato (gráfico e tabela "Parcelas ano a ano"): parcela do 1º mês
+   * de cada ano em cada sistema e o saldo devedor do SAC ao fim do ano.
+   */
+  readonly anos = computed(() => {
+    const { sac, price } = this.resultado();
+    const linhas: { ano: number; sac: number; price: number; saldo: number }[] = [];
+    for (let k = 0; k < sac.parcelas.length; k += 12) {
+      const fimDoAno = sac.parcelas[Math.min(k + 11, sac.parcelas.length - 1)];
+      linhas.push({
+        ano: k / 12 + 1,
+        sac: sac.parcelas[k].parcela,
+        price: price.parcelas[k].parcela,
+        saldo: fimDoAno.saldoDevedor,
+      });
+    }
+    return linhas;
+  });
+
   /** Entrada como fração do valor do bem — aplicada ao preço de cada anúncio ("≈ R$ X/mês com sua entrada"). */
   readonly entradaFracao = computed(() => {
     const p = this.parametros();

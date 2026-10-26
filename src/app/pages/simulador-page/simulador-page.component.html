@@ -30,29 +30,38 @@
 
 <app-banner-anuncie />
 
-<!-- ZONA DE CONTEÚDO (fundo claro) — SEO. Refeita na etapa 4 do redesign. -->
-<section class="conteudo">
+<!-- SAC × PRICE: explicação, gráfico por ano e tabela anual (números da simulação atual) -->
+<section id="como-funciona" class="sac-price">
+  <div class="wrap interno">
+    <div class="duas-colunas">
+      <div class="texto">
+        <h2>SAC ou PRICE: qual cabe no seu bolso?</h2>
+        <div class="desk">
+          <p><strong class="sac">SAC</strong> começa mais alto e vai caindo: você abate sempre a mesma fatia da dívida, e os juros incidem sobre um saldo cada vez menor.</p>
+          <p><strong class="price">PRICE</strong> é a mesma parcela até o fim. Mais fácil de encaixar no orçamento hoje, mas com mais juros no total.</p>
+          <p>Não existe escolha certa para todo mundo. O gráfico usa os números da sua simulação.</p>
+        </div>
+        <div class="mob">
+          <p><strong class="sac">SAC</strong> começa mais alto e vai caindo. Paga menos juros no total.</p>
+          <p><strong class="price">PRICE</strong> tem parcela igual até o fim. Mais fácil no começo, mais juros no total.</p>
+        </div>
+      </div>
+      <app-grafico-anual class="col-grafico" [anos]="store.anos()" />
+    </div>
 
-  <app-amortization-table [resultado]="store.resultado().sac" />
+    <app-tabela-anual class="tabela" />
 
-  <div id="como-funciona" class="texto">
-    <h2 class="titulo">{{ config().seo.h2 }}</h2>
-    <p class="paragrafo">{{ config().seo.intro }}</p>
-    <p class="paragrafo">
-      No <strong class="sac">SAC</strong>, a amortização é constante e as parcelas começam mais
-      altas e diminuem ao longo do tempo. No <strong class="price">PRICE</strong>, as parcelas são
-      fixas do início ao fim. O SAC costuma gerar menos juros no total; o PRICE oferece
-      previsibilidade.
-    </p>
+    <!-- Texto de SEO "como funciona" (ver TODO.md: expansão pendente de aprovação). -->
+    <div class="como-calculamos">
+      <h2>{{ config().seo.h2 }}</h2>
+      <p>{{ config().seo.intro }}</p>
+    </div>
   </div>
-
-  <app-comparison-table />
-
-  <div id="duvidas">
-    <app-faq />
-  </div>
-
 </section>
+
+<app-taxas-referencia [tema]="temaId()" />
+
+<app-faq [tema]="temaId()" />
 
 <app-site-footer [temaAtivo]="temaId()" />
 

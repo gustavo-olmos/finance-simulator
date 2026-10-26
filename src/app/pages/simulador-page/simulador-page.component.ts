@@ -8,17 +8,19 @@ import { getTema } from '../../config/temas.config';
 import { TemaId } from '../../models/tema.model';
 import { SiteHeaderComponent } from '../../components/site-header/site-header.component';
 import { SiteFooterComponent } from '../../components/site-footer/site-footer.component';
-import { ComparisonTableComponent } from '../../components/comparison-table/comparison-table.component';
 import { FaqComponent } from '../../components/faq/faq.component';
 import { OfertasComponent } from '../../components/ofertas/ofertas.component';
 import { BannerAnuncieComponent } from '../../components/banner-anuncie/banner-anuncie.component';
 import { AdSlotComponent } from '../../components/ad-slot/ad-slot.component';
-import { AmortizationTableComponent } from '../../components/amortization-table/amortization-table.component';
+import { GraficoAnualComponent } from '../../components/grafico-anual/grafico-anual.component';
+import { TabelaAnualComponent } from '../../components/tabela-anual/tabela-anual.component';
+import { TaxasReferenciaComponent } from '../../components/taxas-referencia/taxas-referencia.component';
 import { CalculadoraComponent } from '../../components/calculadora/calculadora.component';
 import { ResultadoCardComponent } from '../../components/resultado-card/resultado-card.component';
 import { BarraResultadoComponent } from '../../components/barra-resultado/barra-resultado.component';
 import { SimulacaoStore } from '../../core/simulacao.store';
 import { SITE } from '../../config/site.config';
+import { faqDoTema } from '../../config/conteudo.config';
 
 /**
  * Landing page temática (imóvel / veículo). O tema vem de route.data.
@@ -31,12 +33,13 @@ import { SITE } from '../../config/site.config';
   imports: [
     SiteHeaderComponent,
     SiteFooterComponent,
-    ComparisonTableComponent,
     FaqComponent,
     OfertasComponent,
     BannerAnuncieComponent,
     AdSlotComponent,
-    AmortizationTableComponent,
+    GraficoAnualComponent,
+    TabelaAnualComponent,
+    TaxasReferenciaComponent,
     CalculadoraComponent,
     ResultadoCardComponent,
     BarraResultadoComponent,
@@ -160,16 +163,11 @@ export class SimuladorPageComponent implements OnInit {
     this.seo.injetarJsonLd('faq', {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
-      mainEntity: [
-        { '@type': 'Question', name: 'Para qual tipo de financiamento serve?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Imóvel, veículo, crédito com garantia e outros financiamentos com parcelas mensais. Basta informar valor, entrada, prazo e taxa.' } },
-        { '@type': 'Question', name: 'A taxa de juros é mensal ou anual?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Você informa a taxa anual e o simulador converte para a taxa mensal equivalente automaticamente.' } },
-        { '@type': 'Question', name: 'Os valores são exatos?',
-          acceptedAnswer: { '@type': 'Answer', text: 'São estimativas para fins de comparação. As condições reais variam conforme a instituição financeira e o seu perfil.' } },
-        { '@type': 'Question', name: 'Preciso me cadastrar?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Não. O cálculo é gratuito, instantâneo e não exige nenhum dado pessoal.' } },
-      ],
+      mainEntity: faqDoTema(tema).map((f) => ({
+        '@type': 'Question',
+        name: f.pergunta,
+        acceptedAnswer: { '@type': 'Answer', text: f.resposta },
+      })),
     });
   }
 }

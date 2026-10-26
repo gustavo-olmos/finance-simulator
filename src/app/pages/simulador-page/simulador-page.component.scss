@@ -117,32 +117,111 @@
   .hero-grade { gap: 16px; }
 }
 
-// ===== Zona de conteúdo (claro) =====
-.conteudo {
-  background: #fbfbfa;
-  padding-top: 36px;
+// ===== SAC × PRICE (#como-funciona) =====
+.sac-price {
+  background: var(--superficie);
+  border-top: 1px solid var(--borda);
+  scroll-margin-top: 0;
+}
+
+.interno {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.duas-colunas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  align-items: flex-start;
 }
 
 .texto {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 64px 24px 8px;
+  flex: 1 1 320px;
+  min-width: 0;
 
-  .titulo {
-    font-family: 'Space Grotesk Variable', sans-serif;
-    font-weight: 700;
+  h2 {
+    margin: 0 0 12px;
+    font-family: var(--fonte-titulo);
     font-size: 30px;
-    letter-spacing: -0.02em;
-    margin: 0 0 16px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
   }
 
-  .paragrafo {
-    font-size: 17px;
-    line-height: 1.6;
-    color: #4a504d;
+  p {
     margin: 0 0 14px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--texto-2);
 
-    .sac { color: #15623f; }
-    .price { color: #b07a1e; }
+    &:last-child { margin-bottom: 0; }
+  }
+
+  .sac { color: var(--sac-texto); }
+  .price { color: var(--price-texto); }
+
+  .mob { display: none; }
+}
+
+.col-grafico {
+  flex: 2 1 480px;
+  min-width: 0;
+}
+
+.tabela {
+  margin-top: 32px;
+}
+
+.como-calculamos {
+  margin-top: 40px;
+  max-width: 760px;
+
+  h2 {
+    margin: 0 0 8px;
+    font-family: var(--fonte-titulo);
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--texto-2);
+  }
+}
+
+@media (max-width: 760px) {
+  .interno {
+    padding-top: 28px;
+    padding-bottom: 28px;
+  }
+
+  .duas-colunas { gap: 16px; }
+
+  .texto {
+    h2 {
+      margin-bottom: 10px;
+      font-size: 23px;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin-bottom: 10px;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .desk { display: none; }
+    .mob { display: block; }
+  }
+
+  .tabela { margin-top: 0; }
+
+  .como-calculamos {
+    margin-top: 28px;
+
+    h2 { font-size: 20px; }
+    p { font-size: 15px; }
   }
 }

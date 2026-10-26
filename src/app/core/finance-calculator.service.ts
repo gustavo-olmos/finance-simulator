@@ -41,22 +41,35 @@ export class FinanceCalculatorService {
    * No PRICE a parcela é constante, então é o inverso direto da fórmula de prestação.
    * No SAC a parcela cai com o tempo; consideramos a parcela informada como a primeira
    * (a mais alta), a leitura mais conservadora de "quanto posso pagar por mês".
+   * O seguro (% a.m. sobre o saldo) entra só no SAC, como no handoff do redesign.
    */
   calcularPrincipalMaximo(
     parcelaDesejada: number,
     prazoMeses: number,
     taxaAnual: number,
     sistema: SistemaAmortizacao,
+    seguroMensal = 0,
   ): number {
     const n = Math.max(0, Math.floor(prazoMeses || 0));
     const i = this.taxaMensal(taxaAnual || 0);
+    const s = Math.max(0, (seguroMensal || 0) / 100);
     const parcela = Math.max(0, parcelaDesejada || 0);
     if (n === 0) return 0;
 
     if (sistema === 'PRICE') {
       return i > 0 ? (parcela * (1 - Math.pow(1 + i, -n))) / i : parcela * n;
     }
-    return parcela / (1 / n + i);
+    return parcela / (1 / n + i + s);
+  }
+
+  /** Calcula os dois sistemas com os mesmos parâmetros (o resultado mostra SAC e PRICE lado a lado). */
+  simularAmbos(p: ParametrosSimulacao): { sac: ResultadoSimulacao; price: ResultadoSimulacao } {
+    return { sac: this.calcularSAC(p), price: this.calcularPRICE(p) };
+  }
+
+  /** Taxa efetiva mensal (%) equivalente à taxa anual informada — exibida abaixo do campo de juros. */
+  taxaMensalPercentual(taxaAnual: number): number {
+    return this.taxaMensal(taxaAnual) * 100;
   }
 
   /**

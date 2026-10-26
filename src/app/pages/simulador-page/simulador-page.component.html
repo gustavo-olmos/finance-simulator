@@ -1,92 +1,26 @@
 <app-site-header [temaAtivo]="temaId()" />
 
-<!-- ZONA PRINCIPAL (app) — fundo verde/âmbar conforme o sistema -->
-<section class="app-zone">
-  <div class="palco">
-    <div class="hero">
-      <div class="palco-titulo">
-        <h1 class="h1-principal">{{ config().seo.h1 }}</h1>
-        <h2 class="h2-apoio">{{ config().seo.subtitulo }}</h2>
-      </div>
-
-      <div class="form-wrapper">
-        <app-intro-form
-          [labelValor]="config().labelValor"
-          [defaults]="config().defaults"
-          (calcular)="onIntroCalcular($event)"
-        />
-      </div>
+<div class="pagina">
+<section class="hero">
+  <div class="wrap hero-wrap">
+    <div class="hero-titulo">
+      <h1>{{ config().seo.h1 }}</h1>
+      <p class="sub sub-desk">{{ config().seo.subtitulo }}</p>
+      <p class="sub sub-mob">{{ config().seo.subtituloCurto }}</p>
+      <ul class="selos">
+        @for (selo of selos; track selo) {
+          <li>
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7FE0AE" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg>
+            {{ selo }}
+          </li>
+        }
+      </ul>
     </div>
 
-    <!-- Ponte entre o formulário e a calculadora: explica a escolha SAC/PRICE
-         em linguagem simples, dando conteúdo real ao espaço (e à rolagem). -->
-    <section class="ponte">
-      <h2 class="ponte-titulo">SAC ou PRICE: qual cabe no seu bolso?</h2>
-      <p class="ponte-intro">
-        Essa é a primeira decisão de quem vai financiar, e ela muda o quanto você paga
-        por mês e no total. A RotaFin coloca os dois lado a lado, em tempo real, para
-        você comparar sem depender do simulador de um banco específico.
-      </p>
-
-      <div class="ponte-cards">
-        <div class="ponte-card">
-          <span class="ponte-tag sac">SAC</span>
-          <strong class="ponte-card-titulo">Começa mais alto e vai caindo</strong>
-          <p class="ponte-card-texto">
-            Você abate sempre a mesma fatia da dívida, e os juros incidem só sobre o que
-            ainda falta pagar. Como esse saldo diminui todo mês, a parcela diminui junto —
-            e o total de juros costuma ser menor.
-          </p>
-        </div>
-
-        <div class="ponte-card">
-          <span class="ponte-tag price">PRICE</span>
-          <strong class="ponte-card-titulo">A mesma parcela até o fim</strong>
-          <p class="ponte-card-texto">
-            A prestação é calculada para não mudar ao longo do contrato. A primeira parcela
-            é menor que a do SAC e é mais fácil de encaixar no orçamento — em troca, os juros
-            somados no fim tendem a ser maiores.
-          </p>
-        </div>
-      </div>
-
-      <p class="ponte-fecho">
-        Não existe escolha certa para todo mundo: depende de quanto você pode pagar hoje e
-        de quanto quer pagar no total. Abaixo, troque entre os dois e veja a diferença nos
-        seus próprios números.
-      </p>
-    </section>
-
-    <div id="calculadora" class="ancora-calculadora" [class.oculta-ate-clicar]="!calculadoraRevelada()">
-      <app-simulador
-        [config]="config()"
-        [valorInicial]="valorParam()"
-        [entradaInicial]="entradaParam()"
-        [prazoInicial]="prazoParam()"
-        [taxaInicial]="taxaParam()"
-        [seguroInicial]="seguroParam()"
-        (resultadoChange)="resultadoAtual.set($event)"
-        (parametrosChange)="onParametrosChange($event)"
-      />
+    <div class="hero-grade">
+      <app-calculadora id="calculadora" class="col-calc" />
+      <app-resultado-card id="resultado" class="col-res" />
     </div>
-
-    <div class="palco-acoes" [class.oculta-ate-clicar]="!calculadoraRevelada()">
-      <a class="cta" href="#ofertas">Ver anúncios de financiamento →</a>
-      <button
-        class="btn-share"
-        title="Compartilhar simulação"
-        (click)="mostrarModal.set(true)"
-      >
-        <svg width="18" height="18" viewBox="0 0 24 24">
-          <circle cx="18" cy="5" r="3" fill="currentColor"/>
-          <circle cx="6" cy="12" r="3" fill="currentColor"/>
-          <circle cx="18" cy="19" r="3" fill="currentColor"/>
-          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </button>
-    </div>
-    <p class="aviso" [class.oculta-ate-clicar]="!calculadoraRevelada()">Estimativa. Não constitui proposta de crédito.</p>
   </div>
 </section>
 
@@ -101,7 +35,7 @@
     slotId="topo"
   />
 
-  <app-amortization-table [resultado]="resultadoAtual()" />
+  <app-amortization-table [resultado]="store.resultado().sac" />
 
   <div id="como-funciona" class="texto">
     <h2 class="titulo">{{ config().seo.h2 }}</h2>
@@ -136,9 +70,6 @@
 
 <app-site-footer [temaAtivo]="temaId()" />
 
-@if (mostrarModal() && resultadoAtual()) {
-  <app-share-modal
-    [resultado]="resultadoAtual()!"
-    (fechar)="mostrarModal.set(false)"
-  />
-}
+</div>
+
+<app-barra-resultado />

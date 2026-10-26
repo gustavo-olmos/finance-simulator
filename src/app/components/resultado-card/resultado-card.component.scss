@@ -1,0 +1,213 @@
+:host { display: block; }
+
+.card {
+  background: #FFFFFF;
+  color: var(--texto);
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+}
+
+p { margin: 0; }
+
+.intro {
+  margin-bottom: 16px;
+  font-size: 15px;
+  color: var(--texto-3);
+
+  strong { color: var(--texto); }
+}
+
+.sistemas {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.sistema {
+  border-radius: 12px;
+  padding: 14px;
+
+  &.sac { background: var(--sac-bg); --cor-texto: var(--sac-texto); --cor-serie: var(--sac-cor); }
+  &.price { background: var(--price-bg); --cor-texto: var(--price-texto); --cor-serie: var(--price-cor); }
+}
+
+.rot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--cor-texto);
+}
+
+.cor {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  background: var(--cor-serie);
+}
+
+.valor {
+  margin-top: 6px;
+  font-family: var(--fonte-titulo);
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+}
+
+.sub {
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--texto-3);
+}
+
+.tabela {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--divisor);
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 14px;
+
+  .tr { display: contents; }
+
+  .th,
+  .td { padding: 10px 12px; }
+
+  .th {
+    background: var(--superficie-2);
+    font-weight: 700;
+  }
+
+  .td { border-top: 1px solid var(--divisor); }
+
+  .rot-linha { color: var(--texto-3); }
+  .forte {
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .sac-txt { color: var(--sac-texto); }
+  .price-txt { color: var(--price-texto); }
+}
+
+.frase {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--texto-3);
+}
+
+.cta {
+  margin-top: 16px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 50px;
+  border: 0;
+  border-radius: 11px;
+  background: var(--verde);
+  color: #FFFFFF;
+  font: inherit;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover { background: var(--verde-escuro); }
+}
+
+.secundarios {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.btn-sec {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--borda-input);
+  background: #FFFFFF;
+  color: var(--texto);
+  font: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover { border-color: var(--verde); }
+}
+
+.mob { display: none; }
+
+.aviso {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--texto-aux);
+}
+
+.cta:focus-visible,
+.btn-sec:focus-visible {
+  outline: 2px solid var(--verde);
+  outline-offset: 2px;
+}
+
+// Celular: medidas do card em simulador-mobile-rolagem.
+@media (max-width: 760px) {
+  .card {
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+  }
+
+  .intro {
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+
+  .sistemas { gap: 8px; }
+  .sistema { padding: 12px; }
+  .rot { font-size: 12px; }
+
+  .valor {
+    margin-top: 4px;
+    // 23px no design (390px); reduz um pouco em telas de 360px para "R$ 12.345,67" caber.
+    font-size: clamp(19px, 6vw, 23px);
+  }
+
+  .sub {
+    margin-top: 0;
+    font-size: 12px;
+  }
+
+  .desk { display: none; }
+  .mob { display: inline; }
+
+  .tabela {
+    margin-top: 10px;
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr) minmax(0, 1fr);
+    border-radius: 10px;
+    font-size: 13px;
+
+    .th,
+    .td { padding: 9px 10px; }
+  }
+
+  .frase {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .aviso { font-size: 11px; }
+}

@@ -1,0 +1,260 @@
+:host { display: block; }
+
+.painel {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 18px;
+  padding: 22px;
+  color: #FFFFFF;
+}
+
+.abas {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: rgba(0, 0, 0, 0.22);
+  border-radius: 11px;
+  margin-bottom: 22px;
+}
+
+.aba {
+  flex: 1;
+  min-height: 44px;
+  padding: 0 4px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: #FFFFFF;
+  cursor: pointer;
+
+  &.ativa {
+    background: #FFFFFF;
+    color: var(--verde-escuro);
+  }
+}
+
+.campos {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.linha-campo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.rotulo {
+  font-size: 15px;
+  font-weight: 600;
+  color: #E3F1E9;
+
+  &.bloco {
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  &.pequeno { font-size: 14px; }
+
+  .pct {
+    font-weight: 500;
+    color: #B9D6C6;
+  }
+}
+
+.caixa,
+.stepper {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 9px;
+  background: rgba(0, 0, 0, 0.2);
+  transition: border-color 0.15s;
+
+  &:focus-within { border-color: var(--verde-menta); }
+
+  input {
+    border: 0;
+    outline: none;
+    font: inherit;
+    font-size: 18px;
+    font-weight: 700;
+    color: #FFFFFF;
+    background: transparent;
+  }
+}
+
+.caixa {
+  flex: none;
+  gap: 4px;
+  padding: 0 10px;
+  height: 46px;
+
+  .num {
+    width: 112px;
+    text-align: right;
+  }
+
+  &.baixa {
+    gap: 6px;
+    height: 44px;
+  }
+
+  .curto {
+    width: 64px;
+    font-size: 16px;
+  }
+}
+
+.unidade {
+  color: #B9D6C6;
+  font-size: 15px;
+}
+
+input[type='range'] {
+  display: block;
+  width: 100%;
+  height: 28px;
+  margin: 0;
+  accent-color: var(--verde-menta);
+  cursor: pointer;
+}
+
+.ajuda {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #B9D6C6;
+
+  a {
+    color: #9FE3BF;
+
+    &:hover { color: #FFFFFF; }
+  }
+}
+
+.grade-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.stepper {
+  height: 48px;
+  overflow: hidden;
+
+  button {
+    flex: none;
+    width: 44px;
+    height: 100%;
+    border: 0;
+    background: transparent;
+    color: #FFFFFF;
+    font-size: 22px;
+    cursor: pointer;
+
+    &:hover { background: rgba(255, 255, 255, 0.08); }
+  }
+
+  input {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+  }
+
+  .unidade {
+    font-size: 14px;
+    padding-right: 4px;
+  }
+}
+
+.taxa-mes { margin-top: -8px; }
+
+.seguro {
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  padding-top: 12px;
+
+  summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 36px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #E3F1E9;
+    cursor: pointer;
+    list-style: none;
+
+    &::-webkit-details-marker { display: none; }
+  }
+
+  .chev { transition: transform 0.15s; }
+
+  &[open] .chev { transform: rotate(180deg); }
+}
+
+.seguro-corpo {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .linha-campo { margin-bottom: 0; }
+
+  .ajuda { margin: 0; }
+}
+
+button:focus-visible,
+summary:focus-visible,
+input[type='range']:focus-visible {
+  outline: 2px solid var(--verde-menta);
+  outline-offset: 2px;
+}
+
+// Celular: medidas da primeira dobra (simulador-mobile-dobra).
+@media (max-width: 760px) {
+  .painel {
+    border-radius: 16px;
+    padding: 14px;
+  }
+
+  .abas {
+    gap: 3px;
+    padding: 3px;
+    border-radius: 10px;
+    margin-bottom: 14px;
+  }
+
+  .aba { font-size: 13px; }
+
+  .campos { gap: 14px; }
+
+  .linha-campo { margin-bottom: 2px; }
+
+  .rotulo {
+    font-size: 14px;
+
+    &.bloco { margin-bottom: 4px; }
+  }
+
+  .caixa {
+    height: 44px;
+
+    .num {
+      width: 100px;
+      font-size: 17px;
+    }
+  }
+
+  .grade-2 { gap: 10px; }
+
+  .stepper input { font-size: 16px; }
+
+  .taxa-mes { margin-top: -4px; }
+}

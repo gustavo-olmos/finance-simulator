@@ -1,11 +1,6 @@
-/* Estilos globais — fontes, reset e tokens do redesign (docs/redesign/HANDOFF.md).
-   As variáveis --app-bg e --app-ink ainda são atualizadas em runtime pelo ThemeService
-   (ver AppComponent) enquanto o hero antigo existir; saem na etapa 2 do redesign. */
+/* Estilos globais — fontes, reset e tokens do redesign (docs/redesign/HANDOFF.md). */
 
 :root {
-  --app-bg: #1f8a5b;
-  --app-ink: #15623f;
-
   // Marca
   --verde: #0E6B43;
   --verde-escuro: #0A4D31;
@@ -57,10 +52,16 @@
 // de rolagem e quebra o position: sticky do header.
 html, body { margin: 0; padding: 0; overflow-x: clip; }
 
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
 body {
-  font-family: 'Manrope Variable', system-ui, -apple-system, sans-serif;
-  color: #1a1d1b;
-  background: var(--app-bg);
+  font-family: var(--fonte-ui);
+  color: var(--texto);
+  background: #FFFFFF;
   -webkit-font-smoothing: antialiased;
 }
 

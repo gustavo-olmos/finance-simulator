@@ -24,16 +24,14 @@
   </div>
 </section>
 
-<!-- ZONA DE CONTEÚDO (fundo claro) — SEO + anúncios -->
-<section class="conteudo">
+<app-ofertas [anuncios]="anuncios()" />
 
-  <!-- AD SLOT 1 · topo da zona de conteúdo -->
-  <app-ad-slot
-    formato="responsivo (728×90 / 970×90)"
-    [alturaMin]="120"
-    [larguraMax]="970"
-    slotId="topo"
-  />
+<app-ad-slot [slot]="adsenseSlot" />
+
+<app-banner-anuncie />
+
+<!-- ZONA DE CONTEÚDO (fundo claro) — SEO. Refeita na etapa 4 do redesign. -->
+<section class="conteudo">
 
   <app-amortization-table [resultado]="store.resultado().sac" />
 
@@ -50,20 +48,8 @@
 
   <app-comparison-table />
 
-  <!-- AD SLOT 2 · in-article -->
-  <app-ad-slot
-    formato="in-article (336×280 / responsivo)"
-    [alturaMin]="250"
-    [larguraMax]="760"
-    slotId="in-article"
-  />
-
   <div id="duvidas">
     <app-faq />
-  </div>
-
-  <div id="ofertas">
-    <app-ads-grid [anuncios]="anuncios()" titulo="Anúncios em destaque" />
   </div>
 
 </section>

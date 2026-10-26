@@ -70,6 +70,12 @@ export class SimulacaoStore {
 
   readonly resultado = computed(() => this.calc.simularAmbos(this.parametros()));
 
+  /** Entrada como fração do valor do bem — aplicada ao preço de cada anúncio ("≈ R$ X/mês com sua entrada"). */
+  readonly entradaFracao = computed(() => {
+    const p = this.parametros();
+    return p.valorBem > 0 ? Math.min(1, p.entrada / p.valorBem) : 0;
+  });
+
   /** Query params da simulação (prefill e compartilhamento). O prazo segue em meses na URL. */
   readonly queryParams = computed(() => {
     const p = this.parametros();

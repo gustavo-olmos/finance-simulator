@@ -1,0 +1,95 @@
+:host { display: block; }
+
+.secao {
+  padding-top: 40px;
+  padding-bottom: 8px;
+  scroll-margin-top: 120px;
+}
+
+.cabecalho { margin-bottom: 16px; }
+
+.eyebrow {
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--texto-aux);
+}
+
+h2 {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+}
+
+.mob { display: none; }
+
+.lista {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.pontos { display: none; }
+
+@media (max-width: 760px) {
+  .secao { padding-top: 24px; }
+
+  .cabecalho { margin-bottom: 12px; }
+
+  .eyebrow {
+    margin-bottom: 2px;
+    font-size: 11px;
+  }
+
+  h2 {
+    font-size: 22px;
+    line-height: 1.15;
+    letter-spacing: 0;
+  }
+
+  .desk { display: none; }
+  .mob { display: inline; }
+
+  // Carrossel: card a 78% da largura, com scroll-snap e sangria até a borda da tela.
+  .lista {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: var(--gutter);
+    gap: 12px;
+    margin: 0 calc(-1 * var(--gutter));
+    padding: 0 var(--gutter) 6px;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar { display: none; }
+
+    > app-oferta-card {
+      flex: 0 0 78%;
+      scroll-snap-align: start;
+    }
+  }
+
+  .pontos {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding-top: 12px;
+
+    span {
+      width: 6px;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--borda-input);
+      transition: width 0.2s, background 0.2s;
+
+      &.ativo {
+        width: 18px;
+        background: var(--verde);
+      }
+    }
+  }
+}

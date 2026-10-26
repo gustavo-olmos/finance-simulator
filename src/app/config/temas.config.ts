@@ -11,6 +11,7 @@ export const TEMAS: Record<TemaId, TemaConfig> = {
     labelValor: 'Valor do imóvel',
     bemNome: 'imóvel',
     bemPlural: 'imóveis',
+    parceiros: 'imobiliárias parceiras',
     defaults: { valorBem: 300000, entrada: 60000, taxaAnual: 10.5, prazoMeses: 360 },
     parcelaPadrao: 3000,
     faixas: {
@@ -36,6 +37,7 @@ export const TEMAS: Record<TemaId, TemaConfig> = {
     labelValor: 'Valor do veículo',
     bemNome: 'veículo',
     bemPlural: 'veículos',
+    parceiros: 'concessionárias parceiras',
     defaults: { valorBem: 80000, entrada: 16000, taxaAnual: 23, prazoMeses: 48 },
     parcelaPadrao: 2000,
     faixas: {
@@ -62,11 +64,3 @@ export function getTema(id: TemaId | string | undefined): TemaConfig {
   return TEMAS[(id as TemaId)] ?? TEMAS.imovel;
 }
 
-/** Infere o tema pelo preço: retorna o tema cujo range bemMin–bemMax contém o preço,
- *  preferindo o de menor bemMax quando há sobreposição de faixas. */
-export function inferirTema(preco: number): TemaId {
-  const tema = Object.values(TEMAS)
-    .sort((a, b) => a.faixas.bemMax - b.faixas.bemMax)
-    .find(t => preco >= t.faixas.bemMin && preco <= t.faixas.bemMax);
-  return tema?.id ?? 'imovel';
-}

@@ -1,8 +1,15 @@
-<div class="wrap" [style.max-width.px]="larguraMax()">
-  <div class="rotulo-publicidade">Publicidade</div>
-  <!-- Substitua este placeholder pelo bloco real do AdSense:
-       <ins class="adsbygoogle" [attr.data-ad-slot]="slotId()" ...></ins> -->
-  <div class="slot" [attr.data-ad-slot]="slotId()" [style.min-height.px]="alturaMin()">
-    <span class="placeholder">Google AdSense · {{ formato() }}</span>
-  </div>
-</div>
+@if (ativo()) {
+  <section class="wrap bloco" aria-label="Publicidade">
+    <p class="rotulo">Publicidade</p>
+    <div class="reserva">
+      <ins
+        class="adsbygoogle"
+        style="display:block"
+        [attr.data-ad-client]="client"
+        [attr.data-ad-slot]="slot()"
+        data-ad-format="auto"
+        data-full-width-responsive="false"
+      ></ins>
+    </div>
+  </section>
+}

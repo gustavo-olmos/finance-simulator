@@ -8,6 +8,7 @@ import { SeoService } from '../../core/seo.service';
 import { getTema } from '../../config/temas.config';
 import { TemaId } from '../../models/tema.model';
 import { SiteHeaderComponent } from '../../components/site-header/site-header.component';
+import { SiteFooterComponent } from '../../components/site-footer/site-footer.component';
 import { SimuladorComponent } from '../../components/simulador/simulador.component';
 import { ComparisonTableComponent } from '../../components/comparison-table/comparison-table.component';
 import { FaqComponent } from '../../components/faq/faq.component';
@@ -27,6 +28,7 @@ import { ParametrosSimulacao, ResultadoSimulacao } from '../../models/simulacao.
   standalone: true,
   imports: [
     SiteHeaderComponent,
+    SiteFooterComponent,
     SimuladorComponent,
     ComparisonTableComponent,
     FaqComponent,

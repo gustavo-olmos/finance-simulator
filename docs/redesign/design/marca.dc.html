@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Marca RotaFin</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@1,9..40,700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; height: 880px; box-sizing: border-box; padding: 48px; background: #F3F7F4; font-family: Inter, system-ui, sans-serif; color: #10241A; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: 380px 1fr; gap: 24px">
+
+<div style="background: #FFFFFF; border: 1px solid #DDE5E0; border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px">
+<span style="font-family: 'DM Sans', sans-serif; font-style: italic; font-weight: 700; font-size: 112px; letter-spacing: -4px; line-height: 1; color: #10241A">Rota<span style="color: #0E6B43">Fin</span></span>
+<span style="font-size: 14px; color: #52655A">Sobre fundo claro · cabeçalho do site</span>
+</div>
+
+<div style="background: radial-gradient(ellipse 90% 80% at 50% 45%, #1F7A52 0%, #11573A 50%, #0A3524 100%); border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px">
+<span style="font-family: 'DM Sans', sans-serif; font-style: italic; font-weight: 700; font-size: 112px; letter-spacing: -4px; line-height: 1; color: #FFFFFF">Rota<span style="color: #7FE0AE">Fin</span></span>
+<span style="font-size: 14px; color: #D8EEE2">Sobre fundo escuro · rodapé e redes</span>
+</div>
+
+<div style="background: #FFFFFF; border: 1px solid #DDE5E0; border-radius: 20px; padding: 32px; display: flex; flex-direction: column; gap: 24px">
+<p style="margin: 0; font-size: 14px; font-weight: 600; color: #52655A">Ícone · favicon e app</p>
+<div style="display: flex; align-items: flex-end; gap: 28px">
+<sc-for list="{{icons}}" as="i" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px">
+<span style="width: {{i.px}}px; height: {{i.px}}px; border-radius: {{i.r}}px; background: #0E6B43; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: 'DM Sans', sans-serif; font-style: italic; font-weight: 700; font-size: {{i.fs}}px; line-height: 1; letter-spacing: -0.5px">R</span>
+<span style="font-size: 12px; color: #52655A">{{i.label}}</span>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; gap: 16px">
+<div style="flex: 1; border-radius: 10px; background: #DEE1E6; padding: 8px 8px 0">
+<div style="width: 250px; height: 34px; background: #FFFFFF; border-radius: 9px 9px 0 0; display: flex; align-items: center; gap: 8px; padding: 0 10px; font-size: 12px; color: #202124">
+<span style="width: 16px; height: 16px; flex: none; border-radius: 4px; background: #0E6B43; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: 'DM Sans', sans-serif; font-style: italic; font-weight: 700; font-size: 12px; line-height: 1">R</span>
+<span style="flex: 1; white-space: nowrap; overflow: hidden">Simulador de financiamento | RotaFin</span>
+</div>
+</div>
+</div>
+</div>
+
+<div style="background: #FFFFFF; border: 1px solid #DDE5E0; border-radius: 20px; padding: 32px; display: flex; flex-direction: column; gap: 18px">
+<p style="margin: 0; font-size: 14px; font-weight: 600; color: #52655A">Especificação</p>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; font-size: 15px">
+<div><p style="margin: 0; font-size: 12px; color: #52655A">Fonte</p><p style="margin: 2px 0 0; font-weight: 600">DM Sans Bold Italic (700)</p></div>
+<div><p style="margin: 0; font-size: 12px; color: #52655A">Espaçamento</p><p style="margin: 2px 0 0; font-weight: 600">−0,04 em</p></div>
+<div><p style="margin: 0; font-size: 12px; color: #52655A">“Rota” no claro</p><p style="margin: 2px 0 0; font-weight: 600; display: flex; align-items: center; gap: 8px"><span style="width: 16px; height: 16px; border-radius: 4px; background: #10241A"></span>#10241A</p></div>
+<div><p style="margin: 0; font-size: 12px; color: #52655A">“Fin” no claro</p><p style="margin: 2px 0 0; font-weight: 600; display: flex; align-items: center; gap: 8px"><span style="width: 16px; height: 16px; border-radius: 4px; background: #0E6B43"></span>#0E6B43</p></div>
+<div><p style="margin: 0; font-size: 12px; color: #52655A">“Rota” no escuro</p><p style="margin: 2px 0 0; font-weight: 600; display: flex; align-items: center; gap: 8px"><span style="width: 16px; height: 16px; border-radius: 4px; background: #FFFFFF; border: 1px solid #DDE5E0"></span>#FFFFFF</p></div>
+<div><p style="margin: 0; font-size: 12px; color: #52655A">“Fin” no escuro</p><p style="margin: 2px 0 0; font-weight: 600; display: flex; align-items: center; gap: 8px"><span style="width: 16px; height: 16px; border-radius: 4px; background: #7FE0AE"></span>#7FE0AE</p></div>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":880}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { icons: [
+      { px: 120, r: 28, fs: 78, label: 'ícone do app' },
+      { px: 64, r: 15, fs: 42, label: '64 px' },
+      { px: 32, r: 8, fs: 22, label: '32 px' },
+      { px: 16, r: 4, fs: 12, label: '16 px' }
+    ] };
+  }
+}
+</script>
+</body>
+</html>

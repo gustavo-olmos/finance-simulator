@@ -9,6 +9,7 @@ import { FinanceCalculatorService } from '../../core/finance-calculator.service'
 import { getTema, inferirTema } from '../../config/temas.config';
 import { TemaId } from '../../models/tema.model';
 import { SiteHeaderComponent } from '../../components/site-header/site-header.component';
+import { SiteFooterComponent } from '../../components/site-footer/site-footer.component';
 import { SimuladorComponent } from '../../components/simulador/simulador.component';
 import { AdSlotComponent } from '../../components/ad-slot/ad-slot.component';
 
@@ -20,7 +21,7 @@ import { AdSlotComponent } from '../../components/ad-slot/ad-slot.component';
 @Component({
   selector: 'app-anuncio-detalhe',
   standalone: true,
-  imports: [CurrencyPipe, RouterLink, SiteHeaderComponent, SimuladorComponent, AdSlotComponent],
+  imports: [CurrencyPipe, RouterLink, SiteHeaderComponent, SiteFooterComponent, SimuladorComponent, AdSlotComponent],
   templateUrl: './anuncio-detalhe.component.html',
   styleUrl: './anuncio-detalhe.component.scss',
 })

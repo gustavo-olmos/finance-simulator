@@ -1,6 +1,7 @@
 :host {
   display: block;
-  overflow-x: hidden;
+  // clip (não hidden) para não quebrar o position: sticky do header.
+  overflow-x: clip;
 }
 
 // ===== Zona principal (app) =====
@@ -58,7 +59,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  scroll-margin-top: 24px;
+  scroll-margin-top: 120px; // header sticky (até 103px no celular) + folga
   // Gap mínimo garantido entre o fim do formulário e a calculadora — mesmo
   // motivo do gap no .hero: em telas baixas o conteúdo já estoura o
   // min-height, então não sobra espaço nenhum entre os dois.
@@ -260,25 +261,6 @@
   }
 }
 
-.rodape {
-  border-top: 1px solid #e8e8e5;
-  background: #fff;
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 26px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  font-size: 14px;
-  color: #6b716e;
-
-  span:last-child {
-    font-size: 13px;
-    color: #aab0ac;
-  }
-}
 
 // Fica por último de propósito: mesma especificidade (uma classe) que outras
 // regras de display acima (.palco-acoes, .ancora-calculadora) — em CSS, quando

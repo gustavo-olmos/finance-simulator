@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>RotaFin — celular, primeira dobra</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Inter:wght@400;500;600;700&amp;family=DM+Sans:ital,opsz,wght@1,9..40,700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#9FE3BF}a:hover{color:#FFFFFF}
+input[type=range]{width:100%;height:28px;margin:0;accent-color:#7FE0AE}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; box-sizing: border-box; background: radial-gradient(ellipse 110% 70% at 50% 30%, #1F7A52 0%, #11573A 50%, #0A3524 100%); color: #FFFFFF; font-family: Inter, system-ui, sans-serif">
+
+<header style="background: #FFFFFF; color: #10241A; border-bottom: 1px solid #DDE5E0">
+<div style="height: 54px; padding: 0 8px 0 16px; display: flex; align-items: center; justify-content: space-between">
+<a href="#" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: #10241A">
+<span style="font-family: 'DM Sans', sans-serif; font-style: italic; font-weight: 700; font-size: 24px; letter-spacing: -0.9px; color: #10241A">Rota<span style="color: #0E6B43">Fin</span></span>
+</a>
+<button aria-label="Abrir menu" style="width: 44px; height: 44px; border: 0; background: transparent; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10241A" stroke-width="2" stroke-linecap="round"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg></button>
+</div>
+<nav aria-label="Simulador" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid #EEF3F0">
+<a href="#" aria-current="page" style="display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 46px; border-bottom: 3px solid #0E6B43; color: #0A4D31; font-weight: 700; font-size: 15px; text-decoration: none"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Imóvel</a>
+<a href="#" style="display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 46px; border-bottom: 3px solid transparent; color: #33463C; font-weight: 600; font-size: 15px; text-decoration: none"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14"></path><path d="M3 13l2-6h14l2 6v4H3z"></path><circle cx="7.5" cy="17" r="1.6"></circle><circle cx="16.5" cy="17" r="1.6"></circle></svg>Veículo</a>
+</nav>
+</header>
+
+<div style="padding: 14px 16px 0">
+<h1 style="margin: 0 0 4px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 25px; line-height: 1.1; letter-spacing: -0.4px">Quanto vai ficar a parcela do seu imóvel?</h1>
+<p style="margin: 0 0 12px; font-size: 14px; line-height: 1.45; color: #D8EEE2">Grátis, sem cadastro. Ajuste e veja a parcela embaixo.</p>
+
+<div style="background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.16); border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; gap: 3px; padding: 3px; background: rgba(0,0,0,0.22); border-radius: 10px">
+<button style="flex: 1; min-height: 40px; border: 0; border-radius: 8px; background: #FFFFFF; color: #0A4D31; font: inherit; font-size: 13px; font-weight: 600">Sei o valor do imóvel</button>
+<button style="flex: 1; min-height: 40px; border: 0; border-radius: 8px; background: transparent; color: #FFFFFF; font: inherit; font-size: 13px; font-weight: 600">Sei quanto posso pagar</button>
+</div>
+<div>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px">
+<label for="m-valor" style="font-size: 14px; font-weight: 600; color: #E3F1E9">Valor do imóvel</label>
+<input id="m-valor" type="text" inputmode="numeric" value="R$ 300.000" style="width: 136px; height: 44px; border: 1px solid rgba(255,255,255,0.18); border-radius: 9px; padding: 0 10px; background: rgba(0,0,0,0.2); font: inherit; font-size: 17px; font-weight: 700; text-align: right; color: #FFFFFF; box-sizing: border-box">
+</div>
+<input type="range" min="50000" max="3000000" value="300000" aria-label="Ajustar valor do imóvel">
+</div>
+<div>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px">
+<label for="m-entrada" style="font-size: 14px; font-weight: 600; color: #E3F1E9">Entrada <span style="font-weight: 500; color: #B9D6C6">· 20%</span></label>
+<input id="m-entrada" type="text" inputmode="numeric" value="R$ 60.000" style="width: 136px; height: 44px; border: 1px solid rgba(255,255,255,0.18); border-radius: 9px; padding: 0 10px; background: rgba(0,0,0,0.2); font: inherit; font-size: 17px; font-weight: 700; text-align: right; color: #FFFFFF; box-sizing: border-box">
+</div>
+<input type="range" min="0" max="300000" value="60000" aria-label="Ajustar entrada">
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<div>
+<label for="m-prazo" style="display: block; font-size: 14px; font-weight: 600; color: #E3F1E9; margin-bottom: 4px">Prazo</label>
+<div style="display: flex; align-items: center; height: 48px; border: 1px solid rgba(255,255,255,0.18); border-radius: 9px; background: rgba(0,0,0,0.2)">
+<button aria-label="Diminuir prazo" style="width: 44px; height: 100%; border: 0; background: transparent; color: #FFFFFF; font-size: 22px">−</button>
+<input id="m-prazo" type="text" inputmode="numeric" value="30 anos" style="flex: 1; min-width: 0; border: 0; background: transparent; font: inherit; font-size: 16px; font-weight: 700; text-align: center; color: #FFFFFF">
+<button aria-label="Aumentar prazo" style="width: 44px; height: 100%; border: 0; background: transparent; color: #FFFFFF; font-size: 22px">+</button>
+</div>
+</div>
+<div>
+<label for="m-taxa" style="display: block; font-size: 14px; font-weight: 600; color: #E3F1E9; margin-bottom: 4px">Juros ao ano</label>
+<div style="display: flex; align-items: center; height: 48px; border: 1px solid rgba(255,255,255,0.18); border-radius: 9px; background: rgba(0,0,0,0.2)">
+<button aria-label="Diminuir juros" style="width: 44px; height: 100%; border: 0; background: transparent; color: #FFFFFF; font-size: 22px">−</button>
+<input id="m-taxa" type="text" inputmode="decimal" value="10,5%" style="flex: 1; min-width: 0; border: 0; background: transparent; font: inherit; font-size: 16px; font-weight: 700; text-align: center; color: #FFFFFF">
+<button aria-label="Aumentar juros" style="width: 44px; height: 100%; border: 0; background: transparent; color: #FFFFFF; font-size: 22px">+</button>
+</div>
+</div>
+</div>
+<p style="margin: -4px 0 0; font-size: 13px; color: #B9D6C6">0,84% ao mês · <a href="#">Qual taxa usar?</a></p>
+</div>
+</div>
+
+<div style="position: absolute; left: 0; right: 0; bottom: 0; background: #FFFFFF; color: #10241A; border-radius: 18px 18px 0 0; box-shadow: 0 -8px 24px rgba(0,0,0,0.25); padding: 10px 16px 18px">
+<div style="width: 36px; height: 4px; border-radius: 2px; background: #C9D5CE; margin: 0 auto 10px"></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<div style="background: #E6F2EC; border-radius: 12px; padding: 10px 12px">
+<p style="margin: 0; display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #0A4D31"><span style="width: 9px; height: 9px; border-radius: 2px; background: #0E6B43"></span>SAC · diminui</p>
+<p style="margin: 2px 0 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 23px; font-weight: 700">R$ 2.671,90</p>
+<p style="margin: 0; font-size: 12px; color: #33463C">até R$ 672,24</p>
+</div>
+<div style="background: #FDF3E3; border-radius: 12px; padding: 10px 12px">
+<p style="margin: 0; display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #7A4706"><span style="width: 9px; height: 9px; border-radius: 2px; background: #E39B2D"></span>PRICE · fixa</p>
+<p style="margin: 2px 0 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 23px; font-weight: 700">R$ 2.110,82</p>
+<p style="margin: 0; font-size: 12px; color: #33463C">do início ao fim</p>
+</div>
+</div>
+<a href="#" style="margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; border-radius: 11px; background: #0E6B43; color: #FFFFFF; font-weight: 700; font-size: 15px; text-decoration: none">Ver resultado e imóveis até R$ 300 mil</a>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

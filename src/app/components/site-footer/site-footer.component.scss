@@ -1,0 +1,69 @@
+:host { display: block; }
+
+.site-footer {
+  background: var(--escuro);
+  color: #D5E3DA;
+  font-family: var(--fonte-ui);
+}
+
+.topo {
+  padding-top: 40px;
+  padding-bottom: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: space-between;
+}
+
+.sobre {
+  flex: 1 1 260px;
+  max-width: 360px;
+
+  p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+}
+
+.brand {
+  display: inline-flex;
+  margin-bottom: 10px;
+  font-size: 26px;
+  text-decoration: none;
+}
+
+.links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(140px, 1fr));
+  gap: 10px 32px;
+  font-size: 14px;
+
+  a {
+    color: #D5E3DA;
+
+    &:hover { color: #FFFFFF; }
+  }
+}
+
+.legal {
+  padding-top: 16px;
+  padding-bottom: 28px;
+  border-top: 1px solid #1E4A36;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #B5C8BC;
+}
+
+@media (max-width: 760px) {
+  // Alvos de toque ≥ 44px no celular.
+  .links {
+    gap: 0 24px;
+
+    a {
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+    }
+  }
+}

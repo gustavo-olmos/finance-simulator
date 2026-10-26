@@ -1,0 +1,42 @@
+<figure class="grafico">
+  <figcaption>
+    <span class="desk">Parcela mensal por ano de contrato</span>
+    <span class="mob">Parcela por ano</span>
+    <span class="legenda">
+      <span><span class="cor sac" aria-hidden="true"></span>SAC</span>
+      <span><span class="cor price" aria-hidden="true"></span>PRICE</span>
+    </span>
+  </figcaption>
+
+  <div class="desk">
+    <div class="barras" role="img" [attr.aria-label]="descricao()">
+      @for (b of barrasDesk(); track b.ano) {
+        <div class="par" [title]="b.titulo">
+          <div class="b sac" [style.height.%]="b.sacH"></div>
+          <div class="b price" [style.height.%]="b.priceH"></div>
+        </div>
+      }
+    </div>
+    <div class="eixo">
+      @for (b of barrasDesk(); track b.ano) {
+        <span>{{ b.rotulo }}</span>
+      }
+    </div>
+  </div>
+
+  <div class="mob">
+    <div class="barras" role="img" [attr.aria-label]="descricao()">
+      @for (b of barrasMob(); track b.ano) {
+        <div class="par">
+          <div class="b sac" [style.height.%]="b.sacH"></div>
+          <div class="b price" [style.height.%]="b.priceH"></div>
+        </div>
+      }
+    </div>
+    <div class="eixo-mob">
+      @for (ano of eixoMob(); track ano) {
+        <span>ano {{ ano }}</span>
+      }
+    </div>
+  </div>
+</figure>

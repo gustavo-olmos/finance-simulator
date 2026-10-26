@@ -1,0 +1,118 @@
+:host { display: block; }
+
+.grafico {
+  margin: 0;
+  background: #FFFFFF;
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.legenda {
+  display: flex;
+  gap: 14px;
+  color: var(--texto-3);
+
+  > span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+}
+
+.cor {
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+
+  &.sac { background: var(--sac-cor); }
+  &.price { background: var(--price-cor); }
+}
+
+.barras {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 200px;
+  border-bottom: 1px solid var(--borda-input);
+}
+
+.par {
+  flex: 1 1 0;
+  display: flex;
+  align-items: flex-end;
+  gap: 1px;
+  height: 100%;
+}
+
+.b {
+  flex: 1;
+  border-radius: 2px 2px 0 0;
+
+  &.sac { background: var(--sac-cor); }
+  &.price { background: var(--price-cor); }
+}
+
+.eixo {
+  display: flex;
+  gap: 3px;
+  margin-top: 6px;
+
+  span {
+    flex: 1 1 0;
+    text-align: center;
+    font-size: 11px;
+    color: var(--texto-aux);
+  }
+}
+
+.eixo-mob {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--texto-aux);
+}
+
+.mob { display: none; }
+
+// Celular: gráfico do design mobile (10 amostras, 140px de altura).
+@media (max-width: 760px) {
+  .desk { display: none; }
+  .mob { display: block; }
+  figcaption .mob { display: inline; }
+
+  .grafico {
+    border-radius: 14px;
+    padding: 14px;
+  }
+
+  figcaption {
+    margin-bottom: 10px;
+    font-size: 13px;
+  }
+
+  .legenda { gap: 10px; }
+  .legenda > span { gap: 4px; }
+
+  .cor {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+
+  .barras {
+    gap: 4px;
+    height: 140px;
+  }
+}

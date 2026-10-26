@@ -43,18 +43,36 @@ export class BarraResultadoComponent {
     const zone = inject(NgZone);
     afterNextRender(() => {
       const alvo = this.doc.getElementById('resultado');
-      if (!alvo || typeof IntersectionObserver === 'undefined') return;
-      const io = new IntersectionObserver(
-        // O zone.js não intercepta o IntersectionObserver: sem o run() a mudança do
-        // signal não dispara a renderização.
-        ([e]) => zone.run(() => {
-          if (e.isIntersecting) this.estado.set('oculta');
-          else this.estado.set(e.boundingClientRect.top > 0 ? 'gaveta' : 'compacta');
-        }),
-        { rootMargin: `0px 0px -${ALTURA_GAVETA}px 0px` },
-      );
-      io.observe(alvo);
-      destroyRef.onDestroy(() => io.disconnect());
+      const win = this.doc.defaultView;
+      if (!alvo || !win) return;
+
+      // Listener de scroll em vez de IntersectionObserver: o IO só avisa quando o card
+      // cruza a tela, e um salto por âncora (de "abaixo" direto para "acima") não cruza.
+      // Roda fora da zona e só entra nela quando o estado muda, para não disparar
+      // detecção de mudanças a cada evento de scroll.
+      let agendado = false;
+      const atualizar = () => {
+        agendado = false;
+        const r = alvo.getBoundingClientRect();
+        const limite = win.innerHeight - ALTURA_GAVETA;
+        const novo: Estado = r.top >= limite ? 'gaveta' : r.bottom <= 0 ? 'compacta' : 'oculta';
+        if (novo !== this.estado()) zone.run(() => this.estado.set(novo));
+      };
+      const aoRolar = () => {
+        if (agendado) return;
+        agendado = true;
+        win.requestAnimationFrame(atualizar);
+      };
+
+      zone.runOutsideAngular(() => {
+        win.addEventListener('scroll', aoRolar, { passive: true });
+        win.addEventListener('resize', aoRolar, { passive: true });
+      });
+      atualizar();
+      destroyRef.onDestroy(() => {
+        win.removeEventListener('scroll', aoRolar);
+        win.removeEventListener('resize', aoRolar);
+      });
     });
   }
 

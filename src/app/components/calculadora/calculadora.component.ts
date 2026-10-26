@@ -2,6 +2,7 @@ import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ModoCalculadora, SimulacaoStore } from '../../core/simulacao.store';
 import { decimal } from '../../core/formato';
+import { taxasDoTema } from '../../config/conteudo.config';
 import { CampoNumeroDirective } from './campo-numero.directive';
 
 /**
@@ -32,6 +33,8 @@ export class CalculadoraComponent {
   );
 
   readonly taxaMes = computed(() => decimal(this.store.taxaMensal()) + '%');
+  /** O link "Qual taxa usar?" só aparece quando há taxas de referência preenchidas. */
+  readonly temTaxas = computed(() => taxasDoTema(this.tema().id).length > 0);
 
   slider(e: Event): number {
     return Number((e.target as HTMLInputElement).value);

@@ -56,7 +56,10 @@
         </div>
       </div>
     </div>
-    <p class="ajuda taxa-mes">{{ taxaMes() }} ao mês · <a [routerLink]="[]" fragment="taxas" queryParamsHandling="preserve">Qual taxa usar?</a></p>
+    <p class="ajuda taxa-mes">
+      {{ taxaMes() }} ao mês
+      @if (temTaxas()) {· <a [routerLink]="[]" fragment="taxas" queryParamsHandling="preserve">Qual taxa usar?</a>}
+    </p>
 
     <!-- MIP/DFI só existe no financiamento imobiliário. -->
     @if (tema().id === 'imovel') {

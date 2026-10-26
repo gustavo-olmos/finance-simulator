@@ -1,11 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
+import { faqDoTema } from '../../config/conteudo.config';
+import { TemaId } from '../../models/tema.model';
 
-interface ItemFaq {
-  q: string;
-  a: string;
-}
-
-/** Perguntas frequentes (conteúdo de SEO). */
+/** Perguntas frequentes (conteúdo de SEO). A mesma lista gera o JSON-LD FAQPage da página. */
 @Component({
   selector: 'app-faq',
   standalone: true,
@@ -13,28 +10,6 @@ interface ItemFaq {
   styleUrl: './faq.component.scss',
 })
 export class FaqComponent {
-  readonly abertoIndex = signal<number | null>(null);
-
-  alternar(i: number): void {
-    this.abertoIndex.update(atual => atual === i ? null : i);
-  }
-
-  readonly itens: ItemFaq[] = [
-    {
-      q: 'Para qual tipo de financiamento serve?',
-      a: 'Imóvel, veículo, crédito com garantia e outros financiamentos com parcelas mensais. Basta informar valor, entrada, prazo e taxa.',
-    },
-    {
-      q: 'A taxa de juros é mensal ou anual?',
-      a: 'Você informa a taxa anual e o simulador converte para a taxa mensal equivalente automaticamente.',
-    },
-    {
-      q: 'Os valores são exatos?',
-      a: 'São estimativas para fins de comparação. As condições reais variam conforme a instituição financeira e o seu perfil.',
-    },
-    {
-      q: 'Preciso me cadastrar?',
-      a: 'Não. O cálculo é gratuito, instantâneo e não exige nenhum dado pessoal.',
-    },
-  ];
+  readonly tema = input.required<TemaId>();
+  readonly itens = computed(() => faqDoTema(this.tema()));
 }

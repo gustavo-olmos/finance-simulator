@@ -1,77 +1,90 @@
 :host {
   display: block;
+  overflow-x: clip;
 }
 
-.app-zone {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background: var(--app-bg, #1f8a5b);
+@media (max-width: 760px) {
+  .pagina { padding-bottom: 96px; }
 }
 
-.palco {
-  flex: 1;
+.hero {
+  background: var(--hero-bg);
+  color: #FFFFFF;
+}
+
+.hero-wrap {
+  padding-top: 32px;
+  padding-bottom: 48px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 32px 20px 48px;
   gap: 20px;
 }
 
 .item {
-  max-width: 560px;
+  max-width: 760px;
   width: 100%;
-  background: rgba(255, 255, 255, 0.12);
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 18px;
   overflow: hidden;
 }
 
 .item-img {
-  height: 200px;
+  height: 220px;
   background-size: cover;
   background-position: center;
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.item-info {
-  padding: 22px 24px;
-  color: #fff;
-}
+.item-info { padding: 20px 22px; }
 
 .item-titulo {
-  font-family: 'Space Grotesk Variable', sans-serif;
+  font-family: var(--fonte-titulo);
   font-weight: 700;
   font-size: 26px;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.4px;
   margin: 0 0 8px;
 }
 
 .item-desc {
   font-size: 15px;
   line-height: 1.5;
-  color: rgba(255, 255, 255, 0.82);
+  color: #D8EEE2;
   margin: 0 0 14px;
 }
 
 .item-preco {
-  font-family: 'Space Grotesk Variable', sans-serif;
+  font-family: var(--fonte-titulo);
   font-weight: 700;
   font-size: 24px;
-  color: #fff;
 }
 
+.hero-grade {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.col-calc { flex: 1 1 380px; min-width: 0; }
+.col-res { flex: 1 1 440px; min-width: 0; }
+
+.col-calc,
+.col-res { scroll-margin-top: 120px; }
+
 .voltar {
-  color: rgba(255, 255, 255, 0.9);
+  align-self: center;
+  color: #9FE3BF;
   text-decoration: none;
   font-weight: 700;
   font-size: 14px;
+
+  &:hover { color: #FFFFFF; }
 }
 
 .vazio {
   text-align: center;
-  color: #fff;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -80,4 +93,15 @@
 .conteudo {
   background: #fbfbfa;
   padding: 36px 0 64px;
+}
+
+@media (max-width: 760px) {
+  .hero-wrap {
+    padding-top: 16px;
+    gap: 16px;
+  }
+
+  .item-img { height: 180px; }
+  .item-info { padding: 16px; }
+  .item-titulo { font-size: 22px; }
 }

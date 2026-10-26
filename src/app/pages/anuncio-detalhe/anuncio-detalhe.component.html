@@ -1,7 +1,9 @@
 <app-site-header />
 
-<section class="app-zone">
-  <div class="palco">
+<!-- Versão provisória: a página do anúncio é refeita na etapa 5 do redesign. -->
+<div class="pagina">
+<section class="hero">
+  <div class="wrap hero-wrap">
     @if (anuncio(); as a) {
       <div class="item">
         <div class="item-img" [style.background-image]="'url(' + a.imagem_url + ')'"></div>
@@ -12,7 +14,10 @@
         </div>
       </div>
 
-      <app-simulador [config]="config()" [valorInicial]="valorInicial()" />
+      <div class="hero-grade">
+        <app-calculadora id="calculadora" class="col-calc" />
+        <app-resultado-card id="resultado" class="col-res" />
+      </div>
 
       <a class="voltar" routerLink="/financiamento-imovel">← Voltar para o simulador</a>
     } @else {
@@ -34,3 +39,8 @@
 </section>
 
 <app-site-footer />
+</div>
+
+@if (anuncio()) {
+  <app-barra-resultado />
+}

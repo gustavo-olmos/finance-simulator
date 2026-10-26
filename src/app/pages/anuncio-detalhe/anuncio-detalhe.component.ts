@@ -10,7 +10,10 @@ import { getTema, inferirTema } from '../../config/temas.config';
 import { TemaId } from '../../models/tema.model';
 import { SiteHeaderComponent } from '../../components/site-header/site-header.component';
 import { SiteFooterComponent } from '../../components/site-footer/site-footer.component';
-import { SimuladorComponent } from '../../components/simulador/simulador.component';
+import { CalculadoraComponent } from '../../components/calculadora/calculadora.component';
+import { ResultadoCardComponent } from '../../components/resultado-card/resultado-card.component';
+import { BarraResultadoComponent } from '../../components/barra-resultado/barra-resultado.component';
+import { SimulacaoStore } from '../../core/simulacao.store';
 import { AdSlotComponent } from '../../components/ad-slot/ad-slot.component';
 
 /**
@@ -21,7 +24,17 @@ import { AdSlotComponent } from '../../components/ad-slot/ad-slot.component';
 @Component({
   selector: 'app-anuncio-detalhe',
   standalone: true,
-  imports: [CurrencyPipe, RouterLink, SiteHeaderComponent, SiteFooterComponent, SimuladorComponent, AdSlotComponent],
+  imports: [
+    CurrencyPipe,
+    RouterLink,
+    SiteHeaderComponent,
+    SiteFooterComponent,
+    CalculadoraComponent,
+    ResultadoCardComponent,
+    BarraResultadoComponent,
+    AdSlotComponent,
+  ],
+  providers: [SimulacaoStore],
   templateUrl: './anuncio-detalhe.component.html',
   styleUrl: './anuncio-detalhe.component.scss',
 })
@@ -30,6 +43,7 @@ export class AnuncioDetalheComponent {
   private readonly anuncioService = inject(AnuncioService);
   private readonly seo = inject(SeoService);
   private readonly calc = inject(FinanceCalculatorService);
+  private readonly store = inject(SimulacaoStore);
 
   private readonly slug$ = this.route.paramMap.pipe(map((p) => p.get('slug') ?? ''));
 
@@ -41,9 +55,14 @@ export class AnuncioDetalheComponent {
   /** Tema inferido pelo preço, para escolher faixas adequadas dos sliders. */
   readonly temaId = computed<TemaId>(() => inferirTema(this.anuncio()?.preco ?? 0));
   readonly config = computed(() => getTema(this.temaId()));
-  readonly valorInicial = computed(() => this.anuncio()?.preco ?? null);
 
   constructor() {
+    // Pré-preenche a simulação com o preço do anúncio.
+    effect(() => {
+      const a = this.anuncio();
+      if (a) this.store.inicializar(this.config(), { valorBem: a.preco });
+    }, { allowSignalWrites: true });
+
     // Aplica SEO quando o anúncio é carregado (executa no servidor durante o SSR).
     effect(() => {
       const a = this.anuncio();

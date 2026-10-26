@@ -1,0 +1,78 @@
+<div class="painel" (focusin)="store.editando.set(true)" (focusout)="store.editando.set(false)">
+  <div class="abas" role="tablist" aria-label="Tipo de simulação">
+    <button type="button" role="tab" class="aba" [class.ativa]="store.modo() === 'valor'" [attr.aria-selected]="store.modo() === 'valor'" (click)="setModo('valor')">
+      Sei o valor do {{ tema().bemNome }}
+    </button>
+    <button type="button" role="tab" class="aba" [class.ativa]="store.modo() === 'renda'" [attr.aria-selected]="store.modo() === 'renda'" (click)="setModo('renda')">
+      Sei quanto posso pagar
+    </button>
+  </div>
+
+  <div class="campos">
+    @if (store.modo() === 'valor') {
+      <div>
+        <div class="linha-campo">
+          <label for="f-valor" class="rotulo">{{ tema().labelValor }}</label>
+          <div class="caixa"><span class="unidade">R$</span><input id="f-valor" class="num" [appNumero]="store.valor()" (valorChange)="setValor($event)" (confirmar)="confirmarValor()"></div>
+        </div>
+        <input type="range" [min]="faixas().bemMin" [max]="faixas().bemMax" [step]="faixas().bemStep" [value]="store.valor()" (input)="setValor(slider($event))" [attr.aria-label]="'Ajustar ' + tema().labelValor.toLowerCase()">
+      </div>
+    } @else {
+      <div>
+        <div class="linha-campo">
+          <label for="f-parcela" class="rotulo">Parcela que cabe no bolso</label>
+          <div class="caixa"><span class="unidade">R$</span><input id="f-parcela" class="num" [appNumero]="store.parcelaMax()" (valorChange)="setParcela($event)"></div>
+        </div>
+        <input type="range" [min]="faixas().parcelaMin" [max]="faixas().parcelaMax" [step]="faixas().parcelaStep" [value]="store.parcelaMax()" (input)="setParcela(slider($event))" aria-label="Ajustar parcela mensal">
+      </div>
+    }
+
+    <div>
+      <div class="linha-campo">
+        <label for="f-entrada" class="rotulo">Entrada @if (entradaPct() !== null) {<span class="pct">· {{ entradaPct() }}%</span>}</label>
+        <div class="caixa"><span class="unidade">R$</span><input id="f-entrada" class="num" [appNumero]="store.entrada()" (valorChange)="setEntrada($event)" (confirmar)="confirmarValor()"></div>
+      </div>
+      <input type="range" min="0" [max]="entradaMax()" [step]="faixas().entradaStep" [value]="store.entrada()" (input)="setEntrada(slider($event))" aria-label="Ajustar entrada">
+      <p class="ajuda">Pode incluir o FGTS. Bancos costumam pedir ao menos 20%.</p>
+    </div>
+
+    <div class="grade-2">
+      <div>
+        <label for="f-prazo" class="rotulo bloco">Prazo</label>
+        <div class="stepper">
+          <button type="button" aria-label="Diminuir prazo" (click)="passoPrazo(-1)">−</button>
+          <input id="f-prazo" [appNumero]="store.prazoAnos()" (valorChange)="setPrazo($event)" (confirmar)="confirmarPrazo()">
+          <span class="unidade">anos</span>
+          <button type="button" aria-label="Aumentar prazo" (click)="passoPrazo(1)">+</button>
+        </div>
+      </div>
+      <div>
+        <label for="f-taxa" class="rotulo bloco">Juros ao ano</label>
+        <div class="stepper">
+          <button type="button" aria-label="Diminuir juros" (click)="passoTaxa(-0.1)">−</button>
+          <input id="f-taxa" [appNumero]="store.taxa()" [casas]="2" (valorChange)="setTaxa($event)" (confirmar)="confirmarTaxa()">
+          <span class="unidade">%</span>
+          <button type="button" aria-label="Aumentar juros" (click)="passoTaxa(0.1)">+</button>
+        </div>
+      </div>
+    </div>
+    <p class="ajuda taxa-mes">{{ taxaMes() }} ao mês · <a [routerLink]="[]" fragment="taxas" queryParamsHandling="preserve">Qual taxa usar?</a></p>
+
+    <!-- MIP/DFI só existe no financiamento imobiliário. -->
+    @if (tema().id === 'imovel') {
+    <details class="seguro">
+      <summary>
+        Seguro obrigatório (opcional)
+        <svg class="chev" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+      </summary>
+      <div class="seguro-corpo">
+        <div class="linha-campo">
+          <label for="f-seguro" class="rotulo pequeno">Seguro MIP/DFI</label>
+          <div class="caixa baixa"><input id="f-seguro" class="num curto" [appNumero]="store.seguro()" [casas]="3" (valorChange)="setSeguro($event)"><span class="unidade">% a.m.</span></div>
+        </div>
+        <p class="ajuda">Seguros que o banco cobra junto com a parcela: morte ou invalidez de quem paga (MIP) e danos ao imóvel (DFI). Deixe 0 se não souber.</p>
+      </div>
+    </details>
+    }
+  </div>
+</div>

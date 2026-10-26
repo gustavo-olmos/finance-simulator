@@ -6,7 +6,7 @@ import { map, switchMap } from 'rxjs';
 import { AnuncioService } from '../../core/anuncio.service';
 import { SeoService } from '../../core/seo.service';
 import { FinanceCalculatorService } from '../../core/finance-calculator.service';
-import { getTema, inferirTema } from '../../config/temas.config';
+import { getTema } from '../../config/temas.config';
 import { TemaId } from '../../models/tema.model';
 import { SiteHeaderComponent } from '../../components/site-header/site-header.component';
 import { SiteFooterComponent } from '../../components/site-footer/site-footer.component';
@@ -14,6 +14,7 @@ import { CalculadoraComponent } from '../../components/calculadora/calculadora.c
 import { ResultadoCardComponent } from '../../components/resultado-card/resultado-card.component';
 import { BarraResultadoComponent } from '../../components/barra-resultado/barra-resultado.component';
 import { SimulacaoStore } from '../../core/simulacao.store';
+import { SITE } from '../../config/site.config';
 import { AdSlotComponent } from '../../components/ad-slot/ad-slot.component';
 
 /**
@@ -52,9 +53,10 @@ export class AnuncioDetalheComponent {
     { initialValue: undefined },
   );
 
-  /** Tema inferido pelo preço, para escolher faixas adequadas dos sliders. */
-  readonly temaId = computed<TemaId>(() => inferirTema(this.anuncio()?.preco ?? 0));
+  /** Tema do anúncio (imóvel/veículo), para escolher faixas e textos da calculadora. */
+  readonly temaId = computed<TemaId>(() => this.anuncio()?.categoria ?? 'imovel');
   readonly config = computed(() => getTema(this.temaId()));
+  readonly adsenseSlot = SITE.adsense.slots.anuncio;
 
   constructor() {
     // Pré-preenche a simulação com o preço do anúncio.

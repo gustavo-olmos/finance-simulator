@@ -10,13 +10,15 @@ import { SiteHeaderComponent } from '../../components/site-header/site-header.co
 import { SiteFooterComponent } from '../../components/site-footer/site-footer.component';
 import { ComparisonTableComponent } from '../../components/comparison-table/comparison-table.component';
 import { FaqComponent } from '../../components/faq/faq.component';
-import { AdsGridComponent } from '../../components/ads-grid/ads-grid.component';
+import { OfertasComponent } from '../../components/ofertas/ofertas.component';
+import { BannerAnuncieComponent } from '../../components/banner-anuncie/banner-anuncie.component';
 import { AdSlotComponent } from '../../components/ad-slot/ad-slot.component';
 import { AmortizationTableComponent } from '../../components/amortization-table/amortization-table.component';
 import { CalculadoraComponent } from '../../components/calculadora/calculadora.component';
 import { ResultadoCardComponent } from '../../components/resultado-card/resultado-card.component';
 import { BarraResultadoComponent } from '../../components/barra-resultado/barra-resultado.component';
 import { SimulacaoStore } from '../../core/simulacao.store';
+import { SITE } from '../../config/site.config';
 
 /**
  * Landing page temática (imóvel / veículo). O tema vem de route.data.
@@ -31,7 +33,8 @@ import { SimulacaoStore } from '../../core/simulacao.store';
     SiteFooterComponent,
     ComparisonTableComponent,
     FaqComponent,
-    AdsGridComponent,
+    OfertasComponent,
+    BannerAnuncieComponent,
     AdSlotComponent,
     AmortizationTableComponent,
     CalculadoraComponent,
@@ -53,6 +56,7 @@ export class SimuladorPageComponent implements OnInit {
   readonly store = inject(SimulacaoStore);
 
   readonly selos = ['Grátis', 'Sem cadastro', 'Resultado em segundos'];
+  readonly adsenseSlot = SITE.adsense.slots.simulador;
 
   // Só sincroniza a URL após a primeira renderização para não poluir o histórico no carregamento.
   private urlSincronizada = false;

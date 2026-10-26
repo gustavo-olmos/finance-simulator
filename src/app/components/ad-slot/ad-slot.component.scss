@@ -1,43 +1,38 @@
-:host {
-  display: block;
+:host { display: block; }
+
+.bloco {
+  padding-top: 28px;
+  padding-bottom: 28px;
 }
 
-.wrap {
-  margin: 52px auto 0;
-  padding: 0 24px;
-}
+// Anúncio não preenchido: some por inteiro, sem caixa vazia nem placeholder.
+.bloco:has(ins[data-ad-status='unfilled']) { display: none; }
 
-.rotulo-publicidade {
-  text-align: center;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+.rotulo {
+  margin: 0 0 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
-  color: #b9bdb9;
-  margin-bottom: 8px;
+  color: var(--texto-aux);
+  text-align: center;
 }
 
-.slot {
-  border: 1px dashed #d6d6d0;
-  border-radius: 12px;
-  background: repeating-linear-gradient(
-    135deg,
-    #f4f4f1,
-    #f4f4f1 11px,
-    #eeeeea 11px,
-    #eeeeea 22px
-  );
-  display: flex;
-  align-items: center;
-  justify-content: center;
+// Altura reservada antes do anúncio carregar (evita CLS).
+.reserva {
+  min-height: 250px;
+  max-width: 970px;
+  margin: 0 auto;
 }
 
-.placeholder {
-  font-family: 'Space Grotesk Variable', sans-serif;
-  font-size: 13px;
-  color: #a8aca6;
-  background: #fff;
-  padding: 6px 14px;
-  border-radius: 8px;
-  border: 1px solid #e8e8e5;
+@media (max-width: 760px) {
+  .bloco {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .reserva {
+    width: 300px;
+    max-width: 100%;
+  }
 }

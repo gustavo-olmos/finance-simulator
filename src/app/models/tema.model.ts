@@ -26,6 +26,7 @@ export interface TemaConfig {
   labelValor: string;       // Rótulo do slider principal ("Valor do imóvel" etc.)
   bemNome: string;          // "imóvel" / "veículo" — usado nos textos da calculadora
   bemPlural: string;        // "imóveis" / "veículos" — CTA "Ver imóveis de até…"
+  parceiros: string;        // "imobiliárias parceiras" / "concessionárias parceiras" — seção de ofertas
   defaults: ParametrosSimulacao;
   /** Parcela inicial do modo "Sei quanto posso pagar". */
   parcelaPadrao: number;

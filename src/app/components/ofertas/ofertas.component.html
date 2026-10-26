@@ -1,0 +1,29 @@
+@if (itens().length) {
+  <section id="ofertas" class="wrap secao" aria-labelledby="ofertas-titulo">
+    <div class="cabecalho">
+      <p class="eyebrow">Patrocinado<span class="desk"> · {{ tema().parceiros }}</span></p>
+      <h2 id="ofertas-titulo">
+        @if (selecao().cabem) {
+          <span class="desk">{{ pluralTitulo() }} que cabem nessa simulação</span>
+          <span class="mob">{{ pluralTitulo() }} de até {{ faixa() }}</span>
+        } @else {
+          {{ pluralTitulo() }} mais próximos da sua simulação
+        }
+      </h2>
+    </div>
+
+    <div class="lista" #lista (scroll)="onScroll()">
+      @for (item of itens(); track item.anuncio.id; let i = $index) {
+        <app-oferta-card [anuncio]="item.anuncio" [simulacao]="item.simulacao" [posicao]="i + 1" />
+      }
+    </div>
+
+    @if (itens().length > 1) {
+      <div class="pontos" aria-hidden="true">
+        @for (item of itens(); track item.anuncio.id; let i = $index) {
+          <span [class.ativo]="i === ativo()"></span>
+        }
+      </div>
+    }
+  </section>
+}

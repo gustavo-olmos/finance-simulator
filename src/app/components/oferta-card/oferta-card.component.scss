@@ -1,0 +1,149 @@
+:host { display: block; }
+
+.card {
+  height: 100%;
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+}
+
+.foto {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: #DCE7E0;
+  color: var(--texto-aux);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.selo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--escuro-2);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.corpo {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+p { margin: 0; }
+
+.preco {
+  font-family: var(--fonte-titulo);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.parcela {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--verde-escuro);
+}
+
+.titulo {
+  margin: 6px 0 0;
+  font-size: 15px;
+  font-weight: 600;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover { color: var(--verde-escuro); text-decoration: underline; }
+  }
+}
+
+.detalhes {
+  font-size: 14px;
+  color: var(--texto-2);
+}
+
+.anunciante {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--texto-3);
+}
+
+.avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--sac-bg);
+  flex: none;
+}
+
+.acoes {
+  margin-top: auto;
+  padding-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+
+  &.unica { grid-template-columns: 1fr; }
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  border-radius: 9px;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+
+  &.sec {
+    border: 1px solid var(--borda-input);
+    color: var(--texto);
+
+    &:hover { border-color: var(--verde); }
+  }
+
+  &.pri {
+    background: var(--verde);
+    color: #FFFFFF;
+
+    &:hover { background: var(--verde-escuro); }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--verde);
+    outline-offset: 2px;
+  }
+}
+
+// Celular: medidas do carrossel em simulador-mobile-rolagem.
+@media (max-width: 760px) {
+  .foto { aspect-ratio: auto; height: 180px; }
+  .corpo { padding: 12px 14px 14px; }
+  .preco { font-size: 21px; }
+  .parcela { margin-top: -2px; }
+  .detalhes { font-size: 13px; }
+  .anunciante { margin-top: 6px; }
+  .acoes { padding-top: 10px; }
+}

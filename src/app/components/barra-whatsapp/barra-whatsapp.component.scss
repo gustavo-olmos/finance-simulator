@@ -1,0 +1,59 @@
+:host { display: none; }
+
+p { margin: 0; }
+
+// Medidas de anuncio-mobile.
+@media (max-width: 760px) {
+  :host { display: block; }
+
+  .barra {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px calc(16px + env(safe-area-inset-bottom));
+    background: #FFFFFF;
+    border-top: 1px solid var(--borda);
+    box-shadow: 0 -6px 18px rgba(16, 36, 26, 0.12);
+  }
+
+  .parcela {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .rot {
+    font-size: 11px;
+    color: var(--texto-aux);
+  }
+
+  .val {
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 48px;
+    padding: 0 16px;
+    border-radius: 11px;
+    background: var(--verde);
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+
+    &:hover { background: var(--verde-escuro); color: #FFFFFF; }
+
+    &:focus-visible {
+      outline: 2px solid var(--verde);
+      outline-offset: 2px;
+    }
+  }
+}

@@ -19,6 +19,7 @@ import { CalculadoraComponent } from '../../components/calculadora/calculadora.c
 import { ResultadoCardComponent } from '../../components/resultado-card/resultado-card.component';
 import { BarraResultadoComponent } from '../../components/barra-resultado/barra-resultado.component';
 import { SimulacaoStore } from '../../core/simulacao.store';
+import { UltimaSimulacaoService } from '../../core/ultima-simulacao.service';
 import { SITE } from '../../config/site.config';
 import { faqDoTema } from '../../config/conteudo.config';
 
@@ -54,6 +55,7 @@ export class SimuladorPageComponent implements OnInit {
   private readonly seo = inject(SeoService);
   private readonly anuncioService = inject(AnuncioService);
   private readonly doc = inject(DOCUMENT);
+  private readonly ultimaSimulacao = inject(UltimaSimulacaoService);
   readonly temaId = signal<TemaId>('imovel');
   readonly config = computed(() => getTema(this.temaId()));
   readonly store = inject(SimulacaoStore);
@@ -70,13 +72,17 @@ export class SimuladorPageComponent implements OnInit {
   constructor() {
     afterNextRender(() => { this.urlSincronizada = true; });
 
-    // Mantém a URL com os parâmetros da simulação (prefill e compartilhamento).
+    // Mantém a URL com os parâmetros da simulação (prefill e compartilhamento) e salva a
+    // simulação como "última" para pré-preencher a página do anúncio.
     effect(() => {
       const queryParams = this.store.queryParams();
+      const ultima = this.store.ultimaSimulacao();
       if (!this.urlSincronizada) return;
       if (this.urlTimer) clearTimeout(this.urlTimer);
       this.urlTimer = setTimeout(() => {
         this.router.navigate([], { relativeTo: this.route, queryParams, replaceUrl: true });
+        // Só grava depois de o usuário mexer: abrir a página não conta como "simulação".
+        if (this.store.interagiu()) this.ultimaSimulacao.salvar(this.temaId(), ultima);
       }, 400);
     });
   }

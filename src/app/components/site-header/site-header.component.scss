@@ -94,6 +94,17 @@
   cursor: pointer;
 }
 
+.btn-icone {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  color: var(--texto);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
 .menu-mobile {
   flex-direction: column;
   border-top: 1px solid #EEF3F0;
@@ -129,7 +140,8 @@
 
 @media (max-width: 760px) {
   .desk-only { display: none !important; }
-  .btn-menu.mob-only { display: flex !important; }
+  .btn-menu.mob-only,
+  .btn-icone.mob-only { display: flex !important; }
   .menu-mobile.mob-only { display: flex !important; }
   .abas-mobile.mob-only { display: grid !important; }
 
@@ -139,4 +151,13 @@
   }
 
   .brand { font-size: 24px; }
+
+  // Página do anúncio (anuncio-mobile): voltar · logotipo centralizado · compartilhar.
+  .linha.anuncio {
+    height: 56px;
+    padding-left: 4px;
+    align-items: center;
+
+    .brand { font-size: 23px; }
+  }
 }

@@ -1,0 +1,191 @@
+:host { display: block; }
+
+.galeria {
+  position: relative;
+  height: 420px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+// Desktop: principal (2/3, ocupando as duas linhas) + 2 miniaturas. Fotos além da 3ª
+// ficam ocultas (e, com loading="lazy", nem são baixadas) — aparecem no diálogo.
+.trilho {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 8px;
+}
+
+.foto {
+  min-width: 0;
+  min-height: 0;
+  background: #E4ECE7;
+
+  &:first-child {
+    grid-row: span 2;
+    background: #DCE7E0;
+  }
+
+  &:nth-child(n + 4) { display: none; }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &.vazia {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--texto-aux);
+  }
+}
+
+.uma .foto:first-child { grid-column: span 2; }
+.duas .foto:nth-child(2) { grid-row: span 2; }
+
+.selo {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 5px 9px;
+  border-radius: 6px;
+  background: var(--escuro-2);
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.ver-todas {
+  position: absolute;
+  bottom: 14px;
+  // Fica no canto da foto principal (2/3 da largura), como no design.
+  right: calc(100% / 3 + 14px);
+  min-height: 40px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 9px;
+  background: #FFFFFF;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--texto);
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid var(--verde);
+    outline-offset: 2px;
+  }
+}
+
+.contador { display: none; }
+
+// ===== Diálogo com todas as fotos =====
+.dialogo {
+  width: min(960px, 100vw - 32px);
+  max-height: calc(100vh - 32px);
+  padding: 0;
+  border: 0;
+  border-radius: 16px;
+  background: #FFFFFF;
+  color: var(--texto);
+
+  &::backdrop { background: rgba(10, 30, 20, 0.7); }
+}
+
+.dialogo-topo {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 8px 8px 20px;
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--borda);
+
+  p {
+    margin: 0;
+    font-weight: 700;
+  }
+}
+
+.fechar {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  color: var(--texto);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.dialogo-lista {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+  }
+}
+
+// Celular (anuncio-mobile): foto de ponta a ponta, carrossel com contador "1 / N".
+@media (max-width: 760px) {
+  .galeria {
+    height: 260px;
+    border-radius: 0;
+    margin: 0 calc(-1 * var(--gutter));
+  }
+
+  .trilho {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar { display: none; }
+  }
+
+  .foto,
+  .foto:nth-child(n + 4) {
+    display: block;
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+  }
+
+  .foto.vazia { display: flex; }
+
+  .selo {
+    top: 12px;
+    left: 12px;
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .ver-todas { display: none; }
+
+  .contador {
+    display: block;
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    padding: 4px 9px;
+    border-radius: 12px;
+    background: rgba(16, 36, 26, 0.75);
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 600;
+  }
+}

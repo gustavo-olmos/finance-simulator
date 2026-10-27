@@ -3,100 +3,307 @@
   overflow-x: clip;
 }
 
-@media (max-width: 760px) {
-  .pagina { padding-bottom: 96px; }
-}
+p { margin: 0; }
 
-.hero {
-  background: var(--hero-bg);
-  color: #FFFFFF;
-}
+.mob { display: none; }
 
-.hero-wrap {
-  padding-top: 32px;
-  padding-bottom: 48px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.item {
-  max-width: 760px;
-  width: 100%;
-  margin: 0 auto;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 18px;
-  overflow: hidden;
-}
-
-.item-img {
-  height: 220px;
-  background-size: cover;
-  background-position: center;
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.item-info { padding: 20px 22px; }
-
-.item-titulo {
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 26px;
-  letter-spacing: -0.4px;
-  margin: 0 0 8px;
-}
-
-.item-desc {
-  font-size: 15px;
-  line-height: 1.5;
-  color: #D8EEE2;
-  margin: 0 0 14px;
-}
-
-.item-preco {
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 24px;
-}
-
-.hero-grade {
+// ===== Trilha: "Voltar à minha simulação · Anúncios › Imóveis › título" =====
+.trilha {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  align-items: flex-start;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 0 12px;
+  font-size: 14px;
+  color: var(--texto-aux);
+
+  .atual { color: var(--texto); }
 }
 
-.col-calc { flex: 1 1 380px; min-width: 0; }
-.col-res { flex: 1 1 440px; min-width: 0; }
-
-.col-calc,
-.col-res { scroll-margin-top: 120px; }
-
 .voltar {
-  align-self: center;
-  color: #9FE3BF;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  font-weight: 600;
+  color: var(--verde);
   text-decoration: none;
-  font-weight: 700;
-  font-size: 14px;
 
-  &:hover { color: #FFFFFF; }
+  &:hover { color: var(--verde-escuro); text-decoration: underline; }
+}
+
+// ===== Conteúdo + painel sticky =====
+.conteudo {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  padding: 28px 0 40px;
+}
+
+.coluna {
+  flex: 1 1 520px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.painel {
+  flex: 1 1 380px;
+  min-width: 0;
+  max-width: 420px;
+  position: sticky;
+  top: 92px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.local {
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: var(--texto-aux);
+}
+
+h1 {
+  margin: 0 0 10px;
+  font-family: var(--fonte-titulo);
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+}
+
+.preco {
+  font-family: var(--fonte-titulo);
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.custos {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--texto-aux);
+}
+
+.caracteristicas {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr));
+  gap: 10px;
+
+  li {
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .rot {
+    font-size: 13px;
+    color: var(--texto-aux);
+  }
+
+  .val { font-weight: 700; }
+}
+
+.sobre {
+  h2 {
+    margin: 0 0 8px;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--texto-2);
+  }
+}
+
+.anunciante {
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: var(--sac-bg);
+  flex: none;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.anunciante-info {
+  flex: 1;
+  min-width: 0;
+
+  .rot {
+    font-size: 13px;
+    color: var(--texto-aux);
+  }
+
+  .nome {
+    margin-top: 2px;
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  .creci {
+    margin-top: 2px;
+    font-size: 14px;
+    color: var(--texto-2);
+  }
+}
+
+.ligar {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 10px;
+  border: 1px solid var(--borda-input);
+  align-items: center;
+  justify-content: center;
+  color: var(--texto);
 }
 
 .vazio {
+  padding-top: 64px;
+  padding-bottom: 80px;
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  align-items: center;
+  gap: 12px;
+
+  h1 { margin: 0; font-size: 28px; }
+  p { color: var(--texto-2); }
 }
 
+// ===== Aviso de link copiado (compartilhar no celular) =====
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 100px;
+  z-index: 40;
+  transform: translateX(-50%);
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: var(--escuro-2);
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+// Celular (anuncio-mobile): uma coluna na ordem info → simulação → sobre → anunciante.
 @media (max-width: 760px) {
-  .hero-wrap {
-    padding-top: 16px;
-    gap: 16px;
+  .desk { display: none; }
+  .mob { display: revert; }
+
+  .pagina.com-barra { padding-bottom: 88px; }
+
+  .trilha { display: none; }
+
+  .conteudo {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    padding: 16px 0 0;
   }
 
-  .item-img { height: 180px; }
-  .item-info { padding: 16px; }
-  .item-titulo { font-size: 22px; }
+  // A coluna "some" para os blocos dela poderem ser reordenados com o painel.
+  .coluna { display: contents; }
+
+  .info { order: 1; gap: 14px; }
+  .painel { order: 2; position: static; max-width: none; }
+  .sobre { order: 3; padding-top: 4px; }
+  .anunciante { order: 4; }
+
+  .local {
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+
+  h1 {
+    margin-bottom: 6px;
+    font-size: 24px;
+    letter-spacing: 0;
+  }
+
+  .preco { font-size: 26px; }
+
+  .custos {
+    margin-top: 2px;
+    font-size: 13px;
+  }
+
+  .caracteristicas {
+    gap: 6px;
+    text-align: center;
+
+    li {
+      border-radius: 10px;
+      padding: 8px 4px;
+      flex-direction: column-reverse;
+      gap: 0;
+    }
+
+    .rot {
+      font-size: 11px;
+      text-transform: lowercase;
+    }
+
+    .val { font-size: 14px; }
+  }
+
+  .sobre {
+    h2 {
+      margin-bottom: 6px;
+      font-size: 17px;
+    }
+
+    p {
+      font-size: 15px;
+      line-height: 1.55;
+    }
+  }
+
+  .anunciante {
+    border-radius: 14px;
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+  }
+
+  .anunciante-info {
+    .rot { font-size: 12px; }
+    .nome { margin-top: 0; font-size: 15px; }
+    .creci { margin-top: 0; font-size: 12px; }
+  }
+
+  .ligar.mob { display: flex; }
 }

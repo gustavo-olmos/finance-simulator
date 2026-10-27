@@ -4,6 +4,7 @@ import { FinanceCalculatorService } from './finance-calculator.service';
 import { getTema } from '../config/temas.config';
 import { TemaConfig } from '../models/tema.model';
 import { ParametrosSimulacao } from '../models/simulacao.model';
+import { UltimaSimulacao } from './ultima-simulacao.service';
 
 export type ModoCalculadora = 'valor' | 'renda';
 
@@ -95,6 +96,15 @@ export class SimulacaoStore {
     return p.valorBem > 0 ? Math.min(1, p.entrada / p.valorBem) : 0;
   });
 
+  /** Resumo guardado em localStorage como "última simulação" (UltimaSimulacaoService). */
+  readonly ultimaSimulacao = computed<UltimaSimulacao>(() => ({
+    valor: Math.round(this.parametros().valorBem),
+    entradaPct: this.entradaFracao(),
+    prazoAnos: this.prazoAnos(),
+    taxa: this.taxa(),
+    seguro: this.seguro(),
+  }));
+
   /** Query params da simulação (prefill e compartilhamento). O prazo segue em meses na URL. */
   readonly queryParams = computed(() => {
     const p = this.parametros();
@@ -127,10 +137,10 @@ export class SimulacaoStore {
 
   // Dispara uma vez por carregamento, na primeira mexida do usuário em qualquer campo
   // (não conta o preenchimento vindo da URL) — evita contar quem usou o simulador como bounce.
-  private jaInteragiu = false;
+  readonly interagiu = signal(false);
   registrarInteracao(): void {
-    if (this.jaInteragiu) return;
-    this.jaInteragiu = true;
+    if (this.interagiu()) return;
+    this.interagiu.set(true);
     track('simulacao_interacao', { tema: this.tema().id, modo: this.modo() });
   }
 

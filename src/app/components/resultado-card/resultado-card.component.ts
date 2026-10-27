@@ -5,6 +5,7 @@ import { track } from '@vercel/analytics';
 import { SimulacaoStore } from '../../core/simulacao.store';
 import { SeoService } from '../../core/seo.service';
 import { brl, brl0, brlCurto } from '../../core/formato';
+import { copiarTexto } from '../../core/clipboard';
 
 /**
  * Card de resultado (branco, ao lado da calculadora no desktop e abaixo no celular).
@@ -60,21 +61,7 @@ export class ResultadoCardComponent {
   }
 
   async copiarLink(): Promise<void> {
-    const link = this.link();
-    try {
-      await navigator.clipboard.writeText(link);
-    } catch {
-      // Clipboard API indisponível (contexto não seguro, navegador antigo): fallback com textarea.
-      const ta = this.doc.createElement('textarea');
-      ta.value = link;
-      ta.setAttribute('readonly', '');
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      this.doc.body.appendChild(ta);
-      ta.select();
-      this.doc.execCommand('copy');
-      ta.remove();
-    }
+    await copiarTexto(this.doc, this.link());
     this.registrarCompartilhamento('copiar_link');
     this.copiado.set(true);
     setTimeout(() => this.copiado.set(false), 2000);

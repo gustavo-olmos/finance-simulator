@@ -1,0 +1,141 @@
+:host { display: block; }
+
+p { margin: 0; }
+
+.secao {
+  padding-top: 8px;
+  padding-bottom: 40px;
+}
+
+h2 {
+  margin: 0 0 14px;
+  font-family: var(--fonte-titulo);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.lista {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.card {
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+  overflow: hidden;
+  color: var(--texto);
+  text-decoration: none;
+  transition: border-color 0.15s;
+
+  &:hover {
+    border-color: var(--verde);
+    color: var(--texto);
+
+    .titulo { text-decoration: underline; }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--verde);
+    outline-offset: 2px;
+  }
+}
+
+.foto {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: #DCE7E0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.selo {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 3px 7px;
+  border-radius: 5px;
+  background: var(--escuro-2);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.corpo { padding: 12px 14px 14px; }
+
+.preco {
+  font-family: var(--fonte-titulo);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.parcela {
+  margin-top: 2px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--verde-escuro);
+}
+
+.titulo {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.detalhes {
+  margin-top: 2px;
+  font-size: 14px;
+  color: var(--texto-2);
+}
+
+// Celular (anuncio-mobile): carrossel com card de 250px e foto de 150px.
+@media (max-width: 760px) {
+  .desk { display: none; }
+
+  .secao {
+    padding-top: 26px;
+    padding-bottom: 0;
+  }
+
+  h2 {
+    margin-bottom: 12px;
+    font-size: 20px;
+  }
+
+  .lista {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: var(--gutter);
+    margin: 0 calc(-1 * var(--gutter));
+    padding: 0 var(--gutter) 6px;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar { display: none; }
+  }
+
+  .card {
+    flex: 0 0 250px;
+    scroll-snap-align: start;
+  }
+
+  .foto {
+    aspect-ratio: auto;
+    height: 150px;
+  }
+
+  .corpo { padding: 10px 12px 12px; }
+
+  .preco { font-size: 18px; }
+
+  .parcela { margin-top: 0; }
+
+  .titulo,
+  .detalhes { font-size: 13px; }
+}

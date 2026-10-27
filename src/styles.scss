@@ -1,20 +1,76 @@
-/* Estilos globais — fontes, reset e variáveis de tema (verde/âmbar).
-   As variáveis --app-bg e --app-ink são atualizadas em runtime pelo ThemeService
-   (ver AppComponent) conforme o sistema selecionado (SAC = verde / PRICE = âmbar). */
+/* Estilos globais — fontes, reset e tokens do redesign (docs/redesign/HANDOFF.md). */
 
 :root {
-  --app-bg: #1f8a5b;
-  --app-ink: #15623f;
+  // Marca
+  --verde: #0E6B43;
+  --verde-escuro: #0A4D31;
+  --verde-menta: #7FE0AE;
+  --verde-medio: #2E9B67;
+  --hero-bg: radial-gradient(ellipse 90% 70% at 50% 35%, #1F7A52 0%, #11573A 45%, #0A3524 100%);
+  --escuro: #0A3524;
+  --escuro-2: #10241A;
+
+  // Texto
+  --texto: #10241A;
+  --texto-2: #3D5046;
+  --texto-3: #33463C;
+  --texto-aux: #52655A;
+
+  // Bordas e superfícies
+  --borda: #DDE5E0;
+  --borda-input: #C9D5CE;
+  --divisor: #E4EBE7;
+  --superficie: #F3F7F4;
+  --superficie-2: #F7FAF8;
+
+  // Séries SAC (verde) / PRICE (âmbar)
+  --sac-bg: #E6F2EC;
+  --sac-texto: #0A4D31;
+  --sac-cor: #0E6B43;
+  --price-bg: #FDF3E3;
+  --price-texto: #7A4706;
+  --price-cor: #E39B2D;
+
+  // Tipografia
+  --fonte-logo: 'DM Sans Variable', system-ui, sans-serif;
+  --fonte-titulo: 'Bricolage Grotesque Variable', system-ui, sans-serif;
+  --fonte-ui: 'Inter Variable', system-ui, -apple-system, sans-serif;
+
+  // Forma
+  --raio-controle: 10px;
+  --raio-card: 16px;
+  --container: 1160px;
+  --gutter: 24px;
+
+  @media (max-width: 760px) {
+    --gutter: 16px;
+  }
 }
 
 * { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; overflow-x: hidden; }
+// clip (não hidden): overflow hidden em html/body transforma o body num contêiner
+// de rolagem e quebra o position: sticky do header.
+html, body { margin: 0; padding: 0; overflow-x: clip; }
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
 
 body {
-  font-family: 'Manrope Variable', system-ui, -apple-system, sans-serif;
-  color: #1a1d1b;
-  background: var(--app-bg);
+  font-family: var(--fonte-ui);
+  color: var(--texto);
+  background: #FFFFFF;
   -webkit-font-smoothing: antialiased;
 }
 
 a { color: inherit; }
+
+// Container padrão do redesign (max 1160px, gutter 24px / 16px no celular).
+.wrap {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}

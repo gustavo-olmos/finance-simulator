@@ -1,0 +1,46 @@
+<!-- Gaveta (primeira dobra): o card de resultado ainda está abaixo da tela. -->
+<div class="gaveta" [class.visivel]="mostrarGaveta()" [attr.inert]="mostrarGaveta() ? null : ''" [attr.aria-hidden]="!mostrarGaveta()">
+  <div class="alca" aria-hidden="true"></div>
+  <div class="cards">
+    @if (maximos(); as m) {
+      <div class="card sac">
+        <p class="rot">No SAC</p>
+        <p class="valor">{{ fmt.brlCurto(m.sac) }}</p>
+        <p class="sub">{{ tema().bemNome }} de até</p>
+      </div>
+      <div class="card price">
+        <p class="rot">No PRICE</p>
+        <p class="valor">{{ fmt.brlCurto(m.price) }}</p>
+        <p class="sub">{{ tema().bemNome }} de até</p>
+      </div>
+    } @else {
+      <div class="card sac">
+        <p class="rot"><span class="cor" aria-hidden="true"></span>SAC · diminui</p>
+        <p class="valor">{{ fmt.brl(sac().primeiraParcela) }}</p>
+        <p class="sub">até {{ fmt.brl(sac().ultimaParcela) }}</p>
+      </div>
+      <div class="card price">
+        <p class="rot"><span class="cor" aria-hidden="true"></span>PRICE · fixa</p>
+        <p class="valor">{{ fmt.brl(price().primeiraParcela) }}</p>
+        <p class="sub">do início ao fim</p>
+      </div>
+    }
+  </div>
+  <button type="button" class="cta" (click)="rolar('resultado')">
+    Ver resultado e {{ tema().bemPlural }} até {{ fmt.brlCurto(store.faixaMax()) }}
+  </button>
+</div>
+
+<!-- Barra compacta: depois que o card de resultado saiu da tela por cima. -->
+<div class="compacta" [class.visivel]="mostrarCompacta()" [attr.inert]="mostrarCompacta() ? null : ''" [attr.aria-hidden]="!mostrarCompacta()">
+  <div class="valores">
+    @if (maximos(); as m) {
+      <div><p class="rot sac-txt">SAC · até</p><p class="valor">{{ fmt.brlCurto(m.sac) }}</p></div>
+      <div><p class="rot price-txt">PRICE · até</p><p class="valor">{{ fmt.brlCurto(m.price) }}</p></div>
+    } @else {
+      <div><p class="rot sac-txt">SAC</p><p class="valor">{{ fmt.brl(sac().primeiraParcela) }}</p></div>
+      <div><p class="rot price-txt">PRICE</p><p class="valor">{{ fmt.brl(price().primeiraParcela) }}</p></div>
+    }
+  </div>
+  <button type="button" class="btn" (click)="rolar('calculadora')">Ajustar</button>
+</div>

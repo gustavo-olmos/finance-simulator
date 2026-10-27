@@ -1,0 +1,27 @@
+<article class="card">
+  <a class="foto" [routerLink]="['/anuncios', anuncio().slug]" tabindex="-1" aria-hidden="true" (click)="registrarClique()">
+    @if (imagemThumb(); as src) {
+      <img [src]="src" alt="" width="480" height="360" loading="lazy" decoding="async">
+    } @else {
+      <svg class="sem-foto" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>
+    }
+    <span class="selo">ANÚNCIO</span>
+  </a>
+  <div class="corpo">
+    <p class="preco">{{ fmt.brl0(anuncio().preco) }}</p>
+    <p class="parcela">≈ {{ fmt.brl0(simulacao().parcelaSac) }}/mês com sua entrada</p>
+    <h3 class="titulo"><a [routerLink]="['/anuncios', anuncio().slug]" (click)="registrarClique()">{{ anuncio().titulo }}</a></h3>
+    @if (detalhes()) {
+      <p class="detalhes">{{ detalhes() }}</p>
+    }
+    @if (anuncio().anunciante_nome) {
+      <p class="anunciante"><span class="avatar" aria-hidden="true"></span>{{ anuncio().anunciante_nome }}</p>
+    }
+    <div class="acoes" [class.unica]="!linkWhatsapp()">
+      <a class="btn sec" [routerLink]="['/anuncios', anuncio().slug]" (click)="registrarClique()" [attr.aria-label]="'Simular ' + anuncio().titulo">Simular</a>
+      @if (linkWhatsapp(); as wa) {
+        <a class="btn pri" [href]="wa" target="_blank" rel="noopener" (click)="registrarWhatsapp()" [attr.aria-label]="'Falar no WhatsApp sobre ' + anuncio().titulo">WhatsApp</a>
+      }
+    </div>
+  </div>
+</article>

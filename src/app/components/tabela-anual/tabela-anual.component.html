@@ -1,0 +1,40 @@
+<button type="button" class="btn abrir-mob" [attr.aria-expanded]="abertaNoCelular()" aria-controls="tabela-anual" (click)="abertaNoCelular.set(!abertaNoCelular())">
+  {{ abertaNoCelular() ? 'Esconder parcelas ano a ano' : 'Ver parcelas ano a ano' }}
+</button>
+
+<div id="tabela-anual" class="bloco" [class.aberta-mob]="abertaNoCelular()">
+  <div class="cabecalho">
+    <h3>Parcelas ano a ano</h3>
+    <div class="acoes">
+      <button type="button" class="link" (click)="baixarCsv()">Baixar CSV mês a mês</button>
+      @if (total() > 5) {
+        <button type="button" class="btn" (click)="mostrarTodos.set(!mostrarTodos())">
+          {{ mostrarTodos() ? 'Mostrar só 5 anos' : 'Ver os ' + total() + ' anos' }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <div class="rolagem">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Ano</th>
+          <th scope="col" class="sac">SAC</th>
+          <th scope="col" class="price">PRICE</th>
+          <th scope="col">Saldo (SAC)</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (l of linhas(); track l.ano) {
+          <tr>
+            <td>{{ l.ano }}º</td>
+            <td class="forte">{{ fmt.brl(l.sac) }}</td>
+            <td class="forte">{{ fmt.brl(l.price) }}</td>
+            <td class="saldo">{{ fmt.brl0(l.saldo) }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

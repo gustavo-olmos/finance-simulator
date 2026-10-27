@@ -1,41 +1,51 @@
-import { Component, computed, inject, OnInit, signal, afterNextRender } from '@angular/core';
+import { Component, computed, effect, inject, OnInit, signal, afterNextRender } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { track } from '@vercel/analytics';
 import { AnuncioService } from '../../core/anuncio.service';
 import { SeoService } from '../../core/seo.service';
 import { getTema } from '../../config/temas.config';
 import { TemaId } from '../../models/tema.model';
 import { SiteHeaderComponent } from '../../components/site-header/site-header.component';
-import { SimuladorComponent } from '../../components/simulador/simulador.component';
-import { ComparisonTableComponent } from '../../components/comparison-table/comparison-table.component';
+import { SiteFooterComponent } from '../../components/site-footer/site-footer.component';
 import { FaqComponent } from '../../components/faq/faq.component';
-import { AdsGridComponent } from '../../components/ads-grid/ads-grid.component';
+import { OfertasComponent } from '../../components/ofertas/ofertas.component';
+import { BannerAnuncieComponent } from '../../components/banner-anuncie/banner-anuncie.component';
 import { AdSlotComponent } from '../../components/ad-slot/ad-slot.component';
-import { AmortizationTableComponent } from '../../components/amortization-table/amortization-table.component';
-import { ShareModalComponent } from '../../components/share-modal/share-modal.component';
-import { IntroFormComponent, Modo } from '../../components/intro-form/intro-form.component';
-import { ParametrosSimulacao, ResultadoSimulacao } from '../../models/simulacao.model';
+import { GraficoAnualComponent } from '../../components/grafico-anual/grafico-anual.component';
+import { TabelaAnualComponent } from '../../components/tabela-anual/tabela-anual.component';
+import { TaxasReferenciaComponent } from '../../components/taxas-referencia/taxas-referencia.component';
+import { CalculadoraComponent } from '../../components/calculadora/calculadora.component';
+import { ResultadoCardComponent } from '../../components/resultado-card/resultado-card.component';
+import { BarraResultadoComponent } from '../../components/barra-resultado/barra-resultado.component';
+import { SimulacaoStore } from '../../core/simulacao.store';
+import { UltimaSimulacaoService } from '../../core/ultima-simulacao.service';
+import { SITE } from '../../config/site.config';
+import { faqDoTema } from '../../config/conteudo.config';
 
 /**
  * Landing page temática (imóvel / veículo). O tema vem de route.data.
- * Zona principal (app) limpa; conteúdo de SEO e anúncios abaixo da dobra.
+ * Hero com a calculadora e o card de resultado; conteúdo de SEO e anúncios abaixo.
+ * O estado da simulação fica no SimulacaoStore, fornecido aqui.
  */
 @Component({
   selector: 'app-simulador-page',
   standalone: true,
   imports: [
     SiteHeaderComponent,
-    SimuladorComponent,
-    ComparisonTableComponent,
+    SiteFooterComponent,
     FaqComponent,
-    AdsGridComponent,
+    OfertasComponent,
+    BannerAnuncieComponent,
     AdSlotComponent,
-    AmortizationTableComponent,
-    ShareModalComponent,
-    IntroFormComponent,
+    GraficoAnualComponent,
+    TabelaAnualComponent,
+    TaxasReferenciaComponent,
+    CalculadoraComponent,
+    ResultadoCardComponent,
+    BarraResultadoComponent,
   ],
+  providers: [SimulacaoStore],
   templateUrl: './simulador-page.component.html',
   styleUrl: './simulador-page.component.scss',
 })
@@ -45,22 +55,13 @@ export class SimuladorPageComponent implements OnInit {
   private readonly seo = inject(SeoService);
   private readonly anuncioService = inject(AnuncioService);
   private readonly doc = inject(DOCUMENT);
+  private readonly ultimaSimulacao = inject(UltimaSimulacaoService);
   readonly temaId = signal<TemaId>('imovel');
   readonly config = computed(() => getTema(this.temaId()));
-  readonly resultadoAtual = signal<ResultadoSimulacao | null>(null);
+  readonly store = inject(SimulacaoStore);
 
-  // Parâmetros lidos da URL na abertura da página.
-  readonly valorParam = signal<number | null>(null);
-  readonly entradaParam = signal<number | null>(null);
-  readonly prazoParam = signal<number | null>(null);
-  readonly taxaParam = signal<number | null>(null);
-  readonly seguroParam = signal<number | null>(null);
-
-  readonly mostrarModal = signal(false);
-
-  // No mobile a calculadora fica com display:none (via CSS) até isso virar true —
-  // não depende de cálculo de altura/scroll, ver .oculta-ate-clicar no SCSS.
-  readonly calculadoraRevelada = signal(false);
+  readonly selos = ['Grátis', 'Sem cadastro', 'Resultado em segundos'];
+  readonly adsenseSlot = SITE.adsense.slots.simulador;
 
   // Só sincroniza a URL após a primeira renderização para não poluir o histórico no carregamento.
   private urlSincronizada = false;
@@ -70,6 +71,20 @@ export class SimuladorPageComponent implements OnInit {
 
   constructor() {
     afterNextRender(() => { this.urlSincronizada = true; });
+
+    // Mantém a URL com os parâmetros da simulação (prefill e compartilhamento) e salva a
+    // simulação como "última" para pré-preencher a página do anúncio.
+    effect(() => {
+      const queryParams = this.store.queryParams();
+      const ultima = this.store.ultimaSimulacao();
+      if (!this.urlSincronizada) return;
+      if (this.urlTimer) clearTimeout(this.urlTimer);
+      this.urlTimer = setTimeout(() => {
+        this.router.navigate([], { relativeTo: this.route, queryParams, replaceUrl: true });
+        // Só grava depois de o usuário mexer: abrir a página não conta como "simulação".
+        if (this.store.interagiu()) this.ultimaSimulacao.salvar(this.temaId(), ultima);
+      }, 400);
+    });
   }
 
   ngOnInit(): void {
@@ -77,13 +92,19 @@ export class SimuladorPageComponent implements OnInit {
     this.temaId.set(tema);
 
     const qp = this.route.snapshot.queryParams;
-    if (qp['valor'])   this.valorParam.set(Number(qp['valor']));
-    if (qp['entrada']) this.entradaParam.set(Number(qp['entrada']));
-    if (qp['prazo'])   this.prazoParam.set(Number(qp['prazo']));
-    if (qp['taxa'])    this.taxaParam.set(Number(qp['taxa']));
-    if (qp['seguro'])  this.seguroParam.set(Number(qp['seguro']));
+    const num = (k: string): number | null => {
+      const v = Number(qp[k]);
+      return qp[k] != null && qp[k] !== '' && Number.isFinite(v) ? v : null;
+    };
 
     const cfg = getTema(tema);
+    this.store.inicializar(cfg, {
+      valorBem: num('valor'),
+      entrada: num('entrada'),
+      prazoMeses: num('prazo'),
+      taxaAnual: num('taxa'),
+      seguroMensal: num('seguro'),
+    });
     const path = this.route.snapshot.routeConfig?.path ?? '';
     this.seo.aplicar({
       titulo: cfg.seo.titulo,
@@ -100,7 +121,7 @@ export class SimuladorPageComponent implements OnInit {
     ogUrl.searchParams.set('prazo',   (Number(qp['prazo']   ?? cfg.defaults.prazoMeses)).toString());
     ogUrl.searchParams.set('taxa',    (Number(qp['taxa']    ?? cfg.defaults.taxaAnual)).toString());
     ogUrl.searchParams.set('seguro',  (Number(qp['seguro']  ?? 0)).toString());
-    ogUrl.searchParams.set('sistema', 'SAC');
+    ogUrl.searchParams.set('sistema', qp['sistema'] === 'PRICE' ? 'PRICE' : 'SAC');
     this.seo.setOgImage(ogUrl.toString());
 
     const organizacao = { '@type': 'Organization', name: 'RotaFin', url: this.seo.ORIGIN };
@@ -120,7 +141,7 @@ export class SimuladorPageComponent implements OnInit {
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Início', item: this.seo.ORIGIN },
-        { '@type': 'ListItem', position: 2, name: cfg.seo.h1, item: url },
+        { '@type': 'ListItem', position: 2, name: cfg.seo.produtoNome, item: url },
       ],
     });
 
@@ -148,52 +169,11 @@ export class SimuladorPageComponent implements OnInit {
     this.seo.injetarJsonLd('faq', {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
-      mainEntity: [
-        { '@type': 'Question', name: 'Para qual tipo de financiamento serve?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Imóvel, veículo, crédito com garantia e outros financiamentos com parcelas mensais. Basta informar valor, entrada, prazo e taxa.' } },
-        { '@type': 'Question', name: 'A taxa de juros é mensal ou anual?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Você informa a taxa anual e o simulador converte para a taxa mensal equivalente automaticamente.' } },
-        { '@type': 'Question', name: 'Os valores são exatos?',
-          acceptedAnswer: { '@type': 'Answer', text: 'São estimativas para fins de comparação. As condições reais variam conforme a instituição financeira e o seu perfil.' } },
-        { '@type': 'Question', name: 'Preciso me cadastrar?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Não. O cálculo é gratuito, instantâneo e não exige nenhum dado pessoal.' } },
-      ],
+      mainEntity: faqDoTema(tema).map((f) => ({
+        '@type': 'Question',
+        name: f.pergunta,
+        acceptedAnswer: { '@type': 'Answer', text: f.resposta },
+      })),
     });
-  }
-
-  onIntroCalcular(evento: { parametros: ParametrosSimulacao; modo: Modo }): void {
-    const { parametros: p, modo } = evento;
-    this.valorParam.set(p.valorBem);
-    this.entradaParam.set(p.entrada);
-    this.prazoParam.set(p.prazoMeses);
-    this.taxaParam.set(p.taxaAnual);
-    this.seguroParam.set(p.seguroMensal ?? 0);
-    this.calculadoraRevelada.set(true);
-
-    track('intro_form_calcular', { modo, tema: this.temaId() });
-
-    // Aguarda o próximo frame para a calculadora já ter re-renderizado com os novos
-    // valores antes de rolar até ela.
-    requestAnimationFrame(() => {
-      this.doc.getElementById('calculadora')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  }
-
-  onParametrosChange(p: ParametrosSimulacao): void {
-    if (!this.urlSincronizada) return;
-    if (this.urlTimer) clearTimeout(this.urlTimer);
-    this.urlTimer = setTimeout(() => {
-      this.router.navigate([], {
-        relativeTo: this.route,
-        queryParams: {
-          valor: p.valorBem,
-          entrada: p.entrada,
-          prazo: p.prazoMeses,
-          taxa: p.taxaAnual,
-          seguro: p.seguroMensal ?? 0,
-        },
-        replaceUrl: true,
-      });
-    }, 400);
   }
 }

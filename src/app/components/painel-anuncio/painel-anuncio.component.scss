@@ -1,0 +1,253 @@
+:host { display: block; }
+
+p { margin: 0; }
+
+.mob { display: none; }
+
+.painel {
+  border: 1px solid var(--borda);
+  border-radius: 18px;
+  padding: 22px;
+  background: #FFFFFF;
+  box-shadow: 0 10px 30px rgba(16, 36, 26, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--texto-aux);
+}
+
+.apoio {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--texto-2);
+}
+
+.linha-entrada {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+
+  label {
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+
+.pct {
+  font-weight: 500;
+  color: var(--texto-aux);
+}
+
+.valor-entrada {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+input[type='range'] {
+  width: 100%;
+  height: 28px;
+  margin: 0;
+  accent-color: var(--verde);
+}
+
+.steppers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.rotulo {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  border: 1px solid var(--borda-input);
+  border-radius: 9px;
+
+  button {
+    flex: none;
+    width: 40px;
+    height: 100%;
+    border: 0;
+    background: transparent;
+    font-size: 20px;
+    color: var(--texto);
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid var(--verde);
+      outline-offset: -2px;
+      border-radius: 9px;
+    }
+  }
+
+  span {
+    flex: 1;
+    text-align: center;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.card {
+  border-radius: 12px;
+  padding: 12px;
+
+  &.sac { background: var(--sac-bg); .rot { color: var(--sac-texto); } }
+  &.price { background: var(--price-bg); .rot { color: var(--price-texto); } }
+
+  .rot {
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .valor {
+    margin-top: 4px;
+    font-family: var(--fonte-titulo);
+    font-size: 24px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+}
+
+.renda {
+  margin-top: -4px;
+  font-size: 13px;
+  color: var(--texto-2);
+}
+
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  border-radius: 12px;
+  background: var(--verde);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background 0.15s;
+
+  &:hover { background: var(--verde-escuro); color: #FFFFFF; }
+}
+
+.previa {
+  background: var(--superficie);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.previa-rot {
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--texto-aux);
+}
+
+.previa-texto {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.secundarios {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+
+  &.unico { grid-template-columns: 1fr; }
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--borda-input);
+  color: var(--texto);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+
+  &:hover { border-color: var(--verde); color: var(--texto); }
+}
+
+.cta,
+.btn {
+  &:focus-visible {
+    outline: 2px solid var(--verde);
+    outline-offset: 2px;
+  }
+}
+
+.aviso {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--texto-aux);
+}
+
+// Celular (anuncio-mobile): medidas menores, sem CTA/Ligar/Site e sem rótulos nos steppers.
+@media (max-width: 760px) {
+  .desk { display: none !important; }
+  .mob { display: revert; }
+
+  .painel {
+    border-radius: 16px;
+    padding: 16px;
+    gap: 14px;
+    box-shadow: none;
+  }
+
+  .eyebrow { font-size: 12px; }
+
+  .apoio {
+    margin-top: 2px;
+    font-size: 13px;
+  }
+
+  .linha-entrada { margin-bottom: 2px; }
+
+  .valor-entrada { font-size: 16px; }
+
+  .steppers { gap: 10px; }
+
+  .stepper span { font-size: 14px; }
+
+  .card {
+    padding: 10px 12px;
+
+    .valor {
+      margin-top: 2px;
+      font-size: 21px;
+    }
+  }
+
+  .previa { padding: 10px 12px; }
+
+  .previa-rot { margin-bottom: 4px; }
+
+  .previa-texto { font-size: 13px; }
+}

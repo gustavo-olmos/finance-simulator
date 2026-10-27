@@ -1,8 +1,9 @@
-import { Component, computed, inject, input, signal } from '@angular/core';
+import { Component, computed, inject, input, output, signal } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { NavigationStart, Router, RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
+import { Params } from '@angular/router';
 import { TemaId } from '../../models/tema.model';
 import { LogoComponent } from '../logo/logo.component';
 
@@ -10,6 +11,9 @@ import { LogoComponent } from '../logo/logo.component';
  * Header branco e sticky. Desktop: logotipo · abas Imóvel/Veículo · Como funciona ·
  * Dúvidas · "Anuncie aqui". Celular (≤760px): logotipo + hambúrguer na 1ª linha e as
  * abas em largura total na 2ª.
+ *
+ * Com `voltar` preenchido (página do anúncio): no desktop só abas + "Anuncie aqui";
+ * no celular, uma linha só com voltar · logotipo · compartilhar.
  */
 @Component({
   selector: 'app-site-header',
@@ -20,6 +24,8 @@ import { LogoComponent } from '../logo/logo.component';
 })
 export class SiteHeaderComponent {
   readonly temaAtivo = input<TemaId | null>(null);
+  readonly voltar = input<{ link: string; queryParams: Params | null } | null>(null);
+  readonly compartilhar = output<void>();
   readonly menuAberto = signal(false);
 
   /** Página do simulador que recebe os links de seção (#como-funciona, #duvidas…). */

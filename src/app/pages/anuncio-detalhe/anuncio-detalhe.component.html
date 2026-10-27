@@ -1,39 +1,101 @@
-<app-site-header />
+<app-site-header [temaAtivo]="tema().id" [voltar]="voltar()" (compartilhar)="compartilhar()" />
 
-<!-- Versão provisória: a página do anúncio é refeita na etapa 5 do redesign. -->
-<div class="pagina">
-<section class="hero">
-  <div class="wrap hero-wrap">
-    @if (anuncio(); as a) {
-      <div class="item">
-        <div class="item-img" [style.background-image]="'url(' + a.imagem_url + ')'"></div>
-        <div class="item-info">
-          <h1 class="item-titulo">{{ a.titulo }}</h1>
-          <p class="item-desc">{{ a.descricao }}</p>
-          <div class="item-preco">{{ a.preco | currency: 'BRL' : 'symbol' : '1.0-0' }}</div>
+<div class="pagina" [class.com-barra]="linkWhatsapp()">
+  @if (anuncio(); as a) {
+    <div class="wrap">
+      <nav class="trilha" aria-label="Você está em">
+        <a class="voltar" [routerLink]="voltar().link" [queryParams]="voltar().queryParams">
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>
+          Voltar à minha simulação
+        </a>
+        <span aria-hidden="true">·</span><span>Anúncios</span><span aria-hidden="true">›</span><span>{{ tema().bemPlural.charAt(0).toUpperCase() + tema().bemPlural.slice(1) }}</span><span aria-hidden="true">›</span><span class="atual">{{ a.titulo }}</span>
+      </nav>
+
+      <app-galeria-anuncio [anuncio]="a" />
+
+      <div class="conteudo">
+        <div class="coluna">
+          <div class="info">
+            <div>
+              @if (localizacao()) {
+                <p class="local">{{ localizacao() }}</p>
+              }
+              <h1>{{ a.titulo }}</h1>
+              <p class="preco">{{ fmt.brl0(a.preco) }}</p>
+              @if (custos(); as c) {
+                <p class="custos"><span class="desk">{{ c.desk }}</span><span class="mob">{{ c.mob }}</span></p>
+              }
+            </div>
+
+            @if (caracteristicas().length) {
+              <ul class="caracteristicas" [style.--n]="caracteristicas().length">
+                @for (c of caracteristicas(); track c.rotulo) {
+                  <li><span class="rot">{{ c.rotulo }}</span><span class="val">{{ c.valor }}</span></li>
+                }
+              </ul>
+            }
+          </div>
+
+          <div class="sobre">
+            <h2>Sobre o {{ tema().bemNome }}</h2>
+            <p>{{ a.descricao }}</p>
+          </div>
+
+          @if (a.anunciante_nome) {
+            <div class="anunciante">
+              <span class="logo">
+                @if (logoAnunciante(); as logo) {
+                  <img [src]="logo" alt="" width="56" height="56" loading="lazy">
+                }
+              </span>
+              <div class="anunciante-info">
+                <p class="rot">Anunciado por</p>
+                <p class="nome">{{ a.anunciante_nome }}</p>
+                @if (creci(); as c) {
+                  <p class="creci"><span class="desk">{{ c.desk }}</span><span class="mob">{{ c.mob }}</span></p>
+                }
+              </div>
+              @if (linkTelefone(); as tel) {
+                <a class="ligar mob" [href]="tel" [attr.aria-label]="'Ligar para ' + a.anunciante_nome" (click)="registrarTelefone()">
+                  <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>
+                </a>
+              }
+            </div>
+          }
         </div>
+
+        <app-painel-anuncio
+          id="simular"
+          class="painel"
+          [anuncio]="a"
+          [mensagem]="mensagem()"
+          [linkWhatsapp]="linkWhatsapp()"
+          [linkTelefone]="linkTelefone()"
+          [simulacaoSalva]="simulacaoSalva()"
+        />
       </div>
 
-      <div class="hero-grade">
-        <app-calculadora id="calculadora" class="col-calc" />
-        <app-resultado-card id="resultado" class="col-res" />
-      </div>
+      <app-outros-anuncios [anuncio]="a" [anuncios]="anuncios()" />
+    </div>
 
-      <a class="voltar" routerLink="/financiamento-imovel">← Voltar para o simulador</a>
-    } @else {
-      <div class="vazio">
-        <p>Anúncio não encontrado.</p>
-        <a class="voltar" routerLink="/financiamento-imovel">← Voltar para o simulador</a>
-      </div>
-    }
-  </div>
-</section>
+    <app-ad-slot [slot]="adsenseSlot" />
+  } @else if (anuncio() === undefined) {
+    <div class="wrap vazio">
+      <h1>Anúncio não encontrado</h1>
+      <p>Ele pode ter sido removido pelo anunciante.</p>
+      <a class="voltar" [routerLink]="voltar().link" [queryParams]="voltar().queryParams">Voltar à minha simulação</a>
+    </div>
+  }
 
-<app-ad-slot [slot]="adsenseSlot" />
-
-<app-site-footer />
+  <app-site-footer />
 </div>
 
-@if (anuncio()) {
-  <app-barra-resultado />
+@if (anuncio(); as a) {
+  @if (linkWhatsapp(); as wa) {
+    <app-barra-whatsapp [link]="wa" [parcela]="sac().primeiraParcela" [slug]="a.slug" />
+  }
+}
+
+@if (linkCopiado()) {
+  <p class="toast" role="status">Link copiado</p>
 }

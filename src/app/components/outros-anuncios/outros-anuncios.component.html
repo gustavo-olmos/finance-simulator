@@ -1,0 +1,25 @@
+@if (itens().length) {
+  <section class="secao" aria-labelledby="outros-titulo">
+    <h2 id="outros-titulo">Outros<span class="desk"> {{ bemPlural() }}</span> na mesma faixa</h2>
+    <div class="lista">
+      @for (item of itens(); track item.anuncio.id; let i = $index) {
+        <a class="card" [routerLink]="['/anuncios', item.anuncio.slug]" (click)="registrarClique(item.anuncio.slug, i + 1)">
+          <div class="foto">
+            @if (item.foto; as src) {
+              <img [src]="src" alt="" width="480" height="360" loading="lazy" decoding="async">
+            }
+            <span class="selo">ANÚNCIO</span>
+          </div>
+          <div class="corpo">
+            <p class="preco">{{ fmt.brl0(item.anuncio.preco) }}</p>
+            <p class="parcela">≈ {{ fmt.brl0(item.parcela) }}/mês</p>
+            <p class="titulo">{{ item.anuncio.titulo }}</p>
+            @if (item.detalhes) {
+              <p class="detalhes">{{ item.detalhes }}</p>
+            }
+          </div>
+        </a>
+      }
+    </div>
+  </section>
+}

@@ -1,31 +1,44 @@
 <header class="site-header">
-  <div class="wrap linha">
+  <div class="wrap linha" [class.anuncio]="voltar()">
+    @if (voltar(); as v) {
+      <a class="btn-icone mob-only" [routerLink]="v.link" [queryParams]="v.queryParams" aria-label="Voltar à minha simulação">
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>
+      </a>
+    }
     <a class="brand" routerLink="/financiamento-imovel" aria-label="RotaFin, página inicial">
       <app-logo />
     </a>
 
     <nav class="nav desk-only" aria-label="Principal">
       <ng-container *ngTemplateOutlet="abas" />
-      <a class="nav-link" [routerLink]="rotaSimulador()" fragment="como-funciona" queryParamsHandling="preserve">Como funciona</a>
-      <a class="nav-link" [routerLink]="rotaSimulador()" fragment="duvidas" queryParamsHandling="preserve">Dúvidas</a>
+      @if (!voltar()) {
+        <a class="nav-link" [routerLink]="rotaSimulador()" fragment="como-funciona" queryParamsHandling="preserve">Como funciona</a>
+        <a class="nav-link" [routerLink]="rotaSimulador()" fragment="duvidas" queryParamsHandling="preserve">Dúvidas</a>
+      }
     </nav>
 
     <div class="acoes">
       <a class="btn-anuncie desk-only" [routerLink]="rotaSimulador()" fragment="anunciar" queryParamsHandling="preserve">Anuncie aqui</a>
-      <button
-        type="button"
-        class="btn-menu mob-only"
-        [attr.aria-label]="menuAberto() ? 'Fechar menu' : 'Abrir menu'"
-        [attr.aria-expanded]="menuAberto()"
-        aria-controls="menu-mobile"
-        (click)="menuAberto.set(!menuAberto())"
-      >
-        @if (menuAberto()) {
-          <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg>
-        } @else {
-          <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg>
-        }
-      </button>
+      @if (voltar()) {
+        <button type="button" class="btn-icone mob-only" aria-label="Compartilhar anúncio" (click)="compartilhar.emit()">
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"></path><path d="M7 8l5-5 5 5"></path><path d="M5 14v6h14v-6"></path></svg>
+        </button>
+      } @else {
+        <button
+          type="button"
+          class="btn-menu mob-only"
+          [attr.aria-label]="menuAberto() ? 'Fechar menu' : 'Abrir menu'"
+          [attr.aria-expanded]="menuAberto()"
+          aria-controls="menu-mobile"
+          (click)="menuAberto.set(!menuAberto())"
+        >
+          @if (menuAberto()) {
+            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg>
+          } @else {
+            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg>
+          }
+        </button>
+      }
     </div>
   </div>
 
@@ -37,9 +50,11 @@
     </nav>
   }
 
-  <nav class="abas-mobile mob-only" aria-label="Simulador">
-    <ng-container *ngTemplateOutlet="abas" />
-  </nav>
+  @if (!voltar()) {
+    <nav class="abas-mobile mob-only" aria-label="Simulador">
+      <ng-container *ngTemplateOutlet="abas" />
+    </nav>
+  }
 </header>
 
 <ng-template #abas>

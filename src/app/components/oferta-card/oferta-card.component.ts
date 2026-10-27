@@ -2,7 +2,9 @@ import { Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { track } from '@vercel/analytics';
 import { Anuncio } from '../../models/anuncio.model';
-import { brl, brl0 } from '../../core/formato';
+import { brl0, NBSP } from '../../core/formato';
+import { imagemRedimensionada } from '../../core/imagem';
+import { linkWhatsapp, mensagemAnuncio } from '../../core/whatsapp';
 
 /** Simulação aplicada a um anúncio (mesmo motor da calculadora). */
 export interface SimulacaoOferta {
@@ -30,12 +32,7 @@ export class OfertaCardComponent {
 
   protected readonly fmt = { brl0 };
 
-  // Pede ao Unsplash uma versão redimensionada/comprimida (a URL original é a foto em
-  // resolução nativa, várias vezes maior que o necessário para o card).
-  readonly imagemThumb = computed(() => {
-    const url = this.anuncio().imagem_url;
-    return url ? `${url}?auto=format&fit=crop&w=480&h=360&q=60` : null;
-  });
+  readonly imagemThumb = computed(() => imagemRedimensionada(this.anuncio().imagem_url, 480, 360));
 
   /** "Bairro, cidade · 2 quartos · 64 m²" (imóvel) ou "Cidade · 2024 · 32.000 km" (veículo). */
   readonly detalhes = computed(() => {
@@ -43,8 +40,8 @@ export class OfertaCardComponent {
     const local = [a.bairro, a.cidade].filter(Boolean).join(', ');
     const partes =
       a.categoria === 'veiculo'
-        ? [local, a.ano, a.km != null ? `${a.km.toLocaleString('pt-BR')} km` : null]
-        : [local, a.quartos != null ? `${a.quartos} ${a.quartos === 1 ? 'quarto' : 'quartos'}` : null, a.area_m2 != null ? `${a.area_m2} m²` : null];
+        ? [local, a.ano, a.km != null ? `${a.km.toLocaleString('pt-BR')}${NBSP}km` : null]
+        : [local, a.quartos != null ? `${a.quartos} ${a.quartos === 1 ? 'quarto' : 'quartos'}` : null, a.area_m2 != null ? `${a.area_m2}${NBSP}m²` : null];
     return partes.filter((p) => p != null && p !== '').join(' · ');
   });
 
@@ -52,8 +49,7 @@ export class OfertaCardComponent {
     const a = this.anuncio();
     if (!a.whatsapp) return null;
     const s = this.simulacao();
-    const texto = `Olá! Vi o anúncio ${a.titulo} na RotaFin. Simulei com ${brl0(s.entrada)} de entrada em ${s.prazoAnos} anos, parcela de ${brl(s.parcelaSac)} (SAC). Ainda está disponível?`;
-    return `https://wa.me/${a.whatsapp}?text=${encodeURIComponent(texto)}`;
+    return linkWhatsapp(a.whatsapp, mensagemAnuncio(a.titulo, s.entrada, s.prazoAnos, s.parcelaSac));
   });
 
   registrarClique(): void {

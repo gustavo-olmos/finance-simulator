@@ -1,0 +1,90 @@
+<section class="painel" [attr.aria-label]="'Simulação deste ' + bemNome()">
+  <div>
+    <p class="eyebrow">Sua simulação para este {{ bemNome() }}</p>
+    @if (simulacaoSalva()) {
+      <p class="apoio desk">Usamos os valores da sua última simulação. Ajuste à vontade.</p>
+      <p class="apoio mob">Com os valores que você já tinha usado.</p>
+    } @else {
+      <p class="apoio">Ajuste entrada, prazo e juros para ver a sua parcela.</p>
+    }
+  </div>
+
+  <div>
+    <div class="linha-entrada">
+      <label for="a-entrada">Entrada <span class="pct">· {{ entradaPct() }}%</span></label>
+      <span class="valor-entrada">{{ fmt.brl0(store.entrada()) }}</span>
+    </div>
+    <input
+      id="a-entrada"
+      type="range"
+      min="0"
+      [max]="anuncio().preco"
+      [step]="store.tema().faixas.entradaStep"
+      [value]="store.entrada()"
+      [attr.aria-valuetext]="fmt.brl0(store.entrada())"
+      (input)="setEntrada($event)"
+    >
+  </div>
+
+  <div class="steppers">
+    <div>
+      <span class="rotulo desk" id="a-prazo-rot">Prazo</span>
+      <div class="stepper" role="group" aria-labelledby="a-prazo-rot">
+        <button type="button" aria-label="Diminuir prazo" (click)="passoPrazo(-1)">−</button>
+        <span aria-live="polite">{{ store.prazoAnos() }} {{ store.prazoAnos() === 1 ? 'ano' : 'anos' }}</span>
+        <button type="button" aria-label="Aumentar prazo" (click)="passoPrazo(1)">+</button>
+      </div>
+    </div>
+    <div>
+      <span class="rotulo desk" id="a-taxa-rot">Juros ao ano</span>
+      <div class="stepper" role="group" aria-labelledby="a-taxa-rot">
+        <button type="button" aria-label="Diminuir juros" (click)="passoTaxa(-0.1)">−</button>
+        <span aria-live="polite">{{ taxaFmt() }}</span>
+        <button type="button" aria-label="Aumentar juros" (click)="passoTaxa(0.1)">+</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card sac">
+      <p class="rot">SAC · diminui</p>
+      <p class="valor">{{ fmt.brl(sac().primeiraParcela) }}</p>
+    </div>
+    <div class="card price">
+      <p class="rot">PRICE · fixa</p>
+      <p class="valor">{{ fmt.brl(price().primeiraParcela) }}</p>
+    </div>
+  </div>
+  <p class="renda">Renda familiar<span class="desk"> estimada</span> a partir de <strong>{{ fmt.brl0(sac().primeiraParcela / 0.3) }}</strong>*</p>
+
+  @if (linkWhatsapp(); as wa) {
+    <a class="cta desk" [href]="wa" target="_blank" rel="noopener" (click)="registrarWhatsapp()">
+      <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-13.5 7.8L3 21l1.2-4.5A9 9 0 1 1 21 12z"></path></svg>
+      Falar com {{ anuncio().categoria === 'veiculo' ? 'o anunciante' : 'a imobiliária' }}
+    </a>
+
+    <div class="previa">
+      <p class="previa-rot">Mensagem que será enviada<span class="mob"> no WhatsApp</span></p>
+      <p class="previa-texto">“{{ mensagem() }}”</p>
+    </div>
+  }
+
+  @if (linkTelefone() || anuncio().anunciante_site) {
+    <div class="secundarios desk" [class.unico]="!linkTelefone() || !anuncio().anunciante_site">
+      @if (linkTelefone(); as tel) {
+        <a class="btn" [href]="tel" (click)="registrarTelefone()">
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>
+          Ligar
+        </a>
+      }
+      @if (anuncio().anunciante_site; as site) {
+        <a class="btn" [href]="site" target="_blank" rel="noopener" (click)="registrarSite()">
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"></path><path d="M20 4L10 14"></path><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg>
+          Site do anunciante
+        </a>
+      }
+    </div>
+  }
+
+  <p class="aviso">*Parcela até 30% da renda bruta. Estimativa, não é proposta de crédito. A negociação é feita direto com o anunciante.</p>
+</section>

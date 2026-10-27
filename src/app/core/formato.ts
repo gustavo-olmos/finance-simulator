@@ -1,6 +1,9 @@
 // Formatação de valores em pt-BR, no mesmo padrão dos textos do design
 // ("R$ 2.671,90", "R$ 601.945", "R$ 300 mil", "R$ 1,25 mi").
 
+/** Espaço não separável: "64 m²", "32.000 km" não quebram entre o número e a unidade. */
+export const NBSP = String.fromCharCode(160);
+
 /** Moeda com centavos: R$ 2.671,90 */
 export function brl(v: number): string {
   return 'R$ ' + (v || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });

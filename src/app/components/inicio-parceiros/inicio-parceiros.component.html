@@ -1,0 +1,35 @@
+@if (parceiros.length) {
+  <section id="parceiros" class="secao">
+    <div class="pilha" data-revelar>
+      <div class="cabeca">
+        <div class="titulo">
+          <span class="pilula">Patrocinado</span>
+          <h2>Ofertas de parceiros</h2>
+        </div>
+        @if (anunciarUrl) {
+          <a class="link" [href]="anunciarUrl" target="_blank" rel="noopener">Tem uma imobiliária ou concessionária? Anuncie aqui</a>
+        } @else {
+          <a class="link" routerLink="/financiamento-imovel" fragment="anunciar">Tem uma imobiliária ou concessionária? Anuncie aqui</a>
+        }
+      </div>
+      <div class="grade escalonar">
+        @for (p of parceiros; track p.nome) {
+          <article class="card">
+            <div class="topo">
+              <div class="logo">
+                @if (p.logoUrl) {
+                  <img [src]="p.logoUrl" alt="" width="48" height="48" loading="lazy">
+                } @else {
+                  <span aria-hidden="true">{{ p.nome.charAt(0) }}</span>
+                }
+              </div>
+              <div class="nome"><span>{{ p.tipo }}</span><strong>{{ p.nome }}</strong></div>
+            </div>
+            <p>{{ p.chamada }}</p>
+            <a class="btn" [href]="p.url" target="_blank" rel="noopener sponsored" (click)="registrar(p)">Ver ofertas</a>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+}

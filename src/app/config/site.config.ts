@@ -9,6 +9,7 @@ export const SITE = {
     client: '',
     /** data-ad-slot de cada bloco. TODO: preencher. */
     slots: {
+      inicio: '',
       simulador: '',
       anuncio: '',
     },

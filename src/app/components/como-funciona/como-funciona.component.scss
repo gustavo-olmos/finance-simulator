@@ -1,0 +1,128 @@
+@use '../../styles/inicio' as lp;
+
+:host { @include lp.host; }
+
+@include lp.desk-mob;
+
+h2, h3, p { margin: 0; }
+
+.secao {
+  padding: 96px 0;
+  background: var(--lp-escuro);
+  color: #FFFFFF;
+  @include lp.celular { padding: 56px 0; }
+}
+
+.pilha {
+  @include lp.conteiner;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  @include lp.celular { gap: 24px; }
+}
+
+// --e (0 a 1) vem da rolagem; sem JS fica em 1 (estado final).
+.cabeca, .passo {
+  --desloc: 36px;
+  opacity: calc(0.12 + 0.88 * var(--e, 1));
+  transform: translateY(calc(var(--desloc) * (1 - var(--e, 1))));
+  transition: opacity 0.15s linear, transform 0.15s linear;
+  @include lp.celular { --desloc: 28px; }
+}
+
+.cabeca {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 640px;
+
+  h2 {
+    font-size: 36px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+
+  p { font-size: 17px; line-height: 1.55; color: var(--lp-escuro-texto); }
+
+  @include lp.celular {
+    gap: 8px;
+    h2 { font-size: 26px; line-height: 1.2; }
+    p { font-size: 16px; line-height: 1.5; }
+  }
+}
+
+.trilho {
+  position: relative;
+  height: 4px;
+  margin-top: 8px;
+  border-radius: 999px;
+  background: var(--lp-escuro-borda);
+  overflow: hidden;
+  @include lp.celular { margin-top: 0; }
+}
+
+.cheio {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--lp-ambar);
+  transform: scaleX(var(--trilho, 1));
+  transform-origin: left center;
+}
+
+.passos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  @include lp.celular { display: flex; flex-direction: column; gap: 12px; }
+}
+
+.passo {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 28px;
+  border-radius: 16px;
+  background: var(--lp-escuro-card);
+  border: 1px solid var(--lp-escuro-borda);
+  @include lp.celular { flex-direction: row; gap: 16px; padding: 20px; border-radius: 14px; }
+}
+
+.num {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--lp-ambar);
+  background: var(--lp-ambar);
+  color: var(--lp-texto);
+  font-family: var(--lp-mono);
+  font-size: 15px;
+  font-weight: 500;
+  transition: background 0.3s ease, color 0.3s ease;
+  @include lp.celular { width: 40px; height: 40px; font-size: 14px; }
+}
+
+.apagado .num { background: transparent; color: var(--lp-ambar-claro); }
+
+.texto {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  h3 { font-size: 20px; font-weight: 700; color: #FFFFFF; }
+  p { font-size: 16px; line-height: 1.55; color: var(--lp-escuro-texto); }
+
+  @include lp.celular {
+    gap: 6px;
+    h3 { font-size: 18px; }
+    p { font-size: 15px; line-height: 1.5; }
+  }
+}

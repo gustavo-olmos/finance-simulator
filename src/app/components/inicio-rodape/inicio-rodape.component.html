@@ -1,0 +1,42 @@
+<footer class="rodape">
+  <div class="pilha">
+    <div class="topo">
+      <div class="marca">
+        <span class="logo">RotaFin</span>
+        <p>Simuladores de financiamento de imóvel e veículo.</p>
+      </div>
+
+      <!-- TODO: criar as páginas Contato, Privacidade e Termos. Até lá essas rotas
+           caem no redirect '**' e voltam para o simulador (como no rodapé do site). -->
+      <div class="navs">
+        <nav aria-label="Simuladores">
+          <span class="titulo">Simuladores</span>
+          <a routerLink="/financiamento-imovel">Imóvel</a>
+          <a routerLink="/financiamento-veiculo">Veículo</a>
+        </nav>
+        <nav aria-label="RotaFin">
+          <span class="titulo">RotaFin</span>
+          @if (temGuias) {
+            <a routerLink="/guias">Guias</a>
+          }
+          @if (anunciarUrl) {
+            <a [href]="anunciarUrl" target="_blank" rel="noopener">Anuncie</a>
+          } @else {
+            <a routerLink="/financiamento-imovel" fragment="anunciar">Anuncie</a>
+          }
+          <a routerLink="/contato">Contato</a>
+        </nav>
+        <nav aria-label="Legal">
+          <span class="titulo">Legal</span>
+          <a routerLink="/privacidade">Privacidade</a>
+          <a routerLink="/termos">Termos de uso</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="legal">
+      <p>As simulações são estimativas e não constituem oferta de crédito. Condições reais dependem da instituição financeira e da análise do seu perfil.</p>
+      <p>© 2026 RotaFin</p>
+    </div>
+  </div>
+</footer>

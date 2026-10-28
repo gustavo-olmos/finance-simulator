@@ -1,0 +1,82 @@
+@use '../../styles/inicio' as lp;
+
+:host { @include lp.host; }
+
+@include lp.desk-mob;
+
+.topo {
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--lp-divisor);
+}
+
+.linha {
+  @include lp.conteiner;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 32px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+
+  @include lp.celular { padding: 8px 8px 8px 16px; }
+}
+
+.logo {
+  @include lp.logo;
+  font-size: 26px;
+  @include lp.celular { font-size: 24px; }
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 28px;
+  font-size: 15px;
+  font-weight: 500;
+
+  a {
+    padding: 10px 0;
+    color: var(--lp-texto-3);
+    text-decoration: none;
+    &:hover { color: var(--lp-verde); }
+  }
+}
+
+.cta { @include lp.botao-primario; }
+
+.btn-menu {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: none;
+  color: var(--lp-texto);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  &:focus-visible { outline: 2px solid var(--lp-verde); outline-offset: 2px; }
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 16px 16px;
+  border-top: 1px solid var(--lp-divisor);
+
+  a:not(.cta) {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--lp-divisor);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--lp-texto-3);
+    text-decoration: none;
+  }
+
+  .cta {
+    margin-top: 12px;
+    min-height: 48px;
+    font-size: 16px;
+  }
+}

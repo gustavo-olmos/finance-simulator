@@ -1,0 +1,19 @@
+@if (guias.length) {
+  <section id="guias" class="secao">
+    <div class="pilha" data-revelar>
+      <div class="cabeca">
+        <h2>Antes de assinar, vale ler</h2>
+        <a class="link" routerLink="/guias">Todos os guias</a>
+      </div>
+      <div class="grade escalonar">
+        @for (g of guias; track g.url) {
+          <a class="card" [routerLink]="g.url">
+            <span class="pilula" [class.ambar]="g.tom === 'ambar'">{{ g.tag }}</span>
+            <h3>{{ g.titulo }}</h3>
+            <p>{{ g.resumo }}</p>
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+}

@@ -36,6 +36,34 @@
   --fonte-titulo: 'Bricolage Grotesque Variable', system-ui, sans-serif;
   --fonte-ui: 'Inter Variable', system-ui, -apple-system, sans-serif;
 
+  // Página inicial e seus componentes (docs/landingpage): paleta e fontes próprias
+  --lp-verde: #0E6B43;
+  --lp-verde-hover: #0A5234;
+  --lp-ambar: #D9890F;
+  --lp-ambar-claro: #E8A84A;
+  --lp-pessego: #F9D7BD;
+  --lp-ambar-texto: #7A4504;
+  --lp-juros: #8A4F05;
+  --lp-texto: #0F1A15;
+  --lp-texto-2: #4A5651;
+  --lp-texto-3: #2A3530;
+  --lp-rotulo: #3A4641;
+  --lp-aux: #5B6660;
+  --lp-borda: #DDE5E0;
+  --lp-borda-input: #C7D2CC;
+  --lp-divisor: #E3E8E5;
+  --lp-menta: #E3F0E9;
+  --lp-menta-texto: #0B5535;
+  --lp-superficie: #F2F7F4;
+  --lp-superficie-2: #F7F9F8;
+  --lp-escuro: #0C3B27;
+  --lp-escuro-card: #12482F;
+  --lp-escuro-borda: #1C5A3D;
+  --lp-escuro-texto: #BFD6C9;
+  --lp-curva: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --lp-fonte: 'DM Sans Variable', system-ui, sans-serif;
+  --lp-mono: 'DM Mono', ui-monospace, monospace;
+
   // Forma
   --raio-controle: 10px;
   --raio-card: 16px;
@@ -66,6 +94,27 @@ body {
 }
 
 a { color: inherit; }
+
+// Página inicial: blocos [data-revelar] sobem e aparecem ao rolar. A página marca com
+// .revelar o que está abaixo da dobra e acrescenta .visivel quando entra na tela;
+// filhos de .escalonar entram um a um. Global porque vale para os componentes da página.
+[data-revelar].revelar > :not(.escalonar),
+[data-revelar].revelar .escalonar > * {
+  opacity: 0;
+  translate: 0 28px;
+  transition: opacity 0.8s var(--lp-curva), translate 0.8s var(--lp-curva), transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+[data-revelar].revelar.visivel > :not(.escalonar),
+[data-revelar].revelar.visivel .escalonar > * {
+  opacity: 1;
+  translate: 0 0;
+}
+
+[data-revelar].revelar.visivel > :nth-child(2):not(.escalonar) { transition-delay: 0.12s, 0.12s, 0s, 0s; }
+[data-revelar].revelar.visivel .escalonar > :nth-child(1) { transition-delay: 0.15s, 0.15s, 0s, 0s; }
+[data-revelar].revelar.visivel .escalonar > :nth-child(2) { transition-delay: 0.27s, 0.27s, 0s, 0s; }
+[data-revelar].revelar.visivel .escalonar > :nth-child(3) { transition-delay: 0.39s, 0.39s, 0s, 0s; }
 
 // Container padrão do redesign (max 1160px, gutter 24px / 16px no celular).
 .wrap {

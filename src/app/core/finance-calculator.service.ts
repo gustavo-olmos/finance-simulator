@@ -72,6 +72,12 @@ export class FinanceCalculatorService {
     return this.taxaMensal(taxaAnual) * 100;
   }
 
+  /** Taxa anual (%) equivalente à taxa mensal informada (%) — o inverso de taxaMensalPercentual. */
+  taxaAnualPercentual(taxaMensal: number): number {
+    if (taxaMensal <= 0) return 0;
+    return (Math.pow(1 + taxaMensal / 100, 12) - 1) * 100;
+  }
+
   /**
    * Sistema SAC: amortização constante.
    * Juros recalculados sobre o saldo devedor → parcelas decrescentes.

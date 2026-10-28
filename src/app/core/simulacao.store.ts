@@ -1,5 +1,5 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { track } from '@vercel/analytics';
+import { track } from './analytics';
 import { FinanceCalculatorService } from './finance-calculator.service';
 import { getTema } from '../config/temas.config';
 import { TemaConfig } from '../models/tema.model';

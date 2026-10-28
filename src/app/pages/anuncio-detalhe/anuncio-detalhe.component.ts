@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map, switchMap, tap } from 'rxjs';
-import { track } from '@vercel/analytics';
+import { track } from '../../core/analytics';
 import { AnuncioService } from '../../core/anuncio.service';
 import { SeoService } from '../../core/seo.service';
 import { SimulacaoStore } from '../../core/simulacao.store';

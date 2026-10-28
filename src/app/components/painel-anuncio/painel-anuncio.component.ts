@@ -1,5 +1,5 @@
 import { Component, computed, inject, input } from '@angular/core';
-import { track } from '@vercel/analytics';
+import { track } from '../../core/analytics';
 import { SimulacaoStore } from '../../core/simulacao.store';
 import { brl, brl0, decimal } from '../../core/formato';
 import { Anuncio } from '../../models/anuncio.model';

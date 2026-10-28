@@ -1,0 +1,86 @@
+@use '../../styles/inicio' as lp;
+
+:host { @include lp.host; }
+
+@include lp.desk-mob;
+
+h2 { @include lp.titulo-secao(34px); }
+
+p { margin: 0; }
+
+.secao { padding: 0 24px 88px; }
+
+.caixa {
+  position: relative;
+  overflow: hidden;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 56px 48px;
+  border-radius: 20px;
+  background: var(--lp-ambar);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px 48px;
+}
+
+@keyframes flutuar {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-6px, 10px); }
+}
+
+.anel {
+  position: absolute;
+  top: -70px;
+  right: 18%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 28px solid rgba(255, 255, 255, 0.32);
+  animation: flutuar 8s ease-in-out infinite;
+}
+
+.texto {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 620px;
+
+  p { font-size: 17px; line-height: 1.55; color: #2E1F06; }
+}
+
+.btn {
+  @include lp.botao;
+  @include lp.seta;
+  position: relative;
+  min-height: 52px;
+  padding: 0 28px;
+  background: var(--lp-escuro);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 16px;
+  &:hover { background: #0A2F1F; color: #FFFFFF; }
+  &:focus-visible { outline-color: var(--lp-escuro); }
+}
+
+@include lp.celular {
+  .secao { padding: 0 16px 48px; }
+
+  .caixa {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+    padding: 32px 24px;
+    border-radius: 18px;
+  }
+
+  .anel { top: -50px; right: -50px; width: 150px; height: 150px; border-width: 22px; }
+
+  .texto { gap: 8px; p { font-size: 16px; line-height: 1.5; } }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anel { animation: none; }
+}

@@ -1,0 +1,38 @@
+<app-inicio-topo />
+
+<section id="simular" class="hero">
+  <div class="conteiner grade">
+    <div class="texto">
+      <p class="etiqueta entrar"><span class="ponto" aria-hidden="true"></span>Simulador de financiamento<span class="desk"> · imóvel e veículo</span></p>
+      <h1 class="entrar d1">Saiba <span class="marca">quanto vai pagar</span> antes de assinar<span class="desk"> o financiamento</span>.</h1>
+      <p class="sub desk entrar d2">Simule a parcela da casa ou do carro, veja quanto vai de juros e ajuste entrada e prazo até caber no seu bolso.</p>
+      <p class="sub mob entrar d2">Simule a parcela da casa ou do carro e veja quanto vai de juros. Grátis e sem cadastro.</p>
+      <ul class="beneficios desk entrar d2">
+        @for (b of beneficios; track b) {
+          <li><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7.5"></path></svg>{{ b }}</li>
+        }
+      </ul>
+    </div>
+
+    <div class="calc entrar d3">
+      <div class="bola" aria-hidden="true"></div>
+      <div class="anel desk" aria-hidden="true"></div>
+      <app-calculadora-rapida />
+    </div>
+
+    <ul class="beneficios mob">
+      @for (b of beneficios; track b) {
+        <li><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7.5"></path></svg>{{ b }}</li>
+      }
+    </ul>
+  </div>
+</section>
+
+<app-inicio-simuladores />
+<app-como-funciona />
+<app-ad-slot [slot]="adsenseSlot" />
+<app-inicio-parceiros />
+<app-inicio-guias />
+<app-inicio-duvidas />
+<app-inicio-chamada />
+<app-inicio-rodape />

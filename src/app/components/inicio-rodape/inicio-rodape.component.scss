@@ -1,0 +1,93 @@
+@use '../../styles/inicio' as lp;
+
+:host { @include lp.host; }
+
+p { margin: 0; }
+
+.rodape {
+  padding: 56px 0 40px;
+  background: var(--lp-superficie-2);
+  border-top: 1px solid var(--lp-divisor);
+  @include lp.celular { padding: 40px 0 32px; }
+}
+
+.pilha {
+  @include lp.conteiner;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  @include lp.celular { gap: 28px; }
+}
+
+.topo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 32px 48px;
+  @include lp.celular { flex-direction: column; gap: 28px; }
+}
+
+.marca {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 320px;
+
+  p { font-size: 15px; line-height: 1.55; color: var(--lp-texto-2); }
+
+  @include lp.celular {
+    gap: 8px;
+    p { font-size: 14px; line-height: 1.5; }
+  }
+}
+
+.logo {
+  @include lp.logo;
+  font-size: 24px;
+  @include lp.celular { font-size: 22px; }
+}
+
+.navs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px 64px;
+
+  nav { display: flex; flex-direction: column; gap: 4px; font-size: 15px; }
+
+  a {
+    padding: 6px 0;
+    color: var(--lp-texto-2);
+    text-decoration: none;
+    &:hover { color: var(--lp-verde); }
+  }
+
+  @include lp.celular {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    nav { gap: 2px; }
+    a { padding: 8px 0; }
+  }
+}
+
+.titulo {
+  padding-bottom: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--lp-texto);
+}
+
+.legal {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 24px;
+  border-top: 1px solid var(--lp-borda);
+
+  p { font-size: 13px; line-height: 1.6; color: var(--lp-aux); }
+
+  @include lp.celular {
+    padding-top: 20px;
+    p { font-size: 12px; }
+  }
+}

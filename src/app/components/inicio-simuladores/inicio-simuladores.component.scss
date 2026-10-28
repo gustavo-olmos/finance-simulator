@@ -1,0 +1,140 @@
+@use '../../styles/inicio' as lp;
+
+:host { @include lp.host; }
+
+@include lp.desk-mob;
+
+h2 { @include lp.titulo-secao; }
+h3, p { margin: 0; }
+
+.secao { padding: 88px 0; }
+
+.pilha {
+  @include lp.conteiner;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.cabeca {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 640px;
+
+  p { font-size: 17px; line-height: 1.55; color: var(--lp-texto-2); }
+}
+
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  @include lp.cartao;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 32px;
+  border: 1px solid var(--lp-borda);
+  border-radius: 16px;
+  background: #FFFFFF;
+}
+
+.icone {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--lp-menta);
+  color: var(--lp-verde);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.ambar { background: var(--lp-pessego); color: var(--lp-juros); }
+}
+
+.texto {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+
+  h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.01em; }
+  p { font-size: 16px; line-height: 1.55; color: var(--lp-texto-2); }
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--lp-superficie);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--lp-texto-3);
+  }
+}
+
+.acao {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--lp-verde);
+
+  svg { transition: transform 0.2s ease; }
+}
+
+.card:hover .acao svg { transform: translateX(4px); }
+
+// No celular, cards em linha: ícone, título curto e seta.
+@include lp.celular {
+  .secao { padding: 48px 0; }
+  .pilha { gap: 24px; }
+
+  .cabeca {
+    gap: 8px;
+    p { font-size: 16px; line-height: 1.5; }
+  }
+
+  .grade { grid-template-columns: minmax(0, 1fr); }
+
+  .card {
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    border-radius: 14px;
+  }
+
+  .icone {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    svg { width: 26px; height: 26px; }
+  }
+
+  .texto {
+    flex: 1;
+    gap: 4px;
+    h3 { font-size: 18px; letter-spacing: 0; }
+    p { font-size: 14px; line-height: 1.45; }
+  }
+
+  .acao { flex: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .acao svg { transition: none; }
+  .card:hover .acao svg { transform: none; }
+}

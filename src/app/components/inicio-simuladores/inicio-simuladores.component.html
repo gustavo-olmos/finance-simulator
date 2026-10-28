@@ -1,0 +1,36 @@
+<section id="simuladores" class="secao">
+  <div class="pilha" data-revelar>
+    <div class="cabeca">
+      <h2>Escolha o que você quer financiar</h2>
+      <p class="desk">Cada simulador mostra a parcela, o valor financiado e quanto você paga de juros ao longo de todo o prazo.</p>
+      <p class="mob">Parcela, valor financiado e juros de todo o prazo.</p>
+    </div>
+    <div class="grade escalonar">
+      @for (s of simuladores; track s.tema) {
+        <a class="card" [routerLink]="s.rota">
+          <div class="icone" [class.ambar]="s.tema === 'veiculo'">
+            @if (s.tema === 'imovel') {
+              <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V20h14V9.5"></path><path d="M10 20v-6h4v6"></path></svg>
+            } @else {
+              <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-4.5l2.2-4.6A2 2 0 0 1 7 6.8h10a2 2 0 0 1 1.8 1.1L21 12.5V17h-2"></path><path d="M3 12.5h18"></path><circle cx="7.5" cy="17" r="2"></circle><circle cx="16.5" cy="17" r="2"></circle><path d="M9.5 17h5"></path></svg>
+            }
+          </div>
+          <div class="texto">
+            <h3><span class="desk">{{ s.titulo }}</span><span class="mob">{{ s.curto }}</span></h3>
+            <p class="desk">{{ s.descricao }}</p>
+            <p class="mob">{{ s.resumo }}</p>
+          </div>
+          <ul class="chips desk">
+            @for (c of s.chips; track c) {
+              <li>{{ c }}</li>
+            }
+          </ul>
+          <span class="acao">
+            <span class="desk">{{ s.acao }}</span>
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
+          </span>
+        </a>
+      }
+    </div>
+  </div>
+</section>

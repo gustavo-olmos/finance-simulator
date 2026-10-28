@@ -43,6 +43,86 @@ export function faqDoTema(tema: TemaId): ItemFaq[] {
   return FAQ.filter((f) => !f.temas || f.temas.includes(tema));
 }
 
+/** Perguntas da página inicial (/). Também geram o JSON-LD FAQPage dela. */
+export const FAQ_INICIO: ItemFaq[] = [
+  {
+    pergunta: 'O RotaFin é gratuito?',
+    resposta: 'Sim. Você pode simular quantas vezes quiser, sem criar conta.',
+  },
+  {
+    pergunta: 'O valor da parcela é exato?',
+    resposta: 'É uma estimativa. A parcela final depende da análise de crédito e inclui seguros, tarifas e IOF, que entram no Custo Efetivo Total (CET).',
+  },
+  {
+    pergunta: 'Qual a diferença entre SAC e Price?',
+    resposta: 'Na Price as parcelas são iguais do início ao fim. Na SAC elas começam mais altas e diminuem com o tempo, e o total de juros costuma ser menor.',
+  },
+  {
+    pergunta: 'O RotaFin oferece financiamento?',
+    resposta: 'Não. O RotaFin é uma ferramenta de simulação e não concede crédito. Use os números para negociar com o banco ou a financeira.',
+  },
+];
+
+export interface Guia {
+  /** Etiqueta do card (ex.: 'SAC × Price'). */
+  tag: string;
+  /** Cor da etiqueta. */
+  tom: 'ambar' | 'verde';
+  titulo: string;
+  resumo: string;
+  /** Caminho do post. Vazio = card não aparece. */
+  url: string;
+}
+
+/**
+ * Seção "Antes de assinar, vale ler" da página inicial.
+ * TODO: preencher `url` quando os posts forem publicados. Enquanto nenhum tiver url,
+ * a seção e os links "Guias" do cabeçalho e do rodapé da página inicial não aparecem.
+ */
+export const GUIAS: Guia[] = [
+  {
+    tag: 'SAC × Price',
+    tom: 'ambar',
+    titulo: 'SAC ou Price: qual tabela pesa menos no bolso?',
+    resumo: 'Parcela fixa ou decrescente? Entenda o que muda no total de juros.',
+    url: '',
+  },
+  {
+    tag: 'Veículo',
+    tom: 'verde',
+    titulo: 'Quanto dar de entrada no financiamento do carro',
+    resumo: 'Como a entrada afeta parcela, juros e a aprovação do crédito.',
+    url: '',
+  },
+  {
+    tag: 'Básico',
+    tom: 'verde',
+    titulo: 'CET: o número que o banco precisa te mostrar',
+    resumo: 'Por que a taxa de juros sozinha não conta a história inteira.',
+    url: '',
+  },
+];
+
+export function guiasPublicados(): Guia[] {
+  return GUIAS.filter((g) => g.url);
+}
+
+export interface Parceiro {
+  tipo: 'Imobiliária' | 'Concessionária';
+  nome: string;
+  /** Chamada da oferta. */
+  chamada: string;
+  logoUrl?: string;
+  /** Destino do botão "Ver ofertas" (site ou página do parceiro). */
+  url: string;
+}
+
+/**
+ * Seção "Ofertas de parceiros" (patrocinada) da página inicial.
+ * TODO: preencher com os parceiros contratados. Lista vazia = seção não aparece.
+ */
+export const PARCEIROS: Parceiro[] = [];
+
 export interface TaxaReferencia {
   rotulo: string;
   /** Faixa exibida, ex.: '10 a 12'. Vazio = card não aparece. */

@@ -1,9 +1,14 @@
 import { Routes } from '@angular/router';
 
-// Rotas. As páginas de simulador recebem o tema via `data`.
+// Rotas. A raiz é a página inicial (landing); as páginas de simulador recebem o tema via `data`.
 // /anuncios/:slug é a rota dinâmica de SEO (requisito 3.3).
 export const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'financiamento-imovel' },
+  {
+    path: '',
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('./pages/inicio-page/inicio-page.component').then((m) => m.InicioPageComponent),
+  },
   {
     path: 'financiamento-imovel',
     loadComponent: () =>

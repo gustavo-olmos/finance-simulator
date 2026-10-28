@@ -1,0 +1,97 @@
+// Base da página inicial e dos componentes dela (design em docs/landingpage/).
+// As cores e fontes são os tokens --lp-* de styles.scss; aqui ficam o breakpoint e os
+// padrões repetidos entre os componentes.
+
+$celular: 760px;
+
+@mixin celular {
+  @media (max-width: $celular) { @content; }
+}
+
+// .desk só aparece no desktop e .mob só no celular.
+@mixin desk-mob {
+  @media (min-width: $celular + 1) { .mob { display: none !important; } }
+  @media (max-width: $celular) { .desk { display: none !important; } }
+}
+
+@mixin host {
+  display: block;
+  font-family: var(--lp-fonte);
+  color: var(--lp-texto);
+}
+
+@mixin conteiner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+  @include celular { padding-left: 16px; padding-right: 16px; }
+}
+
+@mixin logo {
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--lp-verde);
+  text-decoration: none;
+}
+
+@mixin botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+
+  &:focus-visible { outline: 2px solid var(--lp-verde); outline-offset: 2px; }
+}
+
+@mixin botao-primario {
+  @include botao;
+  background: var(--lp-verde);
+  color: #FFFFFF;
+  &:hover { background: var(--lp-verde-hover); color: #FFFFFF; }
+}
+
+// Título das seções (h2). No celular, sempre 26px.
+@mixin titulo-secao($tamanho: 36px) {
+  margin: 0;
+  font-size: $tamanho;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  @include celular { font-size: 26px; line-height: 1.2; }
+}
+
+// Card clicável que sobe no hover (no celular, encolhe ao toque).
+@mixin cartao {
+  color: var(--lp-texto);
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  &:focus-visible { outline: 2px solid var(--lp-verde); outline-offset: 2px; }
+  @media (hover: hover) {
+    &:hover { transform: translateY(-4px); box-shadow: 0 16px 32px rgba(15, 26, 21, 0.1); }
+  }
+  @include celular { &:active { transform: scale(0.98); } }
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    &:hover, &:active { transform: none; }
+  }
+}
+
+// Seta (svg) que avança quando o link recebe hover.
+@mixin seta {
+  svg { transition: transform 0.2s ease; }
+  &:hover svg { transform: translateX(4px); }
+
+  @media (prefers-reduced-motion: reduce) {
+    svg { transition: none; }
+    &:hover svg { transform: none; }
+  }
+}

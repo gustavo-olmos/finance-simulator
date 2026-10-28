@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>RotaFin — Landing page (desktop)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,700&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'DM Sans',system-ui,sans-serif;color:#0F1A15;background:#FFFFFF}
+a{color:#0E6B43}a:hover{color:#0A5234}
+.field:focus-within{outline:2px solid #0E6B43;outline-offset:1px}
+summary{list-style:none;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+summary svg{transition:transform .25s ease}
+details[open] summary svg{transform:rotate(180deg)}
+@keyframes rf-up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes rf-mark{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes rf-float{0%,100%{transform:translate(0,0)}50%{transform:translate(-6px,10px)}}
+.rf-armed .rf-rv>:not(.rf-stag),.rf-armed .rf-rv .rf-stag>*{opacity:0;translate:0 28px;transition:opacity .8s cubic-bezier(.2,.7,.2,1),translate .8s cubic-bezier(.2,.7,.2,1),transform .25s ease,box-shadow .25s ease}
+.rf-armed .rf-rv.is-in>:not(.rf-stag),.rf-armed .rf-rv.is-in .rf-stag>*{opacity:1;translate:0 0}
+.rf-up{animation:rf-up .7s cubic-bezier(.2,.7,.2,1) both}
+.rf-d1{animation-delay:.08s}.rf-d2{animation-delay:.16s}.rf-d3{animation-delay:.3s}
+.rf-mark{position:relative;z-index:0;white-space:nowrap}
+.rf-mark::after{content:"";position:absolute;left:-4px;right:-4px;bottom:.08em;height:.34em;border-radius:4px;background:#D9890F;z-index:-1;transform-origin:left center;animation:rf-mark .8s .55s cubic-bezier(.2,.7,.2,1) both}
+.rf-float{animation:rf-float 8s ease-in-out infinite}
+.rf-card{transition:transform .25s ease,box-shadow .25s ease}
+.rf-card:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(15,26,21,.10)}
+.rf-arrow svg{transition:transform .2s ease}
+.rf-card:hover .rf-arrow svg,.rf-arrow:hover svg{transform:translateX(4px)}
+.rf-armed .rf-rv.is-in>:nth-child(2):not(.rf-stag){transition-delay:.12s,.12s,0s,0s}
+.rf-armed .rf-rv.is-in>:nth-child(3):not(.rf-stag){transition-delay:.24s,.24s,0s,0s}
+.rf-armed .rf-rv.is-in>:nth-child(4):not(.rf-stag){transition-delay:.36s,.36s,0s,0s}
+.rf-armed .rf-rv.is-in>:nth-child(5):not(.rf-stag){transition-delay:.48s,.48s,0s,0s}
+.rf-armed .rf-rv.is-in .rf-stag>:nth-child(1){transition-delay:.15s,.15s,0s,0s}
+.rf-armed .rf-rv.is-in .rf-stag>:nth-child(2){transition-delay:.27s,.27s,0s,0s}
+.rf-armed .rf-rv.is-in .rf-stag>:nth-child(3){transition-delay:.39s,.39s,0s,0s}
+.rf-armed .rf-rv.is-in .rf-stag>:nth-child(4){transition-delay:.51s,.51s,0s,0s}
+@media (prefers-reduced-motion: reduce){.rf-up,.rf-mark::after,.rf-float,.rf-reveal{animation:none!important}.rf-card,.rf-card:hover,.rf-arrow svg{transition:none;transform:none}}
+</style>
+</helmet>
+<div class="{{armedCls}}" style="width: 100%; min-width: 0; background: #FFFFFF; font-family: 'DM Sans', system-ui, sans-serif; color: #0F1A15">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #E3E8E5">
+<div style="max-width: 1180px; margin: 0 auto; padding: 14px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 32px">
+<a href="#topo" aria-label="RotaFin, página inicial" style="font-style: italic; font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: {{accent}}; text-decoration: none">RotaFin</a>
+<nav aria-label="Principal" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 28px; font-size: 15px; font-weight: 500">
+<a href="#simuladores" style="color: #2A3530; text-decoration: none; padding: 10px 0">Simuladores</a>
+<a href="#como-funciona" style="color: #2A3530; text-decoration: none; padding: 10px 0">Como funciona</a>
+<a href="#guias" style="color: #2A3530; text-decoration: none; padding: 10px 0">Guias</a>
+<a href="#duvidas" style="color: #2A3530; text-decoration: none; padding: 10px 0">Dúvidas</a>
+</nav>
+<a href="#simular" style="display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 20px; border-radius: 10px; background: {{accent}}; color: #FFFFFF; font-weight: 600; font-size: 15px; text-decoration: none">Simular agora</a>
+</div>
+</header>
+
+<section id="simular" style="background: #F2F7F4; overflow: hidden">
+<div style="max-width: 1180px; margin: 0 auto; padding: 72px 24px 88px; display: flex; flex-wrap: wrap; align-items: center; gap: 48px 64px">
+
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<p class="rf-up" style="margin: 0; align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 10px; border-radius: 999px; background: #FFFFFF; border: 1px solid #DDE5E0; font-size: 13px; font-weight: 600; color: #2A3530"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: #D9890F"></span>Simulador de financiamento · imóvel e veículo</p>
+<h1 class="rf-up rf-d1" style="margin: 0; font-size: 54px; line-height: 1.08; letter-spacing: -0.03em; font-weight: 700; color: #0F1A15">Saiba <span class="rf-mark">quanto vai pagar</span> antes de assinar o financiamento.</h1>
+<p class="rf-up rf-d2" style="margin: 0; font-size: 19px; line-height: 1.55; color: #4A5651; max-width: 520px">Simule a parcela da casa ou do carro, veja quanto vai de juros e ajuste entrada e prazo até caber no seu bolso.</p>
+<ul class="rf-up rf-d2" style="margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 12px 24px; font-size: 15px; font-weight: 500; color: #2A3530">
+<li style="display: flex; align-items: center; gap: 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E6B43" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 10 17 19 7.5"></path></svg>Grátis</li>
+<li style="display: flex; align-items: center; gap: 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E6B43" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 10 17 19 7.5"></path></svg>Sem cadastro</li>
+<li style="display: flex; align-items: center; gap: 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E6B43" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 10 17 19 7.5"></path></svg>Resultado na hora</li>
+</ul>
+</div>
+
+<div class="rf-up rf-d3" style="position: relative; flex: 1 1 440px; min-width: 0; max-width: 520px">
+<div class="rf-float" aria-hidden="true" style="position: absolute; top: -40px; right: -44px; width: 160px; height: 160px; border-radius: 50%; background: #D9890F"></div>
+<div aria-hidden="true" style="position: absolute; bottom: -34px; left: -38px; width: 110px; height: 110px; border-radius: 50%; border: 16px solid #CDE5D7; box-sizing: border-box"></div>
+<div style="position: relative; background: #FFFFFF; border: 1px solid #DDE5E0; border-radius: 16px; box-shadow: 0 1px 2px rgba(15,26,21,0.04), 0 16px 40px rgba(15,26,21,0.08)">
+<div role="tablist" aria-label="O que você quer financiar" style="display: flex; gap: 28px; padding: 0 24px; border-bottom: 1px solid #E3E8E5">
+<button type="button" role="tab" aria-selected="{{selImovel}}" onClick="{{pickImovel}}" style="{{tabImovelStyle}}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V20h14V9.5"></path><path d="M10 20v-6h4v6"></path></svg>Imóvel</button>
+<button type="button" role="tab" aria-selected="{{selVeiculo}}" onClick="{{pickVeiculo}}" style="{{tabVeiculoStyle}}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 17H3v-4.5l2.2-4.6A2 2 0 0 1 7 6.8h10a2 2 0 0 1 1.8 1.1L21 12.5V17h-2"></path><path d="M3 12.5h18"></path><circle cx="7.5" cy="17" r="2"></circle><circle cx="16.5" cy="17" r="2"></circle><path d="M9.5 17h5"></path></svg>Veículo</button>
+</div>
+
+<div role="tabpanel" style="padding: 24px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+<div style="grid-column: span 2; display: flex; flex-direction: column; gap: 6px">
+<label for="d-valor" style="font-size: 13px; font-weight: 600; color: #3A4641">{{valorLabel}}</label>
+<div class="field" style="display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 14px; border: 1px solid #C7D2CC; border-radius: 10px; background: #FFFFFF">
+<span style="font-size: 15px; color: #5B6660">R$</span>
+<input id="d-valor" inputmode="numeric" autocomplete="off" value="{{valor}}" onChange="{{onValor}}" style="flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font-family: 'DM Mono', monospace; font-size: 17px; color: #0F1A15">
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="d-entrada" style="font-size: 13px; font-weight: 600; color: #3A4641">Entrada</label>
+<div class="field" style="display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 14px; border: 1px solid #C7D2CC; border-radius: 10px; background: #FFFFFF">
+<span style="font-size: 15px; color: #5B6660">R$</span>
+<input id="d-entrada" inputmode="numeric" autocomplete="off" value="{{entrada}}" onChange="{{onEntrada}}" style="flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font-family: 'DM Mono', monospace; font-size: 17px; color: #0F1A15">
+</div>
+<span style="font-size: 12px; color: #5B6660">{{entradaPct}}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="d-prazo" style="font-size: 13px; font-weight: 600; color: #3A4641">Prazo</label>
+<div class="field" style="display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 14px; border: 1px solid #C7D2CC; border-radius: 10px; background: #FFFFFF">
+<input id="d-prazo" inputmode="numeric" autocomplete="off" value="{{prazo}}" onChange="{{onPrazo}}" style="flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font-family: 'DM Mono', monospace; font-size: 17px; color: #0F1A15">
+<span style="font-size: 14px; color: #5B6660">meses</span>
+</div>
+<span style="font-size: 12px; color: #5B6660">{{prazoAnos}}</span>
+</div>
+<div style="grid-column: span 2; display: flex; flex-direction: column; gap: 6px">
+<label for="d-taxa" style="font-size: 13px; font-weight: 600; color: #3A4641">Taxa de juros</label>
+<div class="field" style="display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 14px; border: 1px solid #C7D2CC; border-radius: 10px; background: #FFFFFF">
+<input id="d-taxa" inputmode="decimal" autocomplete="off" value="{{taxa}}" onChange="{{onTaxa}}" style="flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font-family: 'DM Mono', monospace; font-size: 17px; color: #0F1A15">
+<span style="font-size: 14px; color: #5B6660">% ao mês</span>
+</div>
+</div>
+</div>
+
+<div style="margin: 0 24px; padding: 20px; border-radius: 12px; background: #F2F7F4; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px"><p style="margin: 0; font-size: 13px; font-weight: 600; color: #3A4641">Parcela estimada</p><span style="padding: 3px 10px; border-radius: 999px; background: #F9D7BD; font-size: 12px; font-weight: 600; color: #7A4504">Tabela Price</span></div>
+<p aria-live="polite" style="margin: 0; font-family: 'DM Mono', monospace; font-size: 40px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; color: {{accent}}">{{parcela}}</p>
+<p style="margin: 0; font-size: 13px; color: #5B6660">{{resumo}}</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div role="img" aria-label="{{barraLabel}}" style="display: flex; height: 10px; border-radius: 999px; overflow: hidden; background: #E3F0E9">
+<div style="{{barPrincipal}}"></div>
+<div style="{{barJuros}}"></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 12px; color: #4A5651">
+<span style="display: flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 2px; background: {{accent}}"></span>Valor financiado</span>
+<span style="display: flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 2px; background: #D9890F"></span>Juros: {{jurosPct}} do total pago</span>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; padding-top: 16px; border-top: 1px solid #D6E3DB">
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; color: #5B6660">Valor financiado</span><span style="font-family: 'DM Mono', monospace; font-size: 14px; color: #0F1A15">{{financiado}}</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; color: #5B6660">Total pago</span><span style="font-family: 'DM Mono', monospace; font-size: 14px; color: #0F1A15">{{total}}</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; color: #5B6660">Total de juros</span><span style="font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 500; color: #8A4F05">{{juros}}</span></div>
+</div>
+</div>
+
+<div style="padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 12px">
+<a href="{{ctaHref}}" class="rf-arrow" style="display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; border-radius: 10px; background: {{accent}}; color: #FFFFFF; font-weight: 600; font-size: 16px; text-decoration: none">{{ctaLabel}}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></a>
+<p style="margin: 0; font-size: 12px; line-height: 1.5; color: #5B6660; text-align: center">Estimativa pela Tabela Price, sem seguros, tarifas e IOF. Confira o CET com o banco.</p>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<section id="simuladores" style="padding: 88px 24px">
+<div data-rv="sim" class="{{rv.sim}}" style="max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 640px">
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; letter-spacing: -0.02em; font-weight: 700">Escolha o que você quer financiar</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #4A5651">Cada simulador mostra a parcela, o valor financiado e quanto você paga de juros ao longo de todo o prazo.</p>
+</div>
+<div class="rf-stag" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px">
+<a href="/imovel" class="rf-card" style="display: flex; flex-direction: column; gap: 20px; padding: 32px; border: 1px solid #DDE5E0; border-radius: 16px; background: #FFFFFF; text-decoration: none; color: #0F1A15">
+<div style="width: 56px; height: 56px; border-radius: 14px; background: #E3F0E9; color: #0E6B43; display: flex; align-items: center; justify-content: center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V20h14V9.5"></path><path d="M10 20v-6h4v6"></path></svg></div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<h3 style="margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.01em">Financiamento de imóvel</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: #4A5651">Casa, apartamento ou terreno. Veja quanto a entrada e o prazo mudam a parcela e o total de juros.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<span style="padding: 6px 12px; border-radius: 999px; background: #F2F7F4; font-size: 13px; font-weight: 500; color: #2A3530">Casa</span>
+<span style="padding: 6px 12px; border-radius: 999px; background: #F2F7F4; font-size: 13px; font-weight: 500; color: #2A3530">Apartamento</span>
+<span style="padding: 6px 12px; border-radius: 999px; background: #F2F7F4; font-size: 13px; font-weight: 500; color: #2A3530">Terreno</span>
+</div>
+<span class="rf-arrow" style="display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; color: {{accent}}">Simular imóvel<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></span>
+</a>
+<a href="/veiculo" class="rf-card" style="display: flex; flex-direction: column; gap: 20px; padding: 32px; border: 1px solid #DDE5E0; border-radius: 16px; background: #FFFFFF; text-decoration: none; color: #0F1A15">
+<div style="width: 56px; height: 56px; border-radius: 14px; background: #F9D7BD; color: #8A4F05; display: flex; align-items: center; justify-content: center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 17H3v-4.5l2.2-4.6A2 2 0 0 1 7 6.8h10a2 2 0 0 1 1.8 1.1L21 12.5V17h-2"></path><path d="M3 12.5h18"></path><circle cx="7.5" cy="17" r="2"></circle><circle cx="16.5" cy="17" r="2"></circle><path d="M9.5 17h5"></path></svg></div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<h3 style="margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.01em">Financiamento de veículo</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: #4A5651">Carro novo, seminovo ou moto. Compare prazos e descubra quanto uma entrada maior reduz a parcela.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<span style="padding: 6px 12px; border-radius: 999px; background: #F2F7F4; font-size: 13px; font-weight: 500; color: #2A3530">Carro 0 km</span>
+<span style="padding: 6px 12px; border-radius: 999px; background: #F2F7F4; font-size: 13px; font-weight: 500; color: #2A3530">Seminovo</span>
+<span style="padding: 6px 12px; border-radius: 999px; background: #F2F7F4; font-size: 13px; font-weight: 500; color: #2A3530">Moto</span>
+</div>
+<span class="rf-arrow" style="display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; color: {{accent}}">Simular veículo<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></span>
+</a>
+</div>
+</div>
+</section>
+
+<section id="como-funciona" style="padding: 96px 24px; background: #0C3B27">
+<div style="max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px">
+<div style="{{comoHead}}">
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; letter-spacing: -0.02em; font-weight: 700; color: #FFFFFF">Como funciona</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #BFD6C9">Do primeiro número à decisão em menos de um minuto.</p>
+</div>
+<div aria-hidden="true" style="position: relative; height: 4px; margin-top: 8px; border-radius: 999px; background: #1C5A3D; overflow: hidden">
+<div style="{{trackFill}}"></div>
+</div>
+<ol data-steps="1" style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px">
+<li style="{{s1Li}}">
+<span style="{{s1Dot}}">01</span>
+<h3 style="margin: 0; font-size: 20px; font-weight: 700; color: #FFFFFF">Escolha imóvel ou veículo</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: #BFD6C9">Cada tipo de financiamento já vem com valores de exemplo para você partir de algum lugar.</p>
+</li>
+<li style="{{s2Li}}">
+<span style="{{s2Dot}}">02</span>
+<h3 style="margin: 0; font-size: 20px; font-weight: 700; color: #FFFFFF">Informe os seus números</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: #BFD6C9">Valor do bem, entrada, prazo e a taxa de juros que o banco te ofereceu.</p>
+</li>
+<li style="{{s3Li}}">
+<span style="{{s3Dot}}">03</span>
+<h3 style="margin: 0; font-size: 20px; font-weight: 700; color: #FFFFFF">Ajuste até caber no bolso</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: #BFD6C9">Veja parcela, total pago e juros mudarem na hora enquanto você testa outros cenários.</p>
+</li>
+</ol>
+</div>
+</section>
+
+<section aria-label="Publicidade" style="padding: 48px 24px 0">
+<div data-rv="ad" class="{{rv.ad}}" style="max-width: 728px; margin: 0 auto; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5B6660">Publicidade</span>
+<div style="height: 90px; border: 1px dashed #B9C6BF; border-radius: 8px; background: #FAFBFA; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 13px; color: #5B6660">Bloco Google AdSense · 728×90</div>
+</div>
+</section>
+
+<section id="parceiros" style="padding: 72px 24px 88px">
+<div data-rv="par" class="{{rv.par}}" style="max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="align-self: flex-start; padding: 4px 10px; border-radius: 999px; background: #F9D7BD; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #7A4504">Patrocinado</span>
+<h2 style="margin: 0; font-size: 32px; line-height: 1.15; letter-spacing: -0.02em; font-weight: 700">Ofertas de parceiros</h2>
+</div>
+<a href="/anuncie" style="font-size: 15px; font-weight: 600; text-decoration: none; padding: 10px 0">Tem uma imobiliária ou concessionária? Anuncie aqui</a>
+</div>
+<div class="rf-stag" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px">
+<article class="rf-card" style="display: flex; flex-direction: column; gap: 16px; padding: 24px; border: 1px solid #DDE5E0; border-radius: 16px; background: #FFFFFF">
+<div style="display: flex; align-items: center; gap: 14px">
+<div style="width: 48px; height: 48px; border-radius: 10px; border: 1px dashed #B9C6BF; background: #FAFBFA; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #5B6660">Logo</div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; font-weight: 600; color: #5B6660">Imobiliária</span><span style="font-size: 17px; font-weight: 700">[Nome do parceiro]</span></div>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #4A5651">[Chamada da oferta do parceiro]</p>
+<a href="#" style="margin-top: auto; display: inline-flex; align-items: center; justify-content: center; min-height: 44px; border-radius: 10px; border: 1px solid #C7D2CC; font-size: 15px; font-weight: 600; color: #0F1A15; text-decoration: none">Ver ofertas</a>
+</article>
+<article class="rf-card" style="display: flex; flex-direction: column; gap: 16px; padding: 24px; border: 1px solid #DDE5E0; border-radius: 16px; background: #FFFFFF">
+<div style="display: flex; align-items: center; gap: 14px">
+<div style="width: 48px; height: 48px; border-radius: 10px; border: 1px dashed #B9C6BF; background: #FAFBFA; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #5B6660">Logo</div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; font-weight: 600; color: #5B6660">Concessionária</span><span style="font-size: 17px; font-weight: 700">[Nome do parceiro]</span></div>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #4A5651">[Chamada da oferta do parceiro]</p>
+<a href="#" style="margin-top: auto; display: inline-flex; align-items: center; justify-content: center; min-height: 44px; border-radius: 10px; border: 1px solid #C7D2CC; font-size: 15px; font-weight: 600; color: #0F1A15; text-decoration: none">Ver ofertas</a>
+</article>
+<article class="rf-card" style="display: flex; flex-direction: column; gap: 16px; padding: 24px; border: 1px solid #DDE5E0; border-radius: 16px; background: #FFFFFF">
+<div style="display: flex; align-items: center; gap: 14px">
+<div style="width: 48px; height: 48px; border-radius: 10px; border: 1px dashed #B9C6BF; background: #FAFBFA; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #5B6660">Logo</div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; font-weight: 600; color: #5B6660">Imobiliária</span><span style="font-size: 17px; font-weight: 700">[Nome do parceiro]</span></div>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #4A5651">[Chamada da oferta do parceiro]</p>
+<a href="#" style="margin-top: auto; display: inline-flex; align-items: center; justify-content: center; min-height: 44px; border-radius: 10px; border: 1px solid #C7D2CC; font-size: 15px; font-weight: 600; color: #0F1A15; text-decoration: none">Ver ofertas</a>
+</article>
+</div>
+</div>
+</section>
+
+<section id="guias" style="padding: 88px 24px; background: #F7F9F8; border-top: 1px solid #E8EDEA">
+<div data-rv="guias" class="{{rv.guias}}" style="max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px">
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; letter-spacing: -0.02em; font-weight: 700">Antes de assinar, vale ler</h2>
+<a href="/guias" style="font-size: 15px; font-weight: 600; text-decoration: none; padding: 10px 0">Todos os guias</a>
+</div>
+<div class="rf-stag" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px">
+<a href="#" class="rf-card" style="display: flex; flex-direction: column; gap: 12px; padding: 28px; border-radius: 16px; background: #FFFFFF; border: 1px solid #DDE5E0; text-decoration: none; color: #0F1A15">
+<span style="align-self: flex-start; padding: 4px 10px; border-radius: 999px; background: #F9D7BD; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #7A4504">SAC × Price</span>
+<h3 style="margin: 0; font-size: 20px; line-height: 1.3; font-weight: 700">SAC ou Price: qual tabela pesa menos no bolso?</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #4A5651">Parcela fixa ou decrescente? Entenda o que muda no total de juros.</p>
+</a>
+<a href="#" class="rf-card" style="display: flex; flex-direction: column; gap: 12px; padding: 28px; border-radius: 16px; background: #FFFFFF; border: 1px solid #DDE5E0; text-decoration: none; color: #0F1A15">
+<span style="align-self: flex-start; padding: 4px 10px; border-radius: 999px; background: #E3F0E9; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #0B5535">Veículo</span>
+<h3 style="margin: 0; font-size: 20px; line-height: 1.3; font-weight: 700">Quanto dar de entrada no financiamento do carro</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #4A5651">Como a entrada afeta parcela, juros e a aprovação do crédito.</p>
+</a>
+<a href="#" class="rf-card" style="display: flex; flex-direction: column; gap: 12px; padding: 28px; border-radius: 16px; background: #FFFFFF; border: 1px solid #DDE5E0; text-decoration: none; color: #0F1A15">
+<span style="align-self: flex-start; padding: 4px 10px; border-radius: 999px; background: #E3F0E9; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #0B5535">Básico</span>
+<h3 style="margin: 0; font-size: 20px; line-height: 1.3; font-weight: 700">CET: o número que o banco precisa te mostrar</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #4A5651">Por que a taxa de juros sozinha não conta a história inteira.</p>
+</a>
+</div>
+</div>
+</section>
+
+<section id="duvidas" style="padding: 88px 24px">
+<div data-rv="faq" class="{{rv.faq}}" style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px">
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; letter-spacing: -0.02em; font-weight: 700">Dúvidas frequentes</h2>
+<div style="display: flex; flex-direction: column; border-top: 1px solid #DDE5E0">
+<details style="border-bottom: 1px solid #DDE5E0" open>
+<summary style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; font-size: 18px; font-weight: 600">O RotaFin é gratuito?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5B6660" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></summary>
+<p style="margin: 0 0 20px; font-size: 16px; line-height: 1.6; color: #4A5651">Sim. Você pode simular quantas vezes quiser, sem criar conta.</p>
+</details>
+<details style="border-bottom: 1px solid #DDE5E0">
+<summary style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; font-size: 18px; font-weight: 600">O valor da parcela é exato?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5B6660" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></summary>
+<p style="margin: 0 0 20px; font-size: 16px; line-height: 1.6; color: #4A5651">É uma estimativa. A parcela final depende da análise de crédito e inclui seguros, tarifas e IOF, que entram no Custo Efetivo Total (CET).</p>
+</details>
+<details style="border-bottom: 1px solid #DDE5E0">
+<summary style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; font-size: 18px; font-weight: 600">Qual a diferença entre SAC e Price?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5B6660" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></summary>
+<p style="margin: 0 0 20px; font-size: 16px; line-height: 1.6; color: #4A5651">Na Price as parcelas são iguais do início ao fim. Na SAC elas começam mais altas e diminuem com o tempo, e o total de juros costuma ser menor.</p>
+</details>
+<details style="border-bottom: 1px solid #DDE5E0">
+<summary style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; font-size: 18px; font-weight: 600">O RotaFin oferece financiamento?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5B6660" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></summary>
+<p style="margin: 0 0 20px; font-size: 16px; line-height: 1.6; color: #4A5651">Não. O RotaFin é uma ferramenta de simulação e não concede crédito. Use os números para negociar com o banco ou a financeira.</p>
+</details>
+</div>
+</div>
+</section>
+
+<section data-rv="cta" class="{{rv.cta}}" style="padding: 0 24px 88px">
+<div style="position: relative; overflow: hidden; max-width: 1180px; margin: 0 auto; padding: 56px 48px; border-radius: 20px; background: #D9890F; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 48px">
+<div class="rf-float" aria-hidden="true" style="position: absolute; top: -70px; right: 18%; width: 200px; height: 200px; border-radius: 50%; border: 28px solid rgba(255,255,255,0.32); box-sizing: border-box"></div>
+<div style="position: relative; display: flex; flex-direction: column; gap: 10px; max-width: 620px">
+<h2 style="margin: 0; font-size: 34px; line-height: 1.15; letter-spacing: -0.02em; font-weight: 700; color: #0F1A15">Faça as contas antes de fechar negócio.</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #2E1F06">Leva menos de um minuto e você chega no banco sabendo o que esperar.</p>
+</div>
+<a href="#simular" class="rf-arrow" style="position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 28px; border-radius: 10px; background: #0C3B27; color: #FFFFFF; font-weight: 700; font-size: 16px; text-decoration: none">Simular agora<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></a>
+</div>
+</section>
+
+<footer style="background: #F7F9F8; border-top: 1px solid #E3E8E5; padding: 56px 24px 40px">
+<div style="max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px 48px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 320px">
+<span style="font-style: italic; font-weight: 700; font-size: 24px; letter-spacing: -0.02em; color: {{accent}}">RotaFin</span>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #4A5651">Simuladores de financiamento de imóvel e veículo.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 32px 64px">
+<nav aria-label="Simuladores" style="display: flex; flex-direction: column; gap: 4px; font-size: 15px">
+<span style="font-size: 13px; font-weight: 700; color: #0F1A15; padding-bottom: 6px">Simuladores</span>
+<a href="/imovel" style="color: #4A5651; text-decoration: none; padding: 6px 0">Imóvel</a>
+<a href="/veiculo" style="color: #4A5651; text-decoration: none; padding: 6px 0">Veículo</a>
+</nav>
+<nav aria-label="RotaFin" style="display: flex; flex-direction: column; gap: 4px; font-size: 15px">
+<span style="font-size: 13px; font-weight: 700; color: #0F1A15; padding-bottom: 6px">RotaFin</span>
+<a href="/guias" style="color: #4A5651; text-decoration: none; padding: 6px 0">Guias</a>
+<a href="/anuncie" style="color: #4A5651; text-decoration: none; padding: 6px 0">Anuncie</a>
+<a href="/contato" style="color: #4A5651; text-decoration: none; padding: 6px 0">Contato</a>
+</nav>
+<nav aria-label="Legal" style="display: flex; flex-direction: column; gap: 4px; font-size: 15px">
+<span style="font-size: 13px; font-weight: 700; color: #0F1A15; padding-bottom: 6px">Legal</span>
+<a href="/privacidade" style="color: #4A5651; text-decoration: none; padding: 6px 0">Privacidade</a>
+<a href="/termos" style="color: #4A5651; text-decoration: none; padding: 6px 0">Termos de uso</a>
+</nav>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding-top: 24px; border-top: 1px solid #DDE5E0">
+<p style="margin: 0; font-size: 13px; line-height: 1.6; color: #5B6660">As simulações são estimativas e não constituem oferta de crédito. Condições reais dependem da instituição financeira e da análise do seu perfil.</p>
+<p style="margin: 0; font-size: 13px; color: #5B6660">© 2026 RotaFin</p>
+</div>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#0E6B43","options":["#0E6B43","#14532D","#1F5FA8"]},"$preview":{"width":1280,"height":3800}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tab: 'imovel',
+      imovel: { valor: '400.000', entrada: '80.000', prazo: '360', taxa: '0,95' },
+      veiculo: { valor: '80.000', entrada: '20.000', prazo: '48', taxa: '1,79' },
+      armed: false,
+      seen: {},
+      prog: null
+    };
+  }
+  componentDidMount() {
+    var self = this;
+    try {
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var stepsEl = document.querySelector('[data-steps]');
+      if (stepsEl && !reduceMotion) {
+        var tick = function () {
+          self._raf = 0;
+          var de = document.documentElement;
+          var vh = window.innerHeight || de.clientHeight;
+          if (!self._sawScroll && de.scrollHeight <= vh + 4) {
+            if (self.state.prog !== 1) self.setState({ prog: 1 });
+            return;
+          }
+          var top = stepsEl.getBoundingClientRect().top;
+          var p = Math.max(0, Math.min(1, (vh * 0.92 - top) / (vh * 0.6)));
+          if (self.state.prog === null || Math.abs(p - self.state.prog) > 0.004) self.setState({ prog: p });
+        };
+        this._onScroll = function (e) {
+          if (e && e.type === 'scroll') self._sawScroll = true;
+          if (!self._raf) self._raf = requestAnimationFrame(tick);
+        };
+        window.addEventListener('scroll', this._onScroll, { passive: true, capture: true });
+        window.addEventListener('resize', this._onScroll, { passive: true });
+        tick();
+      }
+    } catch (e) {}
+    try {
+      if (typeof IntersectionObserver === 'undefined') return;
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var els = document.querySelectorAll('[data-rv]');
+      if (!els.length) return;
+      this._io = new IntersectionObserver(function (entries) {
+        var keys = [];
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          keys.push(en.target.getAttribute('data-rv'));
+          self._io.unobserve(en.target);
+        });
+        if (keys.length) self.setState(function (s) {
+          var seen = Object.assign({}, s.seen);
+          keys.forEach(function (k) { seen[k] = true; });
+          return { seen: seen };
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+      for (var j = 0; j < els.length; j++) this._io.observe(els[j]);
+      this.setState({ armed: true });
+    } catch (e) {}
+  }
+  componentWillUnmount() {
+    if (this._io) this._io.disconnect();
+    if (this._onScroll) {
+      window.removeEventListener('scroll', this._onScroll, { capture: true });
+      window.removeEventListener('resize', this._onScroll);
+    }
+    if (this._raf) cancelAnimationFrame(this._raf);
+  }
+  num(s) {
+    var n = Number(String(s == null ? '' : s).replace(/[^\d,]/g, '').replace(',', '.'));
+    return isFinite(n) ? n : 0;
+  }
+  brl(n) {
+    return n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  setField(field, value) {
+    var tab = this.state.tab;
+    var next = Object.assign({}, this.state[tab]);
+    next[field] = value;
+    var patch = {};
+    patch[tab] = next;
+    this.setState(patch);
+  }
+  tabStyle(on, accent) {
+    var base = 'display: flex; align-items: center; gap: 8px; min-height: 52px; padding: 0 2px; margin-bottom: -1px; border: 0; background: none; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer; ';
+    return on ? base + 'color: ' + accent + '; border-bottom: 2px solid ' + accent : base + 'color: #5B6660; border-bottom: 2px solid transparent';
+  }
+  renderVals() {
+    var accent = this.props.accent ?? '#0E6B43';
+    var tab = this.state.tab;
+    var isImovel = tab === 'imovel';
+    var f = this.state[tab];
+    var valor = this.num(f.valor);
+    var entrada = this.num(f.entrada);
+    var n = Math.round(this.num(f.prazo));
+    var i = this.num(f.taxa) / 100;
+    var P = Math.max(valor - entrada, 0);
+    var ok = P > 0 && n > 0;
+    var pmt = 0;
+    if (ok) pmt = i > 0 ? P * i / (1 - Math.pow(1 + i, -n)) : P / n;
+    var total = pmt * n;
+    var pj = ok && total > 0 ? (total - P) / total : 0;
+    var ease = '; transition: width 0.6s cubic-bezier(.2,.7,.2,1)';
+    var self = this;
+    var pr = this.state.prog == null ? 1 : this.state.prog;
+    var ease3 = function (x) { x = Math.max(0, Math.min(1, x)); return 1 - Math.pow(1 - x, 3); };
+    var mv = function (e) { return 'opacity: ' + (0.12 + 0.88 * e).toFixed(3) + '; transform: translateY(' + (36 * (1 - e)).toFixed(1) + 'px); transition: opacity .15s linear, transform .15s linear'; };
+    var LI = 'display: flex; flex-direction: column; gap: 14px; padding: 28px; border-radius: 16px; background: #12482F; border: 1px solid #1C5A3D; ';
+    var DOT = "width: 44px; height: 44px; box-sizing: border-box; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 15px; font-weight: 500; border: 2px solid #D9890F; transition: background .3s ease, color .3s ease; ";
+    var step = function (i) {
+      var e = ease3((pr - 0.12 - i * 0.28) / 0.26);
+      return { li: LI + mv(e), dot: DOT + (e > 0.98 ? 'background: #D9890F; color: #0F1A15' : 'background: transparent; color: #E8A84A') };
+    };
+    var st1 = step(0), st2 = step(1), st3 = step(2);
+    var seenMap = this.state.seen || {};
+    var rv = {};
+    ['sim', 'como', 'ad', 'par', 'guias', 'faq', 'cta'].forEach(function (k) { rv[k] = seenMap[k] ? 'rf-rv is-in' : 'rf-rv'; });
+    return {
+      accent: accent,
+      armedCls: this.state.armed ? 'rf-armed' : '',
+      comoHead: 'display: flex; flex-direction: column; gap: 12px; max-width: 640px; ' + mv(ease3(pr / 0.15)),
+      trackFill: 'position: absolute; left: 0; top: 0; bottom: 0; width: ' + (Math.min(1, pr / 0.96) * 100).toFixed(1) + '%; background: #D9890F; border-radius: 999px',
+      s1Li: st1.li, s1Dot: st1.dot,
+      s2Li: st2.li, s2Dot: st2.dot,
+      s3Li: st3.li, s3Dot: st3.dot,
+      rv: rv,
+      selImovel: isImovel ? 'true' : 'false',
+      selVeiculo: isImovel ? 'false' : 'true',
+      tabImovelStyle: this.tabStyle(isImovel, accent),
+      tabVeiculoStyle: this.tabStyle(!isImovel, accent),
+      pickImovel: function () { self.setState({ tab: 'imovel' }); },
+      pickVeiculo: function () { self.setState({ tab: 'veiculo' }); },
+      valorLabel: isImovel ? 'Valor do imóvel' : 'Valor do veículo',
+      valor: f.valor, entrada: f.entrada, prazo: f.prazo, taxa: f.taxa,
+      onValor: function (e) { self.setField('valor', e.target.value); },
+      onEntrada: function (e) { self.setField('entrada', e.target.value); },
+      onPrazo: function (e) { self.setField('prazo', e.target.value); },
+      onTaxa: function (e) { self.setField('taxa', e.target.value); },
+      entradaPct: valor > 0 ? Math.round(entrada / valor * 100) + '% do valor' : ' ',
+      prazoAnos: n >= 12 ? (n % 12 === 0 ? (n / 12) + ' anos' : Math.floor(n / 12) + ' anos e ' + (n % 12) + ' meses') : ' ',
+      parcela: ok ? this.brl(pmt) : '—',
+      resumo: ok ? n + ' parcelas fixas' : 'Preencha valor, entrada e prazo',
+      financiado: this.brl(P),
+      total: ok ? this.brl(total) : '—',
+      juros: ok ? this.brl(total - P) : '—',
+      jurosPct: Math.round(pj * 100) + '%',
+      barraLabel: 'Juros representam ' + Math.round(pj * 100) + '% do total pago',
+      barPrincipal: 'height: 100%; width: ' + ((1 - pj) * 100).toFixed(1) + '%; background: ' + accent + ease,
+      barJuros: 'height: 100%; width: ' + (pj * 100).toFixed(1) + '%; background: #D9890F' + ease,
+      ctaLabel: isImovel ? 'Ver simulação completa' : 'Ver simulação completa',
+      ctaHref: isImovel ? '/imovel' : '/veiculo'
+    };
+  }
+}
+</script>
+</body>
+</html>

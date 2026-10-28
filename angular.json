@@ -29,6 +29,9 @@
               "node_modules/@fontsource-variable/inter/index.css",
               "node_modules/@fontsource-variable/bricolage-grotesque/index.css",
               "node_modules/@fontsource-variable/dm-sans/wght-italic.css",
+              "node_modules/@fontsource-variable/dm-sans/wght.css",
+              "node_modules/@fontsource/dm-mono/400.css",
+              "node_modules/@fontsource/dm-mono/500.css",
               "src/styles.scss"
             ],
             "scripts": [],

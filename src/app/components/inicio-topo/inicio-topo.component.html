@@ -1,0 +1,37 @@
+<header id="topo" class="topo">
+  <div class="linha">
+    <a class="logo" routerLink="/" fragment="topo" aria-label="RotaFin, página inicial">RotaFin</a>
+
+    <nav class="nav desk" aria-label="Principal">
+      @for (s of secoes; track s.id) {
+        <a routerLink="/" [fragment]="s.id">{{ s.rotulo }}</a>
+      }
+    </nav>
+
+    <a class="cta desk" routerLink="/" fragment="simular">Simular agora</a>
+
+    <button
+      type="button"
+      class="btn-menu mob"
+      [attr.aria-label]="menuAberto() ? 'Fechar menu' : 'Abrir menu'"
+      [attr.aria-expanded]="menuAberto()"
+      aria-controls="menu-inicio"
+      (click)="menuAberto.set(!menuAberto())"
+    >
+      @if (menuAberto()) {
+        <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg>
+      } @else {
+        <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+      }
+    </button>
+  </div>
+
+  @if (menuAberto()) {
+    <nav id="menu-inicio" class="menu mob" aria-label="Menu" (click)="menuAberto.set(false)">
+      @for (s of secoes; track s.id) {
+        <a routerLink="/" [fragment]="s.id">{{ s.rotulo }}</a>
+      }
+      <a class="cta" routerLink="/" fragment="simular">Simular agora</a>
+    </nav>
+  }
+</header>

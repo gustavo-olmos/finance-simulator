@@ -1,0 +1,66 @@
+@use '../../styles/inicio' as lp;
+
+:host { @include lp.host; }
+
+h2 { @include lp.titulo-secao; }
+
+.secao { padding: 88px 0; }
+
+.pilha {
+  @include lp.conteiner;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.lista { border-top: 1px solid var(--lp-borda); }
+
+details { border-bottom: 1px solid var(--lp-borda); }
+
+summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 64px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+
+  &::-webkit-details-marker { display: none; }
+  &:focus-visible { outline: 2px solid var(--lp-verde); outline-offset: 2px; }
+
+  svg { flex: none; color: var(--lp-aux); transition: transform 0.25s ease; }
+}
+
+details[open] summary svg { transform: rotate(180deg); }
+
+p {
+  margin: 0 0 20px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--lp-texto-2);
+}
+
+@include lp.celular {
+  .secao { padding: 48px 0; }
+  .pilha { gap: 20px; }
+
+  summary {
+    gap: 12px;
+    min-height: 60px;
+    font-size: 16px;
+  }
+
+  p {
+    margin-bottom: 18px;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  summary svg { transition: none; }
+}

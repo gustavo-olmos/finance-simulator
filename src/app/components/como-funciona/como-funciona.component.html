@@ -1,0 +1,21 @@
+<section id="como-funciona" class="secao">
+  <div class="pilha">
+    <div class="cabeca">
+      <h2>Como funciona</h2>
+      <p>Do primeiro número à decisão em menos de um minuto.</p>
+    </div>
+    <div class="trilho" aria-hidden="true"><div class="cheio"></div></div>
+    <ol class="passos">
+      @for (p of passos; track p.titulo; let i = $index) {
+        <li class="passo">
+          <span class="num">0{{ i + 1 }}</span>
+          <div class="texto">
+            <h3>{{ p.titulo }}</h3>
+            <p class="desk">{{ p.texto }}</p>
+            <p class="mob">{{ p.curto }}</p>
+          </div>
+        </li>
+      }
+    </ol>
+  </div>
+</section>

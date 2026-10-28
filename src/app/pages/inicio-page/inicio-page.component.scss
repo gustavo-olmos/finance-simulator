@@ -1,0 +1,184 @@
+// Página inicial — design em docs/landingpage/ (Main = desktop, Mobile = celular).
+// Cada seção é um componente; aqui fica só o hero (texto e moldura da calculadora).
+@use '../../styles/inicio' as lp;
+
+:host {
+  @include lp.host;
+  background: #FFFFFF;
+}
+
+@include lp.desk-mob;
+
+h1, p { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+
+.conteiner { @include lp.conteiner; }
+
+@keyframes entrar {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes marcar {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes flutuar {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-6px, 10px); }
+}
+
+.entrar { animation: entrar 0.7s var(--lp-curva) both; }
+.d1 { animation-delay: 0.08s; }
+.d2 { animation-delay: 0.16s; }
+.d3 { animation-delay: 0.3s; }
+
+.hero {
+  background: var(--lp-superficie);
+  overflow: hidden;
+}
+
+.grade {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 48px 64px;
+  padding-top: 72px;
+  padding-bottom: 88px;
+}
+
+.texto {
+  flex: 1 1 420px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.etiqueta {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px 6px 10px;
+  border-radius: 999px;
+  background: #FFFFFF;
+  border: 1px solid var(--lp-borda);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--lp-texto-3);
+}
+
+.ponto {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--lp-ambar);
+}
+
+h1 {
+  font-size: 54px;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+
+// Grifo âmbar atrás de "quanto vai pagar".
+.marca {
+  position: relative;
+  z-index: 0;
+  white-space: nowrap;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: -4px;
+    right: -4px;
+    bottom: 0.08em;
+    height: 0.34em;
+    border-radius: 4px;
+    background: var(--lp-ambar);
+    z-index: -1;
+    transform-origin: left center;
+    animation: marcar 0.8s 0.55s var(--lp-curva) both;
+  }
+}
+
+.sub {
+  max-width: 520px;
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--lp-texto-2);
+}
+
+.beneficios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--lp-texto-3);
+
+  li { display: flex; align-items: center; gap: 8px; }
+  svg { flex: none; color: var(--lp-verde); }
+}
+
+.calc {
+  position: relative;
+  flex: 1 1 440px;
+  min-width: 0;
+  max-width: 520px;
+}
+
+.bola {
+  position: absolute;
+  top: -40px;
+  right: -44px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: var(--lp-ambar);
+  animation: flutuar 8s ease-in-out infinite;
+}
+
+.anel {
+  position: absolute;
+  bottom: -34px;
+  left: -38px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 16px solid #CDE5D7;
+}
+
+@include lp.celular {
+  .grade {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+    padding-top: 32px;
+    padding-bottom: 40px;
+  }
+
+  .texto { flex: none; gap: 14px; }
+  .etiqueta { padding: 6px 12px 6px 10px; font-size: 12px; }
+  h1 { font-size: 34px; line-height: 1.12; }
+  .marca::after { left: -3px; right: -3px; }
+  .sub { font-size: 17px; line-height: 1.5; }
+
+  .beneficios {
+    justify-content: center;
+    gap: 8px 18px;
+    font-size: 14px;
+    li { gap: 6px; }
+  }
+
+  .calc { flex: none; max-width: none; }
+  .bola { top: -30px; right: -40px; width: 110px; height: 110px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .entrar, .marca::after, .bola { animation: none; }
+}

@@ -1,0 +1,247 @@
+@use '../../styles/inicio' as lp;
+
+// O próprio componente é o card.
+:host {
+  @include lp.host;
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid var(--lp-borda);
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(15, 26, 21, 0.04), 0 16px 40px rgba(15, 26, 21, 0.08);
+}
+
+@include lp.desk-mob;
+
+p { margin: 0; }
+
+.abas {
+  display: flex;
+  gap: 28px;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--lp-divisor);
+}
+
+.aba {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 0 2px;
+  margin-bottom: -1px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--lp-aux);
+  cursor: pointer;
+
+  &.ativa { color: var(--lp-verde); border-bottom-color: var(--lp-verde); }
+  &:focus-visible { outline: 2px solid var(--lp-verde); outline-offset: 2px; }
+}
+
+.campos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  padding: 24px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+label { font-size: 13px; font-weight: 600; color: var(--lp-rotulo); }
+
+.largo { grid-column: span 2; }
+
+.caixa {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--lp-borda-input);
+  border-radius: 10px;
+  background: #FFFFFF;
+
+  &:focus-within { outline: 2px solid var(--lp-verde); outline-offset: 1px; }
+}
+
+input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-family: var(--lp-mono);
+  font-size: 17px;
+  color: var(--lp-texto);
+}
+
+.unidade {
+  font-size: 14px;
+  color: var(--lp-aux);
+  white-space: nowrap;
+}
+
+.ajuda {
+  min-height: 18px;
+  font-size: 12px;
+  color: var(--lp-aux);
+}
+
+.resultado {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0 24px;
+  padding: 20px;
+  border-radius: 12px;
+  background: var(--lp-superficie);
+}
+
+.topo { display: flex; flex-direction: column; gap: 4px; }
+
+.linha {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.rotulo { font-size: 13px; font-weight: 600; color: var(--lp-rotulo); }
+
+.pilula {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--lp-pessego);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--lp-ambar-texto);
+}
+
+.parcela {
+  font-family: var(--lp-mono);
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--lp-verde);
+}
+
+.resumo { font-size: 13px; color: var(--lp-aux); }
+
+.composicao { display: flex; flex-direction: column; gap: 8px; }
+
+.barra {
+  display: flex;
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--lp-menta);
+
+  > div { height: 100%; transition: width 0.6s var(--lp-curva); }
+}
+
+.principal { background: var(--lp-verde); }
+.juros { background: var(--lp-ambar); }
+
+.legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  font-size: 12px;
+  color: var(--lp-texto-2);
+
+  > span { display: flex; align-items: center; gap: 6px; }
+}
+
+.cor {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+.totais {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding-top: 16px;
+  border-top: 1px solid #D6E3DB;
+
+  > div { display: flex; flex-direction: column; gap: 2px; }
+}
+
+dt { font-size: 12px; color: var(--lp-aux); }
+
+dd {
+  margin: 0;
+  font-family: var(--lp-mono);
+  font-size: 14px;
+  color: var(--lp-texto);
+}
+
+.valor-juros { font-weight: 500; color: var(--lp-juros); }
+
+.acao {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 24px 24px;
+}
+
+.cta {
+  @include lp.botao-primario;
+  @include lp.seta;
+  display: flex;
+  min-height: 50px;
+  font-size: 16px;
+}
+
+.aviso {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--lp-aux);
+  text-align: center;
+}
+
+@include lp.celular {
+  :host { box-shadow: 0 1px 2px rgba(15, 26, 21, 0.04), 0 12px 32px rgba(15, 26, 21, 0.08); }
+
+  .abas { gap: 24px; padding: 0 20px; }
+  .campos { gap: 14px; padding: 20px; }
+
+  // Entrada e prazo dividem a linha: menos respiro e fonte 16px (sem zoom no iOS).
+  .campo:not(.largo) .caixa { gap: 6px; padding: 0 12px; }
+  .campo:not(.largo) input { font-size: 16px; }
+
+  .resultado { gap: 14px; margin: 0 20px; padding: 18px; }
+  .parcela { font-size: 34px; }
+  .legenda { gap: 4px 14px; }
+
+  // Um total por linha: rótulo à esquerda, valor à direita.
+  .totais {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 14px;
+    > div { flex-direction: row; justify-content: space-between; gap: 12px; }
+  }
+
+  dt { font-size: 14px; color: var(--lp-texto-2); }
+
+  .acao { gap: 10px; padding: 18px 20px 20px; }
+  .cta { min-height: 52px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .barra > div { transition: none; }
+}

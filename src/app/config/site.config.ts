@@ -13,6 +13,10 @@ export const SITE = {
       anuncio: '',
     },
   },
+  ga4: {
+    /** ID de medição do GA4 (ex.: 'G-XXXXXXXXXX'). Vazio = GA4 não carrega. TODO: preencher. */
+    id: '',
+  },
   /** Destino do botão "Quero anunciar" (mailto: ou link de WhatsApp). TODO: preencher. */
   anunciarUrl: '',
 };

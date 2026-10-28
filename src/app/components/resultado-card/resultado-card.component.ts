@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { DOCUMENT, ViewportScroller } from '@angular/common';
 import { Router } from '@angular/router';
-import { track } from '@vercel/analytics';
+import { track } from '../../core/analytics';
 import { SimulacaoStore } from '../../core/simulacao.store';
 import { SeoService } from '../../core/seo.service';
 import { brl, brl0, brlCurto } from '../../core/formato';

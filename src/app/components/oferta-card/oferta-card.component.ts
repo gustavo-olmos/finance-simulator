@@ -1,6 +1,6 @@
 import { Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { track } from '@vercel/analytics';
+import { track } from '../../core/analytics';
 import { Anuncio } from '../../models/anuncio.model';
 import { brl0, NBSP } from '../../core/formato';
 import { imagemRedimensionada } from '../../core/imagem';

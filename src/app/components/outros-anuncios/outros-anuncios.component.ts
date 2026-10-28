@@ -1,6 +1,6 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { track } from '@vercel/analytics';
+import { track } from '../../core/analytics';
 import { FinanceCalculatorService } from '../../core/finance-calculator.service';
 import { SimulacaoStore } from '../../core/simulacao.store';
 import { brl0, NBSP } from '../../core/formato';

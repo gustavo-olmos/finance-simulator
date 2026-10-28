@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { track } from '@vercel/analytics';
+import { track } from '../../core/analytics';
 import { brl } from '../../core/formato';
 
 /**

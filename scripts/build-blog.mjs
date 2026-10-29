@@ -3,11 +3,11 @@
 //
 //   src/assets/data/guias/index.json     lista (sem o HTML), mais recente primeiro
 //   src/assets/data/guias/<slug>.json    metadados + HTML do post
-//   src/app/config/guias.generated.ts    cards publicados da página inicial
+//   src/app/config/guias.generated.ts    cards da página inicial
 //   src/sitemap.xml                      páginas fixas + anúncios + guias publicados
 //
 // Rascunhos (status: rascunho) entram só fora de produção (VERCEL_ENV !== 'production'):
-// aparecem em `npm start` e nas prévias da Vercel, nunca no sitemap nem nos cards.
+// aparecem marcados em `npm start` e nas prévias da Vercel, nunca no sitemap.
 //
 // Marcação além do Markdown (GFM):
 //   - 1º parágrafo começando com **Resposta curta:** → bloco "Resposta curta" do topo.
@@ -397,8 +397,16 @@ function resumo(p) {
   return { slug, titulo, descricao, tag, tom, resumo, atualizadoEm, publicadoEm, rascunho, tempoLeitura };
 }
 
-function gerarCards(publicados) {
-  const cards = publicados.map((p) => ({ tag: p.tag, tom: p.tom, titulo: p.titulo, resumo: p.resumo, url: `/guias/${p.slug}` }));
+/** Cards da página inicial. Fora de produção, os rascunhos entram marcados (para revisar). */
+function gerarCards(posts) {
+  const cards = posts.map((p) => ({
+    tag: p.tag,
+    tom: p.tom,
+    titulo: p.titulo,
+    resumo: p.resumo,
+    url: `/guias/${p.slug}`,
+    ...(p.rascunho ? { rascunho: true } : {}),
+  }));
   return `// Gerado por scripts/build-blog.mjs a partir de src/content/blog/*.md (npm run blog).
 // Não editar: as mudanças se perdem no próximo build.
 import type { Guia } from './conteudo.config';
@@ -464,7 +472,7 @@ async function main() {
   await mkdir(SAIDA_DADOS, { recursive: true });
   await writeFile(join(SAIDA_DADOS, 'index.json'), JSON.stringify(posts.map(resumo)));
   for (const p of posts) await writeFile(join(SAIDA_DADOS, `${p.slug}.json`), JSON.stringify(p));
-  await writeFile(SAIDA_CARDS, gerarCards(publicados));
+  await writeFile(SAIDA_CARDS, gerarCards(posts));
   await writeFile(SAIDA_SITEMAP, sitemap);
 
   const rascunhos = posts.length - publicados.length;

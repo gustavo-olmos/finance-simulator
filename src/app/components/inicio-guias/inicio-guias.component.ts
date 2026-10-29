@@ -4,9 +4,9 @@ import { Guia, guiasPublicados } from '../../config/conteudo.config';
 import { GuiaCardComponent } from '../guia-card/guia-card.component';
 
 /**
- * "Antes de assinar, vale ler" da página inicial: os guias do blog.
- * Só aparece quando há guia publicado (conteudo.config.ts). O post reaproveita a seção
- * como "Continue lendo", com outros guias.
+ * "Antes de assinar, vale ler" da página inicial: os guias do blog (em produção, só os
+ * publicados; fora dela, também os rascunhos, marcados). Sem guias, não aparece. O post
+ * reaproveita a seção como "Continue lendo", com outros guias publicados.
  */
 @Component({
   selector: 'app-inicio-guias',

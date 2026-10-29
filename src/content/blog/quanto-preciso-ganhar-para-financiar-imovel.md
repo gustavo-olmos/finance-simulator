@@ -9,8 +9,9 @@ resumo: "A conta dos 30% que o banco faz, com tabela de renda por valor de imóv
 status: rascunho          # rascunho | publicado — só publicar depois da aprovação do Gustavo
 atualizadoEm: 2026-10-28
 revisarEm: 2027-01-28     # conferir taxa de referência e regras a cada 3 meses
-capa: quanto-preciso-ganhar-para-financiar-imovel.svg
-capaAlt: "Ilustração de uma casa, uma pilha de moedas e um gráfico com 30% da renda em destaque"
+capa: quanto-preciso-ganhar-para-financiar-imovel.jpg
+capaAlt: "Mão segurando chaves com um chaveiro em forma de casa, na entrada de um apartamento"
+capaCredito: "Foto: Jakub Żerdzicki / Unsplash"
 premissas: "Números do motor do RotaFin (finance-calculator.service.ts): taxa de 11% ao ano, 30 anos (360 meses), sem seguro, entrada de 20% salvo indicação."
 cta:
   titulo: "Faça a conta com os seus números"

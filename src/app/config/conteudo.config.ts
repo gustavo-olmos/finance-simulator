@@ -73,13 +73,16 @@ export interface Guia {
   resumo: string;
   /** Caminho do post. Vazio = card não aparece. */
   url: string;
+  /** Só fora de produção: o card aparece marcado como rascunho. */
+  rascunho?: boolean;
 }
 
 /**
- * Seção "Antes de assinar, vale ler" da página inicial: os guias publicados, gerados
- * no build a partir de src/content/blog/*.md (scripts/build-blog.mjs). Rascunhos não
- * entram. Sem nenhum publicado, a seção e os links "Guias" do cabeçalho e do rodapé da
- * página inicial não aparecem.
+ * Seção "Antes de assinar, vale ler" da página inicial: os guias gerados no build a
+ * partir de src/content/blog/*.md (scripts/build-blog.mjs). Em produção, só os
+ * publicados; em `npm start` e nas prévias da Vercel, também os rascunhos, marcados.
+ * Sem nenhum guia, a seção e os links "Guias" do cabeçalho e do rodapé da página
+ * inicial não aparecem.
  *
  * Pauta (cards do design da página inicial, ainda sem post):
  * - SAC × Price (âmbar): "SAC ou Price: qual tabela pesa menos no bolso?" —

@@ -7,7 +7,7 @@
       </div>
       <div class="grade escalonar">
         @for (g of guias(); track g.url) {
-          <app-guia-card [guia]="g" />
+          <app-guia-card [guia]="g" [rascunho]="!!g.rascunho" />
         }
       </div>
     </div>

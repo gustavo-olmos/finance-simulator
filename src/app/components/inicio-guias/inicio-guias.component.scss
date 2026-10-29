@@ -38,6 +38,9 @@ h2 { @include lp.titulo-secao; }
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 24px;
+
+  // Um guia só não ocupa a linha inteira.
+  > :only-child { max-width: 380px; }
 }
 
 @include lp.celular {

@@ -1,0 +1,73 @@
+// Lista de guias: mesmo topo da página do guia e os cards da página inicial.
+@use '../../styles/inicio' as lp;
+
+:host {
+  @include lp.host;
+  background: #FFFFFF;
+}
+
+h1, p { margin: 0; }
+
+.conteiner { @include lp.conteiner; }
+
+.cabeca {
+  background: var(--lp-superficie-2);
+  border-bottom: 1px solid #E8EDEA;
+}
+
+.pilha {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 48px;
+  padding-bottom: 52px;
+}
+
+.trilha {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--lp-aux);
+
+  a { color: inherit; text-decoration: none; &:hover { color: var(--lp-verde); } }
+}
+
+h1 {
+  font-size: 52px;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+
+.intro {
+  max-width: 700px;
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--lp-texto-2);
+}
+
+.lista { padding: 56px 0 88px; }
+
+.grade {
+  display: grid;
+  // auto-fill: com poucos guias, o card mantém a largura de uma coluna.
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.vazio {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--lp-texto-2);
+  a { color: var(--lp-verde); }
+}
+
+@include lp.celular {
+  .pilha { gap: 14px; padding-top: 24px; padding-bottom: 28px; }
+  .trilha { gap: 6px; font-size: 13px; }
+  h1 { font-size: 31px; line-height: 1.12; }
+  .intro { font-size: 17px; line-height: 1.5; }
+  .lista { padding: 24px 0 48px; }
+  .grade { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+}

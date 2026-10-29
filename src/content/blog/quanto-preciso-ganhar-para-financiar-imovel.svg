@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <!-- Capa: casa, moedas e a fatia de 30% da renda, nas cores da marca. -->
+  <rect width="1600" height="900" fill="#F2F7F4"/>
+  <circle cx="1400" cy="140" r="250" fill="#D9890F"/>
+  <circle cx="150" cy="820" r="130" fill="none" stroke="#CDE5D7" stroke-width="46"/>
+
+  <!-- Casa -->
+  <ellipse cx="590" cy="744" rx="340" ry="22" fill="#DDE5E0"/>
+  <rect x="690" y="290" width="52" height="130" fill="#0C3B27"/>
+  <polygon points="370,470 580,288 790,470" fill="#0C3B27"/>
+  <rect x="410" y="455" width="340" height="287" fill="#0E6B43"/>
+  <rect x="450" y="505" width="78" height="78" rx="10" fill="#E3F0E9"/>
+  <rect x="632" y="505" width="78" height="78" rx="10" fill="#E3F0E9"/>
+  <path d="M489 505v78M450 544h78M671 505v78M632 544h78" stroke="#0E6B43" stroke-width="6"/>
+  <rect x="540" y="612" width="80" height="130" rx="12" fill="#E8A84A"/>
+  <circle cx="604" cy="680" r="6" fill="#7A4504"/>
+
+  <!-- Moedas -->
+  <g>
+    <rect x="804" y="700" width="92" height="20" fill="#D9890F"/>
+    <ellipse cx="850" cy="720" rx="46" ry="14" fill="#D9890F"/>
+    <ellipse cx="850" cy="700" rx="46" ry="14" fill="#E8A84A"/>
+    <rect x="804" y="676" width="92" height="20" fill="#D9890F"/>
+    <ellipse cx="850" cy="696" rx="46" ry="14" fill="#D9890F"/>
+    <ellipse cx="850" cy="676" rx="46" ry="14" fill="#E8A84A"/>
+    <rect x="804" y="652" width="92" height="20" fill="#D9890F"/>
+    <ellipse cx="850" cy="672" rx="46" ry="14" fill="#D9890F"/>
+    <ellipse cx="850" cy="652" rx="46" ry="14" fill="#E8A84A"/>
+  </g>
+
+  <!-- Cartão com a renda: 30% em destaque -->
+  <rect x="934" y="274" width="460" height="480" rx="32" fill="#0F1A15" opacity="0.06"/>
+  <rect x="920" y="256" width="460" height="480" rx="32" fill="#FFFFFF" stroke="#DDE5E0" stroke-width="2"/>
+  <circle cx="1150" cy="440" r="118" fill="none" stroke="#CDE5D7" stroke-width="48"/>
+  <circle cx="1150" cy="440" r="118" fill="none" stroke="#D9890F" stroke-width="48" stroke-dasharray="222.4 741.4" transform="rotate(-90 1150 440)"/>
+  <rect x="990" y="612" width="320" height="20" rx="10" fill="#E3E8E5"/>
+  <rect x="990" y="650" width="210" height="20" rx="10" fill="#E3E8E5"/>
+  <rect x="1230" y="646" width="80" height="28" rx="14" fill="#F9D7BD"/>
+</svg>

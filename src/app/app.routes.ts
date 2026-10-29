@@ -26,5 +26,14 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/anuncio-detalhe/anuncio-detalhe.component').then((m) => m.AnuncioDetalheComponent),
   },
+  // Blog: posts em src/content/blog/*.md, convertidos no build (scripts/build-blog.mjs).
+  {
+    path: 'guias',
+    loadComponent: () => import('./pages/guias-lista/guias-lista.component').then((m) => m.GuiasListaComponent),
+  },
+  {
+    path: 'guias/:slug',
+    loadComponent: () => import('./pages/guia-detalhe/guia-detalhe.component').then((m) => m.GuiaDetalheComponent),
+  },
   { path: '**', redirectTo: 'financiamento-imovel' },
 ];

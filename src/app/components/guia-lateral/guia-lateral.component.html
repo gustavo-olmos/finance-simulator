@@ -1,0 +1,13 @@
+@if (secoes().length) {
+  <nav class="indice" aria-label="Nesta página">
+    <span class="rotulo">Nesta página</span>
+    @for (s of secoes(); track s.id) {
+      <a [routerLink]="[]" [fragment]="s.id" [class.ativo]="s.id === ativa()">{{ s.titulo }}</a>
+    }
+  </nav>
+}
+<div class="simulador">
+  <p class="titulo">Quanto fica a sua parcela?</p>
+  <p>Ajuste valor, entrada e prazo e veja a renda que o banco pede.</p>
+  <a [routerLink]="simulador().caminho" [queryParams]="simulador().params">Abrir o simulador</a>
+</div>

@@ -1,0 +1,50 @@
+@use '../../styles/inicio' as lp;
+
+:host {
+  @include lp.host;
+  margin-top: 16px;
+  @include lp.celular { margin-top: 8px; }
+}
+
+p { margin: 0; }
+
+.chamada {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px 40px;
+  padding: 40px;
+  border-radius: 20px;
+  background: var(--lp-escuro);
+}
+
+.texto {
+  flex: 1 1 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  p { font-size: 16px; line-height: 1.55; color: var(--lp-escuro-texto); }
+  .titulo { font-size: 28px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 700; color: #FFFFFF; }
+}
+
+.botao {
+  @include lp.botao;
+  @include lp.seta;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 24px;
+  border-radius: 12px;
+  background: var(--lp-ambar-claro);
+  color: var(--lp-texto);
+  font-size: 16px;
+  font-weight: 700;
+  &:hover { background: var(--lp-ambar); }
+  &:focus-visible { outline-color: #FFFFFF; }
+}
+
+@include lp.celular {
+  .chamada { flex-direction: column; align-items: stretch; gap: 16px; padding: 24px 20px; border-radius: 16px; }
+  .texto { flex: none; p { font-size: 15px; line-height: 1.5; } .titulo { font-size: 23px; } }
+}

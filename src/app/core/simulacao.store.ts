@@ -15,6 +15,10 @@ export interface IniciaisSimulacao {
   prazoMeses?: number | null;
   taxaAnual?: number | null;
   seguroMensal?: number | null;
+  /** Modo inicial da calculadora (?modo=renda abre em "Sei quanto posso pagar"). */
+  modo?: ModoCalculadora | null;
+  /** Parcela do modo renda (?parcela=). */
+  parcela?: number | null;
 }
 
 /**
@@ -105,16 +109,20 @@ export class SimulacaoStore {
     seguro: this.seguro(),
   }));
 
-  /** Query params da simulação (prefill e compartilhamento). O prazo segue em meses na URL. */
+  /**
+   * Query params da simulação (prefill e compartilhamento). O prazo segue em meses na URL.
+   * No modo renda vão também o modo e a parcela, para o link abrir no mesmo modo.
+   */
   readonly queryParams = computed(() => {
     const p = this.parametros();
-    return {
+    const base = {
       valor: Math.round(p.valorBem),
       entrada: Math.round(p.entrada),
       prazo: p.prazoMeses,
       taxa: p.taxaAnual,
       seguro: p.seguroMensal ?? 0,
     };
+    return this.modo() === 'renda' ? { modo: 'renda', parcela: this.parcelaMax(), ...base } : base;
   });
 
   /** Teto de preço usado no CTA "Ver imóveis de até…" e, depois, no filtro das ofertas. */
@@ -132,7 +140,8 @@ export class SimulacaoStore {
     this.prazoAnos.set(Math.max(1, Math.round((iniciais.prazoMeses ?? d.prazoMeses) / 12)));
     this.taxa.set(iniciais.taxaAnual ?? d.taxaAnual);
     this.seguro.set(iniciais.seguroMensal ?? 0);
-    this.parcelaMax.set(tema.parcelaPadrao);
+    this.modo.set(iniciais.modo ?? 'valor');
+    this.parcelaMax.set(iniciais.parcela && iniciais.parcela > 0 ? iniciais.parcela : tema.parcelaPadrao);
   }
 
   // Dispara uma vez por carregamento, na primeira mexida do usuário em qualquer campo

@@ -1,0 +1,52 @@
+@use '../../styles/inicio' as lp;
+
+// Acompanha a leitura (sticky na coluna do post).
+:host {
+  @include lp.host;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+p { margin: 0; }
+
+.indice {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  a {
+    padding: 7px 0 7px 14px;
+    border-left: 2px solid var(--lp-borda);
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--lp-texto-3);
+    text-decoration: none;
+    &:hover { color: var(--lp-verde); }
+    &.ativo { border-left-color: var(--lp-verde); font-weight: 600; }
+  }
+}
+
+.rotulo {
+  margin-bottom: 8px;
+  font-family: var(--lp-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--lp-aux);
+}
+
+.simulador {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px;
+  border: 1px solid var(--lp-borda);
+  border-radius: 16px;
+  background: var(--lp-superficie-2);
+
+  p { font-size: 15px; line-height: 1.5; color: var(--lp-texto-2); }
+  .titulo { font-size: 17px; line-height: 1.35; font-weight: 700; color: var(--lp-texto); }
+  a { @include lp.botao-primario; padding: 0 18px; }
+}

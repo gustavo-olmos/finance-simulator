@@ -1,0 +1,29 @@
+<app-inicio-topo atual="guias" />
+
+<section class="cabeca">
+  <div class="conteiner pilha">
+    <nav class="trilha" aria-label="Você está em">
+      <a routerLink="/">Início</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">Guias</span>
+    </nav>
+    <h1>Guias</h1>
+    <p class="intro">Explicações curtas, com os números do simulador, para você entender o financiamento antes de assinar.</p>
+  </div>
+</section>
+
+<section class="lista">
+  <div class="conteiner">
+    @if (cards().length) {
+      <div class="grade">
+        @for (c of cards(); track c.card.url) {
+          <app-guia-card [guia]="c.card" [rascunho]="c.rascunho" />
+        }
+      </div>
+    } @else {
+      <p class="vazio">Nenhum guia publicado ainda. Enquanto isso, <a routerLink="/financiamento-imovel">simule o seu financiamento</a>.</p>
+    }
+  </div>
+</section>
+
+<app-inicio-rodape />

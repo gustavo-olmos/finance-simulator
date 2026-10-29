@@ -104,6 +104,8 @@ export class SimuladorPageComponent implements OnInit {
       prazoMeses: num('prazo'),
       taxaAnual: num('taxa'),
       seguroMensal: num('seguro'),
+      modo: qp['modo'] === 'renda' ? 'renda' : null,
+      parcela: num('parcela'),
     });
     const path = this.route.snapshot.routeConfig?.path ?? '';
     this.seo.aplicar({

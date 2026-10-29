@@ -7,3 +7,9 @@ coverage/
 *.log
 .DS_Store
 /docs
+
+# Gerados por scripts/build-blog.mjs (npm run blog, roda antes do start e do build)
+src/assets/data/guias/
+src/assets/guias/
+src/app/config/guias.generated.ts
+src/sitemap.xml

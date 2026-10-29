@@ -1,0 +1,260 @@
+// Corpo dos guias (blog): o HTML gerado por scripts/build-blog.mjs entra por innerHTML,
+// por isso o estilo é global (importado em styles.scss), preso às classes da página
+// guia-detalhe. Design em docs/blog/design/.
+@use 'inicio' as lp;
+
+.artigo-corpo,
+.artigo-notas {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+
+  p, ol, ul, h2, h3, h4, blockquote { margin: 0; }
+  strong { color: var(--lp-texto); font-weight: 600; }
+
+  a {
+    color: var(--lp-verde);
+    &:hover { color: var(--lp-verde-hover); }
+    &:focus-visible { outline: 2px solid var(--lp-verde); outline-offset: 2px; }
+  }
+}
+
+.artigo-corpo {
+  p, li { font-size: 18px; line-height: 1.7; color: var(--lp-texto-3); }
+  li { line-height: 1.65; padding-left: 4px; }
+
+  ol, ul { padding-left: 24px; display: flex; flex-direction: column; gap: 10px; }
+
+  h2 {
+    margin-top: 24px;
+    font-size: 30px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    color: var(--lp-texto);
+  }
+
+  h3 { margin-top: 8px; font-size: 21px; line-height: 1.3; font-weight: 700; color: var(--lp-texto); }
+
+  blockquote { padding-left: 20px; border-left: 3px solid var(--lp-borda); }
+
+  .premissa { font-size: 14px; line-height: 1.5; color: var(--lp-aux); }
+  .rolagem-dica { display: none; }
+
+  // > [!conta]
+  .conta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 16px;
+    padding: 20px 24px;
+    border: 1px solid var(--lp-borda);
+    border-radius: 14px;
+    font-family: var(--lp-mono);
+    font-size: 17px;
+    color: var(--lp-texto);
+  }
+
+  .conta-op { color: var(--lp-aux); }
+
+  .conta-resultado {
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: var(--lp-menta);
+    color: var(--lp-menta-texto);
+    font-weight: 500;
+  }
+
+  // > [!destaque]
+  .destaque {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 22px 24px;
+    border-radius: 14px;
+    background: var(--price-bg);
+
+    p { font-size: 16px; line-height: 1.55; }
+  }
+
+  .destaque-valor {
+    flex: none;
+    font-family: var(--lp-mono);
+    font-size: 30px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--lp-ambar-texto);
+  }
+
+  // > [!atalho]
+  .atalho {
+    @include lp.seta;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 24px;
+    border: 1px solid var(--lp-borda);
+    border-radius: 14px;
+    color: var(--lp-texto);
+    text-decoration: none;
+    transition: border-color 0.2s ease;
+
+    &:hover { color: var(--lp-texto); border-color: var(--lp-verde); }
+    svg { flex: none; color: var(--lp-verde); }
+  }
+
+  .atalho-texto { display: flex; flex-direction: column; gap: 4px; }
+  .atalho-titulo { font-size: 17px; font-weight: 700; }
+  .atalho-desc { font-size: 15px; color: var(--lp-texto-2); }
+
+  // Tabelas: números em DM Mono, à direita; colunas de renda na cor do sistema.
+  .tabela-rolagem {
+    border: 1px solid var(--lp-borda);
+    border-radius: 14px;
+    overflow-x: auto;
+    background: #FFFFFF;
+    &:focus-visible { outline: 2px solid var(--lp-verde); outline-offset: 2px; }
+  }
+
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+
+  // 14px nas laterais (o design usa 16px): a tabela de 6 colunas cabe nos 740px.
+  th {
+    padding: 12px 14px;
+    background: var(--lp-superficie-2);
+    border-bottom: 1px solid var(--lp-borda);
+    text-align: right;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--lp-rotulo);
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 13px 14px;
+    border-top: 1px solid var(--lp-divisor);
+    text-align: right;
+    font-family: var(--lp-mono);
+    font-size: 15px;
+    color: var(--lp-texto);
+    white-space: nowrap;
+  }
+
+  th:first-child, td:first-child { text-align: left; }
+  tr:first-child td { border-top: 0; }
+  td.forte { font-weight: 500; }
+  td.forte-sac { color: var(--lp-menta-texto); }
+  td.forte-price { color: var(--lp-ambar-texto); }
+
+  .chip {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .chip-sac { background: var(--sac-bg); color: var(--sac-texto); }
+  .chip-price { background: var(--price-bg); color: var(--price-texto); }
+}
+
+// Resposta curta (1º parágrafo do post).
+.resposta-curta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 28px;
+  border-radius: 16px;
+  background: var(--lp-menta);
+
+  .rotulo {
+    font-family: var(--lp-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--lp-menta-texto);
+  }
+
+  p { margin: 0; font-size: 19px; line-height: 1.65; color: var(--lp-texto); }
+  strong { font-weight: 600; }
+}
+
+// Notas (depois do último --- do post): fontes e avisos.
+.artigo-notas {
+  gap: 10px;
+  margin-top: 8px;
+  padding-top: 24px;
+  border-top: 1px solid var(--lp-divisor);
+
+  p { font-size: 14px; line-height: 1.6; color: var(--lp-aux); }
+  em { font-style: normal; }
+}
+
+@include lp.celular {
+  .artigo-corpo {
+    gap: 18px;
+
+    p, li { font-size: 17px; line-height: 1.65; }
+    li { line-height: 1.6; padding-left: 2px; }
+    ol, ul { padding-left: 22px; gap: 8px; }
+    h2 { margin-top: 20px; font-size: 24px; line-height: 1.22; }
+    h3 { margin-top: 6px; font-size: 19px; }
+
+    .rolagem-dica {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: -12px;
+      font-size: 13px;
+      color: var(--lp-aux);
+      &::after { content: '→'; }
+    }
+
+    .conta { gap: 8px 10px; padding: 16px; border-radius: 12px; font-size: 15px; }
+    .conta-resultado { padding: 3px 8px; border-radius: 7px; }
+
+    .destaque { flex-direction: column; align-items: flex-start; gap: 4px; padding: 18px; border-radius: 12px; p { font-size: 15px; line-height: 1.5; } }
+    .destaque-valor { font-size: 26px; }
+
+    .atalho { gap: 12px; padding: 16px; border-radius: 12px; }
+    .atalho-titulo { font-size: 16px; }
+    .atalho-desc { font-size: 14px; }
+
+    // Rolagem lateral com a primeira coluna fixa.
+    .tabela-rolagem { border-radius: 12px; }
+    table { width: auto; min-width: 100%; font-size: 14px; }
+    th { padding: 10px 12px; font-size: 12px; }
+    td { padding: 11px 12px; font-size: 14px; }
+
+    th:first-child, td:first-child {
+      position: sticky;
+      left: 0;
+      background: #FFFFFF;
+      box-shadow: 1px 0 0 var(--lp-divisor);
+    }
+
+    th:first-child { background: var(--lp-superficie-2); }
+    .chip { padding: 2px 7px; font-size: 11px; }
+  }
+
+  .resposta-curta {
+    gap: 8px;
+    padding: 20px;
+    border-radius: 14px;
+    .rotulo { font-size: 11px; }
+    p { font-size: 17px; line-height: 1.6; }
+  }
+
+  .artigo-notas {
+    gap: 8px;
+    padding-top: 20px;
+    p { font-size: 13px; line-height: 1.55; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .artigo-corpo .atalho { transition: none; }
+}

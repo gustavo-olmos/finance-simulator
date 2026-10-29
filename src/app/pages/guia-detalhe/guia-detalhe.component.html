@@ -1,0 +1,100 @@
+<app-inicio-topo atual="guias" />
+
+@if (guia(); as g) {
+  @if (g.rascunho) {
+    <div class="faixa-rascunho">
+      <p class="conteiner">Rascunho — não publicado. <span class="desk">Esta página só aparece na prévia.</span><span class="mob">Só aparece na prévia.</span></p>
+    </div>
+  }
+
+  <section class="cabeca">
+    <div class="conteiner pilha">
+      <nav class="trilha" aria-label="Você está em">
+        <a routerLink="/">Início</a>
+        <span aria-hidden="true">›</span>
+        <a routerLink="/guias">Guias</a>
+      </nav>
+      <span class="pilula" [class.ambar]="g.tom === 'ambar'">{{ g.tag }}</span>
+      <h1>{{ g.titulo }}</h1>
+      <p class="resumo">{{ g.resumo }}</p>
+      <div class="meta">
+        <span>
+          <svg class="desk" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"></rect><path d="M3 9h18M8 2v4M16 2v4"></path></svg>
+          <span>Atualizado em <time [attr.datetime]="g.atualizadoEm"><span class="desk">{{ g.atualizadoEm | date: "d 'de' MMMM 'de' y" }}</span><span class="mob">{{ g.atualizadoEm | date: 'dd/MM/y' }}</span></time></span>
+        </span>
+        <span>
+          <svg class="desk" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+          {{ g.tempoLeitura }} min de leitura
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <div class="conteiner corpo">
+    <article class="artigo">
+      @if (g.capa; as capa) {
+        <figure class="capa">
+          <img
+            [src]="capa.src"
+            [attr.srcset]="capa.srcset"
+            sizes="(max-width: 760px) calc(100vw - 32px), 740px"
+            [width]="capa.largura"
+            [height]="capa.altura"
+            [alt]="capa.alt"
+            fetchpriority="high"
+          />
+          @if (capa.credito) {
+            <figcaption>{{ capa.credito }}</figcaption>
+          }
+        </figure>
+      }
+
+      @if (respostaCurta(); as resposta) {
+        <div class="resposta-curta">
+          <span class="rotulo">Resposta curta</span>
+          <p [innerHTML]="resposta"></p>
+        </div>
+      }
+
+      @if (g.secoes.length) {
+        <details class="indice-mob mob">
+          <summary>
+            Nesta página
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+          </summary>
+          <nav aria-label="Nesta página">
+            @for (s of g.secoes; track s.id) {
+              <a [routerLink]="[]" [fragment]="s.id">{{ s.titulo }}</a>
+            }
+          </nav>
+        </details>
+      }
+
+      <div class="artigo-corpo" [innerHTML]="html()" (click)="seguirLink($event)"></div>
+
+      @if (g.cta; as cta) {
+        <app-guia-chamada [cta]="cta" [simulador]="simulador()" [slug]="g.slug" />
+      }
+
+      @if (notas(); as n) {
+        <div class="artigo-notas" [innerHTML]="n" (click)="seguirLink($event)"></div>
+      }
+    </article>
+
+    <aside class="lateral desk">
+      <app-guia-lateral [secoes]="g.secoes" [ativa]="secaoAtiva()" [simulador]="simulador()" />
+    </aside>
+  </div>
+
+  <app-inicio-guias titulo="Continue lendo" [guias]="outros()" />
+} @else if (guia() === undefined) {
+  <section class="cabeca nao-encontrado">
+    <div class="conteiner pilha">
+      <h1>Guia não encontrado</h1>
+      <p class="resumo">Este guia não existe ou ainda não foi publicado.</p>
+      <a class="botao" routerLink="/guias">Ver todos os guias</a>
+    </div>
+  </section>
+}
+
+<app-inicio-rodape />

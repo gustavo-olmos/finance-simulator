@@ -1,5 +1,8 @@
 /* Estilos globais — fontes, reset e tokens do redesign (docs/redesign/HANDOFF.md). */
 
+// Corpo dos guias (HTML do post via innerHTML).
+@use 'app/styles/artigo';
+
 :root {
   // Marca
   --verde: #0E6B43;

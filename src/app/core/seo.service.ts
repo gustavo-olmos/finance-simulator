@@ -8,6 +8,12 @@ export interface MetadadosSeo {
   imagem?: string;
   /** Caminho da rota (ex.: /anuncios/apartamento-2-quartos-centro). */
   canonicalPath?: string;
+  /** og:type. Padrão: website. */
+  tipo?: 'website' | 'article';
+  /** Última atualização (AAAA-MM-DD) de um article: vira article:modified_time. */
+  modificadoEm?: string;
+  /** Pede aos buscadores para não indexar (rascunhos, página não encontrada). */
+  noindex?: boolean;
 }
 
 /**
@@ -31,7 +37,20 @@ export class SeoService {
 
     this.meta.updateTag({ property: 'og:title', content: dados.titulo });
     this.meta.updateTag({ property: 'og:description', content: dados.descricao });
-    this.meta.updateTag({ property: 'og:type', content: 'website' });
+    this.meta.updateTag({ property: 'og:type', content: dados.tipo ?? 'website' });
+
+    // Cada página chama aplicar(): o que não vale para ela é removido (navegação no navegador).
+    if (dados.tipo === 'article' && dados.modificadoEm) {
+      this.meta.updateTag({ property: 'article:modified_time', content: dados.modificadoEm });
+    } else {
+      this.meta.removeTag("property='article:modified_time'");
+    }
+
+    if (dados.noindex) {
+      this.meta.updateTag({ name: 'robots', content: 'noindex' });
+    } else {
+      this.meta.removeTag("name='robots'");
+    }
 
     this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
     this.meta.updateTag({ name: 'twitter:title', content: dados.titulo });
@@ -49,11 +68,12 @@ export class SeoService {
     }
   }
 
-  setOgImage(url: string): void {
+  /** Imagem de compartilhamento, sempre 1200×630 (a do /api/og é PNG). */
+  setOgImage(url: string, tipo = 'image/png'): void {
     this.meta.updateTag({ property: 'og:image',        content: url });
     this.meta.updateTag({ property: 'og:image:width',  content: '1200' });
     this.meta.updateTag({ property: 'og:image:height', content: '630' });
-    this.meta.updateTag({ property: 'og:image:type',   content: 'image/png' });
+    this.meta.updateTag({ property: 'og:image:type',   content: tipo });
     this.meta.updateTag({ name: 'twitter:card',  content: 'summary_large_image' });
     this.meta.updateTag({ name: 'twitter:image', content: url });
   }

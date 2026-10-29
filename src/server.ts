@@ -43,7 +43,14 @@ export function app(): express.Express {
         publicPath: browserDistFolder,
         providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }],
       })
-      .then((html) => res.send(html))
+      .then((html) => {
+        // Guias só mudam a cada deploy: a CDN guarda o HTML por 1 h e serve o antigo
+        // enquanto renova. As outras rotas não (o simulador lê os query params).
+        if (/^\/guias(\/|$)/.test(req.path)) {
+          res.set('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
+        }
+        res.send(html);
+      })
       .catch((err) => next(err));
   });
 

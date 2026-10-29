@@ -44,6 +44,8 @@
   }
 }
 
+.nav a.ativo, .menu a.ativo:not(.cta) { color: var(--lp-verde); font-weight: 600; }
+
 .cta { @include lp.botao-primario; }
 
 .btn-menu {

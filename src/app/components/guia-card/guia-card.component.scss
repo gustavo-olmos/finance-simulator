@@ -1,0 +1,51 @@
+@use '../../styles/inicio' as lp;
+
+:host { @include lp.host; }
+
+h3, p { margin: 0; }
+
+.card {
+  @include lp.cartao;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px;
+  border: 1px solid var(--lp-borda);
+  border-radius: 16px;
+  background: #FFFFFF;
+
+  h3 { font-size: 20px; line-height: 1.3; font-weight: 700; }
+  p { font-size: 15px; line-height: 1.55; color: var(--lp-texto-2); }
+}
+
+.etiquetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+// Etiqueta verde por padrão; âmbar no guia de destaque.
+.pilula {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--lp-menta);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--lp-menta-texto);
+
+  &.ambar { background: var(--lp-pessego); color: var(--lp-ambar-texto); }
+  &.rascunho { background: var(--price-bg); color: var(--lp-ambar-texto); }
+}
+
+@include lp.celular {
+  .card {
+    gap: 8px;
+    padding: 20px;
+    border-radius: 14px;
+    h3 { font-size: 18px; }
+    p { display: none; }
+  }
+}

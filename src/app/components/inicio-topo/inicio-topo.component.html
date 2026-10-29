@@ -3,8 +3,8 @@
     <a class="logo" routerLink="/" fragment="topo" aria-label="RotaFin, página inicial">RotaFin</a>
 
     <nav class="nav desk" aria-label="Principal">
-      @for (s of secoes; track s.id) {
-        <a routerLink="/" [fragment]="s.id">{{ s.rotulo }}</a>
+      @for (s of secoes(); track s.rotulo) {
+        <a [routerLink]="s.link" [fragment]="s.fragmento" [class.ativo]="s.ativo">{{ s.rotulo }}</a>
       }
     </nav>
 
@@ -28,8 +28,8 @@
 
   @if (menuAberto()) {
     <nav id="menu-inicio" class="menu mob" aria-label="Menu" (click)="menuAberto.set(false)">
-      @for (s of secoes; track s.id) {
-        <a routerLink="/" [fragment]="s.id">{{ s.rotulo }}</a>
+      @for (s of secoes(); track s.rotulo) {
+        <a [routerLink]="s.link" [fragment]="s.fragmento" [class.ativo]="s.ativo">{{ s.rotulo }}</a>
       }
       <a class="cta" routerLink="/" fragment="simular">Simular agora</a>
     </nav>

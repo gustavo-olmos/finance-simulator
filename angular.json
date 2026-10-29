@@ -13,7 +13,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/simulae-financiamento",
-            "index": "src/index.html",
+            "index": { "input": "src/index.html", "output": "index.csr.html" },
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",

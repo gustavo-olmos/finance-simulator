@@ -1,4 +1,5 @@
 import { TemaId } from '../models/tema.model';
+import { GUIAS_GERADOS } from './guias.generated';
 
 export interface ItemFaq {
   pergunta: string;
@@ -72,36 +73,26 @@ export interface Guia {
   resumo: string;
   /** Caminho do post. Vazio = card não aparece. */
   url: string;
+  /** Só fora de produção: o card aparece marcado como rascunho. */
+  rascunho?: boolean;
 }
 
 /**
- * Seção "Antes de assinar, vale ler" da página inicial.
- * TODO: preencher `url` quando os posts forem publicados. Enquanto nenhum tiver url,
- * a seção e os links "Guias" do cabeçalho e do rodapé da página inicial não aparecem.
+ * Seção "Antes de assinar, vale ler" da página inicial: os guias gerados no build a
+ * partir de src/content/blog/*.md (scripts/build-blog.mjs). Em produção, só os
+ * publicados; em `npm start` e nas prévias da Vercel, também os rascunhos, marcados.
+ * Sem nenhum guia, a seção e os links "Guias" do cabeçalho e do rodapé da página
+ * inicial não aparecem.
+ *
+ * Pauta (cards do design da página inicial, ainda sem post):
+ * - SAC × Price (âmbar): "SAC ou Price: qual tabela pesa menos no bolso?" —
+ *   Parcela fixa ou decrescente? Entenda o que muda no total de juros.
+ * - Veículo (verde): "Quanto dar de entrada no financiamento do carro" —
+ *   Como a entrada afeta parcela, juros e a aprovação do crédito.
+ * - Básico (verde): "CET: o número que o banco precisa te mostrar" —
+ *   Por que a taxa de juros sozinha não conta a história inteira.
  */
-export const GUIAS: Guia[] = [
-  {
-    tag: 'SAC × Price',
-    tom: 'ambar',
-    titulo: 'SAC ou Price: qual tabela pesa menos no bolso?',
-    resumo: 'Parcela fixa ou decrescente? Entenda o que muda no total de juros.',
-    url: '',
-  },
-  {
-    tag: 'Veículo',
-    tom: 'verde',
-    titulo: 'Quanto dar de entrada no financiamento do carro',
-    resumo: 'Como a entrada afeta parcela, juros e a aprovação do crédito.',
-    url: '',
-  },
-  {
-    tag: 'Básico',
-    tom: 'verde',
-    titulo: 'CET: o número que o banco precisa te mostrar',
-    resumo: 'Por que a taxa de juros sozinha não conta a história inteira.',
-    url: '',
-  },
-];
+export const GUIAS: Guia[] = GUIAS_GERADOS;
 
 export function guiasPublicados(): Guia[] {
   return GUIAS.filter((g) => g.url);

@@ -1,0 +1,10 @@
+<a class="card" [routerLink]="guia().url">
+  <span class="etiquetas">
+    <span class="pilula" [class.ambar]="guia().tom === 'ambar'">{{ guia().tag }}</span>
+    @if (rascunho()) {
+      <span class="pilula rascunho">Rascunho</span>
+    }
+  </span>
+  <h3>{{ guia().titulo }}</h3>
+  <p>{{ guia().resumo }}</p>
+</a>

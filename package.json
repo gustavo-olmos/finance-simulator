@@ -4,7 +4,10 @@
   "description": "Simulador de financiamento (SAC/PRICE) com listagem de anúncios — Angular 17 standalone + Signals + SSR",
   "scripts": {
     "ng": "ng",
+    "blog": "node scripts/build-blog.mjs",
+    "prestart": "npm run blog",
     "start": "ng serve",
+    "prebuild": "npm run blog",
     "build": "ng build",
     "serve:ssr": "node dist/simulae-financiamento/server/server.mjs"
   },
@@ -38,6 +41,8 @@
     "@angular/compiler-cli": "^17.3.0",
     "@types/express": "^4.17.17",
     "@types/node": "^18.18.0",
+    "gray-matter": "^4.0.3",
+    "marked": "^18.1.2",
     "typescript": "~5.4.2"
   }
 }

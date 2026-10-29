@@ -1,0 +1,186 @@
+// Página do guia — design em docs/blog/design/ (Main = desktop, Mobile = celular).
+// Aqui ficam o topo, a coluna lateral e a chamada final; o corpo do post (innerHTML)
+// usa styles/_artigo.scss.
+@use '../../styles/inicio' as lp;
+
+:host {
+  @include lp.host;
+  background: #FFFFFF;
+}
+
+@include lp.desk-mob;
+
+h1, p { margin: 0; }
+
+.conteiner { @include lp.conteiner; }
+
+.faixa-rascunho {
+  background: var(--price-bg);
+  border-bottom: 1px solid var(--lp-pessego);
+
+  p {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--lp-ambar-texto);
+    @include lp.celular { font-size: 13px; }
+  }
+}
+
+.cabeca {
+  background: var(--lp-superficie-2);
+  border-bottom: 1px solid #E8EDEA;
+}
+
+.pilha {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 48px;
+  padding-bottom: 52px;
+}
+
+.trilha {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--lp-aux);
+
+  a { color: inherit; text-decoration: none; &:hover { color: var(--lp-verde); } }
+}
+
+.pilula {
+  align-self: flex-start;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--lp-menta);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--lp-menta-texto);
+
+  &.ambar { background: var(--lp-pessego); color: var(--lp-ambar-texto); }
+}
+
+h1 {
+  max-width: 860px;
+  font-size: 52px;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+
+.resumo {
+  max-width: 700px;
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--lp-texto-2);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+  font-size: 14px;
+  color: var(--lp-aux);
+
+  > span { display: inline-flex; align-items: center; gap: 6px; }
+}
+
+.corpo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 48px 72px;
+  padding-top: 56px;
+  padding-bottom: 80px;
+}
+
+.artigo {
+  flex: 999 1 560px;
+  min-width: 0;
+  max-width: 740px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+// Capa do post (16:9; largura e altura no <img> reservam o espaço).
+.capa {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    background: var(--lp-superficie);
+    @include lp.celular { border-radius: 14px; }
+  }
+
+  figcaption { font-size: 13px; line-height: 1.5; color: var(--lp-aux); }
+}
+
+// Coluna lateral (app-guia-lateral): acompanha a leitura.
+.lateral {
+  position: sticky;
+  top: 24px;
+  flex: 1 1 240px;
+  max-width: 300px;
+}
+
+// Índice recolhível do celular.
+.indice-mob {
+  border: 1px solid var(--lp-borda);
+  border-radius: 12px;
+
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 48px;
+    padding: 0 16px;
+    font-size: 15px;
+    font-weight: 600;
+    list-style: none;
+    cursor: pointer;
+    &::-webkit-details-marker { display: none; }
+    svg { transition: transform 0.25s ease; }
+  }
+
+  &[open] summary svg { transform: rotate(180deg); }
+
+  nav { display: flex; flex-direction: column; padding: 0 16px 8px; }
+
+  a {
+    padding: 11px 0;
+    border-top: 1px solid var(--lp-divisor);
+    font-size: 15px;
+    color: var(--lp-texto-3);
+    text-decoration: none;
+  }
+}
+
+.nao-encontrado .botao { @include lp.botao-primario; align-self: flex-start; }
+
+@include lp.celular {
+  .pilha { gap: 14px; padding-top: 24px; padding-bottom: 28px; }
+  .trilha { gap: 6px; font-size: 13px; }
+  h1 { font-size: 31px; line-height: 1.12; }
+  .resumo { font-size: 17px; line-height: 1.5; }
+  .meta { gap: 6px 16px; font-size: 13px; }
+
+  .corpo { display: block; padding-top: 24px; padding-bottom: 40px; }
+  .artigo { gap: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .indice-mob summary svg { transition: none; }
+}

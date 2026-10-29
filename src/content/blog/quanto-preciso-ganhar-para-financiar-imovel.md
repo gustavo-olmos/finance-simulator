@@ -6,8 +6,9 @@ slug: quanto-preciso-ganhar-para-financiar-imovel
 tag: Renda
 tom: verde
 resumo: "A conta dos 30% que o banco faz, com tabela de renda por valor de imóvel."
-status: rascunho          # rascunho | publicado — só publicar depois da aprovação do Gustavo
-atualizadoEm: 2026-10-28
+status: publicado         # rascunho | publicado — só publicar depois da aprovação do Gustavo
+publicadoEm: 2026-10-29
+atualizadoEm: 2026-10-29
 revisarEm: 2027-01-28     # conferir taxa de referência e regras a cada 3 meses
 capa: quanto-preciso-ganhar-para-financiar-imovel.jpg
 capaAlt: "Mão segurando chaves com um chaveiro em forma de casa, na entrada de um apartamento"

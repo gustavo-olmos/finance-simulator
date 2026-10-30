@@ -35,5 +35,18 @@ export const routes: Routes = [
     path: 'guias/:slug',
     loadComponent: () => import('./pages/guia-detalhe/guia-detalhe.component').then((m) => m.GuiaDetalheComponent),
   },
+  {
+    path: 'contato',
+    loadComponent: () => import('./pages/contato-page/contato-page.component').then((m) => m.ContatoPageComponent),
+  },
+  {
+    path: 'privacidade',
+    loadComponent: () =>
+      import('./pages/privacidade-page/privacidade-page.component').then((m) => m.PrivacidadePageComponent),
+  },
+  {
+    path: 'termos',
+    loadComponent: () => import('./pages/termos-page/termos-page.component').then((m) => m.TermosPageComponent),
+  },
   { path: '**', redirectTo: 'financiamento-imovel' },
 ];

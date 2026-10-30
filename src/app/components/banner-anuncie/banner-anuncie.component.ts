@@ -18,8 +18,7 @@ import { SITE } from '../../config/site.config';
         @if (anunciarUrl) {
           <a class="btn" [href]="anunciarUrl" target="_blank" rel="noopener">Quero anunciar</a>
         } @else {
-          <!-- TODO: sem SITE.anunciarUrl, cai na página de contato (ainda não criada). -->
-          <a class="btn" routerLink="/contato">Quero anunciar</a>
+          <a class="btn" routerLink="/contato" fragment="anunciar">Quero anunciar</a>
         }
       </div>
     </section>

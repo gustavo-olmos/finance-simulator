@@ -254,7 +254,18 @@ input[type='range']:focus-visible {
 
   .grade-2 { gap: 10px; }
 
-  .stepper input { font-size: 16px; }
+  // Botões −/+ mais estreitos: em 360px o "30" do prazo não cabia ao lado de "anos".
+  // A fonte fica em 16px (abaixo disso o iOS dá zoom ao focar).
+  .stepper {
+    button { width: 36px; font-size: 20px; }
+    input { font-size: 16px; }
+    .unidade { font-size: 13px; padding-right: 2px; }
+  }
 
   .taxa-mes { margin-top: -4px; }
+}
+
+// Telas muito estreitas (320px): prazo e juros um embaixo do outro.
+@media (max-width: 340px) {
+  .grade-2 { grid-template-columns: minmax(0, 1fr); }
 }

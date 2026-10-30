@@ -89,7 +89,11 @@ export class GuiaDetalheComponent {
   constructor() {
     afterNextRender(() => {
       const win = this.doc.defaultView;
-      if (win) this.zone.runOutsideAngular(() => this.acompanharLeitura(win));
+      if (!win) return;
+      this.zone.runOutsideAngular(() => {
+        this.acompanharLeitura(win);
+        this.marcarTabelasLargas();
+      });
     });
   }
 
@@ -105,6 +109,24 @@ export class GuiaDetalheComponent {
 
   private confiavel(html: string | undefined): SafeHtml | null {
     return html ? this.sanitizer.bypassSecurityTrustHtml(html) : null;
+  }
+
+  /**
+   * Marca com .rola as tabelas que não cabem na largura, para mostrar a dica "Deslize
+   * para ver tudo". Refaz quando a página muda de tamanho (janela ou outro guia).
+   */
+  private marcarTabelasLargas(): void {
+    if (typeof ResizeObserver === 'undefined') return;
+    const raiz = this.host.nativeElement;
+    const medir = () => {
+      raiz.querySelectorAll<HTMLElement>('.artigo-corpo .tabela').forEach((t) => {
+        const caixa = t.querySelector<HTMLElement>('.tabela-rolagem');
+        if (caixa) t.classList.toggle('rola', caixa.scrollWidth > caixa.clientWidth + 1);
+      });
+    };
+    const observador = new ResizeObserver(medir);
+    observador.observe(raiz);
+    this.destroyRef.onDestroy(() => observador.disconnect());
   }
 
   private acompanharLeitura(win: Window): void {

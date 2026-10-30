@@ -1,0 +1,55 @@
+<app-pagina-texto
+  titulo="Política de privacidade"
+  intro="Como o RotaFin trata as informações de quem usa o site."
+  atualizadoEm="2026-10-29"
+>
+  <h2>Resumo</h2>
+  <ul>
+    <li>Você não precisa criar conta nem informar nome, CPF, e-mail ou telefone para simular.</li>
+    <li>As estatísticas de visita são agregadas e não usam cookies.</li>
+    <li>A sua última simulação fica guardada só no seu navegador, para agilizar as próximas.</li>
+    <li>Não vendemos dados.</li>
+  </ul>
+
+  <h2>Quem é o responsável</h2>
+  <p>O RotaFin (rotafin.com.br) é o responsável pelo tratamento dos dados descritos nesta política. Para qualquer assunto sobre privacidade, escreva para <a [href]="'mailto:' + email">{{ email }}</a>.</p>
+
+  <h2>O que coletamos e para quê</h2>
+
+  <h3>Registros de acesso</h3>
+  <p>Como todo site, o RotaFin recebe dados técnicos de cada acesso, como endereço IP, navegador e página visitada. A empresa de hospedagem (Vercel) guarda esses registros por pouco tempo, para manter o site seguro e funcionando.</p>
+  <p>Os valores da simulação ficam no endereço (URL) da página, para você poder compartilhar o resultado. Por isso, também podem aparecer nesses registros.</p>
+
+  <h3>Estatísticas de uso</h3>
+  <p>Usamos o Vercel Web Analytics e o Vercel Speed Insights para saber quais páginas são visitadas, de onde vêm as visitas, em que tipo de aparelho e com que velocidade o site carrega. Também contamos cliques em alguns botões, como os de contato com anunciantes.</p>
+  <p>Essas ferramentas não usam cookies e não identificam você: os números são agregados. Servem para melhorar o site e para mostrar aos anunciantes quantos contatos os anúncios receberam.</p>
+
+  <h3>Simulação salva no seu aparelho</h3>
+  <p>A sua última simulação (entrada, prazo, taxa de juros, seguro e valor do bem) fica guardada no armazenamento local do navegador. Ela preenche a simulação quando você abre um anúncio. Esse dado não é enviado para nós. Para apagar, limpe os dados do site nas configurações do navegador.</p>
+
+  @if (temGa4) {
+    <h3>Google Analytics</h3>
+    <p>Usamos também o Google Analytics, que usa cookies para medir as visitas. Saiba como o Google usa esses dados em <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">Como o Google usa informações de sites que usam seus serviços</a>. Para não ser medido, você pode instalar o <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">complemento de desativação do Google Analytics</a>.</p>
+  }
+
+  @if (temAdsense) {
+    <h3>Publicidade</h3>
+    <p>Algumas páginas exibem anúncios do Google AdSense. Fornecedores terceiros, incluindo o Google, usam cookies para exibir anúncios com base nas suas visitas anteriores a este e a outros sites. Esses cookies permitem que o Google e os parceiros dele mostrem anúncios de acordo com o que você visitou na internet.</p>
+    <p>Você pode desativar a publicidade personalizada nas <a href="https://adssettings.google.com" target="_blank" rel="noopener">Configurações de anúncios do Google</a> ou, para outros fornecedores, em <a href="https://www.aboutads.info/choices" target="_blank" rel="noopener">aboutads.info</a>.</p>
+  }
+
+  <h2>Contato com anunciantes</h2>
+  <p>Os imóveis e veículos anunciados são de imobiliárias e concessionárias parceiras. Ao tocar no botão de WhatsApp, de telefone ou do site do anunciante, você sai do RotaFin e fala direto com ele. A mensagem do WhatsApp já vem escrita com a sua simulação, e você pode mudar o texto antes de enviar. O que você enviar passa a ser tratado pelo anunciante, de acordo com a política dele.</p>
+
+  <h2>Com quem os dados são compartilhados</h2>
+  <p>Os dados descritos aqui são processados pelos fornecedores que fazem o site funcionar: {{ fornecedores }}. Esses fornecedores podem processar dados fora do Brasil, com as garantias previstas na lei.</p>
+
+  <h2>Seus direitos</h2>
+  <p>Pela Lei Geral de Proteção de Dados (Lei nº 13.709/2018), você pode pedir a confirmação de que tratamos dados seus, o acesso a eles, a correção, a eliminação e informações sobre o compartilhamento. Como o site não tem cadastro, na maioria dos casos não guardamos nada que identifique você. Para fazer um pedido, escreva para <a [href]="'mailto:' + email">{{ email }}</a>.</p>
+
+  <h2>Segurança</h2>
+  <p>O site usa conexão criptografada (HTTPS) em todas as páginas.</p>
+
+  <h2>Mudanças nesta política</h2>
+  <p>Esta política pode mudar quando o site mudar. A data no topo da página mostra a última atualização. Veja também os <a routerLink="/termos">Termos de uso</a>.</p>
+</app-pagina-texto>

@@ -51,6 +51,9 @@ const PAGINAS = [
   { caminho: '/', lastmod: '2026-10-28' },
   { caminho: '/financiamento-imovel', lastmod: '2026-07-04' },
   { caminho: '/financiamento-veiculo', lastmod: '2026-07-04' },
+  { caminho: '/contato', lastmod: '2026-10-29', changefreq: 'yearly', priority: '0.3' },
+  { caminho: '/privacidade', lastmod: '2026-10-29', changefreq: 'yearly', priority: '0.3' },
+  { caminho: '/termos', lastmod: '2026-10-29', changefreq: 'yearly', priority: '0.3' },
 ];
 
 // Chamada final quando o post não define cta.titulo / cta.subtitulo.
@@ -429,7 +432,7 @@ async function gerarSitemap(publicados) {
 
   const blocos = [
     '  <!-- Páginas principais -->',
-    ...PAGINAS.map((p) => url(p.caminho, p.lastmod, 'weekly', '1.0')),
+    ...PAGINAS.map((p) => url(p.caminho, p.lastmod, p.changefreq ?? 'weekly', p.priority ?? '1.0')),
     '',
     '  <!-- Páginas de anúncio -->',
     ...anuncios.map((a) => url(`/anuncios/${a.slug}`, (a.criado_em || hoje).slice(0, 10), 'monthly', '0.7')),

@@ -1,0 +1,26 @@
+<app-inicio-topo />
+
+<section class="cabeca">
+  <div class="conteiner pilha">
+    <nav class="trilha" aria-label="Você está em">
+      <a routerLink="/">Início</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">{{ titulo() }}</span>
+    </nav>
+    <h1>{{ titulo() }}</h1>
+    @if (intro()) {
+      <p class="intro">{{ intro() }}</p>
+    }
+    @if (atualizadoEm()) {
+      <p class="data">Atualizado em <time [attr.datetime]="atualizadoEm()">{{ atualizadoEm() | date: "d 'de' MMMM 'de' y" }}</time></p>
+    }
+  </div>
+</section>
+
+<div class="conteiner corpo">
+  <article class="artigo-corpo">
+    <ng-content />
+  </article>
+</div>
+
+<app-inicio-rodape />

@@ -6,8 +6,6 @@
         <p>Simuladores de financiamento de imóvel e veículo.</p>
       </div>
 
-      <!-- TODO: criar as páginas Contato, Privacidade e Termos. Até lá essas rotas
-           caem no redirect '**' e voltam para o simulador (como no rodapé do site). -->
       <div class="navs">
         <nav aria-label="Simuladores">
           <span class="titulo">Simuladores</span>
@@ -22,7 +20,7 @@
           @if (anunciarUrl) {
             <a [href]="anunciarUrl" target="_blank" rel="noopener">Anuncie</a>
           } @else {
-            <a routerLink="/financiamento-imovel" fragment="anunciar">Anuncie</a>
+            <a routerLink="/contato" fragment="anunciar">Anuncie</a>
           }
           <a routerLink="/contato">Contato</a>
         </nav>

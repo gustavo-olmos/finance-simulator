@@ -13,7 +13,7 @@
     </div>
     <p class="frase">Renda familiar mínima estimada: <strong>{{ fmt.brl0(store.parcelaMax() / 0.3) }}</strong>*</p>
   } @else {
-    <p class="intro">Financiando <strong>{{ fmt.brl0(sac().valorFinanciado) }}</strong> em {{ store.prazoAnos() }} anos</p>
+    <p class="intro">Valor financiado: <strong>{{ fmt.brl0(sac().valorFinanciado) }}</strong> em {{ store.prazoAnos() }} anos</p>
     <div class="sistemas">
       <div class="sistema sac">
         <p class="rot"><span class="cor" aria-hidden="true"></span>SAC · diminui</p>
@@ -32,6 +32,11 @@
         <span role="columnheader" class="th"></span>
         <span role="columnheader" class="th sac-txt">SAC</span>
         <span role="columnheader" class="th price-txt">PRICE</span>
+      </div>
+      <div role="row" class="tr">
+        <span role="rowheader" class="td rot-linha"><span class="desk">Total de juros</span><span class="mob">Juros</span></span>
+        <span role="cell" class="td forte">{{ fmt.brl0(sac().totalJuros) }}</span>
+        <span role="cell" class="td forte">{{ fmt.brl0(price().totalJuros) }}</span>
       </div>
       <div role="row" class="tr">
         <span role="rowheader" class="td rot-linha"><span class="desk">Total pago</span><span class="mob">Total</span></span>

@@ -1,0 +1,63 @@
+// Mesmo topo da lista de guias; o texto usa .artigo-corpo (styles/_artigo.scss).
+@use '../../styles/inicio' as lp;
+
+:host {
+  @include lp.host;
+  background: #FFFFFF;
+}
+
+h1, p { margin: 0; }
+
+.conteiner { @include lp.conteiner; }
+
+.cabeca {
+  background: var(--lp-superficie-2);
+  border-bottom: 1px solid #E8EDEA;
+}
+
+.pilha {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 48px;
+  padding-bottom: 52px;
+}
+
+.trilha {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--lp-aux);
+
+  a { color: inherit; text-decoration: none; &:hover { color: var(--lp-verde); } }
+}
+
+h1 {
+  font-size: 52px;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+
+.intro {
+  max-width: 700px;
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--lp-texto-2);
+}
+
+.data { font-size: 14px; color: var(--lp-aux); }
+
+.corpo { padding-top: 56px; padding-bottom: 88px; }
+
+.artigo-corpo { max-width: 740px; }
+
+@include lp.celular {
+  .pilha { gap: 14px; padding-top: 24px; padding-bottom: 28px; }
+  .trilha { gap: 6px; font-size: 13px; }
+  h1 { font-size: 31px; line-height: 1.12; }
+  .intro { font-size: 17px; line-height: 1.5; }
+  .data { font-size: 13px; }
+  .corpo { padding-top: 24px; padding-bottom: 48px; }
+}

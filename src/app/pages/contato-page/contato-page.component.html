@@ -1,0 +1,19 @@
+<app-pagina-texto titulo="Contato" intro="Fale com o RotaFin por e-mail.">
+  <div class="resposta-curta">
+    <span class="rotulo">E-mail</span>
+    <p><a [href]="links.geral">{{ email }}</a></p>
+  </div>
+
+  <h2>Dúvidas, sugestões ou erros</h2>
+  <p>Ficou com dúvida sobre uma simulação, achou um erro no cálculo ou tem uma ideia para o site? <a [href]="links.geral">Escreva para a gente</a>.</p>
+
+  <h2 id="anunciar">Quero anunciar</h2>
+  <p>É imobiliária ou concessionária? Os seus anúncios aparecem para quem acabou de simular uma parcela na faixa de preço deles, com o botão de WhatsApp já trazendo a simulação na mensagem.</p>
+  <p><a [href]="links.anunciar">Fale com a gente</a> contando o nome da empresa, a cidade e quantos imóveis ou veículos você quer anunciar.</p>
+
+  <h2>Privacidade e seus dados</h2>
+  <p>Pedidos sobre os seus dados pessoais, como acesso, correção ou eliminação, podem ser feitos <a [href]="links.privacidade">pelo mesmo e-mail</a>. Veja a <a routerLink="/privacidade">Política de privacidade</a>.</p>
+
+  <h2>Sobre um anúncio</h2>
+  <p>O RotaFin não negocia os imóveis e veículos anunciados. Para falar sobre um anúncio, use o botão de contato na página dele: a conversa é direto com o anunciante.</p>
+</app-pagina-texto>

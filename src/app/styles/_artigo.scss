@@ -35,6 +35,7 @@
   }
 
   h3 { margin-top: 8px; font-size: 21px; line-height: 1.3; font-weight: 700; color: var(--lp-texto); }
+  > h2:first-child { margin-top: 0; }
 
   blockquote { padding-left: 20px; border-left: 3px solid var(--lp-borda); }
 

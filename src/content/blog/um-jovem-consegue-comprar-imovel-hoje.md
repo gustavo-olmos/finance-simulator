@@ -6,7 +6,7 @@ slug: um-jovem-consegue-comprar-imovel-hoje
 tag: Primeiro imóvel
 tom: ambar
 resumo: "Quanto imóvel cabe na renda de um jovem e quanto tempo leva para juntar a entrada."
-status: rascunho          # rascunho | publicado — só publicar depois da aprovação do Gustavo
+status: publicado         # rascunho | publicado — só publicar depois da aprovação do Gustavo
 publicadoEm: 2026-10-29
 atualizadoEm: 2026-10-29
 revisarEm: 2027-01-29     # conferir renda (PNAD), FipeZAP, faixas do MCMV e Selic a cada 3 meses

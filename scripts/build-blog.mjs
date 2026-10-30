@@ -88,6 +88,13 @@ function paraSlug(texto) {
     .replace(/^-+|-+$/g, '');
 }
 
+// Célula numérica: "R$ 2.593", "8,0 anos", "R$ 146 mil", "4,75%", "—" ou vazia.
+const NUMERO = /^(≈\s*)?(R\$\s*)?[\d.,]+(\s*(%|mil|mi|bi|anos?|meses|m²|\/mês))?$|^[—–-]?$/;
+
+function ehTexto(md) {
+  return !NUMERO.test(md.replace(/\*\*|__/g, '').replace(/ /g, ' ').trim());
+}
+
 /** Texto puro de uma lista de tokens inline (para ids e para o índice). */
 function textoPuro(tokens) {
   return tokens
@@ -183,11 +190,12 @@ function criarConversor(ctx) {
       },
 
       table(token) {
-        const colunas = token.header.length;
         let grupo = null; // último sistema (SAC/Price) visto nos cabeçalhos
         const classes = [];
+        // Coluna de texto (maioria das células não é número): alinhada à esquerda.
+        const colunaTexto = token.header.map((_, i) => token.rows.filter((l) => ehTexto(l[i].text)).length * 2 > token.rows.length);
 
-        const ths = token.header.map((cell) => {
+        const ths = token.header.map((cell, i) => {
           let texto = cell.text.trim();
           const negrito = /^\*\*([\s\S]+)\*\*$/.exec(texto);
           if (negrito) texto = negrito[1].trim();
@@ -203,19 +211,18 @@ function criarConversor(ctx) {
           const destaque = negrito || (/^renda\b/i.test(texto) && doSistema);
           classes.push(destaque ? `forte forte-${doSistema ?? 'sac'}` : '');
 
-          return `<th scope="col">${chip}${inline(texto)}</th>`;
+          return `<th scope="col"${colunaTexto[i] ? ' class="esq"' : ''}>${chip}${inline(texto)}</th>`;
         });
 
-        const linhas = token.rows.map(
-          (linha) =>
-            `<tr>${linha
-              .map((cell, i) => `<td${classes[i] ? ` class="${classes[i]}"` : ''}>${this.parser.parseInline(cell.tokens)}</td>`)
-              .join('')}</tr>`,
-        );
+        // Célula de texto: fonte normal e pode quebrar linha (número fica em DM Mono).
+        const td = (cell, i) => {
+          const c = [classes[i], ehTexto(cell.text) && 'texto', colunaTexto[i] && 'esq'].filter(Boolean).join(' ');
+          return `<td${c ? ` class="${c}"` : ''}>${this.parser.parseInline(cell.tokens)}</td>`;
+        };
+        const linhas = token.rows.map((linha) => `<tr>${linha.map(td).join('')}</tr>`);
 
-        // Tabelas largas rolam de lado no celular; a dica só aparece nelas.
-        const dica = colunas >= 4 ? '<p class="rolagem-dica">Deslize para ver tudo</p>\n' : '';
-        return `${dica}<div class="tabela-rolagem" tabindex="0"><table><thead><tr>${ths.join('')}</tr></thead><tbody>${linhas.join('')}</tbody></table></div>\n`;
+        // A dica de rolagem só aparece quando a tabela não cabe (classe .rola, posta pela página).
+        return `<div class="tabela"><p class="rolagem-dica">Deslize para ver tudo</p><div class="tabela-rolagem" tabindex="0"><table><thead><tr>${ths.join('')}</tr></thead><tbody>${linhas.join('')}</tbody></table></div></div>\n`;
       },
 
       link({ href, title, tokens }) {

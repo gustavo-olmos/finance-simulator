@@ -40,7 +40,23 @@
   blockquote { padding-left: 20px; border-left: 3px solid var(--lp-borda); }
 
   .premissa { font-size: 14px; line-height: 1.5; color: var(--lp-aux); }
-  .rolagem-dica { display: none; }
+
+  // Tabela + dica "Deslize para ver tudo", que só aparece com .rola (a tabela não cabe;
+  // a página do guia mede no navegador).
+  .tabela { display: flex; flex-direction: column; gap: 6px; }
+
+  .rolagem-dica {
+    display: none;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--lp-aux);
+    &::after { content: '→'; }
+  }
+
+  .tabela.rola .rolagem-dica { display: flex; }
 
   // > [!conta]
   .conta {
@@ -129,7 +145,6 @@
     font-size: 13px;
     font-weight: 600;
     color: var(--lp-rotulo);
-    white-space: nowrap;
   }
 
   td {
@@ -142,7 +157,10 @@
     white-space: nowrap;
   }
 
-  th:first-child, td:first-child { text-align: left; }
+  // Texto (não número): fonte normal e quebra de linha. Coluna de texto: à esquerda.
+  td.texto { font-family: var(--lp-fonte); white-space: normal; min-width: 8em; }
+
+  th:first-child, td:first-child, .esq { text-align: left; }
   tr:first-child td { border-top: 0; }
   td.forte { font-weight: 500; }
   td.forte-sac { color: var(--lp-menta-texto); }
@@ -150,6 +168,7 @@
 
   .chip {
     display: inline-block;
+    white-space: nowrap;
     padding: 2px 8px;
     border-radius: 999px;
     font-size: 12px;
@@ -203,17 +222,6 @@
     h2 { margin-top: 20px; font-size: 24px; line-height: 1.22; }
     h3 { margin-top: 6px; font-size: 19px; }
 
-    .rolagem-dica {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: -12px;
-      font-size: 13px;
-      color: var(--lp-aux);
-      &::after { content: '→'; }
-    }
-
     .conta { gap: 8px 10px; padding: 16px; border-radius: 12px; font-size: 15px; }
     .conta-resultado { padding: 3px 8px; border-radius: 7px; }
 
@@ -227,7 +235,8 @@
     // Rolagem lateral com a primeira coluna fixa.
     .tabela-rolagem { border-radius: 12px; }
     table { width: auto; min-width: 100%; font-size: 14px; }
-    th { padding: 10px 12px; font-size: 12px; }
+    // No celular a tabela rola: cabeçalho em uma linha só.
+    th { padding: 10px 12px; font-size: 12px; white-space: nowrap; }
     td { padding: 11px 12px; font-size: 14px; }
 
     th:first-child, td:first-child {

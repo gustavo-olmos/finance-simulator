@@ -68,7 +68,7 @@ export class AnuncioDetalheComponent {
       map((p) => p.get('slug') ?? ''),
       switchMap((slug) => this.anuncioService.getPorSlug(slug)),
       // Prepara a simulação antes da primeira renderização (inclusive no SSR).
-      tap((a) => a && this.prepararSimulacao(a)),
+      tap((a) => (a ? this.prepararSimulacao(a) : this.naoEncontrado())),
     ),
     { initialValue: null },
   );
@@ -197,6 +197,15 @@ export class AnuncioDetalheComponent {
       descricao: `${a.descricao} Simule: a partir de ${brl(sac)}/mês (SAC).`,
       imagem: a.imagem_url,
       canonicalPath: `/anuncios/${a.slug}`,
+    });
+  }
+
+  /** Slug inexistente ou anúncio retirado (inclui os de exemplo): fora da busca. */
+  private naoEncontrado(): void {
+    this.seo.aplicar({
+      titulo: 'Anúncio não encontrado | RotaFin',
+      descricao: 'Este anúncio não está mais disponível.',
+      noindex: true,
     });
   }
 

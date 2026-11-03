@@ -16,9 +16,11 @@ export class AnuncioService {
   private readonly http = inject(HttpClient);
   private readonly url = 'assets/data/anuncios.json';
 
-  private readonly anuncios$: Observable<Anuncio[]> = this.http
-    .get<Anuncio[]>(this.url)
-    .pipe(shareReplay({ bufferSize: 1, refCount: false }));
+  // Anúncios de exemplo (fictícios) ficam no arquivo, mas não vão para o site.
+  private readonly anuncios$: Observable<Anuncio[]> = this.http.get<Anuncio[]>(this.url).pipe(
+    map((lista) => lista.filter((a) => !a.exemplo)),
+    shareReplay({ bufferSize: 1, refCount: false }),
+  );
 
   getTodos(): Observable<Anuncio[]> {
     return this.anuncios$;

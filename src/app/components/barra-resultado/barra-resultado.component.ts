@@ -1,4 +1,4 @@
-import { afterNextRender, Component, computed, DestroyRef, inject, NgZone, signal } from '@angular/core';
+import { afterNextRender, Component, computed, DestroyRef, inject, input, NgZone, signal } from '@angular/core';
 import { DOCUMENT, ViewportScroller } from '@angular/common';
 import { SimulacaoStore } from '../../core/simulacao.store';
 import { brl, brlCurto } from '../../core/formato';
@@ -27,6 +27,9 @@ export class BarraResultadoComponent {
   private readonly scroller = inject(ViewportScroller);
 
   protected readonly fmt = { brl, brlCurto };
+
+  /** Há ofertas na página: o CTA da gaveta cita a faixa de preço. */
+  readonly temOfertas = input(false);
 
   readonly tema = this.store.tema;
   readonly maximos = this.store.maximos;

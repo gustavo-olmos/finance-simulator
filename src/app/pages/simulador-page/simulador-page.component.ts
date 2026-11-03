@@ -68,6 +68,8 @@ export class SimuladorPageComponent implements OnInit {
   private urlTimer: ReturnType<typeof setTimeout> | null = null;
 
   readonly anuncios = toSignal(this.anuncioService.getTodos(), { initialValue: [] });
+  /** Há anúncio do tema (a seção de ofertas aparece): define o destino dos CTAs do resultado. */
+  readonly temOfertas = computed(() => this.anuncios().some((a) => a.categoria === this.temaId()));
 
   constructor() {
     afterNextRender(() => { this.urlSincronizada = true; });

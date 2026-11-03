@@ -27,7 +27,11 @@
     }
   </div>
   <button type="button" class="cta" (click)="rolar('resultado')">
-    Ver resultado e {{ tema().bemPlural }} até {{ fmt.brlCurto(store.faixaMax()) }}
+    @if (temOfertas()) {
+      Ver resultado e {{ tema().bemPlural }} até {{ fmt.brlCurto(store.faixaMax()) }}
+    } @else {
+      Ver resultado completo
+    }
   </button>
 </div>
 

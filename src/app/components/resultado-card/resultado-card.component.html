@@ -53,8 +53,12 @@
     <p class="frase">No PRICE a 1ª parcela é <strong>{{ fmt.brl0(sac().primeiraParcela - price().primeiraParcela) }} menor</strong>, mas o total sai <strong>{{ fmt.brl0(price().totalPago - sac().totalPago) }} mais caro</strong>.</p>
   }
 
-  <button type="button" class="cta" (click)="verOfertas()">
-    Ver {{ tema().bemPlural }} de até {{ fmt.brlCurto(store.faixaMax()) }}
+  <button type="button" class="cta" (click)="rolarCta()">
+    @if (temOfertas()) {
+      Ver {{ tema().bemPlural }} de até {{ fmt.brlCurto(store.faixaMax()) }}
+    } @else {
+      Ver parcelas ano a ano
+    }
     <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"></path><path d="M6 13l6 6 6-6"></path></svg>
   </button>
   <div class="secundarios">

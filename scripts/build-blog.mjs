@@ -442,7 +442,8 @@ async function gerarSitemap(publicados) {
     ...PAGINAS.map((p) => url(p.caminho, p.lastmod, p.changefreq ?? 'weekly', p.priority ?? '1.0')),
     '',
     '  <!-- Páginas de anúncio -->',
-    ...anuncios.map((a) => url(`/anuncios/${a.slug}`, (a.criado_em || hoje).slice(0, 10), 'monthly', '0.7')),
+    // Anúncios de exemplo (fictícios) não vão para o site nem para o sitemap.
+    ...anuncios.filter((a) => !a.exemplo).map((a) => url(`/anuncios/${a.slug}`, (a.criado_em || hoje).slice(0, 10), 'monthly', '0.7')),
   ];
 
   if (publicados.length) {

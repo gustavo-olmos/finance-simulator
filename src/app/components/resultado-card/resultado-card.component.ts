@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 import { DOCUMENT, ViewportScroller } from '@angular/common';
 import { Router } from '@angular/router';
 import { track } from '../../core/analytics';
@@ -27,6 +27,9 @@ export class ResultadoCardComponent {
 
   protected readonly fmt = { brl, brl0, brlCurto };
 
+  /** Há ofertas na página: o CTA leva a elas; sem ofertas, ao gráfico ano a ano. */
+  readonly temOfertas = input(false);
+
   readonly tema = this.store.tema;
   readonly maximos = this.store.maximos;
   readonly sac = computed(() => this.store.resultado().sac);
@@ -52,8 +55,8 @@ export class ResultadoCardComponent {
     return `https://wa.me/?text=${encodeURIComponent(texto)}`;
   });
 
-  verOfertas(): void {
-    this.scroller.scrollToAnchor('ofertas');
+  rolarCta(): void {
+    this.scroller.scrollToAnchor(this.temOfertas() ? 'ofertas' : 'como-funciona');
   }
 
   registrarCompartilhamento(canal: 'whatsapp' | 'copiar_link'): void {

@@ -19,7 +19,7 @@
 
     <div class="hero-grade">
       <app-calculadora id="calculadora" class="col-calc" />
-      <app-resultado-card id="resultado" class="col-res" />
+      <app-resultado-card id="resultado" class="col-res" [temOfertas]="temOfertas()" />
     </div>
   </div>
 </section>
@@ -67,4 +67,4 @@
 
 </div>
 
-<app-barra-resultado />
+<app-barra-resultado [temOfertas]="temOfertas()" />

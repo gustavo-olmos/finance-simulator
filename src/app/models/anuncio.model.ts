@@ -17,6 +17,8 @@ export interface Anuncio {
   /** Fotos adicionais da galeria, depois da principal. */
   fotos?: string[] | null;    // TEXT[]
   criado_em: string;   // TIMESTAMPTZ (ISO 8601)
+  /** Anúncio fictício de exemplo (dados de desenvolvimento): não aparece no site. */
+  exemplo?: boolean | null;   // BOOLEAN
 
   // Localização e características (NULL quando não se aplica ou não informado)
   bairro?: string | null;     // VARCHAR

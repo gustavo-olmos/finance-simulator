@@ -179,7 +179,8 @@ export class GuiaDetalheComponent {
     const origin = this.doc.location?.origin || this.seo.ORIGIN;
     let og: string;
     if (g.capa) {
-      og = origin + g.capa.og;
+      // Capa do Unsplash já vem com URL absoluta.
+      og = /^https?:\/\//.test(g.capa.og) ? g.capa.og : origin + g.capa.og;
       this.seo.setOgImage(og, 'image/jpeg');
     } else {
       const simulacao = new URL(`${origin}/api/og`);

@@ -1,0 +1,8 @@
+{
+  "nome": "RotaFin",
+  "pastaPosts": "src/content/blog",
+  "validar": "npm run blog",
+  "branchBase": "master",
+  "prefixoBranch": "artigo/",
+  "ferramentas": ["financiamento"]
+}

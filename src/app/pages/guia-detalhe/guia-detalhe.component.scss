@@ -125,7 +125,13 @@ h1 {
     @include lp.celular { border-radius: 14px; }
   }
 
-  figcaption { font-size: 13px; line-height: 1.5; color: var(--lp-aux); }
+  figcaption {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--lp-aux);
+
+    a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+  }
 }
 
 // Coluna lateral (app-guia-lateral): acompanha a leitura.

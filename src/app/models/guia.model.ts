@@ -26,7 +26,10 @@ export interface SecaoGuia {
   titulo: string;
 }
 
-/** Imagem de capa (campos capa/capaAlt/capaCredito do post), já otimizada no build. */
+/**
+ * Imagem de capa, já preparada no build: campos capa/capaAlt/capaCredito do post (arquivo
+ * otimizado em assets/guias/) ou capaUnsplash/capaAlt (URLs do Unsplash, hotlink).
+ */
 export interface CapaGuia {
   /** Versão menor (740 px), para navegadores sem srcset. */
   src: string;
@@ -34,11 +37,15 @@ export interface CapaGuia {
   /** Tamanho da maior versão (16:9), para reservar o espaço antes de carregar. */
   largura: number;
   altura: number;
-  /** 1200×630, para o compartilhamento. */
+  /** 1200×630, para o compartilhamento. Caminho do site ou URL absoluta (Unsplash). */
   og: string;
   alt: string;
   /** Crédito da foto (ex.: banco de imagens). Vazio = sem legenda. */
   credito: string;
+  /** Só capas do Unsplash: nome e perfil do fotógrafo e link do Unsplash, para o crédito com links. */
+  autor?: string;
+  autorUrl?: string;
+  fonteUrl?: string;
 }
 
 /** Chamada final para o simulador (campo cta do post). */

@@ -43,7 +43,12 @@
             [alt]="capa.alt"
             fetchpriority="high"
           />
-          @if (capa.credito) {
+          @if (capa.autorUrl && capa.fonteUrl) {
+            <figcaption>
+              Foto: <a [href]="capa.autorUrl" target="_blank" rel="noopener">{{ capa.autor }}</a> /
+              <a [href]="capa.fonteUrl" target="_blank" rel="noopener">Unsplash</a>
+            </figcaption>
+          } @else if (capa.credito) {
             <figcaption>{{ capa.credito }}</figcaption>
           }
         </figure>

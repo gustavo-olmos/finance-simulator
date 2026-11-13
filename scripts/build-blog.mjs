@@ -24,6 +24,14 @@
 // Capa (opcional): `capa` é uma imagem ao lado do .md (jpg, png, webp ou svg) e
 // `capaAlt` descreve a imagem. Sai cortada em 16:9 (740 e 1480 px, webp) e em 1200×630
 // (jpg) para o compartilhamento, em src/assets/guias/.
+//
+// Capa do Unsplash (alternativa a `capa`), como pedem os termos da API do Unsplash: a foto
+// é exibida pela URL deles (hotlink), cortada por parâmetros da URL, e o crédito leva link
+// para o fotógrafo e para o Unsplash. O blog-agent preenche este bloco:
+//   capaUnsplash:
+//     url: "https://images.unsplash.com/photo-...?ixid=..."   (urls.raw da API)
+//     autor: "Nome do fotógrafo"
+//     perfil: "https://unsplash.com/@usuario"
 
 import { access, mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, join } from 'node:path';
@@ -45,6 +53,11 @@ const COM_RASCUNHOS = process.env.VERCEL_ENV !== 'production';
 
 // Nome de arquivo simples, na própria pasta dos posts.
 const CAPA_VALIDA = /^[\w.-]+\.(jpe?g|png|webp|svg)$/i;
+
+// Capa do Unsplash: só URLs de imagem e de perfil do próprio Unsplash.
+const UNSPLASH_IMAGEM = /^https:\/\/images\.unsplash\.com\//;
+const UNSPLASH_PERFIL = /^https:\/\/unsplash\.com\/@[\w.-]+\/?$/;
+const UNSPLASH_UTM = 'utm_source=rotafin&utm_medium=referral';
 
 // Páginas fixas do sitemap (lastmod mantido à mão, como no sitemap estático anterior).
 const PAGINAS = [
@@ -280,12 +293,51 @@ function validar(arquivo, d) {
     }
     if (!d.capaAlt) erros.push(`${arquivo}: capaAlt é obrigatório com capa (descreva a imagem para quem não a vê)`);
   }
+  if (d.capaUnsplash) {
+    const u = d.capaUnsplash;
+    if (d.capa) erros.push(`${arquivo}: use capa ou capaUnsplash, não os dois`);
+    if (!u.url || !UNSPLASH_IMAGEM.test(u.url)) erros.push(`${arquivo}: capaUnsplash.url deve ser uma URL https://images.unsplash.com/...`);
+    if (!u.autor) erros.push(`${arquivo}: capaUnsplash.autor ausente (nome do fotógrafo)`);
+    if (!u.perfil || !UNSPLASH_PERFIL.test(u.perfil)) erros.push(`${arquivo}: capaUnsplash.perfil deve ser o perfil https://unsplash.com/@usuario`);
+    if (!d.capaAlt) erros.push(`${arquivo}: capaAlt é obrigatório com capaUnsplash (descreva a imagem para quem não a vê)`);
+  }
+}
+
+/** Capa do Unsplash: versões cortadas pela própria URL (hotlink), sem baixar a imagem. */
+function capaUnsplash(d) {
+  const u = d.capaUnsplash;
+  if (!u?.url || !UNSPLASH_IMAGEM.test(u.url) || !u.autor || !UNSPLASH_PERFIL.test(u.perfil ?? '') || !d.capaAlt) return null;
+
+  const versao = (largura, altura, formato) => {
+    const url = new URL(u.url);
+    for (const [k, v] of Object.entries({ w: largura, h: altura, fit: 'crop', crop: 'entropy', fm: formato, q: 80 })) {
+      url.searchParams.set(k, String(v));
+    }
+    return url.toString();
+  };
+  const alturaDe = (l) => Math.round((l * 9) / 16);
+  const maior = LARGURAS_CAPA[LARGURAS_CAPA.length - 1];
+  const comUtm = (link) => `${link}${link.includes('?') ? '&' : '?'}${UNSPLASH_UTM}`;
+
+  return {
+    src: versao(LARGURAS_CAPA[0], alturaDe(LARGURAS_CAPA[0]), 'webp'),
+    srcset: LARGURAS_CAPA.map((l) => `${versao(l, alturaDe(l), 'webp')} ${l}w`).join(', '),
+    largura: maior,
+    altura: alturaDe(maior),
+    og: versao(1200, 630, 'jpg'),
+    alt: d.capaAlt,
+    credito: `Foto: ${u.autor} / Unsplash`,
+    autor: u.autor,
+    autorUrl: comUtm(u.perfil.replace(/\/$/, '')),
+    fonteUrl: comUtm('https://unsplash.com/'),
+  };
 }
 
 const LARGURAS_CAPA = [740, 1480];
 
 /** Gera as versões da capa e devolve o que a página precisa (null = sem capa). */
 async function gerarCapa(arquivo, d) {
+  if (d.capaUnsplash) return capaUnsplash(d);
   if (!d.capa || !d.capaAlt || !CAPA_VALIDA.test(d.capa)) return null;
   const origem = join(ORIGEM, d.capa);
   try {
